@@ -1,0 +1,10 @@
+# Ignore virtual environment files.
+/env
+/venv
+/ENV 
+/VENV 
+.env
+.venv
+
+# Ignore python compiled code
+__pycache__/
