@@ -5,10 +5,23 @@ from pathlib import Path
 import os
 import environ
 
-# Initialize environment variables.
-env = environ.Env()
+# Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-environ.Env.read_env(os.path.join(BASE_DIR, ".env"))
+
+# Environment variables
+env = environ.Env()
+environ.Env.read_env(os.path.join(BASE_DIR, '.env')) # read the .env file
+
+# Quick-start development settings - unsuitable for production
+# See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
+
+# SECURITY WARNING: keep the secret key used in production secret!
+SECRET_KEY = env('SECRET_KEY') # secret key from env
+
+# SECURITY WARNING: don't run with debug turned on in production!
+DEBUG = env.bool('DEBUG', default=False) # ensuring that debug is false for production
+
+ALLOWED_HOSTS = env.list('ALLOWED_HOSTS') # allowed urls in our .env
 
 # Load app configurations from env.
 SECRET_KEY = env("SECRET_KEY", default="your-default-secret-key")
@@ -24,6 +37,8 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "corsheaders",
+    'library', # folder to store the databases
+    
 ]
 
 MIDDLEWARE = [
@@ -64,16 +79,18 @@ CORS_ALLOWED_ORIGINS = env.list("CORS_ALLOWED_ORIGINS", default=["http://localho
 # Database
 DATABASES = {
     "default": {
-        "ENGINE": "django.db.backends.postgresql",
-        "NAME": env("POSTGRES_DB", default="AlexandriaDB"),
-        "USER": env("POSTGRES_USER", default="postgres"),
-        "PASSWORD": env("POSTGRES_PASSWORD", default="changeme"),
-        "HOST": env("POSTGRES_HOST", default="127.0.0.1"),
-        "PORT": env("POSTGRES_PORT", default="5432"),
+        'ENGINE' : 'django.db.backends.postgresql',
+        'NAME' : env('POSTGRES_DB'),
+        'USER' : env('POSTGRES_USER'),
+        'PASSWORD' : env('POSTGRES_PASSWORD'),
+        'HOST' : env('POSTGRES_HOST'),
+        'PORT' : env('POSTGRES_PORT'),
     }
 }
 
 # Password validation
+# https://docs.djangoproject.com/en/5.1/ref/settings/#auth-password-validators
+
 AUTH_PASSWORD_VALIDATORS = [
     {
         "NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator",
