@@ -8,3 +8,11 @@
 
 # Ignore python compiled code
 __pycache__/
+
+# logs
+logs/
+logs/*
+*.log
+
+# Media folder
+media/
