@@ -17,20 +17,20 @@ import environ
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-# Environment variable
+# Environment variables
 env = environ.Env()
-environ.Env.read_env()
+environ.Env.read_env(os.path.join(BASE_DIR, '.env')) # read the .env file
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = "django-insecure-4(+z2ch0+@(i9r1bni@d=9ac)8wz_4y_^^&@hq^3el2dk*1_a5"
+SECRET_KEY = env('SECRET_KEY') # secret key from env
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = env.bool('DEBUG', default=False) # ensuring that debug is false for production
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = env.list('ALLOWED_HOSTS') # allowed urls in our .env
 
 
 # Application definition
@@ -42,6 +42,8 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    'library', # folder to store the databases
+    
 ]
 
 MIDDLEWARE = [
@@ -80,9 +82,12 @@ WSGI_APPLICATION = "config.wsgi.application"
 
 DATABASES = {
     "default": {
-        "ENGINE": "django.db.backends.postgresql",
-        "NAME": str(env("POSTGRES_DB", default="bookstagram_db")),
-        
+        'ENGINE' : 'django.db.backends.postgresql',
+        'NAME' : env('POSTGRES_DB'),
+        'USER' : env('POSTGRES_USER'),
+        'PASSWORD' : env('POSTGRES_PASSWORD'),
+        'HOST' : env('POSTGRES_HOST'),
+        'PORT' : env('POSTGRES_PORT'),
     }
 }
 
