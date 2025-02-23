@@ -8,18 +8,6 @@ import environ
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-# Environment variables
-env = environ.Env()
-environ.Env.read_env(os.path.join(BASE_DIR, '.env')) # read the .env file
-
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = env('SECRET_KEY') # secret key from env
-
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = env.bool('DEBUG', default=False) # ensuring that debug is false for production
-
-ALLOWED_HOSTS = env.list('ALLOWED_HOSTS') # allowed urls in our .env
-
 # Load app configurations from env.
 SECRET_KEY = env("SECRET_KEY", default="your-default-secret-key")
 DEBUG = env.bool("DEBUG", default=True)
@@ -33,7 +21,6 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-    "corsheaders",
     'library', # folder to store the databases
     
 ]
