@@ -1,10 +1,43 @@
-# environmental variables
+# Python
+__pycache__/
+*.py[cod]
+*.sqlite3
+*.log
+
+# Environment Variables
 .env
+.env.local
 
-# sensitive settings on django
-settings.py
+# Django Secrets
+config/settings.py
 
-# log file
-.vscode
+# Logs and IDE settings
+*.log
+.vscode/
+*.swp
 
-test
+# Migrations (optional, if you want to ignore generated migrations)
+library/migrations/
+
+# Test and cache files
+test/
+*.cache
+
+# Compiled Python files
+*.pyc
+*.pyo
+*.pyd
+
+# Docker
+*.dockerfile
+
+# Ignore macOS system files
+.DS_Store
+
+# Ignore Node modules (if applicable)
+node_modules/
+
+# Ignore builds and Python virtual environments
+build/
+dist/
+venv/
