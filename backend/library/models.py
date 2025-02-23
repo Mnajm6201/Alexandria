@@ -332,6 +332,50 @@ class UserProfile(models.Model):
         return self.user
 
 
+# Club Member Table
+class ClubMember(models.Model):
+    """
+    Club Member Table
+
+    Variables:
+        club_user: One to Many relation from User (One to Many)
+    """
+
+    club = models.ForeignKey('BookClub', on_delete=models.CASCADE)
+    user = models.ForeignKey('User', on_delete=models.CASCADE)
+
+    class Meta:
+        unique_together = ('club', 'user')
+
+    def __str__(self):
+        return f"{self.user.username} in {self.club.name}"
+
+
+# Book Club Table
+class BookClub(models.Model):
+    """
+    Book Club Table
+
+    Variables:
+        name: One to Many relation from Club Member (One to Many)
+        club_desc: optional: text description of club
+        is_private: sets whether or not club is private (default FALSE)
+    """
+
+    name = models.CharField(max_length=250, null=False)
+    club_desc = models.TextField(null=True, blank=True)
+    is_private = models.BooleanField(default=False)
+
+    book = models.ForeignKey(
+        Book,
+        on_delete=models.CASCADE,
+        related_name='related_book_club',
+        null=True,
+        blank=True
+        )
+
+    def __str_(self):
+        return self.name
 
 # Post Table
 class Post(models.Model):
