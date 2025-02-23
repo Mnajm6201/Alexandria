@@ -9,9 +9,7 @@
 # Ignore python compiled code
 __pycache__/
 
-# logs
-logs/
-*.logs
+
 # Ignore virtual environment files.
 /env
 /venv
@@ -27,5 +25,3 @@ __pycache__/
 logs/
 *.logs
 
-
-test
