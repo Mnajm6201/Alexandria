@@ -11,7 +11,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # Load app configurations from env.
 SECRET_KEY = env("SECRET_KEY", default="your-default-secret-key")
 DEBUG = env.bool("DEBUG", default=True)
-ALLOWED_HOSTS = env.list("ALLOWED_HOSTS", default=["127.0.0.1", "localhost"])
+ALLOWED_HOSTS = env.list("ALLOWED_HOSTS")
 
 # Application definition
 INSTALLED_APPS = [
@@ -21,6 +21,7 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    "corsheaders",
     'library', # folder to store the databases
     
 ]
