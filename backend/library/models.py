@@ -443,5 +443,23 @@ class Shelf (models.Model):
     def __str__(self):
         return f"{self.user} {self.name} {self.shelf_type}"
     
+class ShelfBook(models.Model):
+    """
+    ShelfBook Table (Normalization Table)
+
+    Variables:
+    shelf: Foriegn key to Shelf
+    edition: Foriegn key to Edition
+    """
+    shelf = models.ForeignKey("Shelf", on_delete=models.CASCADE, related_name="shelf_books")
+    edition = models.ForeignKey("Edition", on_delete=models.CASCADE, related_name="edition_shelves")
+
+    class Meta:
+        unique_together = ('shelf', 'edition')
+
+    def __str__(self):
+        return f'{self.shelf.name} - {self.edition}'
+    
+    
 
 
