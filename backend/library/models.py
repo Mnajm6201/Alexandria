@@ -606,3 +606,35 @@ class ShelfComment(BaseComment):
     """
     shelf = models.ForeignKey("Shelf", on_delete=models.CASCADE, related_name="comments")
 
+# Journal Entry Table for user created journal associated with specific books.
+class JournalEntry(models.Model):
+    """
+    Journal Entry Model
+
+    Variables:
+    user_book: FK to UserBook asscoaites user's journal to a specific book.
+    title: Optional string to head journal entry
+    content: Text content of the journal entry
+    created_on: Date the journal was created
+    updated_on: Date the journal was last updated.
+    page_num: Optional page number refrence.
+    """
+
+    user_book = models.ForeignKey(
+        "UserBook",
+        on_delete = models.CASCADE,
+        related_name = "journal_entries"
+    )
+    title = models.CharField(max_length=255, null=True, blank=True)
+    content = models.TextField()
+    created_on = models.DateTimeField(auto_now_add=True)
+    updated_on = models.DateTimeField(auto_now=True)
+    page_num = models.PositiveIntegerField(null=True, blank=True)
+    is_private = models.BooleanField(default=False)
+    
+
+    class Meta:
+        ordering = ["-created_on"]
+    
+    def __str__(self):
+        return f"Journal Entry by {self.user_book.user} on {self.user_book.book.title}"
