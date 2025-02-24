@@ -62,12 +62,6 @@ class Book(models.Model):
     title = models.CharField(max_length=255, null=False)
     summary = models.TextField(blank=True, null=True)
     average_rating = models.DecimalField(default=0.00, max_digits=3, decimal_places=2)
-    community = models.OneToOneField(
-        'Community',
-        on_delete=models.SET_NULL,
-        blank=True,
-        null=True,
-        related_name='related_book')
     
     def __str__(self):
         return self.title
