@@ -382,7 +382,8 @@ class Post(models.Model):
     pass
 
 # Review table
-"""
+class Review(models.Model):
+    """
     Review Table
 
     Variables:
@@ -393,8 +394,7 @@ class Post(models.Model):
         created_on: Date: date the review is created on.
         flagged_count: integer value, initialized to 0, 
             representing how many times review has been flagged as voilating TOS.
-"""
-class Review(models.Model):
+    """
     user = models.ForeignKey('User', on_delete=models.CASCADE, related_name="reviews")
     book = models.ForeignKey("Book", on_delete=models.CASCADE, related_name='reviews')
     content = models.TextField(null=True, blank=True)
@@ -410,4 +410,38 @@ class Review(models.Model):
     )
     def __str__(self):
         return f'Review by {self.user} on {self.book} - {self.rating} stars'
+
+# Shelf table
+class Shelf (models.Model):
+    """
+    Shelf table
+
+    Variables:
+    user: Foriegn key: the user who the shelf belongs to.
+    name: max length 250 char: the given name for shelf
+    shelf_desc: text: optional: the given description.
+    shelf_img: URL/text: the shelf's user ganted image url.
+    is_private: boolean: default False. Represents whether shelf is maked private.
+    shelf_type: ENUM: the shelf's type.
+    """
+    SHELF_TYPES = [
+        ("Owned", "Owned"),
+        ("Read", "Read"),
+        ("Reading", "Reading"),
+        ("Want to Read", "Want to Read"),
+        ("Available", "Available"),
+        ("Lent Out", "Lent Out"),
+        ("Custom", "Custom"),
+    ]
+    user = models.ForeignKey('User', on_delete=models.CASCADE, related_name="shelves")
+    name = models.CharField(max_length=250)
+    shelf_desc = models.TextField(null=True, blank=True)
+    shelf_img = models.TextField(null=True, blank=True)
+    is_private = models.BooleanField(default=False)
+    shelf_type = models.CharField(max_length=20, choices=SHELF_TYPES, null=False)
+
+    def __str__(self):
+        return f"{self.user} {self.name} {self.shelf_type}"
+    
+
 
