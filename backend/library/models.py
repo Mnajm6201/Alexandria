@@ -4,7 +4,64 @@ import datetime
 from django.core.exceptions import ValidationError
 from mptt.models import MPTTModel, TreeForeignKey
 
-# Database schema
+
+
+# Book Table
+class Book(models.Model):
+    """Book Table
+
+    Args:
+        models (Model Object): Inheritance Model Object
+
+    Variables:
+        title: max_length of 255, not null
+        summary: text summary of the book, optional
+        average_rating: the average rating of the book, 0.00 - 5.00
+        original_publication_year = Original publication date of book (first edition date).
+    """
+    title = models.CharField(
+        max_length=255,
+        null=False,
+        db_index = True
+        )
+    summary = models.TextField(
+        blank=True, 
+        null=True
+        )
+    average_rating = models.DecimalField(
+        default=0.00, 
+        max_digits=3, 
+        decimal_places=2,
+        validators = [
+            MinValueValidator(0.00),
+            MaxValueValidator(5.00)
+        ]
+        )
+    year_published = models.PositiveIntegerField(
+        default = 0,
+        validators = [
+            MinValueValidator(1000),
+            MaxValueValidator(datetime.date.today().year + 10)
+        ],
+        db_index = True
+    )
+    original_language = models.CharField(
+        max_length = 50,
+        blank = True,
+        null = True
+    )
+    
+    class Meta:
+        verbose_name = "Book"
+        verbose_name_plural = "Books"
+        ordering = ['title']
+        indexes = [
+            models.Index(fields = ['title']),
+            models.Index(fields=['year_published']),
+        ]
+
+    def __str__(self):
+        return self.title
 
 # Author Table
 class Author(models.Model):
@@ -47,25 +104,6 @@ class Publisher(models.Model):
         return self.name  
 
     
-# Book Table
-class Book(models.Model):
-    """Book Table
-
-    Args:
-        models (Model Object): Inheritance Model Object
-
-    Variables:
-        title: max_length of 255, not null
-        summary: summary of the book, optional
-        average_rating: the average rating of the book, max_digits = 3, decimal_place = 2
-        community: Foreign Key: 
-    """
-    title = models.CharField(max_length=255, null=False)
-    summary = models.TextField(blank=True, null=True)
-    average_rating = models.DecimalField(default=0.00, max_digits=3, decimal_places=2)
-    
-    def __str__(self):
-        return self.title
 
 
 # Edition Table
