@@ -380,3 +380,34 @@ class BookClub(models.Model):
 # Post Table
 class Post(models.Model):
     pass
+
+# Review table
+"""
+    Review Table
+
+    Variables:
+        book: Foriegn key associated with book table.
+        user: Foriegn key associated with user table.
+        content: optional: written text of review.
+        rating: decimal value 0.00-5.00 representing star rating.
+        created_on: Date: date the review is created on.
+        flagged_count: integer value, initialized to 0, 
+            representing how many times review has been flagged as voilating TOS.
+"""
+class Review(models.Model):
+    user = models.ForeignKey('User', on_delete=models.CASCADE, related_name="reviews")
+    book = models.ForeignKey("Book", on_delete=models.CASCADE, related_name='reviews')
+    content = models.TextField(null=True, blank=True)
+    created_on = models.DateTimeField(auto_now_add=True)
+    flagged_count = models.PositiveBigIntegerField(default=0)
+    rating = models.DecimalField(
+        max_digits=3, 
+        decimal_places=2, 
+        validators=[
+            MinValueValidator(0.00),
+            MaxValueValidator(5.00)
+        ],
+    )
+    def __str__(self):
+        return f'Review by {self.user} on {self.book} - {self.rating} stars'
+
