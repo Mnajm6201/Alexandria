@@ -1,6 +1,8 @@
 from django.db import models
 from django.core.validators import MinValueValidator, MaxValueValidator
 import datetime
+from django.core.exceptions import ValidationError
+
 # Database schema
 
 # Author Table
@@ -460,6 +462,86 @@ class ShelfBook(models.Model):
     def __str__(self):
         return f'{self.shelf.name} - {self.edition}'
     
-    
+# Post table for book club post and community post.
+class Post(models.Model):
+    """
+    Post Model
 
+    Variables:
+        user: ForiegnKey to User table (author of the post)
+        thumbnail: up to 255 character string that represents the title of post.
+        content: Text content of the post
+        created_on: Date that the post was created.
+        page_num: Optional integer represents the page number that the post is relevant to (or up to).
+        flagged_count: Integer, default 0, number of times the post has been flagged for violating TOS.
+        like_count: Integer, defualt 0, number of times the post has been liked.
+
+        community: ForiegnKey refrencing comnmunity table.
+        club: ForiegnKey refrencing the book club table.
+
+    Functions:
+        clean: Ensures data entry not filled with both or neither of the foriegn key types.
+
+    Classes:
+        Meta: Serves constaints to ensure data integrity.
+    """
+
+    # Should have one and only one of these relations.
+    community = models.ForeignKey(
+        "Community", 
+        on_delete=models.CASCADE, 
+        related_name="community_posts", 
+        null = True, 
+        blank = True
+        )
+    club = models.ForeignKey(
+        "BookClub", 
+        on_delete=models.CASCADE, 
+        related_name="club_posts", 
+        null = True, 
+        blank = True
+        )
+    user = models.ForeignKey(
+        "User", 
+        on_delete=models.CASCADE, 
+        related_name="user_posts"
+        )
+    title = models.CharField(max_length=250) 
+    content = models.TextField(null=True, blank=True)
+    created_on = models.DateTimeField(auto_now_add=True)
+    flagged_count = models.PositiveIntegerField(default = 0)
+    like_count = models.PositiveIntegerField(default = 0)
+    page_num = models.PositiveIntegerField(null = True, blank = True)
+    
+    # Stops bad data from being saved by Djano ORM.
+    def clean(self):
+        """
+        Ensure a post is linked exactly one of (BookClub or Community)
+        """
+        if self.club and self.community:
+            raise ValidationError("A post cannot belong to both a BookClub and a Community.")
+        if not self.club and not self.community:
+            raise ValidationError("A post must belong to either a BookClub or a Community.")
+    
+    def save(self, *args, **kwargs):
+        """
+        Run validation before saving the post.
+        """
+        self.full_clean()
+        super().save(*args, **kwargs)
+    
+    def __str__(self):
+        return f"Post by {self.user} in {'BookClub' if self.club else 'Community'}"
+    
+    # Stops bad data from existing in the database (if somehow Django ORM clean is bypassed).
+    class Meta:
+        constraints = [
+            models.CheckConstraint(
+                check=(
+                    (models.Q(club__isnull=False) & models.Q(community__isnull=True)) |
+                    (models.Q(club__isnull=True) & models.Q(community__isnull=False))
+                ),
+                name="post_must_have_one_relation"
+            )
+        ]
 
