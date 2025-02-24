@@ -2,6 +2,7 @@ from django.db import models
 from django.core.validators import MinValueValidator, MaxValueValidator
 import datetime
 from django.core.exceptions import ValidationError
+from mptt.models import MPTTModel, TreeForeignKey
 
 # Database schema
 
@@ -538,4 +539,70 @@ class Post(models.Model):
                 name="post_must_have_one_relation"
             )
         ]
+
+# Comment base class and concrete class for comments.
+# We use the Abstract Base Class method to deal with the polymorphism issue of our many comment types.
+# To add a new comment type simply add a new concrete class.
+# Base comment class:
+class BaseComment(MPTTModel):
+    """
+    Abstract Base Class for Comments.
+
+    Variables:
+        user: FK to User table (author of the comment)
+        content: Text content of the comment
+        created_on: DateTime when the comment was created.
+        flagged_count: Number of times the comment was flagged as violating TOS.
+        like_count: Number of times the comment was liked.
+        page_num: Optional page number refrence.
+        parent: TreeForiegnKey using MPTT, whcih allows for deeply nested comments stored in tree structure.
+    """
+
+    user = models.ForeignKey(
+        "User",
+        on_delete=models.CASCADE,
+        related_name="%(class)s_comments" 
+    )
+    content = models.TextField()
+    created_on = models.DateTimeField(auto_now_add=True)
+    flagged_count = models.PositiveIntegerField(default=0)
+    like_count = models.PositiveIntegerField(default=0)
+    page_num = models.PositiveIntegerField(null=True, blank=True)
+    parent = TreeForeignKey(
+        'self',
+        on_delete = models.SET_NULL,
+        null = True,
+        blank = True,
+        related_name = "children"
+    )
+
+    class Meta:
+        abstract = True
+        ordering = ['-created_on']
+    
+    # Tree insertion order specification.
+    class MPTTMeta:
+        order_insertion_by = ['-created_on']
+    
+    def __str__(self):
+        return f"Comment by {self.user} - {self.content[:20]}"
+    
+# Concrete Classes
+class PostComment(BaseComment):
+    """
+    Concrete Comment Model for Post Comments
+    """
+    post = models.ForeignKey("Post", on_delete=models.CASCADE, related_name="comments")
+
+class ReviewComment(BaseComment):
+    """
+    Concrete Comment Model for Review Comments
+    """
+    review = models.ForeignKey("Review", on_delete=models.CASCADE, related_name="comments")
+
+class ShelfComment(BaseComment):
+    """
+    Concrete Comment Model for Shelf Comments
+    """
+    shelf = models.ForeignKey("Shelf", on_delete=models.CASCADE, related_name="comments")
 
