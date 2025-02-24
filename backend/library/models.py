@@ -71,14 +71,19 @@ class Author(models.Model):
         models (Model Object): Inheritance of the Model's Object
 
     Variables: 
-        Primary_Keys are auto generated in Django if non specified
-        name: max_length: 250, char
+        name: name of author
         biography: Text (Optional)
         author_image: URL/Text (Optional)
     """
-    name = models.CharField(max_length=250, unique=True) 
+    name = models.CharField(max_length=250, unique=True, db_index = True) 
     biography = models.TextField(blank=True, null=True)
     author_image = models.URLField(blank=True, null=True)
+
+    class Meta:
+        verbose_name = "Author"
+        verbose_name_plural = "Authors"
+        ordering = ['name']
+        indexes = [models.Index(fields=['name'])]
 
     def __str__(self):
         return self.name
