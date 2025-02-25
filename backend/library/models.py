@@ -3,10 +3,16 @@ from django.core.validators import MinValueValidator, MaxValueValidator
 import datetime
 from django.core.exceptions import ValidationError
 from mptt.models import MPTTModel, TreeForeignKey
+import hashlib
+from django.db.models.signals import post_save, post_delete
+from django.dispatch import receiver
+
+
 
 
 
 # Book Table
+# Uniqueness will be ensured at the edition level, software will need to match edition to book correctly.
 class Book(models.Model):
     """Book Table
 
@@ -17,7 +23,10 @@ class Book(models.Model):
         title: max_length of 255, not null
         summary: text summary of the book, optional
         average_rating: the average rating of the book, 0.00 - 5.00
-        original_publication_year = Original publication date of book (first edition date).
+        year_published:  Original publication date of book (first edition date).
+        original_langauge: Original language of work
+        unique_hash: Hashing normalized title and author list ensures book uniqueness.
+        authors: ManyToMany relation through BookAuthor table.
     """
     title = models.CharField(
         max_length=255,
@@ -48,7 +57,9 @@ class Book(models.Model):
         blank = True,
         null = True
     )
-    
+    unique_hash = models.CharField(max_length=64, unique=True, db_index=True)
+    authors = models.ManyToManyField("Author", through="BookAuthor")
+
     class Meta:
         verbose_name = "Book"
         verbose_name_plural = "Books"
@@ -56,6 +67,7 @@ class Book(models.Model):
         indexes = [
             models.Index(fields = ['title']),
             models.Index(fields=['year_published']),
+            models.Index(fields=['unique_hash'])
         ]
 
     def __str__(self):
@@ -76,6 +88,7 @@ class Author(models.Model):
     name = models.CharField(max_length=250, unique=True) 
     biography = models.TextField(blank=True, null=True)
     author_image = models.URLField(blank=True, null=True)
+    unique_hash = models.CharField(max_length=64, unique=True, db_index=True, blank=True)
 
     class Meta:
         verbose_name = "Author"
@@ -190,6 +203,17 @@ class BookAuthor(models.Model):
     """
     book = models.ForeignKey('Book', on_delete=models.CASCADE, related_name='related_book_authors')
     author = models.ForeignKey('Author', on_delete=models.CASCADE, related_name='related_author_books')
+
+
+    class Meta:
+        constraints = [
+            models.UniqueConstraint(fields=['book', 'author'], name='unique_book_author')
+        ]
+        indexes = [
+            models.Index(fields=['book', 'author']),
+            models.Index(fields=['author', 'book'])
+        ]
+        ordering = ['author__name']
 
     def __str__(self):
         return f"Author Name - Book Title: {self.author.name} - {self.book.title}"
@@ -427,10 +451,6 @@ class BookClub(models.Model):
 
     def __str_(self):
         return self.name
-
-# Post Table
-class Post(models.Model):
-    pass
 
 # Review table
 class Review(models.Model):
