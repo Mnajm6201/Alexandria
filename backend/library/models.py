@@ -22,7 +22,6 @@ class Book(models.Model):
     title = models.CharField(
         max_length=255,
         null=False,
-        db_index = True
         )
     summary = models.TextField(
         blank=True, 
@@ -43,7 +42,6 @@ class Book(models.Model):
             MinValueValidator(1000),
             MaxValueValidator(datetime.date.today().year + 10)
         ],
-        db_index = True
     )
     original_language = models.CharField(
         max_length = 50,
@@ -75,7 +73,7 @@ class Author(models.Model):
         biography: Text (Optional)
         author_image: URL/Text (Optional)
     """
-    name = models.CharField(max_length=250, unique=True, db_index = True) 
+    name = models.CharField(max_length=250, unique=True) 
     biography = models.TextField(blank=True, null=True)
     author_image = models.URLField(blank=True, null=True)
 
@@ -129,25 +127,38 @@ class Edition(models.Model):
     FORMAT_CHOICES = [
         ('Hardcover', 'Hardcover'),
         ('Paperback', 'Paperback'),
-        ('ebook', 'ebook'),
-        ('Audiobook', 'Audiobook')
+        ('eBook', 'eBook'),
+        ('Audiobook', 'Audiobook'),
+        ('Other', 'Other')
         ]
     
-    book = models.ForeignKey("Book", on_delete=models.CASCADE, related_name='related_editions')
-    isbn = models.CharField(max_length=13, unique=True, null=False) # cannot be null
-    publisher = models.ForeignKey("Publisher", on_delete=models.CASCADE, related_name='related_publisher_editions')
+    book = models.ForeignKey("Book", on_delete=models.CASCADE, related_name='editions')
+    isbn = models.CharField(max_length=13, unique=True)
+    publisher = models.ForeignKey("Publisher", on_delete=models.SET_NULL, related_name='editions', null=True, blank=True)
     kind = models.CharField(max_length=10, choices=FORMAT_CHOICES, null=False)
-    publication_year = models.PositiveBigIntegerField(
+    publication_year = models.PositiveIntegerField(
             validators=[
-                MinValueValidator(1500), # Earliest reasonable publication year
+                MinValueValidator(1500),
                 MaxValueValidator(datetime.date.today().year)]
-            , null=False# Current year or earlier is the maximum you can have  
         )
     language = models.CharField(max_length=50, null=False)
+    page_count = models.PositiveIntegerField(null=True, blank=True)
+    edition_number = models.PositiveIntegerField(null=True, blank=True)
+    abridged = models.BooleanField(default=False)
+    class Meta:
+        verbose_name = "Edition"
+        verbose_name_plural = "Editions"
+        ordering = ['-publication_year']
+        indexes = [
+            models.Index(fields=['isbn']),
+            models.Index(fields=['publication_year']),
+            models.Index(fields=(['kind']))
+        ]
+
 
 
     def __str__(self):
-        return f'{self.book.title} - ({self.kind}) - ({self.isbn})'
+        return f'{self.book.title} - {self.kind} - ({self.isbn}) - ({self.publication_year})'
 
 
 # Cover Image table
