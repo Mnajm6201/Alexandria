@@ -3,16 +3,13 @@ from django.core.validators import MinValueValidator, MaxValueValidator
 import datetime
 from django.core.exceptions import ValidationError
 from mptt.models import MPTTModel, TreeForeignKey
-import hashlib
-from django.db.models.signals import post_save, post_delete
-from django.dispatch import receiver
+from django.contrib.auth.models import AbstractUser
 
-
-
-
+##### Book Stuff #####
 
 # Book Table
-# Uniqueness will be ensured at the edition level, software will need to match edition to book correctly.
+# Uniqueness will be ensured with a hash id with authors and title.
+# ManyToMany connection with authors, through normalization table, means that author entities should be created first.
 class Book(models.Model):
     """Book Table
 
@@ -46,7 +43,8 @@ class Book(models.Model):
         ]
         )
     year_published = models.PositiveIntegerField(
-        default = 0,
+        blank=True,
+        null=True,
         validators = [
             MinValueValidator(1000),
             MaxValueValidator(datetime.date.today().year + 10)
@@ -59,6 +57,7 @@ class Book(models.Model):
     )
     unique_hash = models.CharField(max_length=64, unique=True, db_index=True)
     authors = models.ManyToManyField("Author", through="BookAuthor")
+    genres = models.ManyToManyField("Genre", through="BookGenre")
 
     class Meta:
         verbose_name = "Book"
@@ -74,6 +73,7 @@ class Book(models.Model):
         return self.title
 
 # Author Table
+# This needs work, no way to sepeate authors of the same name.
 class Author(models.Model):
     """
     Author Table
@@ -85,44 +85,97 @@ class Author(models.Model):
         biography: Text (Optional)
         author_image: URL/Text (Optional)
     """
-    name = models.CharField(max_length=250, unique=True) 
+    name = models.CharField(max_length=250) 
     biography = models.TextField(blank=True, null=True)
     author_image = models.URLField(blank=True, null=True)
-    unique_hash = models.CharField(max_length=64, unique=True, db_index=True, blank=True)
-
+    unique_hash = models.CharField(max_length=64, unique=True)
+    
     class Meta:
         verbose_name = "Author"
         verbose_name_plural = "Authors"
         ordering = ['name']
-        indexes = [models.Index(fields=['name'])]
+        indexes = [
+            models.Index(fields=['name']),
+            models.Index(fields=['unique_hash'])
+        ]
+
 
     def __str__(self):
         return self.name
 
-
-# Publisher Schema
-class Publisher(models.Model):
+# Normalization table used by Book's ManyToMany relationship with Author.
+class BookAuthor(models.Model):
     """
-    Publisher Table
+    Book Author Table
 
-    Args:
-        models (Model Object): Inheritance of the Model's Object
+    Relationships:
+    - One Book can have multiple BookAuthor entries (One to Many)
+    - One Author can have multiple BookAuthor entries (One to Many)
+
+    """
+    book = models.ForeignKey('Book', on_delete=models.CASCADE, related_name='related_book_authors')
+    author = models.ForeignKey('Author', on_delete=models.CASCADE, related_name='related_author_books')
+
+
+    class Meta:
+        constraints = [
+            models.UniqueConstraint(fields=['book', 'author'], name='unique_book_author')
+        ]
+        indexes = [
+            models.Index(fields=['book', 'author']),
+            models.Index(fields=['author', 'book'])
+        ]
+
+    def __str__(self):
+        return f"Author Name - Book Title: {self.author.name} - {self.book.title}"
+
+# Genres Table used for Book data.
+class Genre(models.Model):
+    """
+    Genres Table
 
     Variables:
-        name: max_length of 100, publisher's name
-        contact_info: contact information for the publisher
+        name: Unique name for each genre, max length of 100.
     """
-    name = models.CharField(max_length=100, null=False, unique=True)
-    contact_info = models.TextField() # it's mandatory so not setting any paramters
 
+    name = models.CharField(max_length=100, unique=True)
+    class Meta:
+        verbose_name = "Genre"
+        verbose_name_plural = "Genres"
+        ordering = ['name']
+        
+    def __str__(self):
+        return self.name
 
-    def __str__(self): # debug to test out if it's locating the database values correctly
-        return self.name  
+# Normalization table used for Book's ManyToMany relationship with genre.
+class BookGenre(models.Model):
+    """
+    Book Genre Table
 
-    
+    Variables:
+        book: Foreign Key from Book
+        genre: Foreign Key from Genre
 
+    Class:
+        Meta: Unique them together, so it prevents entries from same book-genre pair
+    """
+    book = models.ForeignKey('Book', on_delete=models.CASCADE, related_name='related_book_genres')
+    genre = models.ForeignKey('Genre', on_delete=models.CASCADE, related_name='related_genre_books')
 
-# Edition Table
+    class Meta:
+        constraints = [
+            models.UniqueConstraint(fields=['book', 'genre'], name='unique_book_genre')
+        ]
+        indexes = [
+            models.Index(fields=['book', 'genre']),
+            models.Index(fields=['genre', 'book'])
+        ]
+        ordering = ['genre__name']
+
+    def __str__(self):
+        return f"{self.book.title} - {self.genre.name}"
+
+# Edition Table. This is the center for data uploads.
 class Edition(models.Model):
     """
     Edition Table
@@ -168,13 +221,36 @@ class Edition(models.Model):
             models.Index(fields=(['kind']))
         ]
 
-
-
     def __str__(self):
         return f'{self.book.title} - {self.kind} - ({self.isbn}) - ({self.publication_year})'
 
+# Publisher Table, used by edition.
+class Publisher(models.Model):
+    """
+    Publisher Table
 
-# Cover Image table
+    Args:
+        models (Model Object): Inheritance of the Model's Object
+
+    Variables:
+        name: max_length of 100, publisher's name
+        contact_info: contact information for the publisher
+    """
+    name = models.CharField(max_length=100, unique=True)
+    contact_info = models.CharField(max_length=255, null=True, blank=True)
+
+    class Meta:
+        verbose_name = "Publisher"
+        verbose_name_plural = "Publishers"
+        ordering = ['name']
+        indexes = [
+            models.Index(fields=['name'])
+        ]
+
+    def __str__(self):
+        return self.name  
+
+# Cover Image table connecting to edition.
 class CoverImage(models.Model):
     """
     Cover Image Table
@@ -185,112 +261,30 @@ class CoverImage(models.Model):
         is_primary: if it's going to be the primary cover, (default: false)
     """
     edition = models.ForeignKey("Edition", on_delete=models.CASCADE, related_name="related_edition_image")
-    image_url = models.TextField(null=False)
+    image_url = models.URLField()
     is_primary = models.BooleanField(default=False)
+
+    class Meta:
+        verbose_name = "CoverImage"
+        verbose_name_plural = "CoverImages"
 
     def __str__(self):
         return f"Book - URL - primary?: {self.edition.book} - {self.image_url} - {self.is_primary}"
 
-
-class BookAuthor(models.Model):
-    """
-    Book Author Table
-
-    Relationships:
-    - One Book can have multiple BookAuthor entries (One to Many)
-    - One Author can have multiple BookAuthor entries (One to Many)
-
-    """
-    book = models.ForeignKey('Book', on_delete=models.CASCADE, related_name='related_book_authors')
-    author = models.ForeignKey('Author', on_delete=models.CASCADE, related_name='related_author_books')
-
-
-    class Meta:
-        constraints = [
-            models.UniqueConstraint(fields=['book', 'author'], name='unique_book_author')
-        ]
-        indexes = [
-            models.Index(fields=['book', 'author']),
-            models.Index(fields=['author', 'book'])
-        ]
-        ordering = ['author__name']
-
-    def __str__(self):
-        return f"Author Name - Book Title: {self.author.name} - {self.book.title}"
-
-# Community Table
-class Community(models.Model):
-    """
-    Community Table
-
-    Variables:
-        book: Foreign Key, 1 to 1 Relationship with Book
-    """
-    book = models.OneToOneField(
-        Book,
-        on_delete=models.CASCADE,
-        related_name='related_community',
-        null=True,
-        blank=True
-        )
-
-    def __str__(self):
-        return f"Community for {self.book.title}" if self.book else "Community (No Book)"
-
-
-# Genres Table
-class Genres(models.Model):
-    """
-    Genres Table
-
-    Variables:
-        name: Unique name for each genre, max length of 100.
-    """
-
-    name = models.CharField(max_length=100, unique=True)
-
-    def __str__(self):
-        return self.name
-
-
-class BookGenre(models.Model):
-    """
-    Book Genre Table
-
-    Variables:
-        book: Foreign Key from Book
-        genre: Foreign Key from Genre
-
-    Class:
-        Meta: Unique them together, so it prevents entries from same book-genre pair
-    """
-    book = models.ForeignKey('Book', on_delete=models.CASCADE, related_name='related_book_genres')
-    genre = models.ForeignKey('Genres', on_delete=models.CASCADE, related_name='related_genre_books')
-
-    class Meta:
-        unique_together = ('book', 'genre')
-
-    def __str__(self):
-        return f"{self.book.title} - {self.genre.name}"
-
-
+##### User Stuff #####
 
 # User Table
-class User(models.Model):
+class User(AbstractUser):
     """
     User Table
 
-    Variables:
-        user_email: User's Email, maxlength of 250, unique, and not null
-        username: User's Username, maxlenght of 50, unique, and not null
-        password_hash: User's password's hashed function to dehash, not null
-        trust_level: User's Trust Level in terms of lending books, default 50, maximum 100, minimum 0
-        profile_pic: User's profile picture check if the extensions are ["JPG", "PNG", "WebP"] # working on this
+    Inherits from Django's AbstractUser class. 
+    Additional Variables:
+        trust_level: User's Trust Level in terms of lending books, default 50, maximum 100, minimum 0.
+        profile_pic: URL to profile image.
+        books: ManyToMany relationship normalized through UserBook.
+        achievements: ManyToMany relationship normalized through UserAchievements.
     """
-
-    user_email = models.EmailField(max_length=250, unique=True, null=False)
-    username = models.CharField(max_length=50, unique=True, null=False)
-    password_hash = models.TextField(null=False)
     trust_level = models.IntegerField(
         validators=[
             MinValueValidator(0),
@@ -298,12 +292,20 @@ class User(models.Model):
             ],
         default=50,
         )
-
     profile_pic = models.URLField(blank=True, null=True)
+    books = models.ManyToManyField("Book", through="UserBook")
+    achievements = models.ManyToManyField("Achievement", through="UserAchievement")
 
-
-
-# User Book Table
+    class Meta:
+        verbose_name = "User"
+        verbose_name_plural = "Users"
+        indexes = (
+            models.Index(fields=['username']),
+            models.Index(fields=['email']),
+        )
+        ordering = ['username']
+        
+# User Book Table. Normalization tabe used by User's ManyToMany relationship with Book.
 class UserBook(models.Model):
     """
     User Book Table
@@ -334,7 +336,13 @@ class UserBook(models.Model):
     date_ended = models.DateField(blank=True, null=True)
     
     class Meta:
-        unique_together = ('user', 'book')
+        constraints = [
+            models.UniqueConstraint(fields=['user', 'book'], name='unique_user_book')
+        ]
+        indexes = [
+            models.Index(fields=['read_status']),
+            models.Index(fields=['is_owned']),
+        ]
 
 
     def __str__(self):
@@ -342,7 +350,7 @@ class UserBook(models.Model):
 
 
 # Achievement Table
-class Achievements(models.Model):
+class Achievement(models.Model):
     """
     Achievements Table
 
@@ -355,14 +363,23 @@ class Achievements(models.Model):
     name = models.CharField(max_length=50, null=False, unique=True)
     achieve_desc = models.TextField(blank=True, null=True)
     achieve_icon = models.URLField(blank=True, null=True)
+    difficulty_lvl = models.PositiveIntegerField(blank=True, null = True)
 
+    class Meta:
+        verbose_name = "Achievement"
+        verbose_name_plural = "Achievements"
+        indexes = (
+            models.Index(fields=['name']),
+            models.Index(fields=['difficulty_lvl'])
+        )
+        ordering = ['name']
 
     def __str__(self):
         return self.name
 
 
-# User Achievements Table
-class UserAchievements(models.Model):
+# User Achievements Table used for normnalization in User's ManyToMany relationship with Achievement.
+class UserAchievement(models.Model):
     """
     User Achievements Table
 
@@ -374,13 +391,19 @@ class UserAchievements(models.Model):
     """
 
     user = models.ForeignKey("User", on_delete=models.CASCADE, related_name="user_achievements")
-    achievement= models.ForeignKey("Achievements", on_delete=models.CASCADE, related_name="related_achievement_users")
+    achievement= models.ForeignKey("Achievement", on_delete=models.CASCADE, related_name="related_achievement_users")
     completed = models.BooleanField(default=False)
     completion_percentage = models.DecimalField(default=0.00, max_digits=5, decimal_places=2)
 
 
     class Meta:
-        unique_together = ('user', 'achievement')
+        constraints = [
+            models.UniqueConstraint(fields=['user', 'achievement'], name='unique_user_achievement')
+        ]
+        indexes = [
+            models.Index(fields=['completed'])
+        ]
+        ordering = ['completion_percentage']
 
     def __str__(self):
         return f"{self.user} - {self.achievement} (Completed: {self.completed})"
@@ -403,54 +426,122 @@ class UserProfile(models.Model):
     user_location = models.CharField(max_length=100, blank=True, null=True)
     social_links = models.CharField(blank=True, null=True)
 
+    class Meta:
+        verbose_name = "UserProfile"
+        verbose_name_plural = "UserProfiles"
+        indexes = [
+            models.Index(fields=['user_location'])
+        ]
+
     def __str__(self):
-        return self.user
+        return f'{self.user.username}'
 
-
-# Club Member Table
-class ClubMember(models.Model):
+# Shelf table
+class Shelf (models.Model):
     """
-    Club Member Table
+    Shelf table
 
     Variables:
-        club_user: One to Many relation from User (One to Many)
+    user: Foriegn key: the user who the shelf belongs to.
+    name: max length 250 char: the given name for shelf
+    shelf_desc: text: optional: the given description.
+    shelf_img: URL/text: the shelf's user ganted image url.
+    is_private: boolean: default False. Represents whether shelf is maked private.
+    shelf_type: ENUM: the shelf's type.
+    books: ManyToMany field with Edition Table normalized through ShelfEdition.
+    created_on: The date the shelf was created.
     """
-
-    club = models.ForeignKey('BookClub', on_delete=models.CASCADE)
-    user = models.ForeignKey('User', on_delete=models.CASCADE)
+    SHELF_TYPES = [
+        ("Owned", "Owned"),
+        ("Read", "Read"),
+        ("Reading", "Reading"),
+        ("Want to Read", "Want to Read"),
+        ("Available", "Available"),
+        ("Lent Out", "Lent Out"),
+        ("Custom", "Custom"),
+    ]
+    user = models.ForeignKey('User', on_delete=models.CASCADE, related_name="shelves")
+    name = models.CharField(max_length=250)
+    shelf_desc = models.TextField(null=True, blank=True)
+    shelf_img = models.URLField(null=True, blank=True)
+    is_private = models.BooleanField(default=False)
+    shelf_type = models.CharField(max_length=20, choices=SHELF_TYPES, null=False)
+    books = models.ManyToManyField("Edition", through="ShelfEdition")
+    creation_date = models.DateTimeField(auto_now_add=True)
 
     class Meta:
-        unique_together = ('club', 'user')
+        verbose_name = "Shelf"
+        verbose_name_plural = "Shelves"
+        indexes = [
+            models.Index(fields=["name"]),
+            models.Index(fields=["shelf_type"])
+        ]
+        ordering = ["name"]
 
     def __str__(self):
-        return f"{self.user.username} in {self.club.name}"
-
-
-# Book Club Table
-class BookClub(models.Model):
+        return f"{self.user} {self.name} {self.shelf_type}"
+    
+class ShelfEdition(models.Model):
     """
-    Book Club Table
+    ShelfBook Table (Normalization Table)
 
     Variables:
-        name: One to Many relation from Club Member (One to Many)
-        club_desc: optional: text description of club
-        is_private: sets whether or not club is private (default FALSE)
+    shelf: Foriegn key to Shelf
+    edition: Foriegn key to Edition
+    """
+    shelf = models.ForeignKey("Shelf", on_delete=models.CASCADE, related_name="shelf_books")
+    edition = models.ForeignKey("Edition", on_delete=models.CASCADE, related_name="edition_shelves")
+
+    class Meta:
+        constraints = [
+            models.UniqueConstraint(fields=['shelf', 'edition'], name='unique_shelf_edition')
+        ]
+
+    def __str__(self):
+        return f'{self.shelf.name} - {self.edition}'
+
+# Journal Entry Table for user created journal associated with specific books.
+class JournalEntry(models.Model):
+    """
+    Journal Entry Model
+
+    Variables:
+    user_book: FK to UserBook asscoaites user's journal to a specific book.
+    title: Optional string to head journal entry
+    content: Text content of the journal entry
+    created_on: Date the journal was created
+    updated_on: Date the journal was last updated.
+    page_num: Optional page number refrence.
     """
 
-    name = models.CharField(max_length=250, null=False)
-    club_desc = models.TextField(null=True, blank=True)
+    user_book = models.ForeignKey(
+        "UserBook",
+        on_delete = models.CASCADE,
+        related_name = "journal_entries"
+    )
+    title = models.CharField(max_length=255, null=True, blank=True)
+    content = models.TextField()
+    created_on = models.DateTimeField(auto_now_add=True)
+    updated_on = models.DateTimeField(auto_now=True)
+    page_num = models.PositiveIntegerField(null=True, blank=True)
     is_private = models.BooleanField(default=False)
+    
 
-    book = models.ForeignKey(
-        Book,
-        on_delete=models.CASCADE,
-        related_name='related_book_club',
-        null=True,
-        blank=True
-        )
+    class Meta:
+        verbose_name = "JournalEntry"
+        verbose_name_plural = "JournalEntries"
+        indexes = [
+            models.Index(fields=["title"]),
+            models.Index(fields=["page_num"]),
+            models.Index(fields=["updated_on"]),
+        ]
+        ordering = ["-updated_on"]
+    
+    def __str__(self):
+        return f"Journal Entry by {self.user_book.user} on {self.user_book.book.title}"
 
-    def __str_(self):
-        return self.name
+
+##### Community Stuff #####
 
 # Review table
 class Review(models.Model):
@@ -479,57 +570,116 @@ class Review(models.Model):
             MaxValueValidator(5.00)
         ],
     )
+    class Meta:
+        verbose_name = "Review"
+        verbose_name_plural = "Reviews"
+        indexes = [
+            models.Index(fields=["created_on"]),
+            models.Index(fields=["rating"]),
+        ]
+        ordering = ["-created_on"]
+
     def __str__(self):
         return f'Review by {self.user} on {self.book} - {self.rating} stars'
 
-# Shelf table
-class Shelf (models.Model):
+# Community Table
+class Community(models.Model):
     """
-    Shelf table
+    Community Table
 
     Variables:
-    user: Foriegn key: the user who the shelf belongs to.
-    name: max length 250 char: the given name for shelf
-    shelf_desc: text: optional: the given description.
-    shelf_img: URL/text: the shelf's user ganted image url.
-    is_private: boolean: default False. Represents whether shelf is maked private.
-    shelf_type: ENUM: the shelf's type.
+        book: Foreign Key, 1 to 1 Relationship with Book
     """
-    SHELF_TYPES = [
-        ("Owned", "Owned"),
-        ("Read", "Read"),
-        ("Reading", "Reading"),
-        ("Want to Read", "Want to Read"),
-        ("Available", "Available"),
-        ("Lent Out", "Lent Out"),
-        ("Custom", "Custom"),
-    ]
-    user = models.ForeignKey('User', on_delete=models.CASCADE, related_name="shelves")
-    name = models.CharField(max_length=250)
-    shelf_desc = models.TextField(null=True, blank=True)
-    shelf_img = models.TextField(null=True, blank=True)
-    is_private = models.BooleanField(default=False)
-    shelf_type = models.CharField(max_length=20, choices=SHELF_TYPES, null=False)
-
-    def __str__(self):
-        return f"{self.user} {self.name} {self.shelf_type}"
-    
-class ShelfBook(models.Model):
-    """
-    ShelfBook Table (Normalization Table)
-
-    Variables:
-    shelf: Foriegn key to Shelf
-    edition: Foriegn key to Edition
-    """
-    shelf = models.ForeignKey("Shelf", on_delete=models.CASCADE, related_name="shelf_books")
-    edition = models.ForeignKey("Edition", on_delete=models.CASCADE, related_name="edition_shelves")
+    book = models.OneToOneField(
+        Book,
+        on_delete=models.CASCADE,
+        related_name='related_community',
+        null=True,
+        blank=True
+        )
+    users = models.ManyToManyField("User", through="CommunityUser")
 
     class Meta:
-        unique_together = ('shelf', 'edition')
+        verbose_name = "Community"
+        verbose_name_plural = "Communities"
 
     def __str__(self):
-        return f'{self.shelf.name} - {self.edition}'
+        return f"Community for {self.book.title}" if self.book else "Community (No Book)"
+
+# CommunityFollower table. Used for normalization in Community's ManyToMany relationship with User
+class CommunityUser(models.Model):
+    """
+    CommunityUser Table
+
+    Variables:
+        community: Foriegn Key from Community -- 
+            Community has many CommunityFollowers, CommunityFollower has one Community.
+        user: Foriegn Key from User --
+            User has many CommunityFollowers, CommunityFollower has one User.
+    """
+    community = models.ForeignKey('Community', on_delete=models.CASCADE, related_name="related_users")
+    user = models.ForeignKey('User', on_delete=models.CASCADE, related_name="related_communities")
+
+    class Meta:
+        constraints = [
+            models.UniqueConstraint(fields=['community', 'user'], name='unique_community_user')
+        ]
+    
+    def __str__(self):
+        return f"{self.user.username} in {self.community}"
+
+# Book Club Table
+class BookClub(models.Model):
+    """
+    Book Club Table
+
+    Variables:
+        name: One to Many relation from Club Member (One to Many)
+        club_desc: optional: text description of club
+        is_private: sets whether or not club is private (default FALSE)
+    """
+
+    name = models.CharField(max_length=250, null=False)
+    club_desc = models.TextField(null=True, blank=True)
+    is_private = models.BooleanField(default=False)
+    users = models.ManyToManyField("User", through="ClubMember")
+    book = models.ForeignKey(
+        Book,
+        on_delete=models.CASCADE,
+        related_name='related_book_club',
+        null=True,
+        blank=True
+        )
+    class Meta:
+        verbose_name = "BookClub"
+        verbose_name_plural = "BookClubs"
+        indexes = [
+            models.Index(fields=["name"])
+        ]
+        ordering = ['name']
+
+    def __str__(self):
+        return self.name
+
+# Club Member Table. Used for normalization in Club's ManyToMany relationship to user.
+class ClubMember(models.Model):
+    """
+    Club Member Table
+
+    Variables:
+        club_user: One to Many relation from User (One to Many)
+    """
+
+    club = models.ForeignKey('BookClub', on_delete=models.CASCADE)
+    user = models.ForeignKey('User', on_delete=models.CASCADE)
+
+    class Meta:
+      constraints = [
+            models.UniqueConstraint(fields=['user', 'club'], name='unique_club_user')
+        ]
+
+    def __str__(self):
+        return f"{self.user.username} in {self.club.name}"
     
 # Post table for book club post and community post.
 class Post(models.Model):
@@ -591,6 +741,7 @@ class Post(models.Model):
             raise ValidationError("A post cannot belong to both a BookClub and a Community.")
         if not self.club and not self.community:
             raise ValidationError("A post must belong to either a BookClub or a Community.")
+        super().clean()
     
     def save(self, *args, **kwargs):
         """
@@ -613,6 +764,14 @@ class Post(models.Model):
                 name="post_must_have_one_relation"
             )
         ]
+        verbose_name = "Post"
+        verbose_name_plural = "Posts"
+        indexes = [
+            models.Index(fields=["title"]),
+            models.Index(fields=["like_count"]),
+            models.Index(fields=["page_num"])
+        ]
+        ordering = ["-created_on"]
 
 # Comment base class and concrete class for comments.
 # We use the Abstract Base Class method to deal with the polymorphism issue of our many comment types.
@@ -649,10 +808,16 @@ class BaseComment(MPTTModel):
         blank = True,
         related_name = "children"
     )
+    
 
     class Meta:
         abstract = True
         ordering = ['-created_on']
+        indexes = [
+            models.Index(fields=["like_count"]),
+            models.Index(fields=["page_num"]),
+            models.Index(fields=["created_on"])
+        ]
     
     # Tree insertion order specification.
     class MPTTMeta:
@@ -679,36 +844,3 @@ class ShelfComment(BaseComment):
     Concrete Comment Model for Shelf Comments
     """
     shelf = models.ForeignKey("Shelf", on_delete=models.CASCADE, related_name="comments")
-
-# Journal Entry Table for user created journal associated with specific books.
-class JournalEntry(models.Model):
-    """
-    Journal Entry Model
-
-    Variables:
-    user_book: FK to UserBook asscoaites user's journal to a specific book.
-    title: Optional string to head journal entry
-    content: Text content of the journal entry
-    created_on: Date the journal was created
-    updated_on: Date the journal was last updated.
-    page_num: Optional page number refrence.
-    """
-
-    user_book = models.ForeignKey(
-        "UserBook",
-        on_delete = models.CASCADE,
-        related_name = "journal_entries"
-    )
-    title = models.CharField(max_length=255, null=True, blank=True)
-    content = models.TextField()
-    created_on = models.DateTimeField(auto_now_add=True)
-    updated_on = models.DateTimeField(auto_now=True)
-    page_num = models.PositiveIntegerField(null=True, blank=True)
-    is_private = models.BooleanField(default=False)
-    
-
-    class Meta:
-        ordering = ["-created_on"]
-    
-    def __str__(self):
-        return f"Journal Entry by {self.user_book.user} on {self.user_book.book.title}"
