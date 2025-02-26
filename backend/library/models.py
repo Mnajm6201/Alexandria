@@ -844,3 +844,5 @@ class ShelfComment(BaseComment):
     Concrete Comment Model for Shelf Comments
     """
     shelf = models.ForeignKey("Shelf", on_delete=models.CASCADE, related_name="comments")
+
+# Do you see this?
