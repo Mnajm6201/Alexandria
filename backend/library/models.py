@@ -55,7 +55,7 @@ class Book(models.Model):
         blank = True,
         null = True
     )
-    unique_hash = models.CharField(max_length=64, unique=True, db_index=True)
+    unique_hash = models.CharField(max_length=64, unique=True)
     authors = models.ManyToManyField("Author", through="BookAuthor")
     genres = models.ManyToManyField("Genre", through="BookGenre")
 
