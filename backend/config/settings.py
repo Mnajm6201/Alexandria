@@ -66,6 +66,18 @@ WSGI_APPLICATION = "config.wsgi.application"
 CORS_ALLOW_ALL_ORIGINS = False
 CORS_ALLOWED_ORIGINS = env.list("CORS_ALLOWED_ORIGINS", default=["http://localhost:3000"])
 
+# specify headers here
+CORS_ALLOW_HEADERS = [
+    "authorization",  
+    "content-type",
+]
+
+# specify methods here
+CORS_ALLOW_METHODS = [
+    "GET",
+    "POST"
+]
+
 # Database
 DATABASES = {
     "default": {
