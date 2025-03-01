@@ -58,8 +58,20 @@ TEMPLATES = [
 WSGI_APPLICATION = "config.wsgi.application"
 
 # CORS settings
-CORS_ALLOW_ALL_ORIGINS = False
+CORS_ALLOW_ALL_ORIGINS = False # DO NOT SET TO TRUE FOR PRODUCTION
 CORS_ALLOWED_ORIGINS = env.list("CORS_ALLOWED_ORIGINS", default=["http://localhost:3000"])
+
+# add any method requests the front end would make in this array
+CORS_ALLOWED_METHODS = [
+    "GET",
+    "POST"
+]
+
+# specify which HTTP headers are allowed in CORS
+CORS_ALLOW_HEADERS = [
+    "authorization",
+    "content-type"
+]
 
 # Database
 DATABASES = {
