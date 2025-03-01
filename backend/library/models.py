@@ -845,4 +845,4 @@ class ShelfComment(BaseComment):
     """
     shelf = models.ForeignKey("Shelf", on_delete=models.CASCADE, related_name="comments")
 
-# Do you see this?
+# Do you see this
