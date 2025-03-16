@@ -1,89 +1,201 @@
 {
-  "description": "Catch-22 is like no other novel. It has its own rationale, its own extraordinary character. It moves back and forth from hilarity to horror. It is outrageously funny and strangely affecting. It is totally original. Set in the closing months of World War II in an American bomber squadron off Italy, Catch-22 is the story of a bombardier named Yossarian, who is frantic and furious because thousands of people he hasn't even met keep trying to kill him. Catch-22 is a microcosm of the twentieth-century world as it might look to someone dangerously sane. It is a novel that lives and moves and grows with astonishing power and vitality -- a masterpiece of our time. - Back cover.",
-  "title": "Catch-22",
-  "covers": [
-    6468653,
-    1529742,
-    6646509,
-    426382,
-    1022038,
-    10141363,
-    -1
-  ],
-  "first_sentence": {
+  "description": {
     "type": "/type/text",
-    "value": "It was love at first sight."
+    "value": "Story of Holden Caufield with his idiosyncrasies, penetrating insight, confusion, sensitivity and negativism. Holden, knowing he is to be expelled from school, decides to leave early. He spends three days in New York City and tells the story of what he did and suffered there."
   },
-  "subject_places": [
-    "Italy"
-  ],
-  "first_publish_date": "August 15, 1904",
-  "key": "/works/OL276798W",
+  "title": "The Catcher in the Rye",
+  "key": "/works/OL3335245W",
   "authors": [
     {
       "author": {
-        "key": "/authors/OL33512A"
+        "key": "/authors/OL540486A"
       },
       "type": {
         "key": "/type/author_role"
       }
     }
   ],
-  "excerpts": [
-    {
-      "excerpt": "It was love at first sight."
-    }
-  ],
-  "subjects": [
-    "Open Library Staff Picks",
-    "Satire",
-    "War stories",
-    "Fiction",
-    "Drama",
-    "World War, 1939-1945",
-    "Catch-22 (Heller, Joseph)",
-    "World War (1939-1945) fast (OCoLC)fst01180924",
-    "Fictional Works Publication Type",
-    "Bombardiers",
-    "American Aerial operations",
-    "Guerre mondiale, 1939-1945",
-    "Fiction, war & military",
-    "American fiction (fictional works by one author)",
-    "World war, 1939-1945, fiction",
-    "Fiction, satire",
-    "Large type books",
-    "Literature and fiction, historical fiction",
-    "Psychology",
-    "Roman",
-    "American",
-    "Guerre mondiale (1939-1945)",
-    "American War stories",
-    "Aerial Military operations",
-    "Amerikanisches Englisch",
-    "United States. Army Air Forces",
-    "United States",
-    "World War, 1939-1945 / Fiction",
-    "World war, 1939-1945--aerial operations, american",
-    "World war, 1939-1945--aerial operations, american--fiction",
-    "Bombardiers--fiction",
-    "World war, 1939-1945--fiction",
-    "Ps3558.e476 c3 2011b",
-    "813/.54 [fic]"
-  ],
   "type": {
     "key": "/type/work"
   },
-  "subject_times": [
-    "1943"
+  "links": [
+    {
+      "title": "The Catcher in the Rye - Wikipedia",
+      "url": "https://en.wikipedia.org/wiki/The_Catcher_in_the_Rye",
+      "type": {
+        "key": "/type/link"
+      }
+    },
+    {
+      "url": "https://www.washingtonpost.com/entertainment/books/jd-salinger-at-100-is-the-catcher-in-the-rye-still-relevant/2018/12/30/5d0412f6-0929-11e9-a3f0-71c95106d96a_story.html",
+      "title": "J.D. Salinger at 100: Is 'The Catcher in the Rye' still relevant? - The ...",
+      "type": {
+        "key": "/type/link"
+      }
+    },
+    {
+      "url": "https://www.independent.co.uk/arts-entertainment/books/features/jd-salinger-life-catcher-in-rye-books-anniversary-franny-zooey-raise-high-roof-beam-john-lennon-a8699026.html",
+      "title": "The odd life of Catcher in the Rye author JD Salinger",
+      "type": {
+        "key": "/type/link"
+      }
+    },
+    {
+      "url": "https://www.newyorker.com/magazine/1951/08/11/the-vision-of-the-innocent",
+      "title": "The Vision of the Innocent",
+      "type": {
+        "key": "/type/link"
+      }
+    },
+    {
+      "title": "SparkNotes: The Catcher in the Rye",
+      "url": "https://www.sparknotes.com/lit/catcher/",
+      "type": {
+        "key": "/type/link"
+      }
+    },
+    {
+      "url": "https://www.britannica.com/topic/The-Catcher-in-the-Rye",
+      "title": "britannica.com/topic/The-Catcher-in-the-Rye",
+      "type": {
+        "key": "/type/link"
+      }
+    },
+    {
+      "title": "New York Times review",
+      "url": "http://www.nytimes.com/2001/07/29/books/the-close-reader-holden-reconsidered-and-all.html",
+      "type": {
+        "key": "/type/link"
+      }
+    }
   ],
-  "latest_revision": 34,
-  "revision": 34,
+  "subject_times": [
+    "1951",
+    "xian dai"
+  ],
+  "covers": [
+    9273490,
+    -1,
+    9339321,
+    11554908,
+    8599565,
+    11579381,
+    1011105,
+    10084877,
+    8279591
+  ],
+  "subject_places": [
+    "New York (N.Y.)",
+    "United States",
+    "New York",
+    "New York City",
+    "Southern California",
+    "Pencey Preparatory Academy",
+    "Agerstown",
+    "Central Park Zoo",
+    "Metropolitan Museum of Art",
+    "Grand Central Station",
+    "Fifth Avenue",
+    "west",
+    "New York University",
+    "Museum of Natural History",
+    "Wicker Bar",
+    "Seton Hotel",
+    "New England",
+    "Columbia University",
+    "Rockefeller Center",
+    "Biltmore Theatre",
+    "Central Park",
+    "Seattle",
+    "Greenwich Village",
+    "Ernie's Nightclub",
+    "Pennsylvania",
+    "Penn Station",
+    "mei guo",
+    "USA"
+  ],
+  "first_publish_date": "1945",
+  "subject_people": [
+    "Holden Caulfield (Fictitious character)",
+    "Holden Caufield",
+    "D.B. Caufield",
+    "Mr. Spencer",
+    "Robert Ackley",
+    "Ward Stradlater",
+    "Benedict Arnold",
+    "Maurice",
+    "Mr. Antolini",
+    "Carl Luce",
+    "Phoebe Caufield",
+    "Sally Hayes",
+    "Jane Gallagher",
+    "Sunny",
+    "Ernest Morrow",
+    "Cary Grant",
+    "Mal Brossard"
+  ],
+  "excerpts": [
+    {
+      "author": {
+        "key": "/people/george08"
+      },
+      "excerpt": "I'm the most terrific liar you ever saw in your life. It's awful. If I'm on my way to the store to buy a magazine, even, and somebody asks me where I'm going, I'm liable to say I'm going to the opera. It's terrible."
+    },
+    {
+      "author": {
+        "key": "/people/seabelis"
+      },
+      "excerpt": "If you really want to hear about it, the first thing you'll probably want to know is where I was born, and what my lousy childhood was like, and how my parents were occupied and all before they had me, and all that David Copperfield kind of crap, but I don't feel like going into it, if you want to know the truth.",
+      "comment": "first sentence"
+    }
+  ],
+  "subjects": [
+    "fictional works",
+    "Runaway teenagers",
+    "Fiction",
+    "Adolescence",
+    "teenage boys",
+    "Runaway teenagers in literature",
+    "Brothers and sisters",
+    "Emotionally disturbed teenage boys",
+    "Preparatory schools",
+    "Open Library Staff Picks",
+    "Bildungsromans",
+    "Alienation in teenagers",
+    "Interpersonal relations",
+    "juvenile works",
+    "juvenile fiction",
+    "Fictional Works Publication Type",
+    "Classics",
+    "Caulfield, holden (fictitious character), fiction",
+    "New york (n.y.), fiction",
+    "American fiction (fictional works by one author)",
+    "Fiction, coming of age",
+    "Caulfield, holden (fictitious character)",
+    "Salinger, j. d. (jerome david), 1919-2010",
+    "Adolescence in literature",
+    "Holden Caulfield (Fictitious character)",
+    "New York Times reviewed",
+    "Holden ACaulfield (Fictitious character)",
+    "Conduct of life",
+    "Chang pian xiao shuo",
+    "Heranwachsender",
+    "Fictional works [publication type]",
+    "Caulfield, holden (fictitious character)--fiction",
+    "Runaway teenagers--fiction",
+    "Ps3537.a426 c315 1991",
+    "Book: sga sal",
+    "813.5 s 3-8, 1991",
+    "Governors"
+  ],
+  "latest_revision": 25,
+  "revision": 25,
   "created": {
     "type": "/type/datetime",
-    "value": "2009-10-25T12:11:08.383061"
+    "value": "2009-12-10T03:19:09.223330"
   },
   "last_modified": {
     "type": "/type/datetime",
-    "value": "2024-03-03T16:45:04.978603"
+    "value": "2025-02-12T22:13:25.056750"
   }
 }
