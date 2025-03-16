@@ -141,7 +141,7 @@
         </div>
     );
     }
-
+    
     function BookCard() {
     return (
         <div className="w-32 flex-shrink-0">

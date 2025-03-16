@@ -1,0 +1,54 @@
+[
+  {
+    "personal_name": "Heller, Joseph.",
+    "source_records": [
+      "bwb:9780099552185"
+    ],
+    "alternate_names": [
+      "Heller, Joseph.",
+      "Joseph L. Heller",
+      "Heller Joseph",
+      "JOSEPH HELLER",
+      "Joseph. Heller",
+      "Joseph HELLER"
+    ],
+    "bio": {
+      "type": "/type/text",
+      "value": "An American satirical novelist, short story writer and playwright."
+    },
+    "type": {
+      "key": "/type/author"
+    },
+    "death_date": "12 December 1999",
+    "remote_ids": {
+      "viaf": "36926967",
+      "wikidata": "Q208101",
+      "isni": "0000000122783593"
+    },
+    "name": "Joseph Heller",
+    "links": [
+      {
+        "url": "https://secure.wikimedia.org/wikipedia/en/wiki/Joseph_Heller",
+        "type": {
+          "key": "/type/link"
+        },
+        "title": "Wikipedia"
+      }
+    ],
+    "photos": [
+      6742410
+    ],
+    "birth_date": "1 May 1923",
+    "key": "/authors/OL33512A",
+    "latest_revision": 8,
+    "revision": 8,
+    "created": {
+      "type": "/type/datetime",
+      "value": "2008-04-01T03:28:50.625462"
+    },
+    "last_modified": {
+      "type": "/type/datetime",
+      "value": "2022-12-01T20:46:24.691281"
+    }
+  }
+]

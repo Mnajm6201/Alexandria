@@ -23,8 +23,13 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    "mptt",
     "corsheaders",
+    "library",
 ]
+
+# Set custom user model
+AUTH_USER_MODEL = "library.User"
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
@@ -61,16 +66,16 @@ WSGI_APPLICATION = "config.wsgi.application"
 CORS_ALLOW_ALL_ORIGINS = False # DO NOT SET TO TRUE FOR PRODUCTION
 CORS_ALLOWED_ORIGINS = env.list("CORS_ALLOWED_ORIGINS", default=["http://localhost:3000"])
 
-# add any method requests the front end would make in this array
-CORS_ALLOWED_METHODS = [
-    "GET",
-    "POST"
+# specify headers here
+CORS_ALLOW_HEADERS = [
+    "authorization",  
+    "content-type",
 ]
 
-# specify which HTTP headers are allowed in CORS
-CORS_ALLOW_HEADERS = [
-    "authorization",
-    "content-type"
+# specify methods here
+CORS_ALLOW_METHODS = [
+    "GET",
+    "POST"
 ]
 
 # Database
