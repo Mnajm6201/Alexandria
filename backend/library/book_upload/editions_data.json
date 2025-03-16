@@ -1,0 +1,8077 @@
+[
+  {
+    "type": {
+      "key": "/type/edition"
+    },
+    "publish_date": "1961",
+    "publish_country": "nyu",
+    "languages": [
+      {
+        "key": "/languages/eng"
+      }
+    ],
+    "authors": [
+      {
+        "key": "/authors/OL1143795A"
+      }
+    ],
+    "notes": {
+      "type": "/type/text",
+      "value": "Uncorrected proof of first printing.\r\n\r\nRare Book copy: From the library of M. Lincoln Schuster."
+    },
+    "contributions": [
+      "Schuster, M. Lincoln (Max Lincoln), 1897-1970, former owner"
+    ],
+    "title": "Catch-22",
+    "subtitle": "a novel",
+    "by_statement": "Joseph Heller",
+    "publishers": [
+      "Simon and Schuster"
+    ],
+    "publish_places": [
+      "New York"
+    ],
+    "pagination": "337 p.",
+    "number_of_pages": 337,
+    "source_records": [
+      "marc:marc_columbia/Columbia-extract-20221130-001.mrc:325759959:1085"
+    ],
+    "full_title": "Catch-22 a novel",
+    "works": [
+      {
+        "key": "/works/OL276798W"
+      }
+    ],
+    "key": "/books/OL43711752M",
+    "identifiers": {},
+    "oclc_numbers": [
+      "83724711"
+    ],
+    "classifications": {},
+    "latest_revision": 2,
+    "revision": 2,
+    "created": {
+      "type": "/type/datetime",
+      "value": "2022-12-10T13:07:13.360608"
+    },
+    "last_modified": {
+      "type": "/type/datetime",
+      "value": "2023-08-02T17:59:57.959604"
+    }
+  },
+  {
+    "type": {
+      "key": "/type/edition"
+    },
+    "publish_date": "1973",
+    "publish_country": "nyu",
+    "languages": [
+      {
+        "key": "/languages/eng"
+      }
+    ],
+    "authors": [
+      {
+        "key": "/authors/OL1143795A"
+      }
+    ],
+    "notes": {
+      "type": "/type/text",
+      "value": "\"A  Delta book.\"\r\n\r\nBibliography: p. 560-562."
+    },
+    "subjects": [
+      "World War, 1939-1945",
+      "Fiction"
+    ],
+    "title": "Catch-22",
+    "subtitle": "a critical edition",
+    "by_statement": "Robert M. Scotto, editor",
+    "publishers": [
+      "Dell Pub. Co."
+    ],
+    "publish_places": [
+      "New York"
+    ],
+    "pagination": "xi, 562 pages",
+    "number_of_pages": 562,
+    "source_records": [
+      "marc:marc_columbia/Columbia-extract-20221130-001.mrc:436710431:952"
+    ],
+    "full_title": "Catch-22 a critical edition",
+    "works": [
+      {
+        "key": "/works/OL276798W"
+      }
+    ],
+    "key": "/books/OL43751518M",
+    "identifiers": {},
+    "oclc_numbers": [
+      "719473"
+    ],
+    "classifications": {},
+    "latest_revision": 2,
+    "revision": 2,
+    "created": {
+      "type": "/type/datetime",
+      "value": "2022-12-11T02:52:49.403977"
+    },
+    "last_modified": {
+      "type": "/type/datetime",
+      "value": "2023-08-02T17:59:53.430783"
+    }
+  },
+  {
+    "type": {
+      "key": "/type/edition"
+    },
+    "title": "Catch 22",
+    "source_records": [
+      "amazon:3436013552",
+      "promise:bwb_daily_pallets_2021-05-03"
+    ],
+    "physical_format": "paperback",
+    "full_title": "Catch 22",
+    "works": [
+      {
+        "key": "/works/OL276798W"
+      }
+    ],
+    "key": "/books/OL40281251M",
+    "local_id": [
+      "urn:bwbsku:P7-ADE-857"
+    ],
+    "identifiers": {
+      "amazon": [
+        "B000N3ZGB2"
+      ]
+    },
+    "isbn_10": [
+      "3436013552"
+    ],
+    "isbn_13": [
+      "9783436013554"
+    ],
+    "classifications": {},
+    "latest_revision": 3,
+    "revision": 3,
+    "created": {
+      "type": "/type/datetime",
+      "value": "2022-11-13T19:11:48.187064"
+    },
+    "last_modified": {
+      "type": "/type/datetime",
+      "value": "2023-08-02T17:59:48.744404"
+    }
+  },
+  {
+    "type": {
+      "key": "/type/edition"
+    },
+    "authors": [
+      {
+        "key": "/authors/OL1143795A"
+      },
+      {
+        "key": "/authors/OL7718878A"
+      }
+    ],
+    "languages": [
+      {
+        "key": "/languages/eng"
+      }
+    ],
+    "pagination": "544",
+    "publish_date": "2023",
+    "publishers": [
+      "Penguin Random House"
+    ],
+    "source_records": [
+      "bwb:9781784878696"
+    ],
+    "title": "Catch-22",
+    "subtitle": "As Recommended on BBC2's Between the Covers",
+    "full_title": "Catch-22 As Recommended on BBC2's Between the Covers",
+    "works": [
+      {
+        "key": "/works/OL276798W"
+      }
+    ],
+    "key": "/books/OL46064211M",
+    "identifiers": {},
+    "isbn_13": [
+      "9781784878696"
+    ],
+    "classifications": {},
+    "latest_revision": 2,
+    "revision": 2,
+    "created": {
+      "type": "/type/datetime",
+      "value": "2023-01-17T05:18:37.964936"
+    },
+    "last_modified": {
+      "type": "/type/datetime",
+      "value": "2023-08-02T17:59:44.530115"
+    }
+  },
+  {
+    "type": {
+      "key": "/type/edition"
+    },
+    "title": "Catch-22",
+    "authors": [
+      {
+        "key": "/authors/OL1143795A"
+      }
+    ],
+    "publish_date": "Jun 14, 1996",
+    "source_records": [
+      "amazon:0606141766"
+    ],
+    "publishers": [
+      "Demco Media",
+      "Brand: Demco Media"
+    ],
+    "physical_format": "library binding",
+    "full_title": "Catch-22",
+    "covers": [
+      13961422
+    ],
+    "works": [
+      {
+        "key": "/works/OL276798W"
+      }
+    ],
+    "key": "/books/OL47367270M",
+    "identifiers": {},
+    "isbn_10": [
+      "0606141766"
+    ],
+    "isbn_13": [
+      "9780606141765"
+    ],
+    "classifications": {},
+    "latest_revision": 2,
+    "revision": 2,
+    "created": {
+      "type": "/type/datetime",
+      "value": "2023-04-14T04:57:07.628967"
+    },
+    "last_modified": {
+      "type": "/type/datetime",
+      "value": "2023-08-02T17:59:40.148593"
+    }
+  },
+  {
+    "type": {
+      "key": "/type/edition"
+    },
+    "authors": [
+      {
+        "key": "/authors/OL1143795A"
+      }
+    ],
+    "identifiers": {
+      "amazon": [
+        "B0010ZHM28"
+      ],
+      "better_world_books": [
+        "BWB33302819"
+      ]
+    },
+    "local_id": [
+      "urn:bwbsku:KQ-629-651"
+    ],
+    "publish_date": "1972-01-01",
+    "publishers": [
+      "Heron Books"
+    ],
+    "source_records": [
+      "promise:bwb_daily_pallets_2022-04-20:KQ-629-651"
+    ],
+    "title": "Catch-22",
+    "full_title": "Catch-22",
+    "works": [
+      {
+        "key": "/works/OL276798W"
+      }
+    ],
+    "key": "/books/OL47053121M",
+    "classifications": {},
+    "latest_revision": 2,
+    "revision": 2,
+    "created": {
+      "type": "/type/datetime",
+      "value": "2023-02-28T10:29:16.289827"
+    },
+    "last_modified": {
+      "type": "/type/datetime",
+      "value": "2023-08-02T17:59:34.951741"
+    }
+  },
+  {
+    "type": {
+      "key": "/type/edition"
+    },
+    "authors": [
+      {
+        "key": "/authors/OL1143795A"
+      }
+    ],
+    "identifiers": {
+      "amazon": [
+        "B000UC2DW6"
+      ],
+      "better_world_books": [
+        "BWB50542356"
+      ]
+    },
+    "local_id": [
+      "urn:bwbsku:KO-414-978"
+    ],
+    "publish_date": "1976-01-01",
+    "publishers": [
+      "Corgi Books"
+    ],
+    "source_records": [
+      "promise:bwb_daily_pallets_2023-05-24:KO-414-978"
+    ],
+    "title": "Catch-22",
+    "full_title": "Catch-22",
+    "works": [
+      {
+        "key": "/works/OL276798W"
+      }
+    ],
+    "key": "/books/OL47854361M",
+    "classifications": {},
+    "latest_revision": 2,
+    "revision": 2,
+    "created": {
+      "type": "/type/datetime",
+      "value": "2023-05-26T02:44:18.360883"
+    },
+    "last_modified": {
+      "type": "/type/datetime",
+      "value": "2023-08-02T17:59:13.328833"
+    }
+  },
+  {
+    "type": {
+      "key": "/type/edition"
+    },
+    "authors": [
+      {
+        "key": "/authors/OL1143795A"
+      }
+    ],
+    "languages": [
+      {
+        "key": "/languages/eng"
+      }
+    ],
+    "pagination": "544",
+    "publish_date": "2020",
+    "publishers": [
+      "Random House, Incorporated"
+    ],
+    "source_records": [
+      "bwb:9781784875923"
+    ],
+    "subjects": [
+      "American literature"
+    ],
+    "title": "Catch-22",
+    "full_title": "Catch-22",
+    "works": [
+      {
+        "key": "/works/OL276798W"
+      }
+    ],
+    "key": "/books/OL48680702M",
+    "identifiers": {},
+    "isbn_13": [
+      "9781784875923"
+    ],
+    "classifications": {},
+    "lc_classifications": [
+      "PS3558.E476"
+    ],
+    "latest_revision": 2,
+    "revision": 2,
+    "created": {
+      "type": "/type/datetime",
+      "value": "2023-07-17T08:40:44.782975"
+    },
+    "last_modified": {
+      "type": "/type/datetime",
+      "value": "2023-08-02T17:59:08.314701"
+    }
+  },
+  {
+    "type": {
+      "key": "/type/edition"
+    },
+    "authors": [
+      {
+        "key": "/authors/OL1143795A"
+      },
+      {
+        "key": "/authors/OL233861A"
+      }
+    ],
+    "languages": [
+      {
+        "key": "/languages/eng"
+      }
+    ],
+    "pagination": "464",
+    "publish_date": "2010",
+    "publishers": [
+      "Simon & Schuster Children's Publishing"
+    ],
+    "source_records": [
+      "bwb:9781451632965"
+    ],
+    "title": "Catch-22",
+    "subtitle": "50th Anniversary Edition",
+    "full_title": "Catch-22 50th Anniversary Edition",
+    "works": [
+      {
+        "key": "/works/OL276798W"
+      }
+    ],
+    "key": "/books/OL37372616M",
+    "identifiers": {},
+    "isbn_13": [
+      "9781451632965"
+    ],
+    "classifications": {},
+    "latest_revision": 3,
+    "revision": 3,
+    "created": {
+      "type": "/type/datetime",
+      "value": "2022-03-01T01:46:43.820031"
+    },
+    "last_modified": {
+      "type": "/type/datetime",
+      "value": "2024-01-16T21:06:41.551856"
+    }
+  },
+  {
+    "type": {
+      "key": "/type/edition"
+    },
+    "authors": [
+      {
+        "key": "/authors/OL1143795A"
+      }
+    ],
+    "languages": [
+      {
+        "key": "/languages/eng"
+      }
+    ],
+    "publish_date": "1994",
+    "publishers": [
+      "Penguin Random House"
+    ],
+    "source_records": [
+      "bwb:9780099581512"
+    ],
+    "subjects": [
+      "Fiction, war & military",
+      "American fiction (fictional works by one author)",
+      "World war, 1939-1945, fiction",
+      "Fiction, satire"
+    ],
+    "title": "Catch-22",
+    "subtitle": "'Never Has a Book Been Laughed and Wept Over So Many Times'",
+    "full_title": "Catch-22 'Never Has a Book Been Laughed and Wept Over So Many Times'",
+    "works": [
+      {
+        "key": "/works/OL276798W"
+      }
+    ],
+    "key": "/books/OL40333958M",
+    "identifiers": {},
+    "isbn_13": [
+      "9780099581512"
+    ],
+    "classifications": {},
+    "latest_revision": 2,
+    "revision": 2,
+    "created": {
+      "type": "/type/datetime",
+      "value": "2022-11-17T14:05:03.215343"
+    },
+    "last_modified": {
+      "type": "/type/datetime",
+      "value": "2023-08-02T17:42:55.235927"
+    }
+  },
+  {
+    "type": {
+      "key": "/type/edition"
+    },
+    "authors": [
+      {
+        "key": "/authors/OL1143795A"
+      }
+    ],
+    "languages": [
+      {
+        "key": "/languages/eng"
+      }
+    ],
+    "publish_date": "2004",
+    "publishers": [
+      "Penguin Random House"
+    ],
+    "source_records": [
+      "bwb:9780099480662"
+    ],
+    "subjects": [
+      "American fiction (fictional works by one author)",
+      "Fiction, war & military",
+      "World war, 1939-1945, fiction",
+      "Fiction, satire"
+    ],
+    "title": "Catch-22",
+    "subtitle": "'Never Has a Book Been Laughed and Wept Over So Many Times'",
+    "full_title": "Catch-22 'Never Has a Book Been Laughed and Wept Over So Many Times'",
+    "works": [
+      {
+        "key": "/works/OL276798W"
+      }
+    ],
+    "key": "/books/OL40347443M",
+    "identifiers": {},
+    "isbn_13": [
+      "9780099480662"
+    ],
+    "classifications": {},
+    "latest_revision": 2,
+    "revision": 2,
+    "created": {
+      "type": "/type/datetime",
+      "value": "2022-11-17T21:40:16.680879"
+    },
+    "last_modified": {
+      "type": "/type/datetime",
+      "value": "2023-08-02T17:42:49.909825"
+    }
+  },
+  {
+    "type": {
+      "key": "/type/edition"
+    },
+    "authors": [
+      {
+        "key": "/authors/OL6004074A"
+      }
+    ],
+    "identifiers": {
+      "amazon": [
+        "B074TM89CD"
+      ]
+    },
+    "local_id": [
+      "urn:bwbsku:P7-BUE-254"
+    ],
+    "publish_date": "2017-08-29",
+    "publishers": [
+      "Simon & Schuster Audio"
+    ],
+    "source_records": [
+      "promise:bwb_daily_pallets_2022-03-17"
+    ],
+    "title": "Catch-22",
+    "full_title": "Catch-22",
+    "works": [
+      {
+        "key": "/works/OL276798W"
+      }
+    ],
+    "key": "/books/OL43013719M",
+    "classifications": {},
+    "latest_revision": 2,
+    "revision": 2,
+    "created": {
+      "type": "/type/datetime",
+      "value": "2022-12-06T23:50:29.048654"
+    },
+    "last_modified": {
+      "type": "/type/datetime",
+      "value": "2023-08-02T17:40:52.173984"
+    }
+  },
+  {
+    "type": {
+      "key": "/type/edition"
+    },
+    "authors": [
+      {
+        "key": "/authors/OL11464571A"
+      }
+    ],
+    "local_id": [
+      "urn:bwbsku:KQ-154-648"
+    ],
+    "publish_date": "2004-01-01",
+    "publishers": [
+      "Vintage"
+    ],
+    "source_records": [
+      "promise:bwb_daily_pallets_2022-03-17"
+    ],
+    "title": "Catch-22",
+    "full_title": "Catch-22",
+    "works": [
+      {
+        "key": "/works/OL276798W"
+      }
+    ],
+    "key": "/books/OL43121587M",
+    "identifiers": {},
+    "isbn_10": [
+      "0099479184"
+    ],
+    "isbn_13": [
+      "9780099479185"
+    ],
+    "classifications": {},
+    "latest_revision": 2,
+    "revision": 2,
+    "created": {
+      "type": "/type/datetime",
+      "value": "2022-12-07T12:00:44.190732"
+    },
+    "last_modified": {
+      "type": "/type/datetime",
+      "value": "2023-08-02T17:40:47.325797"
+    }
+  },
+  {
+    "publishers": [
+      "Books On Tape, Inc."
+    ],
+    "physical_format": "Audio CD",
+    "title": "Catch-22",
+    "identifiers": {
+      "goodreads": [
+        "3741553"
+      ],
+      "librarything": [
+        "1479"
+      ]
+    },
+    "languages": [
+      {
+        "key": "/languages/eng"
+      }
+    ],
+    "publish_date": "1980",
+    "key": "/books/OL7893451M",
+    "type": {
+      "key": "/type/edition"
+    },
+    "isbn_10": [
+      "0736690859"
+    ],
+    "isbn_13": [
+      "9780736690850"
+    ],
+    "classifications": {},
+    "works": [
+      {
+        "key": "/works/OL276798W"
+      }
+    ],
+    "latest_revision": 5,
+    "revision": 5,
+    "created": {
+      "type": "/type/datetime",
+      "value": "2008-04-29T15:03:11.581851"
+    },
+    "last_modified": {
+      "type": "/type/datetime",
+      "value": "2023-08-02T17:40:30.727947"
+    }
+  },
+  {
+    "publishers": [
+      "Books on Tape"
+    ],
+    "physical_format": "Audio cassette",
+    "title": "Catch-22",
+    "identifiers": {
+      "goodreads": [
+        "106604"
+      ],
+      "librarything": [
+        "1479"
+      ]
+    },
+    "languages": [
+      {
+        "key": "/languages/eng"
+      }
+    ],
+    "publish_date": "1980",
+    "key": "/books/OL7893438M",
+    "type": {
+      "key": "/type/edition"
+    },
+    "isbn_10": [
+      "0736689621"
+    ],
+    "isbn_13": [
+      "9780736689625"
+    ],
+    "oclc_numbers": [
+      "51442102"
+    ],
+    "classifications": {},
+    "works": [
+      {
+        "key": "/works/OL276798W"
+      }
+    ],
+    "latest_revision": 7,
+    "revision": 7,
+    "created": {
+      "type": "/type/datetime",
+      "value": "2008-04-29T15:03:11.581851"
+    },
+    "last_modified": {
+      "type": "/type/datetime",
+      "value": "2023-08-02T17:40:24.407303"
+    }
+  },
+  {
+    "type": {
+      "key": "/type/edition"
+    },
+    "authors": [
+      {
+        "key": "/authors/OL11464571A"
+      }
+    ],
+    "identifiers": {
+      "amazon": [
+        "B002D65EAU"
+      ],
+      "better_world_books": [
+        "BWBM53354948"
+      ]
+    },
+    "local_id": [
+      "urn:bwbsku:KS-232-193"
+    ],
+    "publish_date": "1971-01-01",
+    "publishers": [
+      "corgi"
+    ],
+    "source_records": [
+      "promise:bwb_daily_pallets_2023-02-27:KS-232-193"
+    ],
+    "title": "catch 22",
+    "full_title": "catch 22",
+    "works": [
+      {
+        "key": "/works/OL276798W"
+      }
+    ],
+    "key": "/books/OL47758576M",
+    "classifications": {},
+    "latest_revision": 2,
+    "revision": 2,
+    "created": {
+      "type": "/type/datetime",
+      "value": "2023-05-04T07:28:49.749374"
+    },
+    "last_modified": {
+      "type": "/type/datetime",
+      "value": "2023-08-02T17:40:19.986640"
+    }
+  },
+  {
+    "type": {
+      "key": "/type/edition"
+    },
+    "title": "CATCH-22",
+    "authors": [
+      {
+        "key": "/authors/OL6004074A"
+      }
+    ],
+    "publish_date": "Mar 19, 2019",
+    "source_records": [
+      "amazon:1508296901"
+    ],
+    "number_of_pages": 1,
+    "publishers": [
+      "Simon & Schuster Audio",
+      "Simon & Schuster Audio and Blackstone Audio"
+    ],
+    "physical_format": "audio cd",
+    "full_title": "CATCH-22",
+    "works": [
+      {
+        "key": "/works/OL276798W"
+      }
+    ],
+    "key": "/books/OL40214644M",
+    "covers": [
+      13549352
+    ],
+    "identifiers": {},
+    "isbn_10": [
+      "1508296901"
+    ],
+    "isbn_13": [
+      "9781508296904"
+    ],
+    "classifications": {},
+    "latest_revision": 3,
+    "revision": 3,
+    "created": {
+      "type": "/type/datetime",
+      "value": "2022-10-25T15:54:23.354554"
+    },
+    "last_modified": {
+      "type": "/type/datetime",
+      "value": "2023-08-02T17:40:14.951351"
+    }
+  },
+  {
+    "identifiers": {
+      "amazon": [
+        "B01KA307WW"
+      ]
+    },
+    "title": "Catch-22",
+    "type": {
+      "key": "/type/edition"
+    },
+    "local_id": [
+      "urn:bwbsku:KO-745-388"
+    ],
+    "source_records": [
+      "promise:bwb_daily_pallets_2021-02-04",
+      "bwb:9781478251804"
+    ],
+    "key": "/books/OL43461764M",
+    "works": [
+      {
+        "key": "/works/OL276798W"
+      }
+    ],
+    "number_of_pages": 66,
+    "publishers": [
+      "CreateSpace Independent Publishing Platform"
+    ],
+    "publish_date": "2012",
+    "latest_revision": 4,
+    "revision": 4,
+    "created": {
+      "type": "/type/datetime",
+      "value": "2022-12-08T22:57:13.935027"
+    },
+    "last_modified": {
+      "type": "/type/datetime",
+      "value": "2024-09-19T08:56:10.887616"
+    }
+  },
+  {
+    "type": {
+      "key": "/type/edition"
+    },
+    "authors": [
+      {
+        "key": "/authors/OL6004074A"
+      }
+    ],
+    "identifiers": {
+      "amazon": [
+        "B00DWX7XVQ"
+      ],
+      "better_world_books": [
+        "BWB28091697"
+      ]
+    },
+    "local_id": [
+      "urn:bwbsku:W7-BRT-426"
+    ],
+    "publish_date": "1961-01-01",
+    "publishers": [
+      "Simon and Schuster"
+    ],
+    "source_records": [
+      "promise:bwb_daily_pallets_2022-03-17"
+    ],
+    "title": "Catch 22",
+    "full_title": "Catch 22 (Book Club Edition)",
+    "works": [
+      {
+        "key": "/works/OL276798W"
+      }
+    ],
+    "key": "/books/OL43218671M",
+    "classifications": {},
+    "latest_revision": 2,
+    "revision": 2,
+    "created": {
+      "type": "/type/datetime",
+      "value": "2022-12-07T20:54:37.928229"
+    },
+    "last_modified": {
+      "type": "/type/datetime",
+      "value": "2023-08-02T17:38:35.211943"
+    }
+  },
+  {
+    "identifiers": {
+      "amazon": [
+        "B01JPT046G"
+      ],
+      "better_world_books": [
+        "BWBM51423472"
+      ]
+    },
+    "title": "Catch-22",
+    "type": {
+      "key": "/type/edition"
+    },
+    "local_id": [
+      "urn:bwbsku:W7-BRY-470"
+    ],
+    "source_records": [
+      "promise:bwb_daily_pallets_2022-03-17"
+    ],
+    "full_title": "Catch-22 (A Dell book) by Joseph Heller(2011-11-14)",
+    "key": "/books/OL43220575M",
+    "works": [
+      {
+        "key": "/works/OL276798W"
+      }
+    ],
+    "latest_revision": 3,
+    "revision": 3,
+    "created": {
+      "type": "/type/datetime",
+      "value": "2022-12-07T21:03:25.933719"
+    },
+    "last_modified": {
+      "type": "/type/datetime",
+      "value": "2023-10-10T00:16:49.616852"
+    }
+  },
+  {
+    "publishers": [
+      "HarperCollins"
+    ],
+    "physical_format": "Audio Cassette",
+    "title": "CATCH 22",
+    "identifiers": {
+      "goodreads": [
+        "2204164"
+      ]
+    },
+    "languages": [
+      {
+        "key": "/languages/eng"
+      }
+    ],
+    "publish_date": "January 1, 1973",
+    "key": "/books/OL11183467M",
+    "authors": [
+      {
+        "key": "/authors/OL3563765A"
+      }
+    ],
+    "works": [
+      {
+        "key": "/works/OL276798W"
+      }
+    ],
+    "type": {
+      "key": "/type/edition"
+    },
+    "subjects": [
+      "Audio Adult: Books On Tape"
+    ],
+    "isbn_10": [
+      "0694502537"
+    ],
+    "isbn_13": [
+      "9780694502530"
+    ],
+    "classifications": {},
+    "latest_revision": 5,
+    "revision": 5,
+    "created": {
+      "type": "/type/datetime",
+      "value": "2008-04-30T09:38:13.731961"
+    },
+    "last_modified": {
+      "type": "/type/datetime",
+      "value": "2023-08-02T17:37:59.344019"
+    }
+  },
+  {
+    "type": {
+      "key": "/type/edition"
+    },
+    "publish_date": "2006",
+    "publish_country": "sw",
+    "languages": [
+      {
+        "key": "/languages/swe"
+      }
+    ],
+    "authors": [
+      {
+        "key": "/authors/OL33512A"
+      }
+    ],
+    "work_titles": [
+      "Catch 22"
+    ],
+    "edition_name": "[Ny utg.].",
+    "series": [
+      "W & W pocket"
+    ],
+    "notes": "F\u00f6rsta svenska upplaga 1962.",
+    "links": [
+      {
+        "url": "http://194.68.4.214/bilder/tif/9146215301.tif",
+        "title": "Omslagsbild"
+      }
+    ],
+    "contributions": [
+      "Blomkvist, Torsten, 1912-1967"
+    ],
+    "title": "Moment 22",
+    "by_statement": "Joseph Heller ; \u00f6vers\u00e4ttning av Torsten Blomkvist",
+    "publishers": [
+      "Wahlstr\u00f6m & Widstrand"
+    ],
+    "publish_places": [
+      "Stockholm"
+    ],
+    "pagination": "407, [1] s.",
+    "number_of_pages": 407,
+    "source_records": [
+      "ia:moment220000hell",
+      "promise:bwb_daily_pallets_2022-03-17"
+    ],
+    "covers": [
+      12778648
+    ],
+    "works": [
+      {
+        "key": "/works/OL276798W"
+      }
+    ],
+    "key": "/books/OL38233519M",
+    "local_id": [
+      "urn:bwbsku:W7-AVL-834"
+    ],
+    "identifiers": {},
+    "ocaid": "moment220000hell",
+    "isbn_10": [
+      "9146215301"
+    ],
+    "isbn_13": [
+      "9789146215301"
+    ],
+    "oclc_numbers": [
+      "185292645"
+    ],
+    "classifications": {},
+    "latest_revision": 3,
+    "revision": 3,
+    "created": {
+      "type": "/type/datetime",
+      "value": "2022-06-08T06:11:44.054019"
+    },
+    "last_modified": {
+      "type": "/type/datetime",
+      "value": "2023-08-02T17:36:57.128763"
+    }
+  },
+  {
+    "type": {
+      "key": "/type/edition"
+    },
+    "authors": [
+      {
+        "key": "/authors/OL33512A"
+      }
+    ],
+    "languages": [
+      {
+        "key": "/languages/eng"
+      }
+    ],
+    "pagination": "544",
+    "publish_date": "2010",
+    "publishers": [
+      "Penguin Random House"
+    ],
+    "source_records": [
+      "bwb:9780099552185"
+    ],
+    "title": "Catch-22",
+    "weight": "0.294 ",
+    "full_title": "Catch-22",
+    "works": [
+      {
+        "key": "/works/OL276798W"
+      }
+    ],
+    "key": "/books/OL40307143M",
+    "identifiers": {},
+    "isbn_13": [
+      "9780099552185"
+    ],
+    "classifications": {},
+    "latest_revision": 3,
+    "revision": 3,
+    "created": {
+      "type": "/type/datetime",
+      "value": "2022-11-17T04:11:31.044665"
+    },
+    "last_modified": {
+      "type": "/type/datetime",
+      "value": "2023-08-02T17:36:50.721799"
+    }
+  },
+  {
+    "identifiers": {
+      "amazon": [
+        "B01FMGKMJU"
+      ],
+      "better_world_books": [
+        "BWBM51470031"
+      ]
+    },
+    "title": "CATCH 22",
+    "type": {
+      "key": "/type/edition"
+    },
+    "local_id": [
+      "urn:bwbsku:W7-ABK-341"
+    ],
+    "source_records": [
+      "promise:bwb_daily_pallets_2022-06-06"
+    ],
+    "key": "/books/OL42955137M",
+    "works": [
+      {
+        "key": "/works/OL276798W"
+      }
+    ],
+    "latest_revision": 3,
+    "revision": 3,
+    "created": {
+      "type": "/type/datetime",
+      "value": "2022-12-05T03:40:32.855746"
+    },
+    "last_modified": {
+      "type": "/type/datetime",
+      "value": "2023-10-09T23:30:56.765761"
+    }
+  },
+  {
+    "title": "Catch-22 (Chinese Edition)",
+    "type": {
+      "key": "/type/edition"
+    },
+    "local_id": [
+      "urn:bwbsku:P7-CUR-456"
+    ],
+    "source_records": [
+      "promise:bwb_daily_pallets_2022-03-17"
+    ],
+    "full_title": "Catch-22 (Chinese Edition)",
+    "isbn_10": [
+      "7544778509"
+    ],
+    "isbn_13": [
+      "9787544778503"
+    ],
+    "key": "/books/OL43099866M",
+    "works": [
+      {
+        "key": "/works/OL276798W"
+      }
+    ],
+    "latest_revision": 3,
+    "revision": 3,
+    "created": {
+      "type": "/type/datetime",
+      "value": "2022-12-07T10:07:34.266851"
+    },
+    "last_modified": {
+      "type": "/type/datetime",
+      "value": "2023-10-10T01:30:08.988111"
+    }
+  },
+  {
+    "type": {
+      "key": "/type/edition"
+    },
+    "authors": [
+      {
+        "key": "/authors/OL6004074A"
+      }
+    ],
+    "identifiers": {
+      "amazon": [
+        "B00YTJOVGC"
+      ],
+      "better_world_books": [
+        "BWBM51101829"
+      ]
+    },
+    "local_id": [
+      "urn:bwbsku:W7-BRK-917"
+    ],
+    "publish_date": "1961-01-01",
+    "publishers": [
+      "Simon and Schuster"
+    ],
+    "source_records": [
+      "promise:bwb_daily_pallets_2022-03-29"
+    ],
+    "title": "Catch-22",
+    "works": [
+      {
+        "key": "/works/OL276798W"
+      }
+    ],
+    "key": "/books/OL42996001M",
+    "classifications": {},
+    "latest_revision": 2,
+    "revision": 2,
+    "created": {
+      "type": "/type/datetime",
+      "value": "2022-12-06T22:10:55.508781"
+    },
+    "last_modified": {
+      "type": "/type/datetime",
+      "value": "2023-08-02T17:35:37.938086"
+    }
+  },
+  {
+    "identifiers": {
+      "amazon": [
+        "B00ES2AM5O"
+      ],
+      "better_world_books": [
+        "BWB42956915"
+      ]
+    },
+    "title": "Catch-22",
+    "type": {
+      "key": "/type/edition"
+    },
+    "local_id": [
+      "urn:bwbsku:O8-BOQ-084"
+    ],
+    "publishers": [
+      "Simon & Schuster"
+    ],
+    "source_records": [
+      "promise:bwb_daily_pallets_2022-08-30"
+    ],
+    "key": "/books/OL42909880M",
+    "works": [
+      {
+        "key": "/works/OL276798W"
+      }
+    ],
+    "latest_revision": 3,
+    "revision": 3,
+    "created": {
+      "type": "/type/datetime",
+      "value": "2022-12-04T15:14:00.448408"
+    },
+    "last_modified": {
+      "type": "/type/datetime",
+      "value": "2023-10-10T03:50:29.013618"
+    }
+  },
+  {
+    "type": {
+      "key": "/type/edition"
+    },
+    "publish_date": "1971",
+    "publish_country": "is",
+    "languages": [
+      {
+        "key": "/languages/heb"
+      }
+    ],
+    "authors": [
+      {
+        "key": "/authors/OL1143795A"
+      }
+    ],
+    "work_titles": [
+      "Catch 22"
+    ],
+    "contributions": [
+      "Landau, Benny, 1946-",
+      "Hadar, Beni"
+    ],
+    "subjects": [
+      "World War, 1939-1945",
+      "Fiction"
+    ],
+    "title": "Milkud 22",
+    "by_statement": "G'ozef Heler ; targum Beni Land\u02bcu, Beni Hadar",
+    "publishers": [
+      "Bitan"
+    ],
+    "publish_places": [
+      "Tel Aviv"
+    ],
+    "pagination": "429 p.",
+    "number_of_pages": 429,
+    "source_records": [
+      "marc:harvard_bibliographic_metadata/ab.bib.12.20150123.full.mrc:3316656:756"
+    ],
+    "works": [
+      {
+        "key": "/works/OL276798W"
+      }
+    ],
+    "key": "/books/OL45146337M",
+    "identifiers": {},
+    "oclc_numbers": [
+      "122777434"
+    ],
+    "classifications": {},
+    "latest_revision": 2,
+    "revision": 2,
+    "created": {
+      "type": "/type/datetime",
+      "value": "2022-12-31T09:02:32.851123"
+    },
+    "last_modified": {
+      "type": "/type/datetime",
+      "value": "2023-08-02T17:34:24.749705"
+    }
+  },
+  {
+    "publishers": [
+      "Random House Value Publishing"
+    ],
+    "physical_format": "Hardcover",
+    "source_records": [
+      "bwb:9780517133132"
+    ],
+    "title": "Catch 22",
+    "identifiers": {
+      "goodreads": [
+        "1614965"
+      ]
+    },
+    "languages": [
+      {
+        "key": "/languages/eng"
+      }
+    ],
+    "publish_date": "March 7, 1987",
+    "key": "/books/OL7678071M",
+    "authors": [
+      {
+        "key": "/authors/OL2754228A"
+      }
+    ],
+    "works": [
+      {
+        "key": "/works/OL276798W"
+      }
+    ],
+    "type": {
+      "key": "/type/edition"
+    },
+    "subjects": [
+      "Non-Classifiable",
+      "Sale Books",
+      "Nonfiction - General"
+    ],
+    "isbn_10": [
+      "051713313X"
+    ],
+    "isbn_13": [
+      "9780517133132"
+    ],
+    "classifications": {},
+    "latest_revision": 6,
+    "revision": 6,
+    "created": {
+      "type": "/type/datetime",
+      "value": "2008-04-29T15:03:11.581851"
+    },
+    "last_modified": {
+      "type": "/type/datetime",
+      "value": "2023-08-02T17:34:16.482766"
+    }
+  },
+  {
+    "publishers": [
+      "Palgrave Macmillan"
+    ],
+    "physical_format": "Paperback",
+    "source_records": [
+      "bwb:9780333581261"
+    ],
+    "title": "Catch 22",
+    "identifiers": {
+      "librarything": [
+        "6012527"
+      ]
+    },
+    "key": "/books/OL10551494M",
+    "authors": [
+      {
+        "key": "/authors/OL2859083A"
+      }
+    ],
+    "works": [
+      {
+        "key": "/works/OL276798W"
+      }
+    ],
+    "type": {
+      "key": "/type/edition"
+    },
+    "subjects": [
+      "Study guides, home study & revision notes"
+    ],
+    "isbn_10": [
+      "0333581261"
+    ],
+    "isbn_13": [
+      "9780333581261"
+    ],
+    "classifications": {},
+    "latest_revision": 5,
+    "revision": 5,
+    "created": {
+      "type": "/type/datetime",
+      "value": "2008-04-30T09:38:13.731961"
+    },
+    "last_modified": {
+      "type": "/type/datetime",
+      "value": "2023-08-02T17:34:01.539823"
+    }
+  },
+  {
+    "identifiers": {
+      "amazon": [
+        "B01LXV44SK"
+      ],
+      "better_world_books": [
+        "BWBM52291124"
+      ]
+    },
+    "title": "Catch-22",
+    "type": {
+      "key": "/type/edition"
+    },
+    "local_id": [
+      "urn:bwbsku:KR-968-813"
+    ],
+    "source_records": [
+      "promise:bwb_daily_pallets_2022-11-10:KR-968-813"
+    ],
+    "full_title": "Catch-22",
+    "key": "/books/OL46920128M",
+    "works": [
+      {
+        "key": "/works/OL276798W"
+      }
+    ],
+    "latest_revision": 3,
+    "revision": 3,
+    "created": {
+      "type": "/type/datetime",
+      "value": "2023-02-28T01:49:48.557491"
+    },
+    "last_modified": {
+      "type": "/type/datetime",
+      "value": "2023-10-10T03:44:56.514743"
+    }
+  },
+  {
+    "type": {
+      "key": "/type/edition"
+    },
+    "identifiers": {
+      "amazon": [
+        "B000GREHII"
+      ],
+      "better_world_books": [
+        "BWBM53476719"
+      ]
+    },
+    "local_id": [
+      "urn:bwbsku:KS-390-795"
+    ],
+    "source_records": [
+      "promise:bwb_daily_pallets_2023-04-10:KS-390-795"
+    ],
+    "title": "CATCH-22",
+    "full_title": "CATCH-22",
+    "works": [
+      {
+        "key": "/works/OL276798W"
+      }
+    ],
+    "key": "/books/OL47700425M",
+    "classifications": {},
+    "latest_revision": 2,
+    "revision": 2,
+    "created": {
+      "type": "/type/datetime",
+      "value": "2023-05-04T02:12:17.171143"
+    },
+    "last_modified": {
+      "type": "/type/datetime",
+      "value": "2023-08-02T17:32:45.890179"
+    }
+  },
+  {
+    "description": "Presents the contemporary classic depicting the struggles of a U.S. airman attempting to survive the lunacy and depravity of a World War II base.",
+    "notes": "In Arabic.",
+    "title": "al-Khid\u02bbah 22",
+    "authors": [
+      {
+        "key": "/authors/OL1143795A"
+      }
+    ],
+    "publish_date": "2008",
+    "other_titles": [
+      "Catch-22"
+    ],
+    "publishers": [
+      "Maktabah Jar\u012br"
+    ],
+    "local_id": [
+      "urn:sfpl:31223084262410"
+    ],
+    "publish_places": [
+      "al-Riy\u0101\u1e0d"
+    ],
+    "languages": [
+      {
+        "key": "/languages/ara"
+      }
+    ],
+    "pagination": "466 p.",
+    "source_records": [
+      "marc:marc_openlibraries_sanfranciscopubliclibrary/sfpl_chq_2018_12_24_run04.mrc:102454426:1927"
+    ],
+    "work_titles": [
+      "Catch-22"
+    ],
+    "edition_name": "al-\u1e6cab\u02bbah 1",
+    "subjects": [
+      "Arabic fiction translated from English",
+      "World War, 1939-1945",
+      "Fiction"
+    ],
+    "publish_country": "su",
+    "by_statement": "Juz\u012bf Hayllar",
+    "type": {
+      "key": "/type/edition"
+    },
+    "translated_from": [
+      {
+        "key": "/languages/eng"
+      }
+    ],
+    "translation_of": "Catch-22",
+    "key": "/books/OL27122755M",
+    "number_of_pages": 466,
+    "works": [
+      {
+        "key": "/works/OL276798W"
+      }
+    ],
+    "identifiers": {},
+    "oclc_numbers": [
+      "690776271"
+    ],
+    "classifications": {},
+    "latest_revision": 4,
+    "revision": 4,
+    "created": {
+      "type": "/type/datetime",
+      "value": "2019-07-16T19:51:20.866498"
+    },
+    "last_modified": {
+      "type": "/type/datetime",
+      "value": "2023-08-02T17:32:41.462243"
+    }
+  },
+  {
+    "publishers": [
+      "Penguin Random House"
+    ],
+    "source_records": [
+      "bwb:9781784875848"
+    ],
+    "title": "Catch-22",
+    "number_of_pages": 513,
+    "languages": [
+      {
+        "key": "/languages/eng"
+      }
+    ],
+    "full_title": "Catch-22 (TV Tie-In)",
+    "publish_date": "1994",
+    "key": "/books/OL28724402M",
+    "authors": [
+      {
+        "key": "/authors/OL7718878A"
+      }
+    ],
+    "works": [
+      {
+        "key": "/works/OL276798W"
+      }
+    ],
+    "type": {
+      "key": "/type/edition"
+    },
+    "identifiers": {},
+    "classifications": {},
+    "isbn_13": [
+      "9781784875848"
+    ],
+    "publish_places": [
+      "England, London"
+    ],
+    "copyright_date": "1955",
+    "edition_name": "Vintage",
+    "first_sentence": {
+      "type": "/type/text",
+      "value": "It was love at first sight."
+    },
+    "latest_revision": 3,
+    "revision": 3,
+    "created": {
+      "type": "/type/datetime",
+      "value": "2020-08-13T16:05:07.422136"
+    },
+    "last_modified": {
+      "type": "/type/datetime",
+      "value": "2024-03-03T16:45:04.978603"
+    }
+  },
+  {
+    "notes": "Fiction.\r\n\r\nTranslation of: Dell Publishing Co., Inc., New York, 1975.",
+    "title": "Di er shi er tiao jun gui",
+    "authors": [
+      {
+        "key": "/authors/OL1143795A"
+      }
+    ],
+    "publish_date": "1997",
+    "other_titles": [
+      "Di 22 tiao jun gui"
+    ],
+    "publishers": [
+      "Yi lin chu ban she"
+    ],
+    "series": [
+      "Yi lin shi jie wen xue ming zhu. Xian dang dai xi lie"
+    ],
+    "covers": [
+      10098512
+    ],
+    "publish_places": [
+      "Nanjing"
+    ],
+    "contributions": [
+      "Yang, Jia",
+      "Cheng, Aimin",
+      "Zou, Huiling"
+    ],
+    "subject_times": [
+      "xian dai"
+    ],
+    "languages": [
+      {
+        "key": "/languages/chi"
+      }
+    ],
+    "pagination": "545 pages",
+    "source_records": [
+      "ia:diershiertiaojun0000hell"
+    ],
+    "work_titles": [
+      "Catch 22"
+    ],
+    "edition_name": "Di 1 ban",
+    "subject_places": [
+      "mei guo"
+    ],
+    "subjects": [
+      "Fiction",
+      "World War, 1939-1945",
+      "Chang pian xiao shuo"
+    ],
+    "publish_country": "cc",
+    "by_statement": "(Meiguo) Yuesefu Haile zhu ; Yang Jia, Cheng Aimin, Zou Huiling yi",
+    "type": {
+      "key": "/type/edition"
+    },
+    "translation_of": "Catch-22",
+    "key": "/books/OL28158811M",
+    "number_of_pages": 545,
+    "works": [
+      {
+        "key": "/works/OL276798W"
+      }
+    ],
+    "identifiers": {},
+    "ocaid": "diershiertiaojun0000hell",
+    "isbn_10": [
+      "7805676291",
+      "7805676305"
+    ],
+    "isbn_13": [
+      "9787805676296",
+      "9787805676302"
+    ],
+    "oclc_numbers": [
+      "43575485"
+    ],
+    "classifications": {},
+    "lc_classifications": [
+      "PS3558.E476 C312 1997x"
+    ],
+    "latest_revision": 4,
+    "revision": 4,
+    "created": {
+      "type": "/type/datetime",
+      "value": "2020-05-30T04:34:51.739053"
+    },
+    "last_modified": {
+      "type": "/type/datetime",
+      "value": "2023-08-02T17:32:26.196835"
+    }
+  },
+  {
+    "works": [
+      {
+        "key": "/works/OL276798W"
+      }
+    ],
+    "title": "Catch-22",
+    "publishers": [
+      "Corgi"
+    ],
+    "publish_date": "1969",
+    "key": "/books/OL48596589M",
+    "type": {
+      "key": "/type/edition"
+    },
+    "covers": [
+      14373752
+    ],
+    "identifiers": {},
+    "isbn_10": [
+      "0552081256"
+    ],
+    "classifications": {},
+    "publish_places": [
+      "London"
+    ],
+    "languages": [
+      {
+        "key": "/languages/eng"
+      }
+    ],
+    "physical_format": "Paperback",
+    "latest_revision": 3,
+    "revision": 3,
+    "created": {
+      "type": "/type/datetime",
+      "value": "2023-07-11T13:56:28.442611"
+    },
+    "last_modified": {
+      "type": "/type/datetime",
+      "value": "2023-07-11T13:57:17.905266"
+    }
+  },
+  {
+    "works": [
+      {
+        "key": "/works/OL276798W"
+      }
+    ],
+    "title": "Catch-22",
+    "publishers": [
+      "Fischer Taschenbuch Verlag"
+    ],
+    "publish_date": "1972-02",
+    "key": "/books/OL45596846M",
+    "type": {
+      "key": "/type/edition"
+    },
+    "identifiers": {},
+    "covers": [
+      13135663
+    ],
+    "isbn_10": [
+      "3436013552"
+    ],
+    "classifications": {},
+    "edition_name": "26.-37. Tausend: Februar 1972",
+    "physical_format": "Taschenbuch",
+    "copyright_date": "1955, 1961; 1964",
+    "translation_of": "Catch-22",
+    "subtitle": "Roman",
+    "languages": [
+      {
+        "key": "/languages/ger"
+      }
+    ],
+    "number_of_pages": 442,
+    "translated_from": [
+      {
+        "key": "/languages/eng"
+      }
+    ],
+    "latest_revision": 3,
+    "revision": 3,
+    "created": {
+      "type": "/type/datetime",
+      "value": "2023-01-10T16:28:25.999470"
+    },
+    "last_modified": {
+      "type": "/type/datetime",
+      "value": "2023-01-10T16:30:31.026518"
+    }
+  },
+  {
+    "publishers": [
+      "Vintage Classic",
+      "imusti"
+    ],
+    "physical_format": "paperback",
+    "lc_classifications": [
+      "PS3558.E476",
+      "PS3558.E476 C3 2011"
+    ],
+    "source_records": [
+      "amazon:0099529122",
+      "bwb:9780099529125",
+      "ia:catch220000hell_u5k7",
+      "promise:bwb_daily_pallets_2020-06-24"
+    ],
+    "title": "Catch-22",
+    "covers": [
+      10141363
+    ],
+    "isbn_13": [
+      "9780099529125"
+    ],
+    "full_title": "Catch-22",
+    "isbn_10": [
+      "0099529122"
+    ],
+    "publish_date": "Jun 01, 2011",
+    "key": "/books/OL28206344M",
+    "authors": [
+      {
+        "key": "/authors/OL1143795A"
+      }
+    ],
+    "ocaid": "catch220000hell_u5k7",
+    "works": [
+      {
+        "key": "/works/OL276798W"
+      }
+    ],
+    "type": {
+      "key": "/type/edition"
+    },
+    "local_id": [
+      "urn:bwbsku:KN-755-491"
+    ],
+    "identifiers": {
+      "amazon": [
+        ""
+      ]
+    },
+    "latest_revision": 6,
+    "revision": 6,
+    "created": {
+      "type": "/type/datetime",
+      "value": "2020-06-06T11:48:41.044032"
+    },
+    "last_modified": {
+      "type": "/type/datetime",
+      "value": "2022-12-10T06:57:15.672339"
+    }
+  },
+  {
+    "publishers": [
+      "Recorded Books, Inc."
+    ],
+    "subtitle": "'Never Has a Book Been Laughed and Wept Over So Many Times'",
+    "source_records": [
+      "bwb:9781407427966"
+    ],
+    "title": "Catch-22",
+    "number_of_pages": 1,
+    "isbn_13": [
+      "9781407427966"
+    ],
+    "languages": [
+      {
+        "key": "/languages/eng"
+      }
+    ],
+    "full_title": "Catch-22 'Never Has a Book Been Laughed and Wept Over So Many Times'",
+    "lc_classifications": [
+      "PS3558.E476"
+    ],
+    "publish_date": "2008",
+    "key": "/books/OL28453837M",
+    "authors": [
+      {
+        "key": "/authors/OL1143795A"
+      },
+      {
+        "key": "/authors/OL610998A"
+      }
+    ],
+    "works": [
+      {
+        "key": "/works/OL276798W"
+      }
+    ],
+    "type": {
+      "key": "/type/edition"
+    },
+    "subjects": [
+      "Literature and fiction, historical fiction",
+      "World war, 1939-1945, fiction"
+    ],
+    "latest_revision": 2,
+    "revision": 2,
+    "created": {
+      "type": "/type/datetime",
+      "value": "2020-08-02T08:03:34.116893"
+    },
+    "last_modified": {
+      "type": "/type/datetime",
+      "value": "2021-02-03T09:48:26.130798"
+    }
+  },
+  {
+    "publishers": [
+      "Penguin Random House"
+    ],
+    "subtitle": "'Never Has a Book Been Laughed and Wept Over So Many Times'",
+    "source_records": [
+      "bwb:9780099529118"
+    ],
+    "title": "Catch-22",
+    "number_of_pages": 624,
+    "isbn_13": [
+      "9780099529118"
+    ],
+    "languages": [
+      {
+        "key": "/languages/eng"
+      }
+    ],
+    "full_title": "Catch-22 'Never Has a Book Been Laughed and Wept Over So Many Times'",
+    "lc_classifications": [
+      "PS3558.E476"
+    ],
+    "publish_date": "2011",
+    "key": "/books/OL28469034M",
+    "authors": [
+      {
+        "key": "/authors/OL1143795A"
+      }
+    ],
+    "works": [
+      {
+        "key": "/works/OL276798W"
+      }
+    ],
+    "type": {
+      "key": "/type/edition"
+    },
+    "subjects": [
+      "American fiction (fictional works by one author)",
+      "World war, 1939-1945, fiction",
+      "Fiction, satire",
+      "Fiction, war & military"
+    ],
+    "latest_revision": 2,
+    "revision": 2,
+    "created": {
+      "type": "/type/datetime",
+      "value": "2020-08-02T18:23:58.914962"
+    },
+    "last_modified": {
+      "type": "/type/datetime",
+      "value": "2021-02-03T09:48:26.130798"
+    }
+  },
+  {
+    "publishers": [
+      "Penguin Random House"
+    ],
+    "subtitle": "'Never Has a Book Been Laughed and Wept Over So Many Times'",
+    "source_records": [
+      "bwb:9780099468677"
+    ],
+    "title": "Catch-22",
+    "number_of_pages": 528,
+    "isbn_13": [
+      "9780099468677"
+    ],
+    "languages": [
+      {
+        "key": "/languages/eng"
+      }
+    ],
+    "full_title": "Catch-22 'Never Has a Book Been Laughed and Wept Over So Many Times'",
+    "lc_classifications": [
+      "PS3558.E476"
+    ],
+    "publish_date": "2004",
+    "key": "/books/OL28960349M",
+    "authors": [
+      {
+        "key": "/authors/OL1143795A"
+      }
+    ],
+    "works": [
+      {
+        "key": "/works/OL276798W"
+      }
+    ],
+    "type": {
+      "key": "/type/edition"
+    },
+    "subjects": [
+      "American fiction (fictional works by one author)",
+      "Fiction, war & military",
+      "World war, 1939-1945, fiction",
+      "Fiction, satire"
+    ],
+    "latest_revision": 2,
+    "revision": 2,
+    "created": {
+      "type": "/type/datetime",
+      "value": "2020-08-19T11:20:34.593252"
+    },
+    "last_modified": {
+      "type": "/type/datetime",
+      "value": "2021-02-03T09:48:26.130798"
+    }
+  },
+  {
+    "publishers": [
+      "Knopf Publishing Group"
+    ],
+    "subtitle": "'Never Has a Book Been Laughed and Wept Over So Many Times'",
+    "source_records": [
+      "bwb:9780099499411"
+    ],
+    "title": "Catch-22",
+    "number_of_pages": 448,
+    "isbn_13": [
+      "9780099499411"
+    ],
+    "languages": [
+      {
+        "key": "/languages/eng"
+      }
+    ],
+    "full_title": "Catch-22 'Never Has a Book Been Laughed and Wept Over So Many Times'",
+    "lc_classifications": [
+      ""
+    ],
+    "publish_date": "1999",
+    "key": "/books/OL28968421M",
+    "authors": [
+      {
+        "key": "/authors/OL1143795A"
+      }
+    ],
+    "works": [
+      {
+        "key": "/works/OL276798W"
+      }
+    ],
+    "type": {
+      "key": "/type/edition"
+    },
+    "subjects": [
+      "Fiction, war & military",
+      "American fiction (fictional works by one author)",
+      "World war, 1939-1945, fiction",
+      "Fiction, satire"
+    ],
+    "latest_revision": 2,
+    "revision": 2,
+    "created": {
+      "type": "/type/datetime",
+      "value": "2020-08-19T17:48:26.503476"
+    },
+    "last_modified": {
+      "type": "/type/datetime",
+      "value": "2021-02-03T09:48:26.130798"
+    }
+  },
+  {
+    "publishers": [
+      "Hodder Education Group"
+    ],
+    "subtitle": "'Never Has a Book Been Laughed and Wept Over So Many Times'",
+    "source_records": [
+      "bwb:9780340516423"
+    ],
+    "title": "Catch-22",
+    "number_of_pages": 480,
+    "isbn_13": [
+      "9780340516423"
+    ],
+    "languages": [
+      {
+        "key": "/languages/eng"
+      }
+    ],
+    "full_title": "Catch-22 'Never Has a Book Been Laughed and Wept Over So Many Times'",
+    "lc_classifications": [
+      ""
+    ],
+    "publish_date": "1991",
+    "key": "/books/OL28968447M",
+    "authors": [
+      {
+        "key": "/authors/OL1143795A"
+      }
+    ],
+    "works": [
+      {
+        "key": "/works/OL276798W"
+      }
+    ],
+    "type": {
+      "key": "/type/edition"
+    },
+    "subjects": [
+      "American fiction (fictional works by one author)",
+      "Fiction, war & military",
+      "World war, 1939-1945, fiction",
+      "Fiction, satire"
+    ],
+    "latest_revision": 2,
+    "revision": 2,
+    "created": {
+      "type": "/type/datetime",
+      "value": "2020-08-19T17:49:37.354607"
+    },
+    "last_modified": {
+      "type": "/type/datetime",
+      "value": "2021-02-03T09:48:26.130798"
+    }
+  },
+  {
+    "publishers": [
+      "Penguin Random House",
+      "Simon & Schuster"
+    ],
+    "subtitle": "'Never Has a Book Been Laughed and Wept Over So Many Times'",
+    "source_records": [
+      "bwb:9780099466161",
+      "amazon:0099466163"
+    ],
+    "title": "Catch-22",
+    "number_of_pages": 64,
+    "isbn_13": [
+      "9780099466161"
+    ],
+    "languages": [
+      {
+        "key": "/languages/eng"
+      }
+    ],
+    "full_title": "Catch-22 'Never Has a Book Been Laughed and Wept Over So Many Times'",
+    "lc_classifications": [
+      ""
+    ],
+    "publish_date": "2003",
+    "key": "/books/OL28975142M",
+    "authors": [
+      {
+        "key": "/authors/OL1143795A"
+      }
+    ],
+    "works": [
+      {
+        "key": "/works/OL276798W"
+      }
+    ],
+    "type": {
+      "key": "/type/edition"
+    },
+    "subjects": [
+      "American fiction (fictional works by one author)",
+      "Fiction, war & military",
+      "World war, 1939-1945, fiction",
+      "Fiction, satire"
+    ],
+    "covers": [
+      14133138
+    ],
+    "latest_revision": 3,
+    "revision": 3,
+    "created": {
+      "type": "/type/datetime",
+      "value": "2020-08-19T23:37:56.369483"
+    },
+    "last_modified": {
+      "type": "/type/datetime",
+      "value": "2023-04-18T14:13:29.469477"
+    }
+  },
+  {
+    "publishers": [
+      "Penguin Random House"
+    ],
+    "subtitle": "'Never Has a Book Been Laughed and Wept Over So Many Times'",
+    "source_records": [
+      "bwb:9780099496960"
+    ],
+    "title": "Catch-22",
+    "number_of_pages": 560,
+    "isbn_13": [
+      "9780099496960"
+    ],
+    "languages": [
+      {
+        "key": "/languages/eng"
+      }
+    ],
+    "full_title": "Catch-22 'Never Has a Book Been Laughed and Wept Over So Many Times'",
+    "lc_classifications": [
+      "PS3558.E476"
+    ],
+    "publish_date": "2005",
+    "key": "/books/OL28979706M",
+    "authors": [
+      {
+        "key": "/authors/OL1143795A"
+      },
+      {
+        "key": "/authors/OL7718878A"
+      }
+    ],
+    "works": [
+      {
+        "key": "/works/OL276798W"
+      }
+    ],
+    "type": {
+      "key": "/type/edition"
+    },
+    "subjects": [
+      "Fiction, war & military",
+      "American fiction (fictional works by one author)",
+      "World war, 1939-1945, fiction",
+      "Fiction, satire"
+    ],
+    "latest_revision": 2,
+    "revision": 2,
+    "created": {
+      "type": "/type/datetime",
+      "value": "2020-08-20T02:18:36.168428"
+    },
+    "last_modified": {
+      "type": "/type/datetime",
+      "value": "2021-02-03T09:48:26.130798"
+    }
+  },
+  {
+    "publishers": [
+      "Penguin Random House"
+    ],
+    "subtitle": "'Never Has a Book Been Laughed and Wept Over So Many Times'",
+    "source_records": [
+      "bwb:9781446466766"
+    ],
+    "title": "Catch-22",
+    "number_of_pages": 544,
+    "isbn_13": [
+      "9781446466766"
+    ],
+    "languages": [
+      {
+        "key": "/languages/eng"
+      }
+    ],
+    "full_title": "Catch-22 'Never Has a Book Been Laughed and Wept Over So Many Times'",
+    "lc_classifications": [
+      ""
+    ],
+    "publish_date": "2011",
+    "key": "/books/OL29066121M",
+    "authors": [
+      {
+        "key": "/authors/OL1143795A"
+      }
+    ],
+    "works": [
+      {
+        "key": "/works/OL276798W"
+      }
+    ],
+    "type": {
+      "key": "/type/edition"
+    },
+    "subjects": [
+      "American fiction (fictional works by one author)",
+      "Fiction, war & military",
+      "World war, 1939-1945, fiction",
+      "Fiction, satire"
+    ],
+    "latest_revision": 2,
+    "revision": 2,
+    "created": {
+      "type": "/type/datetime",
+      "value": "2020-08-21T15:43:43.759385"
+    },
+    "last_modified": {
+      "type": "/type/datetime",
+      "value": "2021-02-03T09:48:26.130798"
+    }
+  },
+  {
+    "publishers": [
+      "Penguin Random House"
+    ],
+    "subtitle": "'Never Has a Book Been Laughed and Wept Over So Many Times'",
+    "source_records": [
+      "bwb:9781446424049"
+    ],
+    "title": "Catch-22",
+    "number_of_pages": 544,
+    "isbn_13": [
+      "9781446424049"
+    ],
+    "languages": [
+      {
+        "key": "/languages/eng"
+      }
+    ],
+    "full_title": "Catch-22 'Never Has a Book Been Laughed and Wept Over So Many Times'",
+    "lc_classifications": [
+      ""
+    ],
+    "publish_date": "2011",
+    "key": "/books/OL29071531M",
+    "authors": [
+      {
+        "key": "/authors/OL1143795A"
+      },
+      {
+        "key": "/authors/OL7718878A"
+      }
+    ],
+    "works": [
+      {
+        "key": "/works/OL276798W"
+      }
+    ],
+    "type": {
+      "key": "/type/edition"
+    },
+    "subjects": [
+      "American fiction (fictional works by one author)",
+      "Fiction, war & military",
+      "World war, 1939-1945, fiction",
+      "Fiction, satire"
+    ],
+    "latest_revision": 2,
+    "revision": 2,
+    "created": {
+      "type": "/type/datetime",
+      "value": "2020-08-21T18:54:05.817400"
+    },
+    "last_modified": {
+      "type": "/type/datetime",
+      "value": "2021-02-03T09:48:26.130798"
+    }
+  },
+  {
+    "publishers": [
+      "Grasset et Fasquello"
+    ],
+    "subtitle": "'Never Has a Book Been Laughed and Wept Over So Many Times'",
+    "source_records": [
+      "bwb:9782253113362"
+    ],
+    "title": "Catch-22",
+    "number_of_pages": 638,
+    "isbn_13": [
+      "9782253113362"
+    ],
+    "languages": [
+      {
+        "key": "/languages/fre"
+      }
+    ],
+    "full_title": "Catch-22 'Never Has a Book Been Laughed and Wept Over So Many Times'",
+    "lc_classifications": [
+      ""
+    ],
+    "publish_date": "2006",
+    "key": "/books/OL29631208M",
+    "authors": [
+      {
+        "key": "/authors/OL1143795A"
+      }
+    ],
+    "works": [
+      {
+        "key": "/works/OL276798W"
+      }
+    ],
+    "type": {
+      "key": "/type/edition"
+    },
+    "latest_revision": 2,
+    "revision": 2,
+    "created": {
+      "type": "/type/datetime",
+      "value": "2020-08-29T04:47:00.327974"
+    },
+    "last_modified": {
+      "type": "/type/datetime",
+      "value": "2021-02-03T09:48:26.130798"
+    }
+  },
+  {
+    "identifiers": {
+      "wikidata": [
+        "Q117197800"
+      ]
+    },
+    "title": "Catch-22",
+    "authors": [
+      {
+        "key": "/authors/OL1143795A"
+      }
+    ],
+    "publish_date": "Jun 01, 1961",
+    "publishers": [
+      "Brand: Simon n Schuster",
+      "Simon & Schuster"
+    ],
+    "source_records": [
+      "amazon:0671128051",
+      "promise:bwb_daily_pallets_2020-04-09"
+    ],
+    "isbn_13": [
+      "9780671128050"
+    ],
+    "covers": [
+      10462532
+    ],
+    "physical_format": "hardcover",
+    "full_title": "Catch-22",
+    "isbn_10": [
+      "0671128051"
+    ],
+    "type": {
+      "key": "/type/edition"
+    },
+    "local_id": [
+      "urn:bwbsku:O6-BHZ-982"
+    ],
+    "key": "/books/OL30529708M",
+    "number_of_pages": 427,
+    "works": [
+      {
+        "key": "/works/OL276798W"
+      }
+    ],
+    "latest_revision": 4,
+    "revision": 4,
+    "created": {
+      "type": "/type/datetime",
+      "value": "2020-09-30T14:21:22.444125"
+    },
+    "last_modified": {
+      "type": "/type/datetime",
+      "value": "2023-04-03T18:21:34.002965"
+    }
+  },
+  {
+    "publishers": [
+      "Dell"
+    ],
+    "number_of_pages": 463,
+    "ia_box_id": [
+      "IA108906"
+    ],
+    "series": [
+      "A Dell book -- 1120"
+    ],
+    "covers": [
+      6994926
+    ],
+    "ia_loaded_id": [
+      "catch2201hell"
+    ],
+    "lc_classifications": [
+      "PS3515.E3537 C3 1970"
+    ],
+    "latest_revision": 7,
+    "key": "/books/OL24953142M",
+    "authors": [
+      {
+        "key": "/authors/OL1143795A"
+      }
+    ],
+    "ocaid": "catch2201hell",
+    "publish_places": [
+      "New York"
+    ],
+    "pagination": "463 p.",
+    "classifications": {},
+    "source_records": [
+      "ia:catch2201hell"
+    ],
+    "title": "Catch-22",
+    "identifiers": {},
+    "full_title": "Catch-22",
+    "created": {
+      "type": "/type/datetime",
+      "value": "2011-08-11T04:21:13.851710"
+    },
+    "languages": [
+      {
+        "key": "/languages/eng"
+      }
+    ],
+    "subjects": [
+      "World War, 1939-1945",
+      "Fiction"
+    ],
+    "publish_date": "1970-07",
+    "publish_country": "nyu",
+    "last_modified": {
+      "type": "/type/datetime",
+      "value": "2020-04-30T19:02:56.325070"
+    },
+    "copyright_date": "1961",
+    "oclc_numbers": [
+      "296955"
+    ],
+    "works": [
+      {
+        "key": "/works/OL276798W"
+      }
+    ],
+    "type": {
+      "key": "/type/edition"
+    },
+    "revision": 7
+  },
+  {
+    "publishers": [
+      "Dell"
+    ],
+    "number_of_pages": 463,
+    "ia_box_id": [
+      "IA180301"
+    ],
+    "covers": [
+      5415882,
+      4629013
+    ],
+    "ia_loaded_id": [
+      "catch2200hell_0"
+    ],
+    "key": "/books/OL18360288M",
+    "publish_places": [
+      "New York"
+    ],
+    "pagination": "463 p. ;",
+    "classifications": {},
+    "source_records": [
+      "marc:marc_oregon_summit_records/catalog_files/pcc_bibs.mrc_rev.mrc:83300779:460",
+      "ia:catch22hell00hell",
+      "ia:catch19612200hell",
+      "ia:catch2200hell_0",
+      "bwb:9780440204398",
+      "promise:bwb_daily_pallets_2023-11-03:P9-AIP-659"
+    ],
+    "title": "Catch-22",
+    "notes": "\"A Laurel book.\"",
+    "identifiers": {
+      "librarything": [
+        "1479"
+      ],
+      "goodreads": [
+        "1052616"
+      ]
+    },
+    "isbn_10": [
+      "0440204399"
+    ],
+    "publish_date": "1990",
+    "publish_country": "nyu",
+    "by_statement": "Joseph Heller.",
+    "works": [
+      {
+        "key": "/works/OL276798W"
+      }
+    ],
+    "type": {
+      "key": "/type/edition"
+    },
+    "local_id": [
+      "urn:bwbsku:P9-AIP-659"
+    ],
+    "latest_revision": 15,
+    "revision": 15,
+    "created": {
+      "type": "/type/datetime",
+      "value": "2008-10-16T09:19:56.910128"
+    },
+    "last_modified": {
+      "type": "/type/datetime",
+      "value": "2023-11-05T01:05:30.251168"
+    }
+  },
+  {
+    "publishers": [
+      "Dell"
+    ],
+    "number_of_pages": 463,
+    "ia_box_id": [
+      "IA112905"
+    ],
+    "series": [
+      "Dell book -- 1120"
+    ],
+    "covers": [
+      6998778
+    ],
+    "ia_loaded_id": [
+      "catch2200hell"
+    ],
+    "last_modified": {
+      "type": "/type/datetime",
+      "value": "2020-04-30T15:07:00.351689"
+    },
+    "latest_revision": 6,
+    "key": "/books/OL24956618M",
+    "authors": [
+      {
+        "key": "/authors/OL33512A"
+      }
+    ],
+    "ocaid": "catch2200hell",
+    "publish_places": [
+      "New York"
+    ],
+    "languages": [
+      {
+        "key": "/languages/eng"
+      }
+    ],
+    "pagination": "463 str. ;",
+    "classifications": {},
+    "source_records": [
+      "ia:catch2200hell"
+    ],
+    "title": "Catch-22",
+    "identifiers": {},
+    "full_title": "Catch-22",
+    "created": {
+      "type": "/type/datetime",
+      "value": "2011-08-11T09:17:52.360960"
+    },
+    "edition_name": "8. prt.",
+    "publish_date": "1969-11",
+    "publish_country": "nyu",
+    "by_statement": "Joseph Heller",
+    "oclc_numbers": [
+      "447216912"
+    ],
+    "works": [
+      {
+        "key": "/works/OL276798W"
+      }
+    ],
+    "type": {
+      "key": "/type/edition"
+    },
+    "revision": 6
+  },
+  {
+    "publishers": [
+      "Dell Pub"
+    ],
+    "pagination": "463 p.",
+    "title": "Catch-22",
+    "dewey_decimal_class": [
+      "818 H477c"
+    ],
+    "notes": {
+      "type": "/type/text",
+      "value": "5"
+    },
+    "number_of_pages": 463,
+    "created": {
+      "type": "/type/datetime",
+      "value": "2008-11-08T17:15:43.056961"
+    },
+    "languages": [
+      {
+        "key": "/languages/eng"
+      }
+    ],
+    "last_modified": {
+      "type": "/type/datetime",
+      "value": "2020-04-30T15:02:59.582137"
+    },
+    "publish_date": "1974",
+    "publish_country": "xx ",
+    "key": "/books/OL22199823M",
+    "authors": [
+      {
+        "key": "/authors/OL1143795A"
+      }
+    ],
+    "latest_revision": 3,
+    "publish_places": [
+      "New York"
+    ],
+    "works": [
+      {
+        "key": "/works/OL276798W"
+      }
+    ],
+    "type": {
+      "key": "/type/edition"
+    },
+    "revision": 3
+  },
+  {
+    "publishers": [
+      "J. Cape"
+    ],
+    "pagination": "443p.",
+    "last_modified": {
+      "type": "/type/datetime",
+      "value": "2020-04-30T15:02:59.582137"
+    },
+    "title": "Catch-22.",
+    "number_of_pages": 443,
+    "created": {
+      "type": "/type/datetime",
+      "value": "2008-10-09T19:28:09.745031"
+    },
+    "languages": [
+      {
+        "key": "/languages/eng"
+      }
+    ],
+    "lc_classifications": [
+      "PS3515 E325 C3"
+    ],
+    "publish_date": "1962",
+    "key": "/books/OL18084933M",
+    "authors": [
+      {
+        "key": "/authors/OL1143795A"
+      }
+    ],
+    "latest_revision": 3,
+    "publish_places": [
+      "London"
+    ],
+    "works": [
+      {
+        "key": "/works/OL276798W"
+      }
+    ],
+    "type": {
+      "key": "/type/edition"
+    },
+    "subjects": [
+      "World War, 1939-1945 -- Fiction"
+    ],
+    "revision": 3
+  },
+  {
+    "publishers": [
+      "Delacorte Press"
+    ],
+    "physical_format": "Paperback",
+    "classifications": {},
+    "source_records": [
+      "bwb:9780440010982"
+    ],
+    "title": "Catch-22",
+    "identifiers": {},
+    "created": {
+      "type": "/type/datetime",
+      "value": "2008-04-30T09:38:13.731961"
+    },
+    "isbn_13": [
+      "9780440010982"
+    ],
+    "isbn_10": [
+      "0440010985"
+    ],
+    "publish_date": "September 1964",
+    "key": "/books/OL10254067M",
+    "last_modified": {
+      "type": "/type/datetime",
+      "value": "2020-08-30T01:18:12.462328"
+    },
+    "latest_revision": 3,
+    "works": [
+      {
+        "key": "/works/OL276798W"
+      }
+    ],
+    "type": {
+      "key": "/type/edition"
+    },
+    "first_sentence": {
+      "type": "/type/text",
+      "value": "It was love at first sight."
+    },
+    "revision": 3
+  },
+  {
+    "publishers": [
+      "Caedmon"
+    ],
+    "pagination": "1 sound disc :",
+    "title": "Joseph Heller reads Catch-22.",
+    "work_titles": [
+      "Catch-22."
+    ],
+    "series": [
+      "TC 1418"
+    ],
+    "created": {
+      "type": "/type/datetime",
+      "value": "2008-10-27T14:40:40.983638"
+    },
+    "languages": [
+      {
+        "key": "/languages/eng"
+      }
+    ],
+    "last_modified": {
+      "type": "/type/datetime",
+      "value": "2020-04-30T15:02:05.913277"
+    },
+    "publish_date": "1974",
+    "publish_country": "xxu",
+    "key": "/books/OL20595252M",
+    "authors": [
+      {
+        "key": "/authors/OL33512A"
+      }
+    ],
+    "latest_revision": 4,
+    "publish_places": [
+      "New York"
+    ],
+    "works": [
+      {
+        "key": "/works/OL276798W"
+      }
+    ],
+    "type": {
+      "key": "/type/edition"
+    },
+    "revision": 4
+  },
+  {
+    "publishers": [
+      "Simon & Schuster"
+    ],
+    "source_records": [
+      "ia:catch22novel00helle",
+      "bwb:9781451621174",
+      "marc:marc_loc_2016/BooksAll.2016.part38.utf8:309542033:1280",
+      "marc:marc_columbia/Columbia-extract-20221130-023.mrc:143123485:1975",
+      "marc:harvard_bibliographic_metadata/ab.bib.12.20150123.full.mrc:618682855:1639"
+    ],
+    "title": "Catch-22: 50th Anniversary Edition [Hardcover]",
+    "lccn": [
+      "2011381031"
+    ],
+    "covers": [
+      6716903
+    ],
+    "isbn_13": [
+      "9781451621174"
+    ],
+    "lc_classifications": [
+      "PS3558.E476C3 2011",
+      "PS3558.E476 C3 2011",
+      "PS3558.E476 C3 2011b"
+    ],
+    "publish_date": "April 5, 2011",
+    "key": "/books/OL24626528M",
+    "ocaid": "catch22novel00helle",
+    "works": [
+      {
+        "key": "/works/OL276798W"
+      }
+    ],
+    "type": {
+      "key": "/type/edition"
+    },
+    "oclc_numbers": [
+      "714505268",
+      "659770124"
+    ],
+    "latest_revision": 10,
+    "revision": 10,
+    "created": {
+      "type": "/type/datetime",
+      "value": "2011-04-01T21:28:32.113327"
+    },
+    "last_modified": {
+      "type": "/type/datetime",
+      "value": "2023-01-04T20:33:15.618815"
+    }
+  },
+  {
+    "publishers": [
+      "Simon & Schuster"
+    ],
+    "identifiers": {
+      "goodreads": [
+        "9995541"
+      ]
+    },
+    "languages": [
+      {
+        "key": "/languages/eng"
+      }
+    ],
+    "number_of_pages": 524,
+    "isbn_13": [
+      "9781451626650"
+    ],
+    "covers": [
+      6717176
+    ],
+    "edition_name": "50th Anniversary Edition",
+    "physical_format": "Paperback",
+    "publish_date": "2011",
+    "key": "/books/OL24627169M",
+    "title": "Catch-22",
+    "works": [
+      {
+        "key": "/works/OL276798W"
+      }
+    ],
+    "type": {
+      "key": "/type/edition"
+    },
+    "lc_classifications": [
+      "PS3558.E476C3 2011"
+    ],
+    "source_records": [
+      "bwb:9781451626650",
+      "amazon:1451626657",
+      "idb:9781451626650"
+    ],
+    "latest_revision": 8,
+    "revision": 8,
+    "created": {
+      "type": "/type/datetime",
+      "value": "2011-04-03T17:31:57.166366"
+    },
+    "last_modified": {
+      "type": "/type/datetime",
+      "value": "2023-12-20T02:26:06.406552"
+    }
+  },
+  {
+    "title": "Catch 22",
+    "publish_date": "1989",
+    "publishers": [
+      "Simon & schster"
+    ],
+    "isbn_10": [
+      "0671502336"
+    ],
+    "type": {
+      "key": "/type/edition"
+    },
+    "key": "/books/OL24397480M",
+    "works": [
+      {
+        "key": "/works/OL276798W"
+      }
+    ],
+    "latest_revision": 3,
+    "revision": 3,
+    "created": {
+      "type": "/type/datetime",
+      "value": "2010-10-28T02:18:56.056130"
+    },
+    "last_modified": {
+      "type": "/type/datetime",
+      "value": "2023-02-16T13:47:23.607603"
+    }
+  },
+  {
+    "publishers": [
+      "Caedmon"
+    ],
+    "weight": "15.2 ounces",
+    "covers": [
+      39230
+    ],
+    "physical_format": "Audio CD",
+    "last_modified": {
+      "type": "/type/datetime",
+      "value": "2020-04-30T15:02:05.913277"
+    },
+    "latest_revision": 8,
+    "key": "/books/OL9238346M",
+    "authors": [
+      {
+        "key": "/authors/OL33512A"
+      }
+    ],
+    "contributions": [
+      "Jay O. Sanders (Narrator)"
+    ],
+    "subjects": [
+      "Heller, Joseph - Prose & Criticism",
+      "Fiction",
+      "Abridged Audio - Literature/Classics",
+      "Literature: Classics",
+      "Classics",
+      "Literature - Classics / Criticism",
+      "War & Military"
+    ],
+    "edition_name": "Unabridged edition",
+    "languages": [
+      {
+        "key": "/languages/eng"
+      }
+    ],
+    "source_records": [
+      "amazon:0060890096:o-3:1918363354:243059",
+      "amazon:0060890096:4:1430239233:247808"
+    ],
+    "title": "Catch-22 CD",
+    "identifiers": {
+      "librarything": [
+        "1479"
+      ],
+      "goodreads": [
+        "4609"
+      ]
+    },
+    "created": {
+      "type": "/type/datetime",
+      "value": "2008-04-30T09:38:13.731961"
+    },
+    "isbn_13": [
+      "9780060890094"
+    ],
+    "isbn_10": [
+      "0060890096"
+    ],
+    "publish_date": "February 20, 2007",
+    "works": [
+      {
+        "key": "/works/OL276798W"
+      }
+    ],
+    "type": {
+      "key": "/type/edition"
+    },
+    "physical_dimensions": "5.9 x 5.1 x 2.2 inches",
+    "revision": 8
+  },
+  {
+    "identifiers": {
+      "librarything": [
+        "1479"
+      ],
+      "goodreads": [
+        "439804"
+      ]
+    },
+    "title": "Trampa 22  (Catch-22) (Bolsillo)",
+    "authors": [
+      {
+        "key": "/authors/OL33512A"
+      }
+    ],
+    "publish_date": "January 1, 2007",
+    "publishers": [
+      "Rba"
+    ],
+    "weight": "1 pounds",
+    "covers": [
+      3330633
+    ],
+    "physical_format": "Paperback",
+    "subjects": [
+      "Fiction",
+      "Fiction - General",
+      "Spanish: Adult Fiction",
+      "General",
+      "Literature & Fiction / General",
+      "Literary"
+    ],
+    "isbn_13": [
+      "9788478718597"
+    ],
+    "languages": [
+      {
+        "key": "/languages/spa"
+      }
+    ],
+    "isbn_10": [
+      "8478718591"
+    ],
+    "oclc_numbers": [
+      "141262447"
+    ],
+    "type": {
+      "key": "/type/edition"
+    },
+    "physical_dimensions": "7.3 x 4.9 x 1.1 inches",
+    "local_id": [
+      "urn:bwbsku:T2-FCB-336"
+    ],
+    "source_records": [
+      "promise:bwb_daily_pallets_2023-03-28:T2-FCB-336"
+    ],
+    "ocaid": "trampa22catch22b0000jose",
+    "key": "/books/OL13311848M",
+    "number_of_pages": 656,
+    "works": [
+      {
+        "key": "/works/OL276798W"
+      }
+    ],
+    "latest_revision": 11,
+    "revision": 11,
+    "created": {
+      "type": "/type/datetime",
+      "value": "2008-04-30T20:50:18.033121"
+    },
+    "last_modified": {
+      "type": "/type/datetime",
+      "value": "2024-03-29T05:54:54.577539"
+    }
+  },
+  {
+    "publishers": [
+      "Caedmon"
+    ],
+    "languages": [
+      {
+        "key": "/languages/eng"
+      }
+    ],
+    "source_records": [
+      "amazon:0060890096:o-3:1918363354:243059",
+      "amazon:0060890096:4:1430239233:247808"
+    ],
+    "title": "Catch-22 CD",
+    "type": {
+      "key": "/type/edition"
+    },
+    "identifiers": {
+      "goodreads": [
+        "4609"
+      ],
+      "librarything": [
+        "1479"
+      ]
+    },
+    "last_modified": {
+      "type": "/type/datetime",
+      "value": "2020-04-30T15:02:05.913277"
+    },
+    "covers": [
+      39231
+    ],
+    "created": {
+      "type": "/type/datetime",
+      "value": "2008-04-29T13:35:46.876380"
+    },
+    "isbn_13": [
+      "9780060890094"
+    ],
+    "isbn_10": [
+      "0060890096"
+    ],
+    "publish_date": "February 20, 2007",
+    "key": "/books/OL7283639M",
+    "authors": [
+      {
+        "key": "/authors/OL33512A"
+      }
+    ],
+    "latest_revision": 8,
+    "works": [
+      {
+        "key": "/works/OL276798W"
+      }
+    ],
+    "contributions": [
+      "Jay O. Sanders (Narrator)"
+    ],
+    "revision": 8
+  },
+  {
+    "publishers": [
+      "Perfection Learning"
+    ],
+    "identifiers": {
+      "amazon": [
+        "1606869671"
+      ]
+    },
+    "source_records": [
+      "amazon:1606869671",
+      "bwb:9781606869673"
+    ],
+    "title": "Catch-22",
+    "type": {
+      "key": "/type/edition"
+    },
+    "number_of_pages": 523,
+    "last_modified": {
+      "type": "/type/datetime",
+      "value": "2020-08-29T15:14:58.887368"
+    },
+    "covers": [
+      8929117
+    ],
+    "created": {
+      "type": "/type/datetime",
+      "value": "2019-10-16T06:36:51.756093"
+    },
+    "isbn_13": [
+      "9781606869673"
+    ],
+    "full_title": "Catch-22",
+    "isbn_10": [
+      "1606869671"
+    ],
+    "publish_date": "Apr 05, 2011",
+    "key": "/books/OL27470792M",
+    "authors": [
+      {
+        "key": "/authors/OL6004074A"
+      }
+    ],
+    "latest_revision": 3,
+    "works": [
+      {
+        "key": "/works/OL276798W"
+      }
+    ],
+    "physical_format": "library binding",
+    "revision": 3
+  },
+  {
+    "other_titles": [
+      "Catch-twenty-two"
+    ],
+    "publishers": [
+      "Simon & Schuster Paperbacks"
+    ],
+    "isbn_10": [
+      "1451621175",
+      "1451626657"
+    ],
+    "full_title": "Catch-22",
+    "lc_classifications": [
+      "PS3558.E476 C3 2011"
+    ],
+    "latest_revision": 4,
+    "key": "/books/OL24844308M",
+    "authors": [
+      {
+        "key": "/authors/OL1143795A"
+      }
+    ],
+    "publish_places": [
+      "New York"
+    ],
+    "contributions": [
+      "Buckley, Christopher, 1952-"
+    ],
+    "edition_name": "50th Anniversary ed. ; Simon & Schuster trade pbk. ed.",
+    "pagination": "523 p. :",
+    "source_records": [
+      "marc:marc_loc_updates/v39.i17.records.utf8:16713558:966",
+      "marc:marc_loc_updates/v39.i34.records.utf8:19432509:1187"
+    ],
+    "title": "Catch-22",
+    "lccn": [
+      "2011381031"
+    ],
+    "number_of_pages": 523,
+    "isbn_13": [
+      "9781451621174",
+      "9781451626650"
+    ],
+    "created": {
+      "type": "/type/datetime",
+      "value": "2011-07-26T19:00:57.369698"
+    },
+    "languages": [
+      {
+        "key": "/languages/eng"
+      }
+    ],
+    "dewey_decimal_class": [
+      "813/.54"
+    ],
+    "subjects": [
+      "World War, 1939-1945",
+      "Fiction"
+    ],
+    "publish_date": "2011",
+    "publish_country": "nyu",
+    "last_modified": {
+      "type": "/type/datetime",
+      "value": "2020-04-30T15:02:05.913277"
+    },
+    "by_statement": "Joseph Heller ; introduction by Christopher Buckley",
+    "oclc_numbers": [
+      "659770124"
+    ],
+    "works": [
+      {
+        "key": "/works/OL276798W"
+      }
+    ],
+    "type": {
+      "key": "/type/edition"
+    },
+    "revision": 4
+  },
+  {
+    "publishers": [
+      "Books on Tape"
+    ],
+    "source_records": [
+      "amazon:5557018999"
+    ],
+    "title": "Catch-22",
+    "physical_format": "Audio Cassette",
+    "publish_date": "1980",
+    "key": "/books/OL12580075M",
+    "authors": [
+      {
+        "key": "/authors/OL33512A"
+      }
+    ],
+    "works": [
+      {
+        "key": "/works/OL276798W"
+      }
+    ],
+    "type": {
+      "key": "/type/edition"
+    },
+    "subjects": [
+      "Classics",
+      "Unabridged Audio - Fiction/General"
+    ],
+    "identifiers": {},
+    "isbn_10": [
+      "5557018999"
+    ],
+    "isbn_13": [
+      "9785557018999"
+    ],
+    "classifications": {},
+    "latest_revision": 4,
+    "revision": 4,
+    "created": {
+      "type": "/type/datetime",
+      "value": "2008-04-30T20:50:18.033121"
+    },
+    "last_modified": {
+      "type": "/type/datetime",
+      "value": "2023-08-02T17:48:37.242564"
+    }
+  },
+  {
+    "publishers": [
+      "Tandem Library"
+    ],
+    "identifiers": {
+      "goodreads": [
+        "2042685"
+      ],
+      "librarything": [
+        "1479"
+      ]
+    },
+    "weight": "1.1 pounds",
+    "covers": [
+      1529742
+    ],
+    "physical_format": "School & Library Binding",
+    "last_modified": {
+      "type": "/type/datetime",
+      "value": "2020-08-27T19:27:20.792561"
+    },
+    "latest_revision": 9,
+    "key": "/books/OL7973550M",
+    "authors": [
+      {
+        "key": "/authors/OL33512A"
+      }
+    ],
+    "subjects": [
+      "Classics",
+      "War & Military",
+      "Fiction",
+      "Literature - Classics / Criticism",
+      "World War, 1939-1945",
+      "Children: Young Adult (Gr. 7-9)"
+    ],
+    "languages": [
+      {
+        "key": "/languages/eng"
+      }
+    ],
+    "first_sentence": {
+      "type": "/type/text",
+      "value": "It was love at first sight."
+    },
+    "source_records": [
+      "amazon:0808514024:dg:409035524:260310",
+      "bwb:9780808514022"
+    ],
+    "title": "Catch-22",
+    "number_of_pages": 463,
+    "created": {
+      "type": "/type/datetime",
+      "value": "2008-04-29T15:03:11.581851"
+    },
+    "isbn_13": [
+      "9780808514022"
+    ],
+    "isbn_10": [
+      "0808514024"
+    ],
+    "publish_date": "June 2000",
+    "oclc_numbers": [
+      "57410698"
+    ],
+    "works": [
+      {
+        "key": "/works/OL276798W"
+      }
+    ],
+    "type": {
+      "key": "/type/edition"
+    },
+    "physical_dimensions": "8.3 x 5.6 x 1.3 inches",
+    "revision": 9
+  },
+  {
+    "publishers": [
+      "Vintage"
+    ],
+    "last_modified": {
+      "type": "/type/datetime",
+      "value": "2010-11-24T15:41:11.579004"
+    },
+    "weight": "10.6 ounces",
+    "source_records": [
+      "amazon:0099536013:o-6:2837262651:138663",
+      "amazon:0099536013:7:2440688824:137759"
+    ],
+    "title": "Catch-22",
+    "identifiers": {
+      "librarything": [
+        "1479"
+      ],
+      "goodreads": [
+        "106609"
+      ]
+    },
+    "isbn_13": [
+      "9780099536017"
+    ],
+    "covers": [
+      77315
+    ],
+    "created": {
+      "type": "/type/datetime",
+      "value": "2008-04-30T09:38:13.731961"
+    },
+    "physical_format": "Paperback",
+    "isbn_10": [
+      "0099536013"
+    ],
+    "publish_date": "1994",
+    "key": "/books/OL9274020M",
+    "authors": [
+      {
+        "key": "/authors/OL33512A"
+      }
+    ],
+    "latest_revision": 7,
+    "works": [
+      {
+        "key": "/works/OL276798W"
+      }
+    ],
+    "type": {
+      "key": "/type/edition"
+    },
+    "physical_dimensions": "6.8 x 4.3 x 1.5 inches",
+    "revision": 7
+  },
+  {
+    "publishers": [
+      "Fischer (Tb.), Frankfurt"
+    ],
+    "number_of_pages": 586,
+    "weight": "14.9 ounces",
+    "covers": [
+      1022038
+    ],
+    "physical_format": "Paperback",
+    "last_modified": {
+      "type": "/type/datetime",
+      "value": "2010-11-24T15:41:11.579004"
+    },
+    "latest_revision": 7,
+    "key": "/books/OL9066080M",
+    "authors": [
+      {
+        "key": "/authors/OL33512A"
+      }
+    ],
+    "languages": [
+      {
+        "key": "/languages/ger"
+      }
+    ],
+    "source_records": [
+      "amazon:3596125723:gw:2825750787:167251"
+    ],
+    "title": "Catch 22.",
+    "identifiers": {
+      "librarything": [
+        "1479"
+      ],
+      "goodreads": [
+        "10715"
+      ]
+    },
+    "created": {
+      "type": "/type/datetime",
+      "value": "2008-04-30T09:38:13.731961"
+    },
+    "isbn_13": [
+      "9783596125722"
+    ],
+    "isbn_10": [
+      "3596125723"
+    ],
+    "publish_date": "October 1, 1994",
+    "works": [
+      {
+        "key": "/works/OL276798W"
+      }
+    ],
+    "type": {
+      "key": "/type/edition"
+    },
+    "physical_dimensions": "7.5 x 4.7 x 1.7 inches",
+    "revision": 7
+  },
+  {
+    "publishers": [
+      "Vintage"
+    ],
+    "number_of_pages": 256,
+    "source_records": [
+      "amazon:0099470381:o-6:2694200084:142354",
+      "amazon:0099470381:7:2297083202:142870"
+    ],
+    "title": "Catch-22",
+    "physical_format": "Paperback",
+    "identifiers": {
+      "librarything": [
+        "1479"
+      ],
+      "goodreads": [
+        "187883"
+      ]
+    },
+    "last_modified": {
+      "type": "/type/datetime",
+      "value": "2010-11-24T15:41:11.579004"
+    },
+    "created": {
+      "type": "/type/datetime",
+      "value": "2008-04-30T09:38:13.731961"
+    },
+    "isbn_13": [
+      "9780099470380"
+    ],
+    "isbn_10": [
+      "0099470381"
+    ],
+    "publish_date": "February 5, 2004",
+    "key": "/books/OL9273363M",
+    "authors": [
+      {
+        "key": "/authors/OL33512A"
+      }
+    ],
+    "latest_revision": 6,
+    "works": [
+      {
+        "key": "/works/OL276798W"
+      }
+    ],
+    "type": {
+      "key": "/type/edition"
+    },
+    "subjects": [
+      "General & Literary Fiction"
+    ],
+    "revision": 6
+  },
+  {
+    "publishers": [
+      "Simon & Schuster"
+    ],
+    "last_modified": {
+      "type": "/type/datetime",
+      "value": "2010-11-24T15:41:11.579004"
+    },
+    "source_records": [
+      "amazon:9991258841:is:1357198052:269345"
+    ],
+    "title": "Catch-22",
+    "identifiers": {
+      "goodreads": [
+        "857035"
+      ]
+    },
+    "isbn_13": [
+      "9789991258843"
+    ],
+    "created": {
+      "type": "/type/datetime",
+      "value": "2008-04-30T09:38:13.731961"
+    },
+    "physical_format": "Hardcover",
+    "isbn_10": [
+      "9991258841"
+    ],
+    "publish_date": "August 1981",
+    "key": "/books/OL9205043M",
+    "authors": [
+      {
+        "key": "/authors/OL33512A"
+      }
+    ],
+    "latest_revision": 5,
+    "works": [
+      {
+        "key": "/works/OL276798W"
+      }
+    ],
+    "type": {
+      "key": "/type/edition"
+    },
+    "subjects": [
+      "World War, 1939-1945",
+      "Fiction"
+    ],
+    "first_sentence": {
+      "type": "/type/text",
+      "value": "It was love at first sight."
+    },
+    "revision": 5
+  },
+  {
+    "publishers": [
+      "Vintage"
+    ],
+    "source_records": [
+      "amazon:0099536013:o-6:2837262651:138663",
+      "amazon:0099536013:7:2440688824:137759",
+      "bwb:9780099536017",
+      "amazon:0099536013"
+    ],
+    "title": "Catch-22",
+    "identifiers": {
+      "librarything": [
+        "1479"
+      ],
+      "goodreads": [
+        "106609"
+      ]
+    },
+    "covers": [
+      77316
+    ],
+    "isbn_13": [
+      "9780099536017"
+    ],
+    "isbn_10": [
+      "0099536013"
+    ],
+    "publish_date": "1994",
+    "key": "/books/OL7319367M",
+    "authors": [
+      {
+        "key": "/authors/OL33512A"
+      }
+    ],
+    "works": [
+      {
+        "key": "/works/OL276798W"
+      }
+    ],
+    "type": {
+      "key": "/type/edition"
+    },
+    "latest_revision": 9,
+    "revision": 9,
+    "created": {
+      "type": "/type/datetime",
+      "value": "2008-04-29T13:35:46.876380"
+    },
+    "last_modified": {
+      "type": "/type/datetime",
+      "value": "2022-08-04T21:05:33.163017"
+    }
+  },
+  {
+    "publishers": [
+      "Dell"
+    ],
+    "last_modified": {
+      "type": "/type/datetime",
+      "value": "2010-11-24T15:41:11.579004"
+    },
+    "source_records": [
+      "amazon:044011120X:bk:319009248:269626"
+    ],
+    "title": "Catch-22",
+    "identifiers": {
+      "goodreads": [
+        "857042"
+      ],
+      "librarything": [
+        "1479"
+      ]
+    },
+    "isbn_13": [
+      "9780440111207"
+    ],
+    "created": {
+      "type": "/type/datetime",
+      "value": "2008-04-29T13:35:46.876380"
+    },
+    "languages": [
+      {
+        "key": "/languages/eng"
+      }
+    ],
+    "isbn_10": [
+      "044011120X"
+    ],
+    "publish_date": "November 15, 1974",
+    "key": "/books/OL7517235M",
+    "authors": [
+      {
+        "key": "/authors/OL33512A"
+      }
+    ],
+    "latest_revision": 6,
+    "works": [
+      {
+        "key": "/works/OL276798W"
+      }
+    ],
+    "type": {
+      "key": "/type/edition"
+    },
+    "first_sentence": {
+      "type": "/type/text",
+      "value": "It was love at first sight."
+    },
+    "revision": 6
+  },
+  {
+    "publishers": [
+      "Dh Audio"
+    ],
+    "weight": "4.8 ounces",
+    "covers": [
+      1642093
+    ],
+    "physical_format": "Audio Cassette",
+    "last_modified": {
+      "type": "/type/datetime",
+      "value": "2011-04-22T23:54:04.734766"
+    },
+    "latest_revision": 8,
+    "key": "/books/OL9434928M",
+    "authors": [
+      {
+        "key": "/authors/OL33512A"
+      }
+    ],
+    "contributions": [
+      "Alan Arkin (Narrator)"
+    ],
+    "subjects": [
+      "Mystery & Detective - General",
+      "Fiction",
+      "Audio Adult: Books On Tape",
+      "Modern fiction"
+    ],
+    "edition_name": "Abridged edition",
+    "languages": [
+      {
+        "key": "/languages/eng"
+      }
+    ],
+    "source_records": [
+      "amazon:0886464935:2-ag:3902344851:239620"
+    ],
+    "title": "Catch-22",
+    "identifiers": {
+      "goodreads": [
+        "857038"
+      ],
+      "librarything": [
+        "1479"
+      ]
+    },
+    "created": {
+      "type": "/type/datetime",
+      "value": "2008-04-30T09:38:13.731961"
+    },
+    "isbn_13": [
+      "9780886464936"
+    ],
+    "isbn_10": [
+      "0886464935"
+    ],
+    "publish_date": "March 1999",
+    "oclc_numbers": [
+      "43972945"
+    ],
+    "works": [
+      {
+        "key": "/works/OL276798W"
+      }
+    ],
+    "type": {
+      "key": "/type/edition"
+    },
+    "physical_dimensions": "7 x 4.8 x 0.8 inches",
+    "revision": 8
+  },
+  {
+    "publishers": [
+      "RH Canada UK Dist"
+    ],
+    "number_of_pages": 448,
+    "last_modified": {
+      "type": "/type/datetime",
+      "value": "2010-11-24T15:41:11.579004"
+    },
+    "source_records": [
+      "amazon:0224602675:16:993170700:245031"
+    ],
+    "title": "Catch-22",
+    "identifiers": {
+      "goodreads": [
+        "1010843"
+      ],
+      "librarything": [
+        "1479"
+      ]
+    },
+    "isbn_13": [
+      "9780224602679"
+    ],
+    "created": {
+      "type": "/type/datetime",
+      "value": "2008-04-29T13:35:46.876380"
+    },
+    "languages": [
+      {
+        "key": "/languages/eng"
+      }
+    ],
+    "isbn_10": [
+      "0224602675"
+    ],
+    "publish_date": "December 27, 1987",
+    "key": "/books/OL7414826M",
+    "authors": [
+      {
+        "key": "/authors/OL33512A"
+      }
+    ],
+    "latest_revision": 6,
+    "works": [
+      {
+        "key": "/works/OL276798W"
+      }
+    ],
+    "type": {
+      "key": "/type/edition"
+    },
+    "first_sentence": {
+      "type": "/type/text",
+      "value": "It was love at first sight."
+    },
+    "revision": 6
+  },
+  {
+    "publishers": [
+      "Vintage"
+    ],
+    "number_of_pages": 576,
+    "source_records": [
+      "amazon:0099477319:o-6:2723560756:200922",
+      "amazon:0099477319:7:2326495583:198820"
+    ],
+    "title": "Catch-22",
+    "identifiers": {
+      "goodreads": [
+        "4610"
+      ],
+      "librarything": [
+        "1479"
+      ]
+    },
+    "last_modified": {
+      "type": "/type/datetime",
+      "value": "2010-11-24T15:41:11.579004"
+    },
+    "covers": [
+      76266
+    ],
+    "created": {
+      "type": "/type/datetime",
+      "value": "2008-04-29T13:35:46.876380"
+    },
+    "isbn_13": [
+      "9780099477310"
+    ],
+    "isbn_10": [
+      "0099477319"
+    ],
+    "publish_date": "October 6, 1994",
+    "key": "/books/OL7318832M",
+    "authors": [
+      {
+        "key": "/authors/OL33512A"
+      }
+    ],
+    "latest_revision": 7,
+    "works": [
+      {
+        "key": "/works/OL276798W"
+      }
+    ],
+    "type": {
+      "key": "/type/edition"
+    },
+    "revision": 7
+  },
+  {
+    "publishers": [
+      "Books on Tape"
+    ],
+    "last_modified": {
+      "type": "/type/datetime",
+      "value": "2010-11-24T15:41:11.579004"
+    },
+    "source_records": [
+      "amazon:5553676711"
+    ],
+    "title": "Catch-22",
+    "created": {
+      "type": "/type/datetime",
+      "value": "2008-04-30T20:50:18.033121"
+    },
+    "isbn_13": [
+      "9785553676711"
+    ],
+    "physical_format": "Audio Cassette",
+    "isbn_10": [
+      "5553676711"
+    ],
+    "publish_date": "January 1993",
+    "key": "/books/OL12578375M",
+    "authors": [
+      {
+        "key": "/authors/OL33512A"
+      }
+    ],
+    "latest_revision": 3,
+    "works": [
+      {
+        "key": "/works/OL276798W"
+      }
+    ],
+    "type": {
+      "key": "/type/edition"
+    },
+    "subjects": [
+      "Classics",
+      "Fiction",
+      "Audio - Fiction (Unabridged)"
+    ],
+    "revision": 3
+  },
+  {
+    "publishers": [
+      "Simon & Schuster"
+    ],
+    "source_records": [
+      "amazon:0440511208:bk:1805470135:143602",
+      "ia:catch220000hell_k4a2",
+      "promise:bwb_daily_pallets_2022-03-17"
+    ],
+    "title": "Catch-22",
+    "identifiers": {
+      "librarything": [
+        "1479"
+      ],
+      "goodreads": [
+        "17121"
+      ]
+    },
+    "isbn_13": [
+      "9780440511205"
+    ],
+    "isbn_10": [
+      "0440511208"
+    ],
+    "publish_date": "1961",
+    "key": "/books/OL7522476M",
+    "authors": [
+      {
+        "key": "/authors/OL33512A"
+      }
+    ],
+    "oclc_numbers": [
+      "610803850"
+    ],
+    "works": [
+      {
+        "key": "/works/OL276798W"
+      }
+    ],
+    "type": {
+      "key": "/type/edition"
+    },
+    "covers": [
+      12652369
+    ],
+    "ocaid": "catch220000hell_k4a2",
+    "local_id": [
+      "urn:bwbsku:P7-DEF-095"
+    ],
+    "latest_revision": 9,
+    "revision": 9,
+    "created": {
+      "type": "/type/datetime",
+      "value": "2008-04-29T13:35:46.876380"
+    },
+    "last_modified": {
+      "type": "/type/datetime",
+      "value": "2022-12-07T03:00:22.663138"
+    }
+  },
+  {
+    "publishers": [
+      "Delta"
+    ],
+    "source_records": [
+      "amazon:038528120X:20:1460751894:274842",
+      "bwb:9780385281201"
+    ],
+    "title": "Catch-22",
+    "identifiers": {
+      "goodreads": [
+        "970214"
+      ]
+    },
+    "languages": [
+      {
+        "key": "/languages/eng"
+      }
+    ],
+    "publish_date": "August 15, 1994",
+    "key": "/books/OL7438553M",
+    "authors": [
+      {
+        "key": "/authors/OL33512A"
+      }
+    ],
+    "works": [
+      {
+        "key": "/works/OL276798W"
+      }
+    ],
+    "type": {
+      "key": "/type/edition"
+    },
+    "first_sentence": "It was love at first sight.",
+    "isbn_10": [
+      "038528120X"
+    ],
+    "isbn_13": [
+      "9780385281201"
+    ],
+    "classifications": {},
+    "latest_revision": 7,
+    "revision": 7,
+    "created": {
+      "type": "/type/datetime",
+      "value": "2008-04-29T13:35:46.876380"
+    },
+    "last_modified": {
+      "type": "/type/datetime",
+      "value": "2023-08-02T17:50:43.109830"
+    }
+  },
+  {
+    "publishers": [
+      "Ulverscroft Large Print"
+    ],
+    "identifiers": {
+      "goodreads": [
+        "2028760"
+      ]
+    },
+    "physical_format": "Hardcover",
+    "lc_classifications": [
+      "PS3558.E476"
+    ],
+    "key": "/books/OL9861345M",
+    "authors": [
+      {
+        "key": "/authors/OL33512A"
+      }
+    ],
+    "subjects": [
+      "Classics",
+      "War & Military",
+      "Literature - Classics / Criticism"
+    ],
+    "edition_name": "Large Prnt edition",
+    "languages": [
+      {
+        "key": "/languages/eng"
+      }
+    ],
+    "source_records": [
+      "amazon:070898164X:2-ax:3366064137:276934",
+      "bwb:9780708981641",
+      "amazon:070898164X"
+    ],
+    "title": "Catch-22",
+    "number_of_pages": 768,
+    "isbn_13": [
+      "9780708981641"
+    ],
+    "isbn_10": [
+      "070898164X"
+    ],
+    "publish_date": "January 1984",
+    "works": [
+      {
+        "key": "/works/OL276798W"
+      }
+    ],
+    "type": {
+      "key": "/type/edition"
+    },
+    "first_sentence": {
+      "type": "/type/text",
+      "value": "It was love at first sight."
+    },
+    "latest_revision": 8,
+    "revision": 8,
+    "created": {
+      "type": "/type/datetime",
+      "value": "2008-04-30T09:38:13.731961"
+    },
+    "last_modified": {
+      "type": "/type/datetime",
+      "value": "2022-12-03T20:16:39.761314"
+    }
+  },
+  {
+    "publishers": [
+      "G K Hall Audio Books"
+    ],
+    "weight": "1.7 pounds",
+    "physical_format": "Audio Cassette",
+    "last_modified": {
+      "type": "/type/datetime",
+      "value": "2010-11-24T15:41:11.579004"
+    },
+    "latest_revision": 6,
+    "key": "/books/OL12099838M",
+    "authors": [
+      {
+        "key": "/authors/OL33512A"
+      }
+    ],
+    "subjects": [
+      "Audio Adult: Books On Tape"
+    ],
+    "isbn_13": [
+      "9781560549604"
+    ],
+    "source_records": [
+      "amazon:1560549602"
+    ],
+    "title": "Catch-22",
+    "identifiers": {
+      "librarything": [
+        "1479"
+      ],
+      "goodreads": [
+        "857045"
+      ]
+    },
+    "created": {
+      "type": "/type/datetime",
+      "value": "2008-04-30T20:50:18.033121"
+    },
+    "edition_name": "Unabridged edition",
+    "isbn_10": [
+      "1560549602"
+    ],
+    "publish_date": "April 1992",
+    "works": [
+      {
+        "key": "/works/OL276798W"
+      }
+    ],
+    "type": {
+      "key": "/type/edition"
+    },
+    "physical_dimensions": "9 x 6.8 x 2.2 inches",
+    "revision": 6
+  },
+  {
+    "publishers": [
+      "Simon & Schuster"
+    ],
+    "number_of_pages": 464,
+    "table_of_contents": [
+      {
+        "title": "Preface to the special edition of Catch-22",
+        "type": {
+          "key": "/type/toc_item"
+        },
+        "level": 0
+      },
+      {
+        "title": "The Texan",
+        "type": {
+          "key": "/type/toc_item"
+        },
+        "level": 0
+      },
+      {
+        "title": "Clevinger",
+        "type": {
+          "key": "/type/toc_item"
+        },
+        "level": 0
+      },
+      {
+        "title": "Havermeyer",
+        "type": {
+          "key": "/type/toc_item"
+        },
+        "level": 0
+      },
+      {
+        "title": "Doc Daneeka",
+        "type": {
+          "key": "/type/toc_item"
+        },
+        "level": 0
+      },
+      {
+        "title": "Chief White Halfoat",
+        "type": {
+          "key": "/type/toc_item"
+        },
+        "level": 0
+      },
+      {
+        "title": "Hungry Joe",
+        "type": {
+          "key": "/type/toc_item"
+        },
+        "level": 0
+      },
+      {
+        "title": "McWatt",
+        "type": {
+          "key": "/type/toc_item"
+        },
+        "level": 0
+      },
+      {
+        "title": "Lieutenant Scheisskopf",
+        "type": {
+          "key": "/type/toc_item"
+        },
+        "level": 0
+      },
+      {
+        "title": "Major Major Major Major",
+        "type": {
+          "key": "/type/toc_item"
+        },
+        "level": 0
+      },
+      {
+        "title": "Wintergreen",
+        "type": {
+          "key": "/type/toc_item"
+        },
+        "level": 0
+      },
+      {
+        "title": "Captain Black",
+        "type": {
+          "key": "/type/toc_item"
+        },
+        "level": 0
+      },
+      {
+        "title": "Bologna",
+        "type": {
+          "key": "/type/toc_item"
+        },
+        "level": 0
+      },
+      {
+        "title": "Major de Coverly",
+        "type": {
+          "key": "/type/toc_item"
+        },
+        "level": 0
+      },
+      {
+        "title": "Kid Sampson",
+        "type": {
+          "key": "/type/toc_item"
+        },
+        "level": 0
+      },
+      {
+        "title": "Piltchard & Wren",
+        "type": {
+          "key": "/type/toc_item"
+        },
+        "level": 0
+      },
+      {
+        "title": "Luciana",
+        "type": {
+          "key": "/type/toc_item"
+        },
+        "level": 0
+      },
+      {
+        "title": "The soldier in white",
+        "type": {
+          "key": "/type/toc_item"
+        },
+        "level": 0
+      },
+      {
+        "title": "The soldier who saw everything twice",
+        "type": {
+          "key": "/type/toc_item"
+        },
+        "level": 0
+      },
+      {
+        "title": "Colonel Cathcart",
+        "type": {
+          "key": "/type/toc_item"
+        },
+        "level": 0
+      },
+      {
+        "title": "Corporal Whitcomb",
+        "type": {
+          "key": "/type/toc_item"
+        },
+        "level": 0
+      },
+      {
+        "title": "General Dreedle",
+        "type": {
+          "key": "/type/toc_item"
+        },
+        "level": 0
+      },
+      {
+        "title": "Milo the Mayor",
+        "type": {
+          "key": "/type/toc_item"
+        },
+        "level": 0
+      },
+      {
+        "title": "Nately's old man",
+        "type": {
+          "key": "/type/toc_item"
+        },
+        "level": 0
+      },
+      {
+        "title": "Milo",
+        "type": {
+          "key": "/type/toc_item"
+        },
+        "level": 0
+      },
+      {
+        "title": "The chaplain",
+        "type": {
+          "key": "/type/toc_item"
+        },
+        "level": 0
+      },
+      {
+        "title": "Aarfy",
+        "type": {
+          "key": "/type/toc_item"
+        },
+        "level": 0
+      },
+      {
+        "title": "Nurse Duckett",
+        "type": {
+          "key": "/type/toc_item"
+        },
+        "level": 0
+      },
+      {
+        "title": "Dobbs",
+        "type": {
+          "key": "/type/toc_item"
+        },
+        "level": 0
+      },
+      {
+        "title": "Peckem",
+        "type": {
+          "key": "/type/toc_item"
+        },
+        "level": 0
+      },
+      {
+        "title": "Dunbar",
+        "type": {
+          "key": "/type/toc_item"
+        },
+        "level": 0
+      },
+      {
+        "title": "Mrs. Daneeka",
+        "type": {
+          "key": "/type/toc_item"
+        },
+        "level": 0
+      },
+      {
+        "title": "Yo-Yo's roomies",
+        "type": {
+          "key": "/type/toc_item"
+        },
+        "level": 0
+      },
+      {
+        "title": "Nately's whore",
+        "type": {
+          "key": "/type/toc_item"
+        },
+        "level": 0
+      },
+      {
+        "title": "Thanksgiving",
+        "type": {
+          "key": "/type/toc_item"
+        },
+        "level": 0
+      },
+      {
+        "title": "Milo the Militant",
+        "type": {
+          "key": "/type/toc_item"
+        },
+        "level": 0
+      },
+      {
+        "title": "The cellar",
+        "type": {
+          "key": "/type/toc_item"
+        },
+        "level": 0
+      },
+      {
+        "title": "General Scheisskopf",
+        "type": {
+          "key": "/type/toc_item"
+        },
+        "level": 0
+      },
+      {
+        "title": "Kid sister",
+        "type": {
+          "key": "/type/toc_item"
+        },
+        "level": 0
+      },
+      {
+        "title": "The eternal city",
+        "type": {
+          "key": "/type/toc_item"
+        },
+        "level": 0
+      },
+      {
+        "title": "Catch-22",
+        "type": {
+          "key": "/type/toc_item"
+        },
+        "level": 0
+      },
+      {
+        "title": "Snowden",
+        "type": {
+          "key": "/type/toc_item"
+        },
+        "level": 0
+      },
+      {
+        "title": "Yossarian",
+        "type": {
+          "key": "/type/toc_item"
+        },
+        "level": 0
+      }
+    ],
+    "weight": "14.4 ounces",
+    "isbn_10": [
+      "0684833395"
+    ],
+    "first_sentence": {
+      "type": "/type/text",
+      "value": "It was love at first sight."
+    },
+    "covers": [
+      426382
+    ],
+    "physical_format": "Paperback",
+    "last_modified": {
+      "type": "/type/datetime",
+      "value": "2015-05-19T17:01:06.412085"
+    },
+    "latest_revision": 13,
+    "key": "/books/OL7721539M",
+    "authors": [
+      {
+        "key": "/authors/OL33512A"
+      }
+    ],
+    "ocaid": "catch00hell",
+    "publish_places": [
+      "New York, USA"
+    ],
+    "languages": [
+      {
+        "key": "/languages/eng"
+      }
+    ],
+    "pagination": "463 p.",
+    "classifications": {},
+    "source_records": [
+      "amazon:0684833395",
+      "ia:catch00hell"
+    ],
+    "title": "Catch-22",
+    "identifiers": {
+      "librarything": [
+        "1479"
+      ],
+      "goodreads": [
+        "168668"
+      ]
+    },
+    "isbn_13": [
+      "9780684833392"
+    ],
+    "created": {
+      "type": "/type/datetime",
+      "value": "2008-04-29T15:03:11.581851"
+    },
+    "edition_name": "1st Scribner paperback fiction edition",
+    "subjects": [
+      "Modern fiction",
+      "War stories",
+      "Heller, Joseph - Prose & Criticism",
+      "Fiction",
+      "Literature - Classics / Criticism",
+      "Literature: Classics",
+      "World War, 1939-1945",
+      "Classics",
+      "Literary",
+      "Fiction / Literary"
+    ],
+    "publish_date": "September 4, 1996",
+    "copyright_date": "1994",
+    "works": [
+      {
+        "key": "/works/OL276798W"
+      }
+    ],
+    "type": {
+      "key": "/type/edition"
+    },
+    "physical_dimensions": "8.3 x 5.5 x 1.2 inches",
+    "revision": 13
+  },
+  {
+    "publishers": [
+      "Demco Media"
+    ],
+    "identifiers": {
+      "goodreads": [
+        "1367899"
+      ]
+    },
+    "physical_format": "Turtleback",
+    "last_modified": {
+      "type": "/type/datetime",
+      "value": "2020-08-27T19:27:35.845942"
+    },
+    "latest_revision": 6,
+    "key": "/books/OL10924578M",
+    "authors": [
+      {
+        "key": "/authors/OL33512A"
+      }
+    ],
+    "subjects": [
+      "World War, 1939-1945",
+      "Fiction"
+    ],
+    "languages": [
+      {
+        "key": "/languages/eng"
+      }
+    ],
+    "source_records": [
+      "amazon:060600453X",
+      "bwb:9780606004534"
+    ],
+    "title": "Catch 22",
+    "number_of_pages": 455,
+    "created": {
+      "type": "/type/datetime",
+      "value": "2008-04-30T09:38:13.731961"
+    },
+    "isbn_13": [
+      "9780606004534"
+    ],
+    "isbn_10": [
+      "060600453X"
+    ],
+    "publish_date": "December 1992",
+    "works": [
+      {
+        "key": "/works/OL276798W"
+      }
+    ],
+    "type": {
+      "key": "/type/edition"
+    },
+    "first_sentence": {
+      "type": "/type/text",
+      "value": "It was love at first sight."
+    },
+    "revision": 6
+  },
+  {
+    "publishers": [
+      "Dell, 1969"
+    ],
+    "number_of_pages": 569,
+    "source_records": [
+      "amazon:0552015008:bw:3857350932:142140"
+    ],
+    "title": "Catch-22",
+    "physical_format": "Paperback",
+    "identifiers": {
+      "goodreads": [
+        "857044"
+      ],
+      "librarything": [
+        "1479"
+      ]
+    },
+    "last_modified": {
+      "type": "/type/datetime",
+      "value": "2010-11-24T15:41:11.579004"
+    },
+    "created": {
+      "type": "/type/datetime",
+      "value": "2008-04-29T15:03:11.581851"
+    },
+    "isbn_13": [
+      "9780552015004"
+    ],
+    "isbn_10": [
+      "0552015008"
+    ],
+    "publish_date": "1969",
+    "key": "/books/OL7790071M",
+    "authors": [
+      {
+        "key": "/authors/OL33512A"
+      }
+    ],
+    "latest_revision": 6,
+    "works": [
+      {
+        "key": "/works/OL276798W"
+      }
+    ],
+    "type": {
+      "key": "/type/edition"
+    },
+    "revision": 6
+  },
+  {
+    "publishers": [
+      "Laurel"
+    ],
+    "classifications": {},
+    "last_modified": {
+      "type": "/type/datetime",
+      "value": "2020-04-30T15:06:08.677214"
+    },
+    "source_records": [
+      "amazon:0440204399:bk:641029385:268378",
+      "ia:catch19612200hell"
+    ],
+    "title": "Catch-22",
+    "identifiers": {
+      "goodreads": [
+        "1052616"
+      ],
+      "librarything": [
+        "1479"
+      ]
+    },
+    "isbn_13": [
+      "9780440204398"
+    ],
+    "covers": [
+      5415881,
+      4629012
+    ],
+    "created": {
+      "type": "/type/datetime",
+      "value": "2008-04-29T13:35:46.876380"
+    },
+    "languages": [
+      {
+        "key": "/languages/eng"
+      }
+    ],
+    "isbn_10": [
+      "0440204399"
+    ],
+    "publish_date": "August 5, 1989",
+    "key": "/books/OL7518690M",
+    "authors": [
+      {
+        "key": "/authors/OL33512A"
+      }
+    ],
+    "latest_revision": 10,
+    "works": [
+      {
+        "key": "/works/OL276798W"
+      }
+    ],
+    "type": {
+      "key": "/type/edition"
+    },
+    "first_sentence": {
+      "type": "/type/text",
+      "value": "It was love at first sight."
+    },
+    "revision": 10
+  },
+  {
+    "publishers": [
+      "Vintage"
+    ],
+    "number_of_pages": 256,
+    "source_records": [
+      "amazon:0099470381:o-6:2694200084:142354",
+      "amazon:0099470381:7:2297083202:142870",
+      "bwb:9780099470380"
+    ],
+    "title": "Catch-22",
+    "identifiers": {
+      "librarything": [
+        "1479"
+      ],
+      "goodreads": [
+        "187883"
+      ]
+    },
+    "last_modified": {
+      "type": "/type/datetime",
+      "value": "2020-08-19T13:48:39.117450"
+    },
+    "created": {
+      "type": "/type/datetime",
+      "value": "2008-04-29T13:35:46.876380"
+    },
+    "isbn_13": [
+      "9780099470380"
+    ],
+    "isbn_10": [
+      "0099470381"
+    ],
+    "publish_date": "February 5, 2004",
+    "key": "/books/OL7318708M",
+    "authors": [
+      {
+        "key": "/authors/OL33512A"
+      }
+    ],
+    "latest_revision": 7,
+    "works": [
+      {
+        "key": "/works/OL276798W"
+      }
+    ],
+    "type": {
+      "key": "/type/edition"
+    },
+    "revision": 7
+  },
+  {
+    "publishers": [
+      "Vintage"
+    ],
+    "identifiers": {
+      "librarything": [
+        "1479"
+      ],
+      "goodreads": [
+        "4610"
+      ]
+    },
+    "weight": "12 ounces",
+    "covers": [
+      76267
+    ],
+    "physical_format": "Paperback",
+    "last_modified": {
+      "type": "/type/datetime",
+      "value": "2010-11-24T15:41:11.579004"
+    },
+    "latest_revision": 7,
+    "key": "/books/OL9273487M",
+    "authors": [
+      {
+        "key": "/authors/OL33512A"
+      }
+    ],
+    "subjects": [
+      "Adventure / thriller",
+      "War fiction",
+      "Fiction"
+    ],
+    "edition_name": "New Ed edition",
+    "source_records": [
+      "amazon:0099477319:o-6:2723560756:200922",
+      "amazon:0099477319:7:2326495583:198820"
+    ],
+    "title": "Catch-22",
+    "number_of_pages": 576,
+    "created": {
+      "type": "/type/datetime",
+      "value": "2008-04-30T09:38:13.731961"
+    },
+    "isbn_13": [
+      "9780099477310"
+    ],
+    "isbn_10": [
+      "0099477319"
+    ],
+    "publish_date": "October 6, 1994",
+    "works": [
+      {
+        "key": "/works/OL276798W"
+      }
+    ],
+    "type": {
+      "key": "/type/edition"
+    },
+    "physical_dimensions": "7.6 x 5.1 x 1.4 inches",
+    "revision": 7
+  },
+  {
+    "publishers": [
+      "Perfection Learning Prebound"
+    ],
+    "physical_format": "Unknown Binding",
+    "source_records": [
+      "amazon:0812417178",
+      "bwb:9780812417173"
+    ],
+    "title": "Catch 22",
+    "identifiers": {
+      "goodreads": [
+        "4613"
+      ],
+      "librarything": [
+        "1479"
+      ]
+    },
+    "last_modified": {
+      "type": "/type/datetime",
+      "value": "2020-08-28T04:28:52.701574"
+    },
+    "created": {
+      "type": "/type/datetime",
+      "value": "2008-04-30T09:38:13.731961"
+    },
+    "isbn_13": [
+      "9780812417173"
+    ],
+    "isbn_10": [
+      "0812417178"
+    ],
+    "publish_date": "January 1978",
+    "key": "/books/OL11346360M",
+    "authors": [
+      {
+        "key": "/authors/OL33512A"
+      }
+    ],
+    "latest_revision": 7,
+    "works": [
+      {
+        "key": "/works/OL276798W"
+      }
+    ],
+    "type": {
+      "key": "/type/edition"
+    },
+    "subjects": [
+      "Fiction"
+    ],
+    "revision": 7
+  },
+  {
+    "publishers": [
+      "DH Audio",
+      "Dh Audio",
+      "Brand: Dh Audio"
+    ],
+    "weight": "4.2 ounces",
+    "physical_format": "Audio Cassette",
+    "key": "/books/OL8195319M",
+    "authors": [
+      {
+        "key": "/authors/OL33512A"
+      }
+    ],
+    "contributions": [
+      "Alan Arkin (Reader)"
+    ],
+    "subjects": [
+      "Classics",
+      "Audio - Fiction - General",
+      "Fiction",
+      "Unabridged Audio - Fiction/General",
+      "Audio Adult: Books On Tape"
+    ],
+    "edition_name": "Abridged edition",
+    "languages": [
+      {
+        "key": "/languages/eng"
+      }
+    ],
+    "source_records": [
+      "amazon:0886461251:ee:1836266064:246395",
+      "amazon:0886461251"
+    ],
+    "title": "Catch-22",
+    "identifiers": {
+      "librarything": [
+        "1479"
+      ],
+      "goodreads": [
+        "857037"
+      ]
+    },
+    "isbn_13": [
+      "9780886461256"
+    ],
+    "isbn_10": [
+      "0886461251"
+    ],
+    "publish_date": "September 1994",
+    "works": [
+      {
+        "key": "/works/OL276798W"
+      }
+    ],
+    "type": {
+      "key": "/type/edition"
+    },
+    "physical_dimensions": "7 x 4.4 x 0.8 inches",
+    "covers": [
+      13833337
+    ],
+    "latest_revision": 7,
+    "revision": 7,
+    "created": {
+      "type": "/type/datetime",
+      "value": "2008-04-29T15:03:11.581851"
+    },
+    "last_modified": {
+      "type": "/type/datetime",
+      "value": "2023-04-05T04:42:27.052513"
+    }
+  },
+  {
+    "publishers": [
+      "Simon and Schuster"
+    ],
+    "subtitle": "a novel.",
+    "genres": [
+      "Fiction."
+    ],
+    "lc_classifications": [
+      "PZ4.H47665 Cat"
+    ],
+    "latest_revision": 3,
+    "key": "/books/OL14724410M",
+    "authors": [
+      {
+        "key": "/authors/OL33512A"
+      }
+    ],
+    "publish_places": [
+      "New York"
+    ],
+    "pagination": "443 p.",
+    "title": "Catch-22",
+    "number_of_pages": 443,
+    "created": {
+      "type": "/type/datetime",
+      "value": "2008-09-14T07:09:06.539440"
+    },
+    "languages": [
+      {
+        "key": "/languages/eng"
+      }
+    ],
+    "subjects": [
+      "World War, 1939-1945 -- Fiction."
+    ],
+    "publish_date": "1961",
+    "publish_country": "nyu",
+    "last_modified": {
+      "type": "/type/datetime",
+      "value": "2011-04-11T19:21:22.358173"
+    },
+    "works": [
+      {
+        "key": "/works/OL276798W"
+      }
+    ],
+    "type": {
+      "key": "/type/edition"
+    },
+    "revision": 3
+  },
+  {
+    "created": {
+      "type": "/type/datetime",
+      "value": "2008-08-29T19:42:29.325890"
+    },
+    "works": [
+      {
+        "key": "/works/OL276798W"
+      }
+    ],
+    "latest_revision": 3,
+    "key": "/books/OL13634006M",
+    "title": "Catch-22.",
+    "notes": {
+      "type": "/type/text",
+      "value": "Gift of anonymous donor."
+    },
+    "authors": [
+      {
+        "key": "/authors/OL33512A"
+      }
+    ],
+    "type": {
+      "key": "/type/edition"
+    },
+    "last_modified": {
+      "type": "/type/datetime",
+      "value": "2011-04-11T19:21:22.358173"
+    },
+    "revision": 3
+  },
+  {
+    "publishers": [
+      "Corgi"
+    ],
+    "covers": [
+      10398772
+    ],
+    "key": "/books/OL19672293M",
+    "authors": [
+      {
+        "key": "/authors/OL33512A"
+      }
+    ],
+    "ocaid": "catch220000hell",
+    "publish_places": [
+      "London"
+    ],
+    "source_records": [
+      "bwb:9780552097550",
+      "ia:catch220000hell",
+      "ia:catch220000hell_t3k7"
+    ],
+    "title": "Catch-22",
+    "identifiers": {
+      "goodreads": [
+        "857043"
+      ],
+      "librarything": [
+        "1479"
+      ]
+    },
+    "languages": [
+      {
+        "key": "/languages/eng"
+      }
+    ],
+    "isbn_10": [
+      "0552097551"
+    ],
+    "publish_date": "1964",
+    "publish_country": "enk",
+    "by_statement": "Joseph Heller.",
+    "works": [
+      {
+        "key": "/works/OL276798W"
+      }
+    ],
+    "type": {
+      "key": "/type/edition"
+    },
+    "lc_classifications": [
+      "PS3558.E476 C3 1964"
+    ],
+    "latest_revision": 9,
+    "revision": 9,
+    "created": {
+      "type": "/type/datetime",
+      "value": "2008-10-23T13:08:29.240070"
+    },
+    "last_modified": {
+      "type": "/type/datetime",
+      "value": "2021-07-04T05:06:39.341454"
+    }
+  },
+  {
+    "publishers": [
+      "Simon & Schuster Paperbacks"
+    ],
+    "number_of_pages": 453,
+    "isbn_10": [
+      "0684833395"
+    ],
+    "pagination": "453 p. ;",
+    "local_id": [
+      "urn:sfpl:31223114316459",
+      "urn:sfpl:31223126273938",
+      "urn:sfpl:31223126273953",
+      "urn:sfpl:31223121034475",
+      "urn:sfpl:31223101817568",
+      "urn:sfpl:31223121262977",
+      "urn:sfpl:31223089685771",
+      "urn:sfpl:31223116677478",
+      "urn:sfpl:31223121034483",
+      "urn:sfpl:31223114316475",
+      "urn:sfpl:31223099396484",
+      "urn:sfpl:31223085048446",
+      "urn:sfpl:31223115616410",
+      "urn:sfpl:31223087203569",
+      "urn:sfpl:31223094183754",
+      "urn:sfpl:31223099074834",
+      "urn:sfpl:31223100864579",
+      "urn:sfpl:31223100864645",
+      "urn:sfpl:31223101817360",
+      "urn:sfpl:31223101817386",
+      "urn:sfpl:31223116469165",
+      "urn:sfpl:31223099074776",
+      "urn:sfpl:31223121034558",
+      "urn:sfpl:31223121034566",
+      "urn:sfpl:31223115616469",
+      "urn:sfpl:31223126273912",
+      "urn:sfpl:31223107088271",
+      "urn:sfpl:31223114316491",
+      "urn:sfpl:31223114316517",
+      "urn:sfpl:31223121034491",
+      "urn:sfpl:31223089685789",
+      "urn:sfpl:31223068455733",
+      "urn:sfpl:31223101817444",
+      "urn:sfpl:31223121034509",
+      "urn:sfpl:31223072495360",
+      "urn:sfpl:31223115616428",
+      "urn:sfpl:31223126273896",
+      "urn:sfpl:31223116677445",
+      "urn:sfpl:31223126273862",
+      "urn:sfpl:31223115616436",
+      "urn:sfpl:31223115616444",
+      "urn:sfpl:31223126273888",
+      "urn:sfpl:31223114316467",
+      "urn:sfpl:31223121262985",
+      "urn:sfpl:31223126273904",
+      "urn:sfpl:31223121034517",
+      "urn:sfpl:31223089685805",
+      "urn:sfpl:31223126273870",
+      "urn:sfpl:31223121034525",
+      "urn:sfpl:31223089685813",
+      "urn:sfpl:31223126273854",
+      "urn:sfpl:31223101817493",
+      "urn:sfpl:31223116677437",
+      "urn:sfpl:31223114497358",
+      "urn:sfpl:31223101817501",
+      "urn:sfpl:31223121034533",
+      "urn:sfpl:31223126273920",
+      "urn:sfpl:31223116677429",
+      "urn:sfpl:31223094782167",
+      "urn:sfpl:31223126273847",
+      "urn:sfpl:31223114316434",
+      "urn:sfpl:31223060953693",
+      "urn:sfpl:31223114316483",
+      "urn:sfpl:31223116677460",
+      "urn:sfpl:31223081855893",
+      "urn:sfpl:31223126273946",
+      "urn:sfpl:31223121034541"
+    ],
+    "lc_classifications": [
+      "PS3558.E476 C3 2004",
+      "PS3558.E476 C3 1996x"
+    ],
+    "key": "/books/OL20024538M",
+    "authors": [
+      {
+        "key": "/authors/OL33512A"
+      }
+    ],
+    "publish_places": [
+      "New York"
+    ],
+    "languages": [
+      {
+        "key": "/languages/eng"
+      }
+    ],
+    "genres": [
+      "Fiction."
+    ],
+    "source_records": [
+      "marc:marc_oregon_summit_records/catalog_files/lewisandclarkbibsrev.mrc:422624420:825",
+      "marc:marc_openlibraries_sanfranciscopubliclibrary/sfpl_chq_2018_12_24_run02.mrc:171084025:14719",
+      "marc:marc_columbia/Columbia-extract-20221130-006.mrc:417172951:1031"
+    ],
+    "title": "Catch-22",
+    "dewey_decimal_class": [
+      "813/.54"
+    ],
+    "notes": {
+      "type": "/type/text",
+      "value": "\"With an updated preface by the author\"--Cover."
+    },
+    "identifiers": {
+      "librarything": [
+        "1479"
+      ],
+      "wikidata": [
+        "Q58883450"
+      ],
+      "goodreads": [
+        "168668"
+      ]
+    },
+    "edition_name": "1st Simon & Schuster pbk. ed.",
+    "subjects": [
+      "World War, 1939-1945 -- Fiction"
+    ],
+    "publish_date": "2004",
+    "publish_country": "nyu",
+    "by_statement": "Joseph Heller.",
+    "oclc_numbers": [
+      "55739574",
+      "35231812"
+    ],
+    "works": [
+      {
+        "key": "/works/OL276798W"
+      }
+    ],
+    "type": {
+      "key": "/type/edition"
+    },
+    "lccn": [
+      "94013984"
+    ],
+    "latest_revision": 9,
+    "revision": 9,
+    "created": {
+      "type": "/type/datetime",
+      "value": "2008-10-25T07:00:43.248333"
+    },
+    "last_modified": {
+      "type": "/type/datetime",
+      "value": "2024-07-16T23:59:09.859611"
+    }
+  },
+  {
+    "notes": {
+      "type": "/type/text",
+      "value": "Originally published: Jonathan Cape, 1962."
+    },
+    "identifiers": {
+      "goodreads": [
+        "4610"
+      ],
+      "librarything": [
+        "1479"
+      ],
+      "amazon": [
+        ""
+      ]
+    },
+    "title": "Catch-22",
+    "authors": [
+      {
+        "key": "/authors/OL33512A"
+      }
+    ],
+    "publish_date": "1994",
+    "publishers": [
+      "Vintage"
+    ],
+    "lc_classifications": [
+      "PS3558.E476"
+    ],
+    "publish_places": [
+      "London"
+    ],
+    "pagination": "519p. ;",
+    "source_records": [
+      "bwb:9780099477310",
+      "ia:catch220000hell_r2x5",
+      "promise:bwb_daily_pallets_2023-12-24:KN-513-043"
+    ],
+    "dewey_decimal_class": [
+      "813.54"
+    ],
+    "languages": [
+      {
+        "key": "/languages/eng"
+      }
+    ],
+    "isbn_10": [
+      "0099477319"
+    ],
+    "publish_country": "enk",
+    "by_statement": "Joseph Heller.",
+    "type": {
+      "key": "/type/edition"
+    },
+    "ocaid": "catch220000hell_r2x5",
+    "key": "/books/OL22135595M",
+    "number_of_pages": 519,
+    "works": [
+      {
+        "key": "/works/OL276798W"
+      }
+    ],
+    "covers": [
+      13061725
+    ],
+    "local_id": [
+      "urn:bwbsku:KN-513-043"
+    ],
+    "latest_revision": 11,
+    "revision": 11,
+    "created": {
+      "type": "/type/datetime",
+      "value": "2008-11-07T08:03:56.557182"
+    },
+    "last_modified": {
+      "type": "/type/datetime",
+      "value": "2024-01-16T01:24:34.439991"
+    }
+  },
+  {
+    "publishers": [
+      "Black Swan"
+    ],
+    "identifiers": {
+      "librarything": [
+        "1479"
+      ],
+      "goodreads": [
+        "1894939"
+      ]
+    },
+    "last_modified": {
+      "type": "/type/datetime",
+      "value": "2020-08-19T23:26:22.305817"
+    },
+    "latest_revision": 7,
+    "key": "/books/OL16245484M",
+    "authors": [
+      {
+        "key": "/authors/OL33512A"
+      }
+    ],
+    "publish_places": [
+      "London"
+    ],
+    "pagination": "5698p. :",
+    "source_records": [
+      "bwb:9780552991957"
+    ],
+    "title": "Catch-22",
+    "dewey_decimal_class": [
+      "813/.54"
+    ],
+    "notes": {
+      "type": "/type/text",
+      "value": "Originally published, London , Cape, 1962.\n\nPort on inside cover."
+    },
+    "number_of_pages": 5698,
+    "created": {
+      "type": "/type/datetime",
+      "value": "2008-09-22T22:09:48.777107"
+    },
+    "languages": [
+      {
+        "key": "/languages/eng"
+      }
+    ],
+    "isbn_10": [
+      "0552991953"
+    ],
+    "publish_date": "1985",
+    "publish_country": "xxk",
+    "by_statement": "Joseph Heller ; with a new introduction by Anthony Burgess.",
+    "works": [
+      {
+        "key": "/works/OL276798W"
+      }
+    ],
+    "type": {
+      "key": "/type/edition"
+    },
+    "revision": 7
+  },
+  {
+    "publishers": [
+      "Cape"
+    ],
+    "number_of_pages": 443,
+    "series": [
+      "Jonathan Cape paperbacks, 57"
+    ],
+    "last_modified": {
+      "type": "/type/datetime",
+      "value": "2020-08-20T01:03:40.181431"
+    },
+    "latest_revision": 8,
+    "key": "/books/OL14967712M",
+    "authors": [
+      {
+        "key": "/authors/OL33512A"
+      }
+    ],
+    "pagination": "443p.,20cm",
+    "source_records": [
+      "bwb:9780224613286"
+    ],
+    "title": "Catch-22.",
+    "dewey_decimal_class": [
+      "823.91"
+    ],
+    "notes": {
+      "type": "/type/text",
+      "value": "Originally published Simon & Schuster, 1961 (B62-8559) 1962."
+    },
+    "identifiers": {
+      "librarything": [
+        "1479"
+      ],
+      "goodreads": [
+        "2678529"
+      ]
+    },
+    "created": {
+      "type": "/type/datetime",
+      "value": "2008-09-16T21:04:51.004536"
+    },
+    "languages": [
+      {
+        "key": "/languages/eng"
+      }
+    ],
+    "isbn_10": [
+      "0224613286"
+    ],
+    "publish_date": "1968",
+    "publish_country": "xxk",
+    "oclc_numbers": [
+      "10083755"
+    ],
+    "works": [
+      {
+        "key": "/works/OL276798W"
+      }
+    ],
+    "type": {
+      "key": "/type/edition"
+    },
+    "revision": 8
+  },
+  {
+    "other_titles": [
+      "Popravka dvadt\ufe20s\ufe21at\u02b9 dva"
+    ],
+    "publishers": [
+      "Izd-vo AST",
+      "\"Folio\""
+    ],
+    "subtitle": "roman",
+    "isbn_10": [
+      "5237000665",
+      "9660301588"
+    ],
+    "pagination": "522 p., [1] leaf of plates :",
+    "last_modified": {
+      "type": "/type/datetime",
+      "value": "2011-04-11T19:21:22.358173"
+    },
+    "latest_revision": 5,
+    "key": "/books/OL23016009M",
+    "authors": [
+      {
+        "key": "/authors/OL33512A"
+      }
+    ],
+    "publish_places": [
+      "Moskva",
+      "Khar\u02b9kov"
+    ],
+    "genres": [
+      "Fiction."
+    ],
+    "source_records": [
+      "marc:SanFranPL09/SanFranPL09.out:47686402:1156"
+    ],
+    "title": "Popravka-22",
+    "work_titles": [
+      "Catch-22."
+    ],
+    "number_of_pages": 522,
+    "created": {
+      "type": "/type/datetime",
+      "value": "2009-02-18T01:04:55.450336"
+    },
+    "languages": [
+      {
+        "key": "/languages/rus"
+      }
+    ],
+    "subjects": [
+      "World War, 1939-1945 -- Fiction"
+    ],
+    "publish_date": "1998",
+    "publish_country": "un ",
+    "by_statement": "Dzhozef Kheller ; perevod s angli\u012dskogo A. Kisti\ufe20a\ufe21kovskogo.",
+    "oclc_numbers": [
+      "41276393"
+    ],
+    "works": [
+      {
+        "key": "/works/OL276798W"
+      }
+    ],
+    "type": {
+      "key": "/type/edition"
+    },
+    "revision": 5
+  },
+  {
+    "publishers": [
+      "Corgi"
+    ],
+    "identifiers": {
+      "librarything": [
+        "1479"
+      ],
+      "goodreads": [
+        "2132031"
+      ]
+    },
+    "isbn_10": [
+      "0552094773"
+    ],
+    "last_modified": {
+      "type": "/type/datetime",
+      "value": "2020-08-19T23:33:46.543364"
+    },
+    "latest_revision": 7,
+    "key": "/books/OL15060573M",
+    "authors": [
+      {
+        "key": "/authors/OL33512A"
+      }
+    ],
+    "publish_places": [
+      "London"
+    ],
+    "pagination": "478p. ;",
+    "source_records": [
+      "bwb:9780552094771"
+    ],
+    "title": "Catch-22",
+    "dewey_decimal_class": [
+      "823/.9/1"
+    ],
+    "notes": {
+      "type": "/type/text",
+      "value": "Originally published, New York , Simon and Schuster, 1961  London , Cape, 1962."
+    },
+    "number_of_pages": 478,
+    "created": {
+      "type": "/type/datetime",
+      "value": "2008-09-17T17:51:52.591633"
+    },
+    "languages": [
+      {
+        "key": "/languages/eng"
+      }
+    ],
+    "subjects": [
+      "Fiction in English."
+    ],
+    "publish_date": "1974",
+    "publish_country": "xxk",
+    "by_statement": "Joseph Heller.",
+    "works": [
+      {
+        "key": "/works/OL276798W"
+      }
+    ],
+    "type": {
+      "key": "/type/edition"
+    },
+    "revision": 7
+  },
+  {
+    "publishers": [
+      "Knopf"
+    ],
+    "number_of_pages": 568,
+    "isbn_10": [
+      "0679437223"
+    ],
+    "series": [
+      "Everyman's library ;",
+      "220"
+    ],
+    "covers": [
+      418205
+    ],
+    "lc_classifications": [
+      "PS3558.E476 C3 1995",
+      "PS3558.E476C3 1995"
+    ],
+    "key": "/books/OL933823M",
+    "authors": [
+      {
+        "key": "/authors/OL33512A"
+      }
+    ],
+    "publish_places": [
+      "New York"
+    ],
+    "pagination": "xxxix, 568 p. ;",
+    "source_records": [
+      "bwb:9780679437222",
+      "marc:marc_loc_2016/BooksAll.2016.part25.utf8:6263066:764",
+      "ia:catch220000hell_s4l3",
+      "promise:bwb_daily_pallets_2021-08-26"
+    ],
+    "title": "Catch-22",
+    "dewey_decimal_class": [
+      "813/.54"
+    ],
+    "notes": {
+      "type": "/type/text",
+      "value": "Sequel: Closing time."
+    },
+    "identifiers": {
+      "goodreads": [
+        "857019"
+      ],
+      "librarything": [
+        "1479"
+      ]
+    },
+    "languages": [
+      {
+        "key": "/languages/eng"
+      }
+    ],
+    "lccn": [
+      "95234876"
+    ],
+    "subjects": [
+      "World War, 1939-1945 -- Fiction."
+    ],
+    "publish_date": "1995",
+    "publish_country": "nyu",
+    "by_statement": "Joseph Heller ; with an introduction by Malcolm Bradbury.",
+    "works": [
+      {
+        "key": "/works/OL276798W"
+      }
+    ],
+    "type": {
+      "key": "/type/edition"
+    },
+    "ocaid": "catch220000hell_s4l3",
+    "local_id": [
+      "urn:bwbsku:O7-DMA-546"
+    ],
+    "latest_revision": 11,
+    "revision": 11,
+    "created": {
+      "type": "/type/datetime",
+      "value": "2008-04-01T03:28:50.625462"
+    },
+    "last_modified": {
+      "type": "/type/datetime",
+      "value": "2022-12-08T01:22:44.721208"
+    }
+  },
+  {
+    "publishers": [
+      "Dell Pub. Co."
+    ],
+    "series": [
+      "A Dell book"
+    ],
+    "pagination": "463 p. ;",
+    "last_modified": {
+      "type": "/type/datetime",
+      "value": "2011-04-11T19:21:22.358173"
+    },
+    "latest_revision": 3,
+    "key": "/books/OL18255760M",
+    "authors": [
+      {
+        "key": "/authors/OL33512A"
+      }
+    ],
+    "publish_places": [
+      "New York"
+    ],
+    "oclc_number": [
+      "5055820"
+    ],
+    "subjects": [
+      "World War, 1939-1945 -- Fiction."
+    ],
+    "genres": [
+      "Fiction."
+    ],
+    "revision": 3,
+    "title": "Catch-22",
+    "number_of_pages": 463,
+    "created": {
+      "type": "/type/datetime",
+      "value": "2008-10-15T10:22:49.774794"
+    },
+    "languages": [
+      {
+        "key": "/languages/eng"
+      }
+    ],
+    "isbn_10": [
+      "044011120"
+    ],
+    "publish_date": "1979",
+    "location": [
+      "MChB"
+    ],
+    "by_statement": "Joseph Heller.",
+    "works": [
+      {
+        "key": "/works/OL276798W"
+      }
+    ],
+    "type": {
+      "key": "/type/edition"
+    },
+    "publish_country": "nyu"
+  },
+  {
+    "publishers": [
+      "The Folio Society"
+    ],
+    "pagination": "xxix, 438p. :",
+    "title": "Catch-22",
+    "type": {
+      "key": "/type/edition"
+    },
+    "notes": {
+      "type": "/type/text",
+      "value": "\"... first published in Great Britain by Jonathan Cape in June 1962.   This edition follows the text of the July 1962 reprint by Jonathan Cape, with minor emendations.\" - t.p. verso."
+    },
+    "number_of_pages": 438,
+    "created": {
+      "type": "/type/datetime",
+      "value": "2008-09-22T22:09:41.931096"
+    },
+    "languages": [
+      {
+        "key": "/languages/eng"
+      }
+    ],
+    "last_modified": {
+      "type": "/type/datetime",
+      "value": "2011-04-11T19:21:22.358173"
+    },
+    "publish_date": "2004",
+    "publish_country": "xxk",
+    "key": "/books/OL16245474M",
+    "authors": [
+      {
+        "key": "/authors/OL33512A"
+      }
+    ],
+    "by_statement": "Joseph Heller ; Introduction by Malcolm Bradbury, illustrations by Neil Packer.",
+    "publish_places": [
+      "London"
+    ],
+    "works": [
+      {
+        "key": "/works/OL276798W"
+      }
+    ],
+    "contributions": [
+      "Bradbury, Malcolm.",
+      "Packer, Neil (Illustrator)"
+    ],
+    "latest_revision": 4,
+    "revision": 4
+  },
+  {
+    "publishers": [
+      "Dell Pub. Co."
+    ],
+    "number_of_pages": 463,
+    "ia_box_id": [
+      "IA105517"
+    ],
+    "pagination": "463 p. ;",
+    "covers": [
+      6468653
+    ],
+    "lc_classifications": [
+      "PS3558.E476 C3 1961"
+    ],
+    "latest_revision": 6,
+    "key": "/books/OL24202886M",
+    "authors": [
+      {
+        "key": "/authors/OL33512A"
+      }
+    ],
+    "ocaid": "catch220hellrich",
+    "publish_places": [
+      "New York"
+    ],
+    "genres": [
+      "Fiction."
+    ],
+    "classifications": {},
+    "source_records": [
+      "ia:catch220hellrich"
+    ],
+    "title": "Catch-22",
+    "dewey_decimal_class": [
+      "813.54"
+    ],
+    "identifiers": {},
+    "created": {
+      "type": "/type/datetime",
+      "value": "2010-05-05T06:00:01.305127"
+    },
+    "subjects": [
+      "World War, 1939-1945 -- Fiction."
+    ],
+    "publish_date": "1962-10",
+    "publish_country": "nyu",
+    "last_modified": {
+      "type": "/type/datetime",
+      "value": "2020-04-30T15:09:08.572207"
+    },
+    "by_statement": "Joseph Heller.",
+    "oclc_numbers": [
+      "19602226"
+    ],
+    "works": [
+      {
+        "key": "/works/OL276798W"
+      }
+    ],
+    "type": {
+      "key": "/type/edition"
+    },
+    "revision": 6
+  },
+  {
+    "publishers": [
+      "BBC Audiobooks"
+    ],
+    "weight": "1.5 pounds",
+    "physical_format": "Audio Cassette",
+    "last_modified": {
+      "type": "/type/datetime",
+      "value": "2011-04-11T19:21:22.358173"
+    },
+    "latest_revision": 5,
+    "key": "/books/OL10728256M",
+    "authors": [
+      {
+        "key": "/authors/OL33512A"
+      }
+    ],
+    "contributions": [
+      "Peter Whitman (Narrator)"
+    ],
+    "subjects": [
+      "Modern fiction",
+      "War fiction"
+    ],
+    "languages": [
+      {
+        "key": "/languages/eng"
+      }
+    ],
+    "title": "Catch 22 (Home Repair Is Homicide Mysteries)",
+    "identifiers": {
+      "goodreads": [
+        "255444"
+      ]
+    },
+    "created": {
+      "type": "/type/datetime",
+      "value": "2008-04-30T09:38:13.731961"
+    },
+    "isbn_13": [
+      "9780745127644"
+    ],
+    "isbn_10": [
+      "0745127649"
+    ],
+    "publish_date": "January 1993",
+    "works": [
+      {
+        "key": "/works/OL276798W"
+      }
+    ],
+    "type": {
+      "key": "/type/edition"
+    },
+    "physical_dimensions": "8.8 x 6.6 x 2.4 inches",
+    "revision": 5
+  },
+  {
+    "publishers": [
+      "Dell Publishing company"
+    ],
+    "number_of_pages": 463,
+    "covers": [
+      10857931
+    ],
+    "key": "/books/OL15135833M",
+    "authors": [
+      {
+        "key": "/authors/OL33512A"
+      }
+    ],
+    "ocaid": "catchtwentytwo00hell",
+    "publish_places": [
+      "New York"
+    ],
+    "pagination": "463 p. ;",
+    "source_records": [
+      "ia:catchtwentytwo00hell",
+      "bwb:9780440111207",
+      "promise:bwb_daily_pallets_2021-01-29"
+    ],
+    "title": "Catch-22",
+    "identifiers": {
+      "librarything": [
+        "1479"
+      ],
+      "goodreads": [
+        "857042"
+      ]
+    },
+    "languages": [
+      {
+        "key": "/languages/eng"
+      }
+    ],
+    "isbn_10": [
+      "044011120X"
+    ],
+    "publish_date": "1961",
+    "publish_country": "nyu",
+    "by_statement": "Joseph Heller.",
+    "works": [
+      {
+        "key": "/works/OL276798W"
+      }
+    ],
+    "type": {
+      "key": "/type/edition"
+    },
+    "local_id": [
+      "urn:bwbsku:KO-607-016"
+    ],
+    "latest_revision": 10,
+    "revision": 10,
+    "created": {
+      "type": "/type/datetime",
+      "value": "2008-09-18T14:33:24.844696"
+    },
+    "last_modified": {
+      "type": "/type/datetime",
+      "value": "2022-12-08T23:53:24.748369"
+    }
+  },
+  {
+    "publishers": [
+      "Dell Publishing Co"
+    ],
+    "number_of_pages": 562,
+    "subtitle": "a critical edition",
+    "series": [
+      "A Delta book"
+    ],
+    "covers": [
+      9367155
+    ],
+    "lc_classifications": [
+      "PS'3558'E476'C3'1973"
+    ],
+    "latest_revision": 8,
+    "key": "/books/OL20021159M",
+    "authors": [
+      {
+        "key": "/authors/OL33512A"
+      }
+    ],
+    "ocaid": "josephhellerscat0000hell",
+    "publish_places": [
+      "New York, NY"
+    ],
+    "contributions": [
+      "Scotto, Robert Michael, 1942-"
+    ],
+    "pagination": "xi, 562 p.",
+    "classifications": {},
+    "source_records": [
+      "ia:josephhellerscat0000hell"
+    ],
+    "title": "Catch-22",
+    "notes": {
+      "type": "/type/text",
+      "value": "Bibliogr.\r\n\r\n1"
+    },
+    "identifiers": {},
+    "created": {
+      "type": "/type/datetime",
+      "value": "2008-10-25T06:43:39.482447"
+    },
+    "languages": [
+      {
+        "key": "/languages/eng"
+      }
+    ],
+    "isbn_10": [
+      "0440543053"
+    ],
+    "publish_date": "1978-04",
+    "publish_country": "nyu",
+    "last_modified": {
+      "type": "/type/datetime",
+      "value": "2020-04-30T15:11:07.059412"
+    },
+    "by_statement": "Joseph Heller ; Robert M. Scotto, editor.",
+    "works": [
+      {
+        "key": "/works/OL276798W"
+      }
+    ],
+    "type": {
+      "key": "/type/edition"
+    },
+    "revision": 8
+  },
+  {
+    "publishers": [
+      "VINTAGE (RAND)"
+    ],
+    "identifiers": {
+      "goodreads": [
+        "187880"
+      ],
+      "librarything": [
+        "1479"
+      ]
+    },
+    "lc_classifications": [
+      "PS3558.E476"
+    ],
+    "source_records": [
+      "bwb:9780099470465",
+      "ia:catch220000hell_o7u7",
+      "promise:bwb_daily_pallets_2021-04-07"
+    ],
+    "title": "Catch-22",
+    "number_of_pages": 544,
+    "covers": [
+      76002
+    ],
+    "isbn_13": [
+      "9780099470465"
+    ],
+    "isbn_10": [
+      "0099470462"
+    ],
+    "publish_date": "March 14, 2005",
+    "key": "/books/OL7318712M",
+    "authors": [
+      {
+        "key": "/authors/OL33512A"
+      }
+    ],
+    "works": [
+      {
+        "key": "/works/OL276798W"
+      }
+    ],
+    "type": {
+      "key": "/type/edition"
+    },
+    "ocaid": "catch220000hell_o7u7",
+    "local_id": [
+      "urn:bwbsku:KP-037-622"
+    ],
+    "latest_revision": 12,
+    "revision": 12,
+    "created": {
+      "type": "/type/datetime",
+      "value": "2008-04-29T13:35:46.876380"
+    },
+    "last_modified": {
+      "type": "/type/datetime",
+      "value": "2023-01-14T22:35:03.902972"
+    }
+  },
+  {
+    "publishers": [
+      "Dell Publishing Co"
+    ],
+    "pagination": "463 p.",
+    "last_modified": {
+      "type": "/type/datetime",
+      "value": "2011-04-11T19:21:22.358173"
+    },
+    "title": "Catch-22.",
+    "series": [
+      "A Dell book -- 11120"
+    ],
+    "notes": {
+      "type": "/type/text",
+      "value": "1"
+    },
+    "number_of_pages": 463,
+    "created": {
+      "type": "/type/datetime",
+      "value": "2008-10-23T11:12:19.158376"
+    },
+    "languages": [
+      {
+        "key": "/languages/eng"
+      }
+    ],
+    "lc_classifications": [
+      "PS3558.E476 C3 1979"
+    ],
+    "publish_date": "1979",
+    "publish_country": "nyu",
+    "key": "/books/OL19651315M",
+    "authors": [
+      {
+        "key": "/authors/OL33512A"
+      }
+    ],
+    "latest_revision": 4,
+    "publish_places": [
+      "New York, NY"
+    ],
+    "works": [
+      {
+        "key": "/works/OL276798W"
+      }
+    ],
+    "type": {
+      "key": "/type/edition"
+    },
+    "revision": 4
+  },
+  {
+    "publishers": [
+      "Corgi"
+    ],
+    "number_of_pages": 569,
+    "covers": [
+      10857933
+    ],
+    "key": "/books/OL22315066M",
+    "authors": [
+      {
+        "key": "/authors/OL33512A"
+      }
+    ],
+    "publish_places": [
+      "London"
+    ],
+    "pagination": "569p.",
+    "source_records": [
+      "bwb:9780552015004",
+      "ia:catch220000hell_h5i9",
+      "promise:bwb_daily_pallets_2020-06-24"
+    ],
+    "title": "Catch-22",
+    "notes": "Originally published: London : Cape, 1962.",
+    "identifiers": {
+      "goodreads": [
+        "857044"
+      ],
+      "librarything": [
+        "1479"
+      ]
+    },
+    "languages": [
+      {
+        "key": "/languages/eng"
+      }
+    ],
+    "publish_date": "1962",
+    "publish_country": "enk",
+    "works": [
+      {
+        "key": "/works/OL276798W"
+      }
+    ],
+    "type": {
+      "key": "/type/edition"
+    },
+    "local_id": [
+      "urn:bwbsku:KN-745-657"
+    ],
+    "ocaid": "catch220000hell_h5i9",
+    "isbn_10": [
+      "0552015008"
+    ],
+    "classifications": {},
+    "dewey_decimal_class": [
+      "813.54"
+    ],
+    "latest_revision": 12,
+    "revision": 12,
+    "created": {
+      "type": "/type/datetime",
+      "value": "2008-11-10T04:23:15.244235"
+    },
+    "last_modified": {
+      "type": "/type/datetime",
+      "value": "2023-08-02T18:00:35.769988"
+    }
+  },
+  {
+    "publishers": [
+      "Simon and Schuster"
+    ],
+    "number_of_pages": 443,
+    "subtitle": "a novel.",
+    "covers": [
+      9367172
+    ],
+    "lc_classifications": [
+      "PZ4.H47665 Cat",
+      "PS3558.E476 Cat"
+    ],
+    "key": "/books/OL5825513M",
+    "authors": [
+      {
+        "key": "/authors/OL33512A"
+      }
+    ],
+    "ocaid": "catch22novel00hell",
+    "publish_places": [
+      "New York"
+    ],
+    "pagination": "443 p.",
+    "classifications": {},
+    "source_records": [
+      "marc:marc_records_scriblio_net/part05.dat:35544259:527",
+      "marc:marc_cca/b10621386.out:1527381:573"
+    ],
+    "title": "Catch-22",
+    "lccn": [
+      "61012846"
+    ],
+    "notes": "Sequel: Closing time.",
+    "identifiers": {
+      "librarything": [
+        "1479"
+      ]
+    },
+    "languages": [
+      {
+        "key": "/languages/eng"
+      }
+    ],
+    "subjects": [
+      "World War, 1939-1945 -- Fiction"
+    ],
+    "publish_date": "1961",
+    "publish_country": "nyu",
+    "works": [
+      {
+        "key": "/works/OL276798W"
+      }
+    ],
+    "type": {
+      "key": "/type/edition"
+    },
+    "latest_revision": 14,
+    "revision": 14,
+    "created": {
+      "type": "/type/datetime",
+      "value": "2008-04-01T03:28:50.625462"
+    },
+    "last_modified": {
+      "type": "/type/datetime",
+      "value": "2022-11-14T10:01:20.794118"
+    }
+  },
+  {
+    "publishers": [
+      "Fischer"
+    ],
+    "title": "Der Iks-Haken.",
+    "dewey_decimal_class": [
+      "813.54"
+    ],
+    "created": {
+      "type": "/type/datetime",
+      "value": "2008-08-30T17:53:52.671049"
+    },
+    "languages": [
+      {
+        "key": "/languages/ger"
+      }
+    ],
+    "work_titles": [
+      "Catch 22."
+    ],
+    "last_modified": {
+      "type": "/type/datetime",
+      "value": "2011-04-11T19:21:22.358173"
+    },
+    "publish_date": "1964",
+    "publish_country": "xx ",
+    "key": "/books/OL13644147M",
+    "authors": [
+      {
+        "key": "/authors/OL33512A"
+      }
+    ],
+    "latest_revision": 5,
+    "works": [
+      {
+        "key": "/works/OL276798W"
+      }
+    ],
+    "type": {
+      "key": "/type/edition"
+    },
+    "revision": 5
+  },
+  {
+    "publishers": [
+      "Simon & Schuster"
+    ],
+    "identifiers": {
+      "librarything": [
+        "1479"
+      ],
+      "goodreads": [
+        "168668"
+      ]
+    },
+    "pagination": "443 p.",
+    "last_modified": {
+      "type": "/type/datetime",
+      "value": "2011-04-11T19:21:22.358173"
+    },
+    "latest_revision": 5,
+    "key": "/books/OL22942941M",
+    "authors": [
+      {
+        "key": "/authors/OL33512A"
+      }
+    ],
+    "publish_places": [
+      "New York"
+    ],
+    "subjects": [
+      "World War, 1939-1945 -- Fiction."
+    ],
+    "genres": [
+      "Fiction."
+    ],
+    "title": "Catch-22",
+    "notes": {
+      "type": "/type/text",
+      "value": "Sequel: Closing time."
+    },
+    "number_of_pages": 443,
+    "created": {
+      "type": "/type/datetime",
+      "value": "2009-02-12T14:26:05.509145"
+    },
+    "languages": [
+      {
+        "key": "/languages/eng"
+      }
+    ],
+    "isbn_10": [
+      "0684833395"
+    ],
+    "publish_date": "1961",
+    "publish_country": "nyu",
+    "by_statement": "Joseph Heller.",
+    "works": [
+      {
+        "key": "/works/OL276798W"
+      }
+    ],
+    "type": {
+      "key": "/type/edition"
+    },
+    "revision": 5
+  },
+  {
+    "publishers": [
+      "Cape"
+    ],
+    "title": "Catch-22.",
+    "created": {
+      "type": "/type/datetime",
+      "value": "2008-10-25T07:28:28.900839"
+    },
+    "languages": [
+      {
+        "key": "/languages/eng"
+      }
+    ],
+    "last_modified": {
+      "type": "/type/datetime",
+      "value": "2011-04-11T19:21:22.358173"
+    },
+    "publish_date": "1962",
+    "publish_country": "xxk",
+    "key": "/books/OL20030026M",
+    "authors": [
+      {
+        "key": "/authors/OL33512A"
+      }
+    ],
+    "latest_revision": 4,
+    "publish_places": [
+      "London"
+    ],
+    "works": [
+      {
+        "key": "/works/OL276798W"
+      }
+    ],
+    "type": {
+      "key": "/type/edition"
+    },
+    "revision": 4
+  },
+  {
+    "publishers": [
+      "VINTAGE (RAND)"
+    ],
+    "number_of_pages": 544,
+    "last_modified": {
+      "type": "/type/datetime",
+      "value": "2011-04-11T19:21:22.358173"
+    },
+    "weight": "13.4 ounces",
+    "title": "Catch-22",
+    "identifiers": {
+      "goodreads": [
+        "187880"
+      ],
+      "librarything": [
+        "1479"
+      ]
+    },
+    "isbn_13": [
+      "9780099470465"
+    ],
+    "covers": [
+      76003
+    ],
+    "created": {
+      "type": "/type/datetime",
+      "value": "2008-04-30T09:38:13.731961"
+    },
+    "physical_format": "Paperback",
+    "isbn_10": [
+      "0099470462"
+    ],
+    "publish_date": "March 14, 2005",
+    "key": "/books/OL9273367M",
+    "authors": [
+      {
+        "key": "/authors/OL33512A"
+      }
+    ],
+    "latest_revision": 8,
+    "works": [
+      {
+        "key": "/works/OL276798W"
+      }
+    ],
+    "type": {
+      "key": "/type/edition"
+    },
+    "physical_dimensions": "7.6 x 5.1 x 1.3 inches",
+    "revision": 8
+  },
+  {
+    "publishers": [
+      "Jonathan Cape",
+      "RH Canada UK Dist"
+    ],
+    "identifiers": {
+      "goodreads": [
+        "1010843"
+      ],
+      "librarything": [
+        "1479"
+      ]
+    },
+    "key": "/books/OL22571169M",
+    "authors": [
+      {
+        "key": "/authors/OL33512A"
+      }
+    ],
+    "publish_places": [
+      "London"
+    ],
+    "pagination": "443p. ;",
+    "source_records": [
+      "bwb:9780224602679",
+      "amazon:0224602675"
+    ],
+    "title": "Catch-22",
+    "number_of_pages": 443,
+    "languages": [
+      {
+        "key": "/languages/eng"
+      }
+    ],
+    "publish_date": "1962",
+    "publish_country": "enk",
+    "by_statement": "Joseph Heller.",
+    "works": [
+      {
+        "key": "/works/OL276798W"
+      }
+    ],
+    "type": {
+      "key": "/type/edition"
+    },
+    "covers": [
+      14303933,
+      13833336
+    ],
+    "isbn_10": [
+      "0224602675"
+    ],
+    "classifications": {},
+    "contributors": [
+      {
+        "role": "Cover Design",
+        "name": "Germano Facetti"
+      }
+    ],
+    "physical_format": "Hardcover",
+    "latest_revision": 11,
+    "revision": 11,
+    "created": {
+      "type": "/type/datetime",
+      "value": "2008-11-16T09:56:34.375829"
+    },
+    "last_modified": {
+      "type": "/type/datetime",
+      "value": "2023-04-29T07:42:07.636579"
+    }
+  },
+  {
+    "publishers": [
+      "the reprint society"
+    ],
+    "pagination": "415 p. ;",
+    "title": "Catch-22",
+    "notes": {
+      "type": "/type/text",
+      "value": "Date from title-page verso.\n\nWith a half-title page."
+    },
+    "number_of_pages": 415,
+    "created": {
+      "type": "/type/datetime",
+      "value": "2008-10-11T19:15:40.313656"
+    },
+    "languages": [
+      {
+        "key": "/languages/eng"
+      }
+    ],
+    "last_modified": {
+      "type": "/type/datetime",
+      "value": "2011-04-11T19:21:22.358173"
+    },
+    "publish_date": "1963",
+    "publish_country": "enk",
+    "key": "/books/OL18183250M",
+    "authors": [
+      {
+        "key": "/authors/OL33512A"
+      }
+    ],
+    "by_statement": "by Joseph Heller.",
+    "publish_places": [
+      "London"
+    ],
+    "works": [
+      {
+        "key": "/works/OL276798W"
+      }
+    ],
+    "type": {
+      "key": "/type/edition"
+    },
+    "latest_revision": 4,
+    "revision": 4
+  },
+  {
+    "publishers": [
+      "Cram Cassettes Study Guides"
+    ],
+    "number_of_pages": 48,
+    "physical_format": "Paperback",
+    "last_modified": {
+      "type": "/type/datetime",
+      "value": "2020-08-27T13:10:52.111323"
+    },
+    "latest_revision": 8,
+    "key": "/books/OL8596079M",
+    "authors": [
+      {
+        "key": "/authors/OL33512A"
+      }
+    ],
+    "subjects": [
+      "Classics",
+      "Literature - Classics / Criticism",
+      "Fiction"
+    ],
+    "edition_name": "Audio Cassette edition",
+    "languages": [
+      {
+        "key": "/languages/eng"
+      }
+    ],
+    "source_records": [
+      "bwb:9781556511318"
+    ],
+    "title": "Catch-22",
+    "identifiers": {
+      "librarything": [
+        "1479"
+      ],
+      "goodreads": [
+        "1367897"
+      ]
+    },
+    "created": {
+      "type": "/type/datetime",
+      "value": "2008-04-30T06:33:27.187047"
+    },
+    "isbn_13": [
+      "9781556511318"
+    ],
+    "isbn_10": [
+      "1556511310"
+    ],
+    "publish_date": "January 1989",
+    "works": [
+      {
+        "key": "/works/OL276798W"
+      }
+    ],
+    "type": {
+      "key": "/type/edition"
+    },
+    "revision": 8
+  },
+  {
+    "publishers": [
+      "Simon & Schuster"
+    ],
+    "identifiers": {
+      "librarything": [
+        "1479"
+      ],
+      "goodreads": [
+        "26121"
+      ]
+    },
+    "subtitle": "a novel",
+    "ia_box_id": [
+      "IA120217"
+    ],
+    "isbn_10": [
+      "0684865130"
+    ],
+    "pagination": "415 p. ;",
+    "covers": [
+      9367772
+    ],
+    "lc_classifications": [
+      "PS3558.E476 C3 1999",
+      "PS3558.E476C3 1999"
+    ],
+    "latest_revision": 20,
+    "url": [
+      "http://www.loc.gov/catdir/bios/simon052/00265132.html",
+      "http://www.loc.gov/catdir/description/simon031/00265132.html"
+    ],
+    "key": "/books/OL6803063M",
+    "authors": [
+      {
+        "key": "/authors/OL33512A"
+      }
+    ],
+    "ocaid": "catch22novelhell00hell",
+    "publish_places": [
+      "New York"
+    ],
+    "uri_descriptions": [
+      "Contributor biographical information",
+      "Publisher description"
+    ],
+    "edition_name": "[S&S classic ed.].",
+    "genres": [
+      "Fiction."
+    ],
+    "classifications": {},
+    "source_records": [
+      "marc:marc_records_scriblio_net/part01.dat:26836572:848",
+      "marc:marc_ithaca_college/ic_marc.mrc:181867968:558",
+      "ia:catch22novel00hell",
+      "ia:catch22novelhell00hell",
+      "bwb:9780684865133",
+      "marc:marc_loc_2016/BooksAll.2016.part01.utf8:60516528:939"
+    ],
+    "title": "Catch-22",
+    "lccn": [
+      "00265132"
+    ],
+    "notes": "Sequel: Closing time.",
+    "number_of_pages": 415,
+    "created": {
+      "type": "/type/datetime",
+      "value": "2008-04-01T03:28:50.625462"
+    },
+    "languages": [
+      {
+        "key": "/languages/eng"
+      }
+    ],
+    "dewey_decimal_class": [
+      "813/.54"
+    ],
+    "subjects": [
+      "World War, 1939-1945 -- Fiction"
+    ],
+    "publish_date": "1999",
+    "publish_country": "nyu",
+    "last_modified": {
+      "type": "/type/datetime",
+      "value": "2020-10-13T19:04:30.601084"
+    },
+    "by_statement": "by Joseph Heller.",
+    "works": [
+      {
+        "key": "/works/OL276798W"
+      }
+    ],
+    "type": {
+      "key": "/type/edition"
+    },
+    "uris": [
+      "http://www.loc.gov/catdir/bios/simon052/00265132.html",
+      "http://www.loc.gov/catdir/description/simon031/00265132.html"
+    ],
+    "revision": 20
+  },
+  {
+    "publishers": [
+      "Simon and Schuster"
+    ],
+    "subtitle": "a novel",
+    "genres": [
+      "Fiction."
+    ],
+    "last_modified": {
+      "type": "/type/datetime",
+      "value": "2011-04-11T19:21:22.358173"
+    },
+    "latest_revision": 3,
+    "key": "/books/OL16086747M",
+    "authors": [
+      {
+        "key": "/authors/OL33512A"
+      }
+    ],
+    "publish_places": [
+      "New York"
+    ],
+    "languages": [
+      {
+        "key": "/languages/eng"
+      }
+    ],
+    "pagination": "472 p. ;",
+    "title": "Catch-22",
+    "number_of_pages": 472,
+    "created": {
+      "type": "/type/datetime",
+      "value": "2008-09-22T04:00:57.808247"
+    },
+    "edition_name": "Bk. club ed.",
+    "subjects": [
+      "World War, 1939-1945 -- Fiction."
+    ],
+    "publish_date": "1961",
+    "publish_country": "nyu",
+    "by_statement": "by Joseph Heller.",
+    "works": [
+      {
+        "key": "/works/OL276798W"
+      }
+    ],
+    "type": {
+      "key": "/type/edition"
+    },
+    "revision": 3
+  },
+  {
+    "other_titles": [
+      "Catch twenty-two."
+    ],
+    "publishers": [
+      "Dell"
+    ],
+    "identifiers": {},
+    "covers": [
+      9367162
+    ],
+    "last_modified": {
+      "type": "/type/datetime",
+      "value": "2020-04-30T15:13:09.573169"
+    },
+    "latest_revision": 6,
+    "key": "/books/OL23765108M",
+    "authors": [
+      {
+        "key": "/authors/OL33512A"
+      }
+    ],
+    "ocaid": "catch19612200hell",
+    "pagination": "463 p.",
+    "classifications": {},
+    "source_records": [
+      "marc:marc_upei/marc-for-openlibrary-bigset.mrc:93438026:452"
+    ],
+    "title": "Catch-22",
+    "number_of_pages": 463,
+    "created": {
+      "type": "/type/datetime",
+      "value": "2009-10-09T23:25:25.240495"
+    },
+    "publish_date": "1962-10",
+    "by_statement": "by Joseph Heller.",
+    "works": [
+      {
+        "key": "/works/OL276798W"
+      }
+    ],
+    "type": {
+      "key": "/type/edition"
+    },
+    "revision": 6
+  },
+  {
+    "publishers": [
+      "Simon & Schuster Paperbacks"
+    ],
+    "identifiers": {
+      "librarything": [
+        "1479"
+      ],
+      "goodreads": [
+        "168668"
+      ]
+    },
+    "pagination": "453 p. ;",
+    "last_modified": {
+      "type": "/type/datetime",
+      "value": "2011-04-11T19:21:22.358173"
+    },
+    "latest_revision": 6,
+    "key": "/books/OL21700610M",
+    "authors": [
+      {
+        "key": "/authors/OL33512A"
+      }
+    ],
+    "publish_places": [
+      "New York, NY"
+    ],
+    "subjects": [
+      "World War, 1939-1945 -- Fiction"
+    ],
+    "languages": [
+      {
+        "key": "/languages/eng"
+      }
+    ],
+    "genres": [
+      "Fiction."
+    ],
+    "source_records": [
+      "marc:marc_oregon_summit_records/catalog_files/washs02192008.mrc_revrev.mrc:1805809610:836"
+    ],
+    "title": "Catch-22",
+    "notes": {
+      "type": "/type/text",
+      "value": "\"With an updated preface by the author\"--Cover."
+    },
+    "number_of_pages": 453,
+    "created": {
+      "type": "/type/datetime",
+      "value": "2008-11-03T16:33:50.333921"
+    },
+    "edition_name": "1st Simon & Schuster pbk. ed.",
+    "isbn_10": [
+      "0684833395"
+    ],
+    "publish_date": "2004",
+    "publish_country": "nyu",
+    "by_statement": "Joseph Heller.",
+    "oclc_numbers": [
+      "58802921"
+    ],
+    "works": [
+      {
+        "key": "/works/OL276798W"
+      }
+    ],
+    "type": {
+      "key": "/type/edition"
+    },
+    "revision": 6
+  },
+  {
+    "publishers": [
+      "Franklin Library"
+    ],
+    "number_of_pages": 551,
+    "lc_classifications": [
+      "PS3558.E476 C3 1978"
+    ],
+    "latest_revision": 5,
+    "key": "/books/OL4181778M",
+    "authors": [
+      {
+        "key": "/authors/OL33512A"
+      }
+    ],
+    "publish_places": [
+      "Franklin Center, Pa"
+    ],
+    "contributions": [
+      "Parker, Robert Andrew."
+    ],
+    "languages": [
+      {
+        "key": "/languages/eng"
+      }
+    ],
+    "pagination": "551 p. :",
+    "source_records": [
+      "marc:marc_loc_2016/BooksAll.2016.part13.utf8:20782147:783"
+    ],
+    "title": "Catch-22",
+    "dewey_decimal_class": [
+      "813/.54"
+    ],
+    "notes": {
+      "type": "/type/text",
+      "value": "Sequel: Closing time.\n\"Privately printed.\"\nAccompanied by \"Notes from the editors.\" (22 p.)"
+    },
+    "identifiers": {
+      "librarything": [
+        "1479"
+      ]
+    },
+    "created": {
+      "type": "/type/datetime",
+      "value": "2008-04-01T03:28:50.625462"
+    },
+    "edition_name": "Limited ed.",
+    "lccn": [
+      "80459697"
+    ],
+    "subjects": [
+      "World War, 1939-1945 -- Fiction."
+    ],
+    "publish_date": "1978",
+    "publish_country": "pau",
+    "last_modified": {
+      "type": "/type/datetime",
+      "value": "2020-10-20T07:28:01.979456"
+    },
+    "by_statement": "Joseph Heller ; illustrated by Robert Andrew Parker.",
+    "works": [
+      {
+        "key": "/works/OL276798W"
+      }
+    ],
+    "type": {
+      "key": "/type/edition"
+    },
+    "revision": 5
+  },
+  {
+    "publishers": [
+      "Dell"
+    ],
+    "subtitle": "a critical edition.",
+    "last_modified": {
+      "type": "/type/datetime",
+      "value": "2011-04-11T19:21:22.358173"
+    },
+    "latest_revision": 3,
+    "key": "/books/OL21947816M",
+    "authors": [
+      {
+        "key": "/authors/OL33512A"
+      }
+    ],
+    "publish_places": [
+      "[New York"
+    ],
+    "contributions": [
+      "Scotto, Robert M., 1942-"
+    ],
+    "pagination": "xi,562p.",
+    "title": "Catch-22",
+    "notes": {
+      "type": "/type/text",
+      "value": "\"A Delta book.\"\n\nBibliography: p.560-562."
+    },
+    "number_of_pages": 562,
+    "created": {
+      "type": "/type/datetime",
+      "value": "2008-11-05T06:29:39.518072"
+    },
+    "languages": [
+      {
+        "key": "/languages/eng"
+      }
+    ],
+    "subjects": [
+      "Heller, Joseph."
+    ],
+    "publish_date": "1973",
+    "location": [
+      "BIN"
+    ],
+    "by_statement": "Robert M.Scotto, editor.",
+    "works": [
+      {
+        "key": "/works/OL276798W"
+      }
+    ],
+    "type": {
+      "key": "/type/edition"
+    },
+    "revision": 3
+  },
+  {
+    "publishers": [
+      "Modern Library"
+    ],
+    "subtitle": "a novel",
+    "series": [
+      "Modern library of the world's best books -- 375"
+    ],
+    "lc_classifications": [
+      "PS'3515'E476'C3'1966"
+    ],
+    "latest_revision": 4,
+    "key": "/books/OL19799195M",
+    "authors": [
+      {
+        "key": "/authors/OL33512A"
+      }
+    ],
+    "publish_places": [
+      "New York, NY"
+    ],
+    "pagination": "443 p.",
+    "title": "Catch-22",
+    "notes": {
+      "type": "/type/text",
+      "value": "Bibliogr.\n\n1"
+    },
+    "number_of_pages": 443,
+    "created": {
+      "type": "/type/datetime",
+      "value": "2008-10-23T22:21:39.411506"
+    },
+    "languages": [
+      {
+        "key": "/languages/eng"
+      }
+    ],
+    "last_modified": {
+      "type": "/type/datetime",
+      "value": "2011-04-11T19:21:22.358173"
+    },
+    "publish_date": "1966",
+    "publish_country": "nyu",
+    "by_statement": "by Joseph Heller",
+    "works": [
+      {
+        "key": "/works/OL276798W"
+      }
+    ],
+    "type": {
+      "key": "/type/edition"
+    },
+    "revision": 4
+  },
+  {
+    "publishers": [
+      "Cape"
+    ],
+    "pagination": "443p.,21cm",
+    "title": "Catch-22",
+    "notes": "Originally published, Simon & Schuster, 1961.",
+    "number_of_pages": 443,
+    "languages": [
+      {
+        "key": "/languages/eng"
+      }
+    ],
+    "publish_date": "1962",
+    "publish_country": "xxk",
+    "key": "/books/OL16503452M",
+    "authors": [
+      {
+        "key": "/authors/OL33512A"
+      }
+    ],
+    "works": [
+      {
+        "key": "/works/OL276798W"
+      }
+    ],
+    "type": {
+      "key": "/type/edition"
+    },
+    "covers": [
+      14303934
+    ],
+    "identifiers": {},
+    "classifications": {},
+    "dewey_decimal_class": [
+      "823.91"
+    ],
+    "physical_format": "Hardcover",
+    "contributors": [
+      {
+        "role": "Cover Design",
+        "name": "Germano Facetti"
+      }
+    ],
+    "publish_places": [
+      "London"
+    ],
+    "latest_revision": 6,
+    "revision": 6,
+    "created": {
+      "type": "/type/datetime",
+      "value": "2008-09-24T09:44:02.678422"
+    },
+    "last_modified": {
+      "type": "/type/datetime",
+      "value": "2023-04-29T07:43:49.573369"
+    }
+  },
+  {
+    "publishers": [
+      "Simon & Schuster"
+    ],
+    "identifiers": {
+      "librarything": [
+        "1479"
+      ],
+      "goodreads": [
+        "957549",
+        "2678528"
+      ]
+    },
+    "subtitle": "a novel",
+    "isbn_10": [
+      "0671502336",
+      "0671502336",
+      "067189854X"
+    ],
+    "covers": [
+      3875791,
+      405706,
+      405705
+    ],
+    "lc_classifications": [
+      "PS3558.E476 C3 1994",
+      "PS3558.E476C3 1994",
+      "PZ4.H47665 Cat",
+      "PS3558.E476 Cat"
+    ],
+    "key": "/books/OL1089872M",
+    "authors": [
+      {
+        "key": "/authors/OL33512A"
+      }
+    ],
+    "ocaid": "catch22b00hell",
+    "publish_places": [
+      "New York"
+    ],
+    "subjects": [
+      "World War, 1939-1945 -- Fiction."
+    ],
+    "pagination": "415 p. ;",
+    "source_records": [
+      "ia:catch22b00hell",
+      "marc:marc_marygrove/marygrovecollegelibrary.full.D20191108.T213022.internetarchive2nd_REPACK.mrc:18779250:3671",
+      "amazon:0671502336",
+      "bwb:9780671502331",
+      "bwb:9780671898540",
+      "marc:marc_loc_2016/BooksAll.2016.part23.utf8:125858018:732",
+      "ia:catch22novel0000hell",
+      "marc:harvard_bibliographic_metadata/ab.bib.00.20150123.full.mrc:694818414:628",
+      "marc:marc_columbia/Columbia-extract-20221130-004.mrc:258220855:1021",
+      "marc:marc_columbia/Columbia-extract-20221130-002.mrc:3878093:1383"
+    ],
+    "title": "Catch-22",
+    "dewey_decimal_class": [
+      "813/.54"
+    ],
+    "notes": {
+      "type": "/type/text",
+      "value": "Sequel: Closing time."
+    },
+    "number_of_pages": 415,
+    "languages": [
+      {
+        "key": "/languages/eng"
+      }
+    ],
+    "lccn": [
+      "94013984",
+      "61012846"
+    ],
+    "local_id": [
+      "urn:mgc:31927000611050"
+    ],
+    "publish_date": "1994",
+    "publish_country": "nyu",
+    "by_statement": "by Joseph Heller.",
+    "works": [
+      {
+        "key": "/works/OL276798W"
+      }
+    ],
+    "type": {
+      "key": "/type/edition"
+    },
+    "oclc_numbers": [
+      "271160",
+      "30108766"
+    ],
+    "latest_revision": 18,
+    "revision": 18,
+    "created": {
+      "type": "/type/datetime",
+      "value": "2008-04-01T03:28:50.625462"
+    },
+    "last_modified": {
+      "type": "/type/datetime",
+      "value": "2024-07-20T08:24:08.577883"
+    }
+  },
+  {
+    "publishers": [
+      "Cape"
+    ],
+    "identifiers": {
+      "librarything": [
+        "1479"
+      ]
+    },
+    "lc_classifications": [
+      "PS3558.E476 C3 1962"
+    ],
+    "latest_revision": 5,
+    "key": "/books/OL2915359M",
+    "authors": [
+      {
+        "key": "/authors/OL33512A"
+      }
+    ],
+    "publish_places": [
+      "London"
+    ],
+    "pagination": "443 p. ;",
+    "source_records": [
+      "marc:marc_loc_2016/BooksAll.2016.part15.utf8:181050241:553"
+    ],
+    "title": "Catch-22",
+    "dewey_decimal_class": [
+      "813/.54"
+    ],
+    "notes": {
+      "type": "/type/text",
+      "value": "Sequel: Closing time."
+    },
+    "number_of_pages": 443,
+    "created": {
+      "type": "/type/datetime",
+      "value": "2008-04-01T03:28:50.625462"
+    },
+    "languages": [
+      {
+        "key": "/languages/eng"
+      }
+    ],
+    "lccn": [
+      "84147225"
+    ],
+    "subjects": [
+      "World War, 1939-1945 -- Fiction."
+    ],
+    "publish_date": "1962",
+    "publish_country": "enk",
+    "last_modified": {
+      "type": "/type/datetime",
+      "value": "2020-10-31T06:14:07.111050"
+    },
+    "by_statement": "Joseph Heller.",
+    "works": [
+      {
+        "key": "/works/OL276798W"
+      }
+    ],
+    "type": {
+      "key": "/type/edition"
+    },
+    "revision": 5
+  },
+  {
+    "identifiers": {},
+    "series": [
+      "A Dell book ; 11120"
+    ],
+    "covers": [
+      9367169
+    ],
+    "last_modified": {
+      "type": "/type/datetime",
+      "value": "2020-04-30T15:15:57.117719"
+    },
+    "latest_revision": 6,
+    "key": "/books/OL21500373M",
+    "authors": [
+      {
+        "key": "/authors/OL33512A"
+      }
+    ],
+    "ocaid": "catch22hell00hell",
+    "publish_places": [
+      "New York"
+    ],
+    "pagination": "463 p.",
+    "classifications": {},
+    "title": "Catch-22",
+    "notes": "6",
+    "number_of_pages": 463,
+    "created": {
+      "type": "/type/datetime",
+      "value": "2008-11-02T20:52:22.130482"
+    },
+    "languages": [
+      {
+        "key": "/languages/eng"
+      }
+    ],
+    "publish_date": "1966-01",
+    "by_statement": "Joseph Heller",
+    "works": [
+      {
+        "key": "/works/OL276798W"
+      }
+    ],
+    "type": {
+      "key": "/type/edition"
+    },
+    "revision": 6
+  },
+  {
+    "publishers": [
+      "Dell Publishing"
+    ],
+    "subtitle": "a critical edition",
+    "series": [
+      "A Dell book"
+    ],
+    "last_modified": {
+      "type": "/type/datetime",
+      "value": "2011-04-11T19:21:22.358173"
+    },
+    "latest_revision": 6,
+    "key": "/books/OL21421308M",
+    "authors": [
+      {
+        "key": "/authors/OL33512A"
+      }
+    ],
+    "publish_places": [
+      "New York"
+    ],
+    "contributions": [
+      "Scotto, Robert M."
+    ],
+    "title": "Catch-22",
+    "notes": {
+      "type": "/type/text",
+      "value": "Originally published by Simon and Schuster, 1961."
+    },
+    "identifiers": {
+      "goodreads": [
+        "857042"
+      ],
+      "librarything": [
+        "1479"
+      ]
+    },
+    "created": {
+      "type": "/type/datetime",
+      "value": "2008-11-02T13:29:53.351890"
+    },
+    "languages": [
+      {
+        "key": "/languages/eng"
+      }
+    ],
+    "isbn_10": [
+      "044011120X"
+    ],
+    "publish_date": "1979",
+    "publish_country": "xxu",
+    "by_statement": "edited by Robert M. Scotto.",
+    "works": [
+      {
+        "key": "/works/OL276798W"
+      }
+    ],
+    "type": {
+      "key": "/type/edition"
+    },
+    "revision": 6
+  },
+  {
+    "publishers": [
+      "Knopf"
+    ],
+    "identifiers": {
+      "goodreads": [
+        "168668"
+      ],
+      "librarything": [
+        "1479"
+      ]
+    },
+    "series": [
+      "Everyman's library -- 220"
+    ],
+    "pagination": "xxxix, 568 p. ;",
+    "covers": [
+      7877422
+    ],
+    "local_id": [
+      "urn:phillips:31867001363162"
+    ],
+    "key": "/books/OL23245221M",
+    "authors": [
+      {
+        "key": "/authors/OL33512A"
+      }
+    ],
+    "ocaid": "catch2200hell_0",
+    "publish_places": [
+      "New York"
+    ],
+    "subjects": [
+      "World War, 1939-1945 -- Fiction",
+      "War stories"
+    ],
+    "genres": [
+      "Fiction"
+    ],
+    "classifications": {},
+    "source_records": [
+      "marc:CollingswoodLibraryMarcDump10-27-2008/Collingswood.out:26210612:3346",
+      "ia:catch2200hell_0",
+      "marc:marc_openlibraries_phillipsacademy/PANO_FOR_IA_05072019.mrc:99283085:1077",
+      "bwb:9780684833392",
+      "marc:marc_loc_2016/BooksAll.2016.part32.utf8:100061811:954"
+    ],
+    "title": "Catch-22",
+    "lccn": [
+      "95234876",
+      "2004558446"
+    ],
+    "notes": "Sequel: Closing time.",
+    "number_of_pages": 568,
+    "languages": [
+      {
+        "key": "/languages/eng"
+      }
+    ],
+    "isbn_10": [
+      "0684833395"
+    ],
+    "publish_date": "1996",
+    "publish_country": "nyu",
+    "by_statement": "Joseph Heller ; with an introduction by Malcolm Bradbury.",
+    "works": [
+      {
+        "key": "/works/OL276798W"
+      }
+    ],
+    "type": {
+      "key": "/type/edition"
+    },
+    "lc_classifications": [
+      "PS3558.E476 C3 2004"
+    ],
+    "latest_revision": 12,
+    "revision": 12,
+    "created": {
+      "type": "/type/datetime",
+      "value": "2009-05-29T11:12:18.260213"
+    },
+    "last_modified": {
+      "type": "/type/datetime",
+      "value": "2020-12-11T03:04:16.314676"
+    }
+  },
+  {
+    "publishers": [
+      "Everyman's Library"
+    ],
+    "identifiers": {
+      "goodreads": [
+        "563463"
+      ],
+      "librarything": [
+        "1479"
+      ]
+    },
+    "weight": "1.5 pounds",
+    "covers": [
+      908643
+    ],
+    "physical_format": "Hardcover",
+    "lc_classifications": [
+      ""
+    ],
+    "latest_revision": 9,
+    "key": "/books/OL8998547M",
+    "authors": [
+      {
+        "key": "/authors/OL33512A"
+      }
+    ],
+    "contributions": [
+      "Malcolm Bradbury (Introduction)"
+    ],
+    "subjects": [
+      "Modern fiction",
+      "War fiction",
+      "Fiction"
+    ],
+    "edition_name": "New Ed edition",
+    "source_records": [
+      "bwb:9781857152203"
+    ],
+    "title": "Catch-22 (Everyman's Library Classics)",
+    "number_of_pages": 569,
+    "created": {
+      "type": "/type/datetime",
+      "value": "2008-04-30T09:38:13.731961"
+    },
+    "isbn_13": [
+      "9781857152203"
+    ],
+    "isbn_10": [
+      "1857152204"
+    ],
+    "publish_date": "September 21, 1995",
+    "last_modified": {
+      "type": "/type/datetime",
+      "value": "2020-10-08T07:17:23.824427"
+    },
+    "works": [
+      {
+        "key": "/works/OL276798W"
+      }
+    ],
+    "type": {
+      "key": "/type/edition"
+    },
+    "physical_dimensions": "8.3 x 5.3 x 1.4 inches",
+    "revision": 9
+  },
+  {
+    "publishers": [
+      "Grasset"
+    ],
+    "identifiers": {
+      "goodreads": [
+        "828637"
+      ],
+      "librarything": [
+        "1479"
+      ]
+    },
+    "weight": "15.2 ounces",
+    "physical_format": "Mass Market Paperback",
+    "last_modified": {
+      "type": "/type/datetime",
+      "value": "2011-04-11T19:21:22.358173"
+    },
+    "latest_revision": 6,
+    "key": "/books/OL8886577M",
+    "authors": [
+      {
+        "key": "/authors/OL33512A"
+      },
+      {
+        "key": "/authors/OL325952A"
+      }
+    ],
+    "first_sentence": {
+      "type": "/type/text",
+      "value": "It was love at first sight."
+    },
+    "title": "Catch 22",
+    "number_of_pages": 510,
+    "isbn_13": [
+      "9782246269311"
+    ],
+    "created": {
+      "type": "/type/datetime",
+      "value": "2008-04-30T09:38:13.731961"
+    },
+    "languages": [
+      {
+        "key": "/languages/fre"
+      }
+    ],
+    "isbn_10": [
+      "2246269318"
+    ],
+    "publish_date": "January 1, 1985",
+    "works": [
+      {
+        "key": "/works/OL276798W"
+      }
+    ],
+    "type": {
+      "key": "/type/edition"
+    },
+    "physical_dimensions": "7.5 x 4.7 x 0.8 inches",
+    "revision": 6
+  },
+  {
+    "publishers": [
+      "Corgi Books"
+    ],
+    "number_of_pages": 478,
+    "weight": "255 grams",
+    "physical_format": "Paperback",
+    "last_modified": {
+      "type": "/type/datetime",
+      "value": "2013-11-18T10:38:37.787709"
+    },
+    "latest_revision": 8,
+    "key": "/books/OL22407013M",
+    "authors": [
+      {
+        "key": "/authors/OL33512A"
+      }
+    ],
+    "publish_places": [
+      "London"
+    ],
+    "classifications": {},
+    "title": "Catch 22.",
+    "notes": "Originally published, London: Jonathan Cape, 1962.",
+    "identifiers": {
+      "goodreads": [
+        "3305213"
+      ],
+      "librarything": [
+        "1479"
+      ]
+    },
+    "created": {
+      "type": "/type/datetime",
+      "value": "2008-11-12T17:29:45.202909"
+    },
+    "languages": [
+      {
+        "key": "/languages/eng"
+      }
+    ],
+    "isbn_10": [
+      "0552081256"
+    ],
+    "publish_date": "1964",
+    "publish_country": "xxk",
+    "oclc_numbers": [
+      "223360727"
+    ],
+    "works": [
+      {
+        "key": "/works/OL276798W"
+      }
+    ],
+    "type": {
+      "key": "/type/edition"
+    },
+    "physical_dimensions": "18 x 11 x 2.8 centimeters",
+    "revision": 8
+  },
+  {
+    "title": "K\u02bbaech\u02bbi-22",
+    "authors": [
+      {
+        "key": "/authors/OL33512A"
+      }
+    ],
+    "publish_date": "1995",
+    "publishers": [
+      "Silch\u02bb\u014fn Munhaksa"
+    ],
+    "isbn_10": [
+      "8939202376",
+      "8939202392",
+      "8939202384"
+    ],
+    "pagination": "2 v. ;",
+    "lc_classifications": [
+      "PS3515.E325 C3166 1995"
+    ],
+    "publish_places": [
+      "S\u014ful T\u02bb\u016dkpy\u014flsi"
+    ],
+    "contributions": [
+      "An, Ch\u014fng-hyo, 1941-"
+    ],
+    "languages": [
+      {
+        "key": "/languages/kor"
+      }
+    ],
+    "genres": [
+      "Fiction."
+    ],
+    "work_titles": [
+      "Catch-22."
+    ],
+    "edition_name": "Ch\u02bbop\u02bban",
+    "subjects": [
+      "World War, 1939-1945 -- Fiction."
+    ],
+    "publish_country": "ko ",
+    "by_statement": "Josep Hell\u014f chi\u016dm ; An Ch\u014fng-hyo omgim.",
+    "type": {
+      "key": "/type/edition"
+    },
+    "key": "/books/OL19509830M",
+    "works": [
+      {
+        "key": "/works/OL276798W"
+      }
+    ],
+    "latest_revision": 5,
+    "revision": 5,
+    "created": {
+      "type": "/type/datetime",
+      "value": "2008-10-22T17:11:30.646609"
+    },
+    "last_modified": {
+      "type": "/type/datetime",
+      "value": "2023-04-19T04:43:00.254731"
+    }
+  },
+  {
+    "publishers": [
+      "Simon and Schuster"
+    ],
+    "subtitle": "a novel",
+    "genres": [
+      "Fiction."
+    ],
+    "last_modified": {
+      "type": "/type/datetime",
+      "value": "2011-04-11T19:21:22.358173"
+    },
+    "latest_revision": 3,
+    "key": "/books/OL18860569M",
+    "authors": [
+      {
+        "key": "/authors/OL33512A"
+      }
+    ],
+    "publish_places": [
+      "New York"
+    ],
+    "pagination": "443 p. ;",
+    "title": "Catch-22",
+    "number_of_pages": 443,
+    "created": {
+      "type": "/type/datetime",
+      "value": "2008-10-20T09:12:18.071004"
+    },
+    "languages": [
+      {
+        "key": "/languages/eng"
+      }
+    ],
+    "subjects": [
+      "World War, 1939-1945 -- Fiction."
+    ],
+    "publish_date": "1961",
+    "publish_country": "nyu",
+    "by_statement": "by Joseph Heller.",
+    "works": [
+      {
+        "key": "/works/OL276798W"
+      }
+    ],
+    "type": {
+      "key": "/type/edition"
+    },
+    "revision": 3
+  },
+  {
+    "publishers": [
+      "Simon and Schuster"
+    ],
+    "subtitle": "a novel",
+    "pagination": "472 p. ;",
+    "last_modified": {
+      "type": "/type/datetime",
+      "value": "2011-04-11T19:21:22.358173"
+    },
+    "latest_revision": 3,
+    "key": "/books/OL18200973M",
+    "authors": [
+      {
+        "key": "/authors/OL33512A"
+      }
+    ],
+    "publish_places": [
+      "New York"
+    ],
+    "edition_name": "Bk. club ed.",
+    "genres": [
+      "Fiction."
+    ],
+    "title": "Catch-22",
+    "number_of_pages": 472,
+    "created": {
+      "type": "/type/datetime",
+      "value": "2008-10-11T22:15:21.430568"
+    },
+    "languages": [
+      {
+        "key": "/languages/eng"
+      }
+    ],
+    "subjects": [
+      "World War, 1939-1945 -- Fiction."
+    ],
+    "publish_date": "1961",
+    "publish_country": "nyu",
+    "by_statement": "by Joseph Heller.",
+    "works": [
+      {
+        "key": "/works/OL276798W"
+      }
+    ],
+    "type": {
+      "key": "/type/edition"
+    },
+    "revision": 3
+  }
+]
