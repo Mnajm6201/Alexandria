@@ -26,6 +26,7 @@ INSTALLED_APPS = [
     "mptt",
     "corsheaders",
     "library",
+    'rest_framework',
 ]
 
 # Set custom user model
