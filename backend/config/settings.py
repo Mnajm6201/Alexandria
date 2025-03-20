@@ -15,6 +15,12 @@ SECRET_KEY = env("SECRET_KEY", default="your-default-secret-key")
 DEBUG = env.bool("DEBUG", default=True)
 ALLOWED_HOSTS = env.list("ALLOWED_HOSTS", default=["127.0.0.1", "localhost"])
 
+# Frontend URL
+FRONTEND_URL = env("FRONTEND_URL", default="http://localhost:3000")
+
+# The from: ...@some.com like the no-reply
+DEFAULT_FROM_EMAIL = env("EMAIL_HOST_USER", default="your-email@example.com")
+
 # Application definition
 INSTALLED_APPS = [
     "django.contrib.admin",
@@ -26,6 +32,8 @@ INSTALLED_APPS = [
     "mptt",
     "corsheaders",
     "library",
+    "rest_framework",
+    'rest_framework_simplejwt',
 ]
 
 # Set custom user model
@@ -164,3 +172,31 @@ else:
     EMAIL_HOST_USER = env("EMAIL_HOST_USER", default="your-email@gmail.com")
     EMAIL_HOST_PASSWORD = env("EMAIL_HOST_PASSWORD", default="your-email-password")
     DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+
+
+
+# Rest_framework for making restful calls
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
+    ]
+}
+
+# JWT settings
+from datetime import timedelta
+
+SIMPLE_JWT = {
+    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=60),
+    'REFRESH_TOKEN_LIFETIME': timedelta(days=1),
+    'ROTATE_REFRESH_TOKENS': False,
+    'BLACKLIST_AFTER_ROTATION': False,
+    'ALGORITHM': 'HS256',
+    'SIGNING_KEY': SECRET_KEY,
+    'VERIFYING_KEY': None,
+    'AUTH_HEADER_TYPES': ('Bearer',),
+    'USER_ID_FIELD': 'id',
+    'USER_ID_CLAIM': 'user_id',
+    'AUTH_TOKEN_CLASSES': ('rest_framework_simplejwt.tokens.AccessToken',),
+    'TOKEN_TYPE_CLAIM': 'token_type',
+}
