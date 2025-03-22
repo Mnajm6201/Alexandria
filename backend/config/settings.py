@@ -26,6 +26,7 @@ INSTALLED_APPS = [
     "mptt",
     "corsheaders",
     "library",
+    "entity_pages",
     'rest_framework',
 ]
 
@@ -71,12 +72,17 @@ CORS_ALLOWED_ORIGINS = env.list("CORS_ALLOWED_ORIGINS", default=["http://localho
 CORS_ALLOW_HEADERS = [
     "authorization",  
     "content-type",
+    "accept", 
+    "origin",
+    "x-csrftoken"
 ]
 
 # specify methods here
 CORS_ALLOW_METHODS = [
     "GET",
-    "POST"
+    "POST",
+    "OPTIONS",
+    "HEAD"
 ]
 
 # Database

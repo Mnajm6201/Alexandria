@@ -4,9 +4,11 @@
     Description: This program takes a Book object as an arguement and returns all
     data on book, author list, edition list, with all information on each edition, 
     as JSON.
+    Note: Current unused.
 """
+
 from rest_framework import serializers
-from .models import Book, Author, Edition, Publisher, CoverImage, Genre
+from library.models import Book, Author, Edition, Publisher, CoverImage, Genre
 
 # Author Serializer
 class AuthorSerializer(serializers.ModelSerializer):

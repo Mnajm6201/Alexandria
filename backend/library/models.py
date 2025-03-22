@@ -55,7 +55,7 @@ class Book(models.Model):
         blank = True,
         null = True
     )
-    unique_hash = models.CharField(max_length=64, unique=True)
+    book_id = models.CharField(max_length=64, unique=True)
     authors = models.ManyToManyField("Author", through="BookAuthor")
     genres = models.ManyToManyField("Genre", through="BookGenre")
 
@@ -66,7 +66,7 @@ class Book(models.Model):
         indexes = [
             models.Index(fields = ['title']),
             models.Index(fields=['year_published']),
-            models.Index(fields=['unique_hash'])
+            models.Index(fields=['book_id'])
         ]
 
     def __str__(self):
