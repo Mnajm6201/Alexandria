@@ -21,6 +21,9 @@ FRONTEND_URL = env("FRONTEND_URL", default="http://localhost:3000")
 # The from: ...@some.com like the no-reply
 DEFAULT_FROM_EMAIL = env("EMAIL_HOST_USER", default="your-email@example.com")
 
+# Clerk api key
+CLERK_SECRET_KEY = env("CLERK_SECRET_KEY")
+
 # Application definition
 INSTALLED_APPS = [
     "django.contrib.admin",
@@ -34,6 +37,7 @@ INSTALLED_APPS = [
     "library",
     "rest_framework",
     'rest_framework_simplejwt',
+    'accounts',
 ]
 
 # Set custom user model
@@ -76,14 +80,22 @@ CORS_ALLOWED_ORIGINS = env.list("CORS_ALLOWED_ORIGINS", default=["http://localho
 
 # specify headers here
 CORS_ALLOW_HEADERS = [
-    "authorization",  
+    "accept",
+    "accept-encoding",
+    "authorization",
     "content-type",
+    "dnt",
+    "origin",
+    "user-agent",
+    "x-csrftoken",
+    "x-requested-with",
 ]
 
 # specify methods here
 CORS_ALLOW_METHODS = [
     "GET",
-    "POST"
+    "POST",
+    "OPTIONS",
 ]
 
 # Database
@@ -105,12 +117,19 @@ AUTH_PASSWORD_VALIDATORS = [
     },
     {
         "NAME": "django.contrib.auth.password_validation.MinimumLengthValidator",
+        "OPTIONS": {
+            "min_length" : 8,
+        }
     },
     {
         "NAME": "django.contrib.auth.password_validation.CommonPasswordValidator",
     },
     {
         "NAME": "django.contrib.auth.password_validation.NumericPasswordValidator",
+    },
+    # adding our password validator.py we created
+    {
+        "NAME": "library.validators.CustomPasswordValidator"
     },
 ]
 
