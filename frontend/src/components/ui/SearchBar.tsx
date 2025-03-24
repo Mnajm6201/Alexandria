@@ -6,7 +6,6 @@
 import React, { useState, useEffect } from "react";   
 import { Input } from "@/components/ui/input";
 import { Search } from "lucide-react";
-import { useSearchParams, useSelectedLayoutSegment } from "next/navigation";
 
 const SearchBar = () => {
     /**
@@ -51,58 +50,66 @@ const SearchBar = () => {
                     setIsLoading(false)
                 })
                 .catch((error) => {
-                    console.error("Oops! A unknown searching error occurred!", error)
+                    console.error("Oops! A unknown search error occurred!", error)
                     setIsLoading(false)
                 });
-        }, 400); // change timeout time here
+        }, 400); // change delay duration here
 
         return () => clearTimeout(delayDebounce)
     }, [query]);
 
     return (
-        <div className="relative w-full max-w-sm mx-4">
-            <Search className="absolute left-2 top-1/2 transform -translate-y-1/2 text-gray-400" />
-            <Input
-                type="search"
-                placeholder="Search books by title, ISBN, genre, or author"
-                className="pl-8 bg-white text-black"
-                value={query}
-                onChange={(e) => setQuery(e.target.value)}
-            />
+        <div className="w-full flex justify-center">
+            <div className="relative w-full" style={{ maxWidth: "75%", minWidth: "650px" }}>
+                <Search className="absolute left-2 top-1/2 transform -translate-y-1/2 text-gray-400" />
+                    <Input
+                    type="search"
+                    placeholder="Search books by title, ISBN, genre, or author"
+                    className="pl-8 bg-white text-black w-full"
+                    value={query}
+                    onChange={(e) => setQuery(e.target.value)}
+                />
 
-            {showDropdown && (results.books.length > 0 || results.authors.length > 0) && (
+                {showDropdown && (results.books.length > 0 || results.authors.length > 0) && (
                 <div className="absolute top-full mt-1 left-0 w-full bg-white border rounded shadow z-10 max-h-60 overflow-y-auto">
-                {isLoading && <p className="p-2 text-sm text-gray-500">Loading...</p>}
+                    {isLoading && <p className="p-2 text-sm text-gray-500">Loading...</p>}
 
-                {/** BOOK RESULTS*/}
-                {results.books.length > 0 && (
+                    {/* BOOK RESULTS */}
+                    {results.books.length > 0 && (
                     <>
-                    <div className="px-3 py-2 text-sm font-semibold text-black border-b">Books</div>
-                    {results.books.map((book) => (
-                        <div key={`book-${book.id}`} className="px-3 py-2 hover:bg-gray-100 cursor-pointer text-black">
-                        {book.title}
+                        <div className="px-3 py-2 text-sm font-semibold text-black border-b">Books</div>
+                        {results.books.map((book) => (
+                        <div
+                            key={`book-${book.id}`}
+                            className="px-3 py-2 hover:bg-gray-100 cursor-pointer text-black"
+                        >
+                            {book.title}
                         </div>
-                    ))}
+                        ))}
                     </>
-                )}
+                    )}
 
-                {/** AUTHOR RESULTS*/}
-                {results.authors.length > 0 && (
+                    {/* AUTHOR RESULTS */}
+                    {results.authors.length > 0 && (
                     <>
-                    <div className="px-3 py-2 text-sm font-semibold text-black border-b">Authors</div>
-                    {results.authors.map((author) => (
-                        <div key={`author-${author.id}`} className="px-3 py-2 hover:bg-gray-100 cursor-pointer text-black">
-                        {author.name}
+                        <div className="px-3 py-2 text-sm font-semibold text-black border-b">Authors</div>
+                        {results.authors.map((author) => (
+                        <div
+                            key={`author-${author.id}`}
+                            className="px-3 py-2 hover:bg-gray-100 cursor-pointer text-black"
+                        >
+                            {author.name}
                         </div>
-                    ))}
+                        ))}
                     </>
-                )}
+                    )}
 
-                {results.books.length === 0 && results.authors.length === 0 && (
+                    {results.books.length === 0 && results.authors.length === 0 && (
                     <div className="px-3 py-2 text-sm text-gray-500">No results found.</div>
-                )}
+                    )}
                 </div>
-            )}
+                )}
+            </div>
         </div>
     );
 };

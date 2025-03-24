@@ -1,201 +1,53 @@
 {
-  "description": {
-    "type": "/type/text",
-    "value": "Story of Holden Caufield with his idiosyncrasies, penetrating insight, confusion, sensitivity and negativism. Holden, knowing he is to be expelled from school, decides to leave early. He spends three days in New York City and tells the story of what he did and suffered there."
-  },
-  "title": "The Catcher in the Rye",
-  "key": "/works/OL3335245W",
+  "description": "\"To sixth-grader Nate Wright, life is one big game. So when he suits up for any sport, he does it with an unmistakable swagger. From fine-tuning his trash-talking skills on the basketball court to his cocky 'tude in the soccer goal, Nate can be a bigger challenge to his teammates than their opponents\"--Page 4 of cover.",
+  "covers": [
+    9378949,
+    8182595,
+    8468654
+  ],
+  "key": "/works/OL17874268W",
   "authors": [
     {
       "author": {
-        "key": "/authors/OL540486A"
+        "key": "/authors/OL772769A"
       },
       "type": {
         "key": "/type/author_role"
       }
     }
   ],
+  "title": "Big Nate - Game On!",
+  "subjects": [
+    "Middle school students",
+    "Conduct of life",
+    "Middle schools",
+    "School stories",
+    "Juvenile fiction",
+    "Comic books, strips",
+    "Boys",
+    "Humorous graphic novels",
+    "Schools",
+    "Humor",
+    "Fiction",
+    "Sports",
+    "Big Nate (Fictitious character)",
+    "Cartoons and comics",
+    "Comic books, strips, etc.",
+    "Children's fiction",
+    "Schools, fiction",
+    "Sports, fiction"
+  ],
   "type": {
     "key": "/type/work"
   },
-  "links": [
-    {
-      "title": "The Catcher in the Rye - Wikipedia",
-      "url": "https://en.wikipedia.org/wiki/The_Catcher_in_the_Rye",
-      "type": {
-        "key": "/type/link"
-      }
-    },
-    {
-      "url": "https://www.washingtonpost.com/entertainment/books/jd-salinger-at-100-is-the-catcher-in-the-rye-still-relevant/2018/12/30/5d0412f6-0929-11e9-a3f0-71c95106d96a_story.html",
-      "title": "J.D. Salinger at 100: Is 'The Catcher in the Rye' still relevant? - The ...",
-      "type": {
-        "key": "/type/link"
-      }
-    },
-    {
-      "url": "https://www.independent.co.uk/arts-entertainment/books/features/jd-salinger-life-catcher-in-rye-books-anniversary-franny-zooey-raise-high-roof-beam-john-lennon-a8699026.html",
-      "title": "The odd life of Catcher in the Rye author JD Salinger",
-      "type": {
-        "key": "/type/link"
-      }
-    },
-    {
-      "url": "https://www.newyorker.com/magazine/1951/08/11/the-vision-of-the-innocent",
-      "title": "The Vision of the Innocent",
-      "type": {
-        "key": "/type/link"
-      }
-    },
-    {
-      "title": "SparkNotes: The Catcher in the Rye",
-      "url": "https://www.sparknotes.com/lit/catcher/",
-      "type": {
-        "key": "/type/link"
-      }
-    },
-    {
-      "url": "https://www.britannica.com/topic/The-Catcher-in-the-Rye",
-      "title": "britannica.com/topic/The-Catcher-in-the-Rye",
-      "type": {
-        "key": "/type/link"
-      }
-    },
-    {
-      "title": "New York Times review",
-      "url": "http://www.nytimes.com/2001/07/29/books/the-close-reader-holden-reconsidered-and-all.html",
-      "type": {
-        "key": "/type/link"
-      }
-    }
-  ],
-  "subject_times": [
-    "1951",
-    "xian dai"
-  ],
-  "covers": [
-    9273490,
-    -1,
-    9339321,
-    11554908,
-    8599565,
-    11579381,
-    1011105,
-    10084877,
-    8279591
-  ],
-  "subject_places": [
-    "New York (N.Y.)",
-    "United States",
-    "New York",
-    "New York City",
-    "Southern California",
-    "Pencey Preparatory Academy",
-    "Agerstown",
-    "Central Park Zoo",
-    "Metropolitan Museum of Art",
-    "Grand Central Station",
-    "Fifth Avenue",
-    "west",
-    "New York University",
-    "Museum of Natural History",
-    "Wicker Bar",
-    "Seton Hotel",
-    "New England",
-    "Columbia University",
-    "Rockefeller Center",
-    "Biltmore Theatre",
-    "Central Park",
-    "Seattle",
-    "Greenwich Village",
-    "Ernie's Nightclub",
-    "Pennsylvania",
-    "Penn Station",
-    "mei guo",
-    "USA"
-  ],
-  "first_publish_date": "1945",
-  "subject_people": [
-    "Holden Caulfield (Fictitious character)",
-    "Holden Caufield",
-    "D.B. Caufield",
-    "Mr. Spencer",
-    "Robert Ackley",
-    "Ward Stradlater",
-    "Benedict Arnold",
-    "Maurice",
-    "Mr. Antolini",
-    "Carl Luce",
-    "Phoebe Caufield",
-    "Sally Hayes",
-    "Jane Gallagher",
-    "Sunny",
-    "Ernest Morrow",
-    "Cary Grant",
-    "Mal Brossard"
-  ],
-  "excerpts": [
-    {
-      "author": {
-        "key": "/people/george08"
-      },
-      "excerpt": "I'm the most terrific liar you ever saw in your life. It's awful. If I'm on my way to the store to buy a magazine, even, and somebody asks me where I'm going, I'm liable to say I'm going to the opera. It's terrible."
-    },
-    {
-      "author": {
-        "key": "/people/seabelis"
-      },
-      "excerpt": "If you really want to hear about it, the first thing you'll probably want to know is where I was born, and what my lousy childhood was like, and how my parents were occupied and all before they had me, and all that David Copperfield kind of crap, but I don't feel like going into it, if you want to know the truth.",
-      "comment": "first sentence"
-    }
-  ],
-  "subjects": [
-    "fictional works",
-    "Runaway teenagers",
-    "Fiction",
-    "Adolescence",
-    "teenage boys",
-    "Runaway teenagers in literature",
-    "Brothers and sisters",
-    "Emotionally disturbed teenage boys",
-    "Preparatory schools",
-    "Open Library Staff Picks",
-    "Bildungsromans",
-    "Alienation in teenagers",
-    "Interpersonal relations",
-    "juvenile works",
-    "juvenile fiction",
-    "Fictional Works Publication Type",
-    "Classics",
-    "Caulfield, holden (fictitious character), fiction",
-    "New york (n.y.), fiction",
-    "American fiction (fictional works by one author)",
-    "Fiction, coming of age",
-    "Caulfield, holden (fictitious character)",
-    "Salinger, j. d. (jerome david), 1919-2010",
-    "Adolescence in literature",
-    "Holden Caulfield (Fictitious character)",
-    "New York Times reviewed",
-    "Holden ACaulfield (Fictitious character)",
-    "Conduct of life",
-    "Chang pian xiao shuo",
-    "Heranwachsender",
-    "Fictional works [publication type]",
-    "Caulfield, holden (fictitious character)--fiction",
-    "Runaway teenagers--fiction",
-    "Ps3537.a426 c315 1991",
-    "Book: sga sal",
-    "813.5 s 3-8, 1991",
-    "Governors"
-  ],
-  "latest_revision": 25,
-  "revision": 25,
+  "latest_revision": 10,
+  "revision": 10,
   "created": {
     "type": "/type/datetime",
-    "value": "2009-12-10T03:19:09.223330"
+    "value": "2018-05-31T05:09:45.673828"
   },
   "last_modified": {
     "type": "/type/datetime",
-    "value": "2025-02-12T22:13:25.056750"
+    "value": "2023-02-16T05:58:23.782371"
   }
 }

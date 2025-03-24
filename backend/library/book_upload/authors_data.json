@@ -1,76 +1,48 @@
 [
   {
-    "death_date": "27 January 2010",
-    "remote_ids": {
-      "viaf": "17092",
-      "wikidata": "Q79904",
-      "isni": "0000000121171704"
-    },
-    "bio": {
-      "type": "/type/text",
-      "value": "*28 January, 2010:* The New Yorker has made a series of Salinger's short stories available online: http://www.newyorker.com/online/blogs/backissues/2010/01/postscript-j-d-salinger.html"
-    },
-    "photos": [
-      3368221
+    "key": "/authors/OL772769A",
+    "personal_name": "Lincoln Peirce",
+    "alternate_names": [
+      "Lincoln Pierce",
+      "LINCOLN PEIRCE"
     ],
-    "title": "(mei) (Salinger, Jerome David",
+    "photos": [
+      11295049,
+      10394626
+    ],
+    "source_records": [
+      "amazon:1532145225",
+      "ia:fromtop0000peir",
+      "amazon:0062401114",
+      "promise:bwb_daily_pallets_2022-03-17",
+      "amazon:0007524536"
+    ],
+    "birth_date": "23 Oct 1963",
+    "remote_ids": {
+      "viaf": "53335308"
+    },
     "links": [
       {
-        "url": "http://www.nybooks.com/articles/14272",
+        "title": "Goodreads",
+        "url": "https://www.goodreads.com/author/show/815278.Lincoln_Peirce",
         "type": {
           "key": "/type/link"
-        },
-        "title": "Justice to J. D. Salinger - The New York Review of Books"
-      },
-      {
-        "url": "http://www.guardian.co.uk/books/2010/jan/28/jdsalinger-usa",
-        "type": {
-          "key": "/type/link"
-        },
-        "title": "Excerpts of his work - The Guardian"
+        }
       }
     ],
-    "name": "J. D. Salinger",
-    "key": "/authors/OL540486A",
-    "source_records": [
-      "amazon:1439550050",
-      "amazon:141146947X",
-      "amazon:014104926X",
-      "ia:maitianlideshouw0000sail",
-      "amazon:8435008215",
-      "amazon:8806218182",
-      "marc:marc_dnb_202006/dnb_all_dnbmarc_20200615-1.mrc:518362479:2015",
-      "amazon:2266149865",
-      "bwb:9780822070382",
-      "amazon:9403134100",
-      "promise:bwb_daily_pallets_2022-03-17"
-    ],
+    "name": "Lincoln Peirce",
     "type": {
       "key": "/type/author"
     },
-    "personal_name": "J. D. Salinger",
-    "alternate_names": [
-      "Jerome David Salinger",
-      "Salinger, J.D.",
-      "J\u00e9r\u00f4me David Salinger",
-      "Jerome D. Salinger",
-      "J.D. Salinger",
-      "J.D. SALINGER",
-      "J D Salinger",
-      "Sailinge",
-      "(mei) Sai, lin ge (Salinger, Jerome David",
-      "SALINGER J. D."
-    ],
-    "birth_date": "1 January 1919",
-    "latest_revision": 17,
-    "revision": 17,
+    "latest_revision": 18,
+    "revision": 18,
     "created": {
       "type": "/type/datetime",
       "value": "2008-04-01T03:28:50.625462"
     },
     "last_modified": {
       "type": "/type/datetime",
-      "value": "2023-07-29T17:33:42.895938"
+      "value": "2025-01-01T13:59:29.618870"
     }
   }
 ]
