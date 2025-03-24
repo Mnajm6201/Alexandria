@@ -40,3 +40,53 @@ body {
 .shadow {
   box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
 }
+
+/* Improve base text contrast in dark mode */
+[data-theme="dark"] {
+  --foreground: #ffffff; /* Brighter white for text */
+  --card-foreground: #ffffff; /* Brighter white for card text */
+  
+  /* Custom radio button and selection styles */
+  --radio-bg-active: #8b5cf6; /* Bright purple for active state */
+  --radio-text-active: #ffffff; /* White text for active state */
+  --radio-bg-inactive: #374151; /* Darker gray for inactive state */
+  --radio-text-inactive: #e5e7eb; /* Light gray text for inactive */
+  
+  /* Text colors for details */
+  --text-muted: #d1d5db; /* Much lighter gray for better readability */
+}
+
+/* Specifically target the summary text in dark mode */
+[data-theme="dark"] .text-gray-700 {
+  color: #e5e7eb !important; /* Force lighter color */
+}
+
+/* Target book details text in dark mode */
+[data-theme="dark"] .text-gray-500,
+[data-theme="dark"] .text-sm.font-medium.text-gray-500 {
+  color: #d1d5db !important; /* Force lighter color */
+}
+
+/* Radio button styling for both light and dark modes */
+button.py-2.px-4.text-sm.font-medium {
+  border-color: var(--primary);
+  transition: all 0.2s ease;
+}
+
+/* Active state for buttons */
+[data-theme="dark"] button.bg-blue-50 {
+  background-color: var(--radio-bg-active);
+  color: var(--radio-text-active);
+}
+
+/* Inactive state for buttons in dark mode */
+[data-theme="dark"] button.bg-white.border-gray-300 {
+  background-color: var(--radio-bg-inactive);
+  color: var(--radio-text-inactive);
+}
+
+/* Make sure details section and genre tags have better contrast */
+[data-theme="dark"] .bg-blue-100.text-blue-800 {
+  background-color: #4b5563; /* Darker background */
+  color: #e5e7eb; /* Lighter text */
+}

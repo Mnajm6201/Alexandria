@@ -1,16 +1,17 @@
-/** @type {import('next').NextConfig} */
-const nextConfig = {
-  // Keep your existing rewrites for API proxying
+import type { NextConfig } from 'next'
+import { NextResponse } from 'next/server'
+import { NextRequest } from 'next/server'
+
+const nextConfig: NextConfig = {
   async rewrites() {
     return [
       {
         source: '/api/:path*',
-        destination: 'http://localhost:8000/api/:path*'
+        destination: 'http://localhost:8000/api/:path*',
       },
     ]
   },
-  
-  // Keep your existing CORS headers
+
   async headers() {
     return [
       {
@@ -23,8 +24,7 @@ const nextConfig = {
       },
     ]
   },
-  
-  // Add image domain configuration
+
   images: {
     remotePatterns: [
       {
@@ -33,18 +33,18 @@ const nextConfig = {
       },
       {
         protocol: 'https',
-        hostname: '*.amazonaws.com',
+        hostname: '**.amazonaws.com',
       },
       {
         protocol: 'https',
-        hostname: '*.cloudinary.com',
-      }
+        hostname: '**.cloudinary.com',
+      },
     ],
     domains: [
       'covers.openlibrary.org',
-      'localhost'
-    ]
+      'localhost',
+    ],
   },
-};
+}
 
-module.exports = nextConfig;
+export default nextConfig

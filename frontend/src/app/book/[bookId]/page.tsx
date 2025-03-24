@@ -1,29 +1,13 @@
 /*
-  Name: BookPage.tsx
-  Date: 03/22/2025
-  Description: React client component that displays detailed information for a specific book. It fetches book data from an API endpoint using the provided bookId, transforms the raw API data into a strongly-typed BookData object with the adaptBookData function, and then renders a comprehensive book page composed of various sub-components. These sub-components include:
-  
-    - BookHeader: Displays the book’s title, cover image, authors, and user status actions.
-    - BookSummary: Renders the book's summary with conditional truncation and an expand/collapse feature.
-    - BookDetails: Shows detailed book information such as page count, publication date, ISBN, genres, and language.
-    - ItemCarousel: Presents the available editions of the book in a horizontally scrollable carousel.
-    - VendorLinks: Displays vendor information for purchasing the book (or a fallback if no vendors are available).
-    - LibraryAvailability: Shows the library availability information (or a placeholder if not available).
-    - ReviewSection: Provides a section to view and submit user reviews, complete with star ratings and pagination.
-  
-  Input:
-    - params: An object containing the bookId as a route parameter.
+  Name: page.tsx
+  Date: 03/23/2025
+  Description: React client component that displays detailed information for a specific book.
+  This component extracts the bookId directly from the URL to avoid Next.js 15.1.7 params issues.
   
   Output:
-    - Renders a fully detailed book page with sections for header, summary, details, editions, vendor links, library availability, and reviews.
+    - Renders a fully detailed book page with sections for header, summary, details, editions, 
+      vendor links, library availability, and reviews.
     - Displays appropriate loading and error states during the data fetching process.
-    - Utilizes a data adapter (adaptBookData) to ensure the raw API data conforms to the BookData interface.
-
-  Notes:
-    - Employs React’s useState and useEffect hooks for managing state and side effects.
-    - Uses Tailwind CSS for responsive styling and layout.
-    - Handles missing or incomplete data gracefully by providing default/fallback UI elements.
-    - Designed to work in a client-side rendering environment.
 */
 'use client'
 
@@ -37,6 +21,7 @@ import {
     ReviewSection 
 } from '@/components/ui/book_details'
 import ItemCarousel from '@/components/ui/ItemCarousel'
+import CoverImage from '@/components/ui/CoverImage'
 
 // Define the types needed for component
 interface Author {
@@ -210,18 +195,33 @@ function adaptBookData(apiData: any): BookData {
   };
 }
 
-export default function BookPage({ params }: { params: { bookId: string } }) {
+// Main component that bypasses params entirely
+export default function BookPage() {
+  // Extract bookId directly from the URL path to avoid Next.js params issues
+  const [bookId, setBookId] = useState<string>('');
   const [book, setBook] = useState<BookData>(DEFAULT_BOOK);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
 
+  // Get bookId from URL on first render
+  useEffect(() => {
+    const pathname = window.location.pathname;
+    const match = pathname.match(/\/book\/([^/]+)/);
+    if (match && match[1]) {
+      setBookId(match[1]);
+    }
+  }, []);
+
+  // Fetch book data when bookId is available
   useEffect(() => {
     const fetchBookDetails = async () => {
+      if (!bookId) return;
+      
       try {
         setLoading(true);
         setError(null);
 
-        const response = await fetch(`http://localhost:8000/api/books/${params.bookId}/`, {
+        const response = await fetch(`http://localhost:8000/api/books/${bookId}/`, {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',
@@ -254,14 +254,12 @@ export default function BookPage({ params }: { params: { bookId: string } }) {
       }
     };
     
-    if (params.bookId) {
-      fetchBookDetails();
-    }
-  }, [params.bookId]);
+    fetchBookDetails();
+  }, [bookId]);
   
   if (loading) return (
     <div className="flex justify-center items-center min-h-screen">
-      <div className="animate-pulse text-xl text-gray-500">Loading book details...</div>
+      <div className="animate-pulse text-xl text-gray-500 dark:text-gray-300">Loading book details...</div>
     </div>
   );
   
@@ -316,23 +314,18 @@ export default function BookPage({ params }: { params: { bookId: string } }) {
             }}
             renderItem={(edition) => (
               <div className="flex flex-col">
-                {edition.cover_image ? (
-                  <img
-                    src={edition.cover_image}
-                    alt={`Cover for ${edition.title || book.title}`}
-                    className="w-full h-72 object-cover rounded-md shadow-lg"
-                    loading="lazy"
-                  />
-                ) : (
-                  <div className="w-full h-72 bg-gray-200 flex items-center justify-center rounded-md">
-                    <span className="text-gray-500">No cover</span>
-                  </div>
-                )}
+                <CoverImage 
+                  src={edition.cover_image}
+                  alt={`Cover for ${edition.title || book.title}`}
+                  width="100%"
+                  height="h-72"
+                  className="mb-2"
+                />
                 {edition.format && (
-                  <span className="mt-2 text-sm text-gray-700">{edition.format}</span>
+                  <span className="mt-2 text-sm text-gray-700 dark:text-gray-300">{edition.format}</span>
                 )}
                 {edition.publication_date && (
-                  <span className="text-xs text-gray-500">{edition.publication_date}</span>
+                  <span className="text-xs text-gray-500 dark:text-gray-400">{edition.publication_date}</span>
                 )}
               </div>
             )}
@@ -346,9 +339,9 @@ export default function BookPage({ params }: { params: { bookId: string } }) {
           <VendorLinks vendors={book.vendor_links} />
         </div>
       ) : (
-        <div className="mt-8 bg-white rounded-lg shadow p-6">
-          <h2 className="text-xl font-semibold text-gray-900">Where to Buy</h2>
-          <p className="text-gray-500 mt-2">No vendors available</p>
+        <div className="mt-8 bg-white dark:bg-gray-800 rounded-lg shadow p-6">
+          <h2 className="text-xl font-semibold text-gray-900 dark:text-gray-100">Where to Buy</h2>
+          <p className="text-gray-500 dark:text-gray-300 mt-2">No vendors available</p>
         </div>
       )}
       
@@ -358,9 +351,9 @@ export default function BookPage({ params }: { params: { bookId: string } }) {
           <LibraryAvailability libraries={book.library_availability} />
         </div>
       ) : (
-        <div className="mt-8 bg-white rounded-lg shadow p-6">
-          <h2 className="text-xl font-semibold text-gray-900">Library Availability</h2>
-          <p className="text-gray-500 mt-2">Unavailable</p>
+        <div className="mt-8 bg-white dark:bg-gray-800 rounded-lg shadow p-6">
+          <h2 className="text-xl font-semibold text-gray-900 dark:text-gray-100">Library Availability</h2>
+          <p className="text-gray-500 dark:text-gray-300 mt-2">Unavailable</p>
         </div>
       )}
       

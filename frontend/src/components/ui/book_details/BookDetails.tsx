@@ -2,7 +2,7 @@
   Name: BookDetails.tsx
   Date: 03/22/2025
   Description: React client component that displays detailed information about a book, including page count, publication date, ISBN, genres, and language. 
-  The component formats the publication date into a human-readable format, conditionally renders available book details using heroicons for visual cues, and provides a 
+  The component formats the publication date into a human-readable format, conditionally renders available book details using Lucid React icons for visual cues, and provides a 
   toggleable list for genres. If the genres array exceeds 15 items, only the first 15 are shown by default with an option to expand or collapse the full list.
 
   Input:
@@ -20,13 +20,13 @@
   Notes:
     - Utilizes Tailwind CSS for styling.
     - Employs conditional rendering to display only provided details.
-    - Uses heroicons for visual enhancement next to each detail.
+    - Uses Lucid React icons for visual enhancement next to each detail.
     - Manages internal state for toggling the display of the complete genre list.
 */
 'use client'
 
 import { useState } from 'react'
-import { CalendarIcon, BookOpenIcon, TagIcon, GlobeAltIcon} from '@heroicons/react/24/outline'
+import { Calendar, BookOpen, Tag, Globe } from 'lucide-react'
 
 interface BookDetailsProps {
   pageCount?: number
@@ -64,7 +64,7 @@ export default function BookDetails({
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         {pageCount && (
           <div className="flex items-start">
-            <BookOpenIcon className="h-5 w-5 text-gray-400 mr-2 mt-0.5" />
+            <BookOpen className="h-5 w-5 text-gray-400 mr-2 mt-0.5" />
             <div>
               <p className="text-sm font-medium text-gray-500">Pages</p>
               <p className="text-gray-900">{pageCount}</p>
@@ -74,7 +74,7 @@ export default function BookDetails({
         
         {publicationDate && (
           <div className="flex items-start">
-            <CalendarIcon className="h-5 w-5 text-gray-400 mr-2 mt-0.5" />
+            <Calendar className="h-5 w-5 text-gray-400 mr-2 mt-0.5" />
             <div>
               <p className="text-sm font-medium text-gray-500">First published</p>
               <p className="text-gray-900">{formattedDate}</p>
@@ -96,7 +96,7 @@ export default function BookDetails({
         
         {language && (
           <div className="flex items-start">
-            <GlobeAltIcon className="h-5 w-5 text-gray-400 mr-2 mt-0.5" />
+            <Globe className="h-5 w-5 text-gray-400 mr-2 mt-0.5" />
             <div>
               <p className="text-sm font-medium text-gray-500">Language</p>
               <p className="text-gray-900">{language}</p>
@@ -108,7 +108,7 @@ export default function BookDetails({
       {genres.length > 0 && (
         <div className="mt-4">
           <div className="flex items-start mb-2">
-            <TagIcon className="h-5 w-5 text-gray-400 mr-2 mt-0.5" />
+            <Tag className="h-5 w-5 text-gray-400 mr-2 mt-0.5" />
             <p className="text-sm font-medium text-gray-500">Genres</p>
           </div>
           

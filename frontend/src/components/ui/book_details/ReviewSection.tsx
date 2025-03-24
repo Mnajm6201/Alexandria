@@ -4,7 +4,7 @@
   Description: React client component that provides a comprehensive review section for a book. 
   The component allows users to submit a review with a star rating and text, and displays a 
   list of existing reviews with pagination support. It leverages Next.js Image for displaying user avatars, 
-  Heroicons for visual star ratings (filled and outlined), and maintains state for user inputs, rating hover 
+  Lucide React for visual star ratings (filled and outlined), and maintains state for user inputs, rating hover 
   interactions, and loading states during review submission.
   NOTE: The API logic to submit the review is missing.
 
@@ -32,8 +32,7 @@
 
 import { useState } from 'react'
 import Image from 'next/image'
-import { StarIcon } from '@heroicons/react/24/solid'
-import { StarIcon as StarOutlineIcon } from '@heroicons/react/24/outline'
+import { Star, ThumbsUp } from 'lucide-react'
 
 interface User {
   id: string
@@ -96,10 +95,10 @@ export default function ReviewSection({ reviews = [], bookId }: ReviewSectionPro
     return (
       <div className="flex">
         {[1, 2, 3, 4, 5].map((star) => (
-          <StarIcon
+          <Star
             key={star}
             className={`h-5 w-5 ${
-              star <= rating ? 'text-yellow-400' : 'text-gray-300'
+              star <= rating ? 'text-yellow-400 fill-yellow-400' : 'text-gray-300'
             }`}
           />
         ))}
@@ -130,11 +129,13 @@ export default function ReviewSection({ reviews = [], bookId }: ReviewSectionPro
                   onMouseEnter={() => setHoveredRating(star)}
                   onMouseLeave={() => setHoveredRating(0)}
                 >
-                  {star <= (hoveredRating || userRating) ? (
-                    <StarIcon className="h-8 w-8 text-yellow-400" />
-                  ) : (
-                    <StarOutlineIcon className="h-8 w-8 text-gray-300" />
-                  )}
+                  <Star 
+                    className={`h-8 w-8 ${
+                      star <= (hoveredRating || userRating) 
+                        ? 'text-yellow-400 fill-yellow-400' 
+                        : 'text-gray-300'
+                    }`}
+                  />
                 </button>
               ))}
             </div>
@@ -207,20 +208,7 @@ export default function ReviewSection({ reviews = [], bookId }: ReviewSectionPro
                       type="button"
                       className="inline-flex items-center text-sm text-gray-500 hover:text-gray-700"
                     >
-                      <svg
-                        className="h-4 w-4 mr-1"
-                        fill="none"
-                        stroke="currentColor"
-                        viewBox="0 0 24 24"
-                        xmlns="http://www.w3.org/2000/svg"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth="2"
-                          d="M14 10h4.764a2 2 0 011.789 2.894l-3.5 7A2 2 0 0115.263 21h-4.017c-.163 0-.326-.02-.485-.06L7 20m7-10V5a2 2 0 00-2-2h-.095c-.5 0-.905.405-.905.905c0 .714-.211 1.412-.608 2.006L7 11v9m7-10h-2M7 20H5a2 2 0 01-2-2v-6a2 2 0 012-2h2.5"
-                        ></path>
-                      </svg>
+                      <ThumbsUp className="h-4 w-4 mr-1" />
                       {review.likes}
                     </button>
                   </div>

@@ -23,18 +23,18 @@
   Output:
     - Renders a styled section with a header "Library Availability" and a button to show nearby libraries.
     - Displays a list of libraries with their details including name, distance, address, availability status, and due date (if applicable).
-    - Each library entry contains an external link to the library’s website, opening in a new tab.
+    - Each library entry contains an external link to the library's website, opening in a new tab.
 
   Notes:
     - Uses Tailwind CSS for styling.
-    - Utilizes React’s useState hook for managing user location and loading state.
-    - Employs the browser’s Geolocation API to fetch the user's location.
+    - Utilizes React's useState hook for managing user location and loading state.
+    - Employs the browser's Geolocation API to fetch the user's location.
     - The sorting of libraries by proximity is a placeholder and requires backend support for accurate distance calculation.
 */
 'use client'
 
 import { useState } from 'react'
-import { ArrowTopRightOnSquareIcon, MapPinIcon } from '@heroicons/react/24/outline'
+import { ExternalLink, MapPin } from 'lucide-react'
 
 interface UserLocation {
   latitude: number
@@ -102,7 +102,7 @@ export default function LibraryAvailability({ libraries = [] }: LibraryAvailabil
           onClick={requestLocation}
           disabled={isLoadingLocation}
         >
-          <MapPinIcon className="h-4 w-4 mr-2" />
+          <MapPin className="h-4 w-4 mr-2" />
           {isLoadingLocation ? 'Finding location...' : 'Show nearby'}
         </button>
       </div>
@@ -152,7 +152,7 @@ export default function LibraryAvailability({ libraries = [] }: LibraryAvailabil
                   className="mt-2 inline-flex items-center text-sm text-blue-600 hover:text-blue-800"
                 >
                   Visit library
-                  <ArrowTopRightOnSquareIcon className="h-4 w-4 ml-1" />
+                  <ExternalLink className="h-4 w-4 ml-1" />
                 </a>
               </div>
             </div>
