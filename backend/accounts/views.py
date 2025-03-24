@@ -242,4 +242,5 @@ class PasswordResetConfirmView(APIView):
 
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-    
+# Maybe goign to list it as a ticket to create a webhook for clerk and database connection that way when admin want 
+# to drop an user from database clerk will also
