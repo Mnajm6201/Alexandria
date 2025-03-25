@@ -25,6 +25,7 @@ urlpatterns = [
    # path('', include('library.urls')),
     path('', include('entity_pages.urls')),
     path('api/auth/', include('accounts.urls', namespace='accounts')),
+    path('api/', include("search.urls")),
 ]
 
 if settings.DEBUG:

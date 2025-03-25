@@ -1,15 +1,15 @@
-    import Link from "next/link";
-    import {
+import Link from "next/link";
+import {
     Search,
     BookOpen,
     Home,
     Compass,
     BookmarkIcon,
     User,
-    } from "lucide-react";
-    import { Button } from "@/components/ui/button";
-    import { Input } from "@/components/ui/input";
-    import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
+} from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
+import SearchBar from "@/components/ui/SearchBar";
 
     export default function DiscoveryPage() {
     return (
@@ -23,12 +23,7 @@
                 Alexandria
             </Link>
             <div className="relative w-full max-w-sm mx-4">
-                <Search className="absolute left-2 top-1/2 transform -translate-y-1/2 text-gray-400" />
-                <Input
-                type="search"
-                placeholder="Search books..."
-                className="pl-8 bg-white"
-                />
+                <SearchBar />
             </div>
             <Button variant="ghost" size="icon">
                 <BookOpen className="h-6 w-6 text-[#4A4238]" />
@@ -141,7 +136,7 @@
         </div>
     );
     }
-
+    
     function BookCard() {
     return (
         <div className="w-32 flex-shrink-0">
