@@ -48,8 +48,10 @@ class ClerkVerificationView(APIView):
                     'Content-Type': 'application/json'
                 }
                 
-                user_url = f'https://api.clerk.com/v1/users/{user_id}'
+                # Try api.clerk.dev instead of api.clerk.com if you're getting 404 errors
+                user_url = f'https://api.clerk.dev/v1/users/{user_id}'
                 print(f"Getting user details from: {user_url}")
+                print(f"With headers: Authorization: Bearer sk_****{clerk_api_key[-4:]}, Content-Type: {headers['Content-Type']}")
                 
                 user_response = requests.get(
                     user_url,
@@ -65,6 +67,7 @@ class ClerkVerificationView(APIView):
                 
                 user_data = user_response.json()
                 print(f"User data retrieved successfully")
+                print(f"User data: {json.dumps(user_data, indent=2)}")
                 
                 # Extract email from user data
                 primary_email_id = user_data.get('primary_email_address_id')
@@ -80,23 +83,41 @@ class ClerkVerificationView(APIView):
                     return Response({'error': 'No email found for user'}, 
                                    status=status.HTTP_400_BAD_REQUEST)
                 
-                print(f"Found user email: {email}")
+                # Normalize email to prevent case-sensitivity issues
+                email = email.lower().strip()
+                print(f"Found user email (normalized): {email}")
                 
                 # Get user name
                 first_name = user_data.get('first_name', '')
                 last_name = user_data.get('last_name', '')
                 
-                # Find or create user
-                user, created = User.objects.get_or_create(
-                    email=email,
-                    defaults={
-                        'username': email,  # Use email as username
-                        'first_name': first_name,
-                        'last_name': last_name,
-                    }
-                )
-                
-                print(f"User {'created' if created else 'found'} in database: {user.username}")
+                try:
+                    print("Explicitly checking if user exists in database...")
+                    existing_user = User.objects.filter(email=email).first()
+                    if existing_user:
+                        print(f"Found existing user in database: id={existing_user.id}, email={existing_user.email}")
+                        user = existing_user
+                    else:
+                        print(f"No user found in database with email: {email}")
+                        
+                        print("Attempting to create new user...")
+                        new_user = User(
+                            email=email,
+                            username=email,
+                            first_name=first_name,
+                            last_name=last_name
+                        )
+                        new_user.save()
+                        print(f"Created new user with id: {new_user.id}")
+                        user = new_user
+                        created = True
+                    
+                except Exception as e:
+                    print(f"Database operation error: {str(e)}")
+                    import traceback
+                    traceback.print_exc()
+                    return Response({'error': f'Database error: {str(e)}'}, 
+                                  status=status.HTTP_500_INTERNAL_SERVER_ERROR)
                 
                 # Generate JWT
                 refresh = RefreshToken.for_user(user)
@@ -106,7 +127,7 @@ class ClerkVerificationView(APIView):
                     'access': str(refresh.access_token),
                     'user_id': user.id,
                     'email': user.email,
-                    'is_new_user': created
+                    'is_new_user': created if 'created' in locals() else False
                 })
                 
             except jwt.DecodeError:
