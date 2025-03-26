@@ -35,11 +35,12 @@ export default function RootLayout({
       lang="en"
       className={`${inter.className} ${geistSans.variable} ${geistMono.variable}`}
     >
-      <body className="antialiased">
-        <ThemeToggle />
+      <body className="antialiased min-h-screen bg-amber-50">
+        <div className='fixed right-4 top-4 z-50'>
+          <ThemeToggle />
+        </div>
         <AuthProvider>
-          <Header />
-          <main className="container mx-auto px-4 py-8">{children}</main>
+          <main>{children}</main>
         </AuthProvider>
       </body>
     </html>

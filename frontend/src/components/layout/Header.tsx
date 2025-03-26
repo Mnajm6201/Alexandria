@@ -2,48 +2,117 @@
 "use client";
 
 import Link from "next/link";
+import { BookOpen } from "lucide-react";
 import { useAuth } from "@clerk/nextjs";
+import { Button } from "@/components/ui/button";
 
-export function Header() {
+// A header prop for including in each function components to either it's an app header or landing page header
+interface HeaderProps {
+  variant?: "landing" | "app";
+}
+
+export function Header({ variant = "app" }: HeaderProps) {
   const { isSignedIn, signOut } = useAuth();
 
-  return (
-    <header className="flex justify-between items-center p-4 border-b">
-      <div className="flex items-center">
-        <Link href="/" className="text-xl font-bold">
-          Alexandria
-        </Link>
-      </div>
+  // variant to specify it's for landing page
+  const isLanding = variant === "landing";
 
-      <div className="flex items-center gap-4">
-        {isSignedIn ? (
-          <div className="flex items-center gap-4">
-            <Link href="/profile" className="text-gray-700 hover:text-blue-600">
-              My Profile
-            </Link>
-            <button
-              onClick={() => signOut()}
-              className="px-4 py-2 text-sm bg-gray-200 text-gray-800 rounded-lg hover:bg-gray-300"
+  return (
+    <header className="sticky top-0 z-40 border-b border-amber-200 bg-amber-50/80 backdrop-blur-sm">
+      <div className="container mx-auto max-w-7xl flex h-16 items-center justify-between px-4 md:px-6">
+        <div className="flex items-center gap-2">
+          <BookOpen className="h-6 w-6 text-amber-800" />
+          <Link
+            href="/"
+            className="text-xl font-serif font-bold text-amber-900"
+          >
+            Alexandria
+          </Link>
+        </div>
+
+        {/* If we want to change the routing just make the href whever the page is need to route to
+        for instance if for discovery page, just do /discovery              */}
+        {isLanding ? (
+          <nav className="hidden md:flex items-center gap-6">
+            <Link
+              href="#features"
+              className="text-sm font-medium text-amber-900 hover:text-amber-700"
             >
-              Sign Out
-            </button>
-          </div>
+              Features
+            </Link>
+            <Link
+              href="/discovery"
+              className="text-sm font-medium text-amber-900 hover:text-amber-700"
+            >
+              Discover
+            </Link>
+            <Link
+              href="#community"
+              className="text-sm font-medium text-amber-900 hover:text-amber-700"
+            >
+              Community
+            </Link>
+            <Link
+              href="#about"
+              className="text-sm font-medium text-amber-900 hover:text-amber-700"
+            >
+              About
+            </Link>
+          </nav>
         ) : (
-          <div className="flex items-center gap-4">
+          // You can add application-specific navigation links here
+          <nav className="hidden md:flex items-center gap-6">
             <Link
-              href="/auth/sign-in"
-              className="text-gray-700 hover:text-blue-600"
+              href="/browse"
+              className="text-sm font-medium text-amber-900 hover:text-amber-700"
             >
-              Sign In
+              Browse
             </Link>
             <Link
-              href="/auth/sign-up"
-              className="px-4 py-2 text-sm bg-blue-600 text-white rounded-lg hover:bg-blue-700"
+              href="/my-books"
+              className="text-sm font-medium text-amber-900 hover:text-amber-700"
             >
-              Sign Up
+              My Books
             </Link>
-          </div>
+            <Link
+              href="/community"
+              className="text-sm font-medium text-amber-900 hover:text-amber-700"
+            >
+              Community
+            </Link>
+          </nav>
         )}
+
+        <div className="flex items-center gap-4">
+          {isSignedIn ? (
+            <div className="flex items-center gap-4">
+              <Link
+                href="/profile"
+                className="text-sm font-medium text-amber-900 hover:text-amber-700"
+              >
+                My Profile
+              </Link>
+              <Button
+                onClick={() => signOut()}
+                className="bg-amber-800 text-amber-50 hover:bg-amber-700"
+              >
+                Sign Out
+              </Button>
+            </div>
+          ) : (
+            <div className="flex items-center gap-4">
+              <Link
+                href="/auth/sign-in"
+                className="text-sm font-medium text-amber-900 hover:text-amber-700"
+              >
+                Log in
+              </Link>
+              <Button className="bg-amber-800 text-amber-50 hover:bg-amber-700">
+                Sign up
+              </Button>
+            </div>
+          )}
+        </div>
       </div>
     </header>
   );
