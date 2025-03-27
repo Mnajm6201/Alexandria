@@ -60,9 +60,10 @@ export default function LandingPage() {
                 </div>
                 <div className="relative h-[500px] w-[400px] rounded-2xl bg-amber-300 shadow-xl">
                   <Image
-                    src="/placeholder.svg?height=500&width=400"
+                    src="/Gatsby.jpg"
+                    width="500"
+                    height="350"
                     alt="Stack of books"
-                    fill
                     className="rounded-2xl object-cover"
                   />
                 </div>
