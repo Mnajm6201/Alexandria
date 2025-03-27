@@ -100,6 +100,7 @@ CORS_ALLOW_METHODS = [
     "OPTIONS",
     "HEAD",
     "OPTIONS",
+    "DELETE"
 ]
 
 # Database
