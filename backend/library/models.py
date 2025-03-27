@@ -22,7 +22,7 @@ class Book(models.Model):
         average_rating: the average rating of the book, 0.00 - 5.00
         year_published:  Original publication date of book (first edition date).
         original_langauge: Original language of work
-        unique_hash: Hashing normalized title and author list ensures book uniqueness.
+        book_id: Hashing normalized title and author list ensures book uniqueness.
         authors: ManyToMany relation through BookAuthor table.
     """
     title = models.CharField(
@@ -88,7 +88,7 @@ class Author(models.Model):
     name = models.CharField(max_length=250) 
     biography = models.TextField(blank=True, null=True)
     author_image = models.URLField(blank=True, null=True)
-    unique_hash = models.CharField(max_length=64, unique=True)
+    author_id = models.CharField(max_length=64, unique=True)
     
     class Meta:
         verbose_name = "Author"
@@ -96,7 +96,7 @@ class Author(models.Model):
         ordering = ['name']
         indexes = [
             models.Index(fields=['name']),
-            models.Index(fields=['unique_hash'])
+            models.Index(fields=['author_id'])
         ]
 
 

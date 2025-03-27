@@ -9,13 +9,16 @@
   Output:
     - The BookDetailView processes the request and returns a JSON response with the book details if found,
       or a 404 error response if the book does not exist.
+    - The BookDetailView processes the request and returns a JSON response with the author details if found,
+      or a 404 error response if the book does not exist.
 
   Notes:
     - This configuration enables the REST API endpoint for fetching detailed book information.
 """
 from django.urls import path
-from .views import BookDetailView
+from .views import BookDetailView, AuthorDetailView
 
 urlpatterns = [
     path('api/books/<str:book_id>/', BookDetailView.as_view(), name='book-detail'),
+    path('api/authors/<str:author_id>/', AuthorDetailView.as_view(), name='author-detail'),
 ]
