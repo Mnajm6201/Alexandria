@@ -6,6 +6,7 @@
 import React, { useState, useEffect } from "react";   
 import { Input } from "@/components/ui/input";
 import { Search } from "lucide-react";
+import { useRouter } from "next/navigation";
 
 const SearchBar = () => {
     /**
@@ -17,8 +18,8 @@ const SearchBar = () => {
      * function's app's views.py
      */
     type SearchResults = {
-        books: { id: number; title: string}[];
-        authors: { id: number; name: string}[];
+        books: { book_id: string; title: string}[];
+        authors: { unique_hash: string; name: string}[];
     }
 
     // use states
@@ -26,6 +27,7 @@ const SearchBar = () => {
     const [isLoading, setIsLoading] = useState<boolean>(false);
     const [results, setResults] = useState<SearchResults>({ books: [], authors: []});
     const [showDropdown, setShowDropdown] = useState<boolean>(false);
+    const router = useRouter();
 
     /**
      * Fetches data from endpoint
@@ -80,8 +82,9 @@ const SearchBar = () => {
                         <div className="px-3 py-2 text-sm font-semibold text-black border-b">Books</div>
                         {results.books.map((book) => (
                         <div
-                            key={`book-${book.id}`}
+                            key={`book-${book.book_id}`}
                             className="px-3 py-2 hover:bg-gray-100 cursor-pointer text-black"
+                            onClick={() => router.push(`/book/${book.book_id}`)}
                         >
                             {book.title}
                         </div>
@@ -95,8 +98,9 @@ const SearchBar = () => {
                         <div className="px-3 py-2 text-sm font-semibold text-black border-b">Authors</div>
                         {results.authors.map((author) => (
                         <div
-                            key={`author-${author.id}`}
+                            key={`author-${author.unique_hash}`}
                             className="px-3 py-2 hover:bg-gray-100 cursor-pointer text-black"
+                            onClick={() => router.push(`/author/${author.unique_hash}`)}
                         >
                             {author.name}
                         </div>

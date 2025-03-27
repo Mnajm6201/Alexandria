@@ -10,8 +10,10 @@ import {
 import { Button } from "@/components/ui/button";
 import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
 import SearchBar from "@/components/ui/SearchBar";
+import ItemCarousel from "@/components/ui/ItemCarousel";
+import CoverImage from "@/components/ui/CoverImage";
 
-    export default function DiscoveryPage() {
+export default function DiscoveryPage() {
     return (
         /**
          * NAVBAR AND SEARCH BAR
@@ -59,14 +61,6 @@ import SearchBar from "@/components/ui/SearchBar";
                 <h2 className="text-xl font-semibold mb-4 text-[#4A4238]">
                 Top Rated This Week
                 </h2>
-                <ScrollArea>
-                <div className="flex space-x-4 pb-4">
-                    {[1, 2, 3, 4, 5, 6].map((book) => (
-                    <BookCard key={book} />
-                    ))}
-                </div>
-                <ScrollBar orientation="horizontal" />
-                </ScrollArea>
             </section>
             
             {/** SUB FEATURE 2 */}
@@ -88,21 +82,6 @@ import SearchBar from "@/components/ui/SearchBar";
             <section>
                 <h2 className="text-xl font-semibold mb-4 text-[#4A4238]">
                 Popular in Mystery
-                </h2>
-                <ScrollArea>
-                <div className="flex space-x-4 pb-4">
-                    {[1, 2, 3, 4, 5, 6].map((book) => (
-                    <BookCard key={book} />
-                    ))}
-                </div>
-                <ScrollBar orientation="horizontal" />
-                </ScrollArea>
-            </section>
-
-            {/** SUB FEATURE 4 */}
-            <section>
-                <h2 className="text-xl font-semibold mb-4 text-[#4A4238]">
-                New Releases
                 </h2>
                 <ScrollArea>
                 <div className="flex space-x-4 pb-4">
