@@ -45,16 +45,18 @@ export function AuthSynchronizer() {
 
         console.log("Backend response:", response.data);
 
-        Cookies.set("access_token", response.data, {
+        Cookies.set("access_token", response.data.access, {
           expires: 1 / 24,
           secure: process.env.NODE_ENV === "production",
-          sameSite: "strict",
+          sameSite: "lax",
+          path: "/",
         });
 
-        Cookies.set("refresh_token", response.data, {
+        Cookies.set("refresh_token", response.data.refresh, {
           expires: 1,
           secure: process.env.NODE_ENV === "production",
-          sameSite: "strict",
+          sameSite: "lax",
+          path: "/",
         });
 
         console.log("Authentication synchronized with backend");
