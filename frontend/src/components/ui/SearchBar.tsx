@@ -19,7 +19,7 @@ const SearchBar = () => {
      */
     type SearchResults = {
         books: { book_id: string; title: string}[];
-        authors: { unique_hash: string; name: string}[];
+        authors: { author_id: string; name: string}[];
     }
 
     // use states
@@ -98,9 +98,9 @@ const SearchBar = () => {
                         <div className="px-3 py-2 text-sm font-semibold text-black border-b">Authors</div>
                         {results.authors.map((author) => (
                         <div
-                            key={`author-${author.unique_hash}`}
+                            key={`author-${author.author_id}`}
                             className="px-3 py-2 hover:bg-gray-100 cursor-pointer text-black"
-                            onClick={() => router.push(`/author/${author.unique_hash}`)}
+                            onClick={() => router.push(`/author/${author.author_id}`)}
                         >
                             {author.name}
                         </div>

@@ -90,3 +90,8 @@ button.py-2.px-4.text-sm.font-medium {
   background-color: #4b5563; /* Darker background */
   color: #e5e7eb; /* Lighter text */
 }
+
+/* This rule applies only in light mode (when data-theme is not "dark") */
+:not([data-theme="dark"]) .author-page {
+  color: #111111 !important;  /* Use a darker color for improved readability */
+}

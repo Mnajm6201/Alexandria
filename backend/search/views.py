@@ -55,7 +55,7 @@ class SearchBarView(APIView):
             filters=author_filters,
             query=query,
             limit=5,
-            fields_list=["unique_hash", "name"]
+            fields_list=["author_id", "name"]
         )
 
         # add any search result other than the ones listed above here:
