@@ -135,11 +135,11 @@ class LibraryUpload:
                 bio = bio.get('value', '')
             
             # Create a unique hash for the author
-            unique_hash = self._create_hash(key)
+            author_id = self._create_hash(key)
             
             # Get or create the author
             author, created = Author.objects.get_or_create(
-                unique_hash=unique_hash,
+                author_id=author_id,
                 defaults={
                     'name': name[:250], 
                     'biography': bio,
@@ -168,7 +168,7 @@ class LibraryUpload:
         # Extract book details
         title = self.work_data.get('title', 'Unknown Title')
         key = self.work_data.get('key', '').replace('/works/', '')
-        unique_hash = key  # Use the work ID as the unique hash
+        book_id = key  # Use the work ID as the unique hash
         
         # Get description
         description = self.work_data.get('description', '')
@@ -212,7 +212,7 @@ class LibraryUpload:
         
         # Create or update the book
         book, created = Book.objects.get_or_create(
-            unique_hash=unique_hash,
+            book_id=book_id,
             defaults={
                 'title': title[:255],  
                 'summary': description,

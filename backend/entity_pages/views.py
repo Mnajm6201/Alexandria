@@ -24,8 +24,8 @@
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
-from library.models import Book, UserBook
-from .serializers import BookPageSerializer
+from library.models import Book, UserBook, Author
+from .serializers import BookPageSerializer, AuthorPageSerializer
 
 class BookDetailView(APIView):
     """
@@ -64,3 +64,30 @@ class BookDetailView(APIView):
                 {"error": "Book not found"}, 
                 status=status.HTTP_404_NOT_FOUND
             )
+
+class AuthorDetailView(APIView):
+    """
+    API view for retrieving detailed information about a specific author.
+    """
+    def get(self, request, author_id):
+        if request.method == 'OPTIONS':
+            return Response(status=status.HTTP_200_OK)
+        try:
+            # Get author record based on passed author_id
+            author = Author.objects.prefetch_related(
+                'related_author_books',  
+                'related_author_books__book'
+            ).get(author_id=author_id)
+            
+            serializer = AuthorPageSerializer(author)
+            data = serializer.data
+            
+            return Response(data)
+        
+        # Return error status if author not found
+        except Author.DoesNotExist:
+            return Response(
+                {"error": "Author not found"}, 
+                status=status.HTTP_404_NOT_FOUND
+            )
+        

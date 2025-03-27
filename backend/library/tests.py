@@ -10,22 +10,22 @@ import datetime
 
 class BookModelTest(TestCase):
     def setUp(self):
-        self.author1 = Author.objects.create(name="J.K. Rowling", unique_hash="auth123")
-        self.author2 = Author.objects.create(name="George Orwell", unique_hash="auth121")
-        self.author3 = Author.objects.create(name="Harper Lee", unique_hash="auth122")
+        self.author1 = Author.objects.create(name="J.K. Rowling", author_id="auth123")
+        self.author2 = Author.objects.create(name="George Orwell", author_id="auth121")
+        self.author3 = Author.objects.create(name="Harper Lee", author_id="auth122")
         
         self.genre_fiction = Genre.objects.create(name="Fiction")
         self.genre_dystopian = Genre.objects.create(name="Dystopian")
         self.genre_classic = Genre.objects.create(name="Classic")
 
         self.book1 = Book.objects.create(
-            title="Harry Potter", unique_hash="book1234", year_published=1997
+            title="Harry Potter", book_id="book1234", year_published=1997
         )
         self.book1.authors.add(self.author1)
         self.book1.genres.add(self.genre_fiction)
         
         self.book2 = Book.objects.create(
-            title="1984", unique_hash="book5678", year_published=1949
+            title="1984", book_id="book5678", year_published=1949
         )
         self.book2.authors.add(self.author2)
         self.book2.genres.add(self.genre_dystopian)
