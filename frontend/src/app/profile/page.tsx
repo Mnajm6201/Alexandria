@@ -331,7 +331,7 @@ export default function UserProfile() {
               <div className="flex gap-4">
                 <div className="h-24 w-16 flex-shrink-0 overflow-hidden rounded-md bg-amber-200">
                   <Image
-                    src="/placeholder.svg?height=96&width=64"
+                    src="https://covers.openlibrary.org/b/id/10504392-L.jpg"
                     alt="Book cover"
                     width={64}
                     height={96}
@@ -371,31 +371,95 @@ export default function UserProfile() {
               </div>
 
               <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4">
-                {[1, 2, 3, 4].map((book) => (
-                  <div key={book} className="space-y-2">
-                    <div className="aspect-[2/3] overflow-hidden rounded-md bg-amber-200">
-                      <Image
-                        src={`/placeholder.svg?height=150&width=100&text=Book${book}`}
-                        alt={`Book ${book}`}
-                        width={100}
-                        height={150}
-                        className="h-full w-full object-cover"
-                      />
-                    </div>
-                    <div>
-                      <Link
-                        href="#"
-                        className="text-sm font-medium text-amber-900 hover:underline line-clamp-1"
-                      >
-                        Book Title {book}
-                      </Link>
-                      <p className="text-xs text-amber-700 line-clamp-1">
-                        Author Name
-                      </p>
-                    </div>
-                  </div>
-                ))}
+              {/* Book 1 */}
+              <div className="space-y-2">
+                <div className="aspect-[2/3] overflow-hidden rounded-md bg-amber-200">
+                  <Image
+                    src="https://covers.openlibrary.org/b/id/14637497-L.jpg"
+                    alt="Book 1"
+                    width={100}
+                    height={150}
+                    className="h-full w-full object-cover"
+                  />
+                </div>
+                <div>
+                  <Link
+                    href="#"
+                    className="text-sm font-medium text-amber-900 hover:underline line-clamp-1"
+                  >
+                    Book Title 1
+                  </Link>
+                  <p className="text-xs text-amber-700 line-clamp-1">Author Name</p>
+                </div>
               </div>
+
+              {/* Book 2 */}
+              <div className="space-y-2">
+                <div className="aspect-[2/3] overflow-hidden rounded-md bg-amber-200">
+                  <Image
+                    src="https://covers.openlibrary.org/b/id/14596711-L.jpg"
+                    alt="Book 2"
+                    width={100}
+                    height={150}
+                    className="h-full w-full object-cover"
+                  />
+                </div>
+                <div>
+                  <Link
+                    href="#"
+                    className="text-sm font-medium text-amber-900 hover:underline line-clamp-1"
+                  >
+                    Book Title 2
+                  </Link>
+                  <p className="text-xs text-amber-700 line-clamp-1">Author Name</p>
+                </div>
+              </div>
+
+              {/* Book 3 */}
+              <div className="space-y-2">
+                <div className="aspect-[2/3] overflow-hidden rounded-md bg-amber-200">
+                  <Image
+                    src="https://covers.openlibrary.org/b/id/14303933-L.jpg"
+                    alt="Book 3"
+                    width={100}
+                    height={150}
+                    className="h-full w-full object-cover"
+                  />
+                </div>
+                <div>
+                  <Link
+                    href="#"
+                    className="text-sm font-medium text-amber-900 hover:underline line-clamp-1"
+                  >
+                    Book Title 3
+                  </Link>
+                  <p className="text-xs text-amber-700 line-clamp-1">Author Name</p>
+                </div>
+              </div>
+
+              {/* Book 4 */}
+              <div className="space-y-2">
+                <div className="aspect-[2/3] overflow-hidden rounded-md bg-amber-200">
+                  <Image
+                    src="https://covers.openlibrary.org/b/id/14422282-L.jpg"
+                    alt="Book 4"
+                    width={100}
+                    height={150}
+                    className="h-full w-full object-cover"
+                  />
+                </div>
+                <div>
+                  <Link
+                    href="#"
+                    className="text-sm font-medium text-amber-900 hover:underline line-clamp-1"
+                  >
+                    Book Title 4
+                  </Link>
+                  <p className="text-xs text-amber-700 line-clamp-1">Author Name</p>
+                </div>
+              </div>
+            </div>
+
             </div>
           </div>
 
