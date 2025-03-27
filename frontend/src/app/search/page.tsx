@@ -16,6 +16,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
 import { Header } from "@/components/layout/Header";
+import SearchBar from "@/components/ui/SearchBar";
 
 export default function SearchResults() {
   // Mock search results for "The Great Gatsby"
@@ -89,57 +90,8 @@ export default function SearchResults() {
 
 
       <main className="container py-8 mx-auto px-8 md:px-6">
-        {/* Search Bar */}
-        <div className="mb-8 rounded-lg border border-amber-200 bg-white p-6">
-          <div className="flex flex-col gap-4 sm:flex-row">
-            <div className="relative flex-1">
-              <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-amber-600" />
-              <Input
-                type="text"
-                placeholder="Search books, authors, ISBN..."
-                className="pl-9 border-amber-300 bg-amber-50 focus-visible:ring-amber-600"
-                defaultValue="The Great Gatsby"
-              />
-            </div>
-            <div className="flex gap-2">
-              <Button
-                variant="outline"
-                className="border-amber-300 text-amber-800"
-              >
-                <Filter className="mr-2 h-4 w-4" />
-                Filters
-                <ChevronDown className="ml-2 h-4 w-4" />
-              </Button>
-              <Button className="bg-amber-800 text-amber-50 hover:bg-amber-700">
-                Search
-              </Button>
-            </div>
-          </div>
-
-          {/* Active Filters */}
-          <div className="mt-4 flex flex-wrap gap-2">
-            <Badge className="bg-amber-100 text-amber-800 hover:bg-amber-200 border-amber-300">
-              Books
-              <button className="ml-1 rounded-full hover:bg-amber-200 p-0.5">
-                ×
-              </button>
-            </Badge>
-            <Badge className="bg-amber-100 text-amber-800 hover:bg-amber-200 border-amber-300">
-              Fiction
-              <button className="ml-1 rounded-full hover:bg-amber-200 p-0.5">
-                ×
-              </button>
-            </Badge>
-            <Badge className="bg-amber-100 text-amber-800 hover:bg-amber-200 border-amber-300">
-              English
-              <button className="ml-1 rounded-full hover:bg-amber-200 p-0.5">
-                ×
-              </button>
-            </Badge>
-            <button className="text-xs text-amber-700 hover:text-amber-900 hover:underline">
-              Clear All
-            </button>
-          </div>
+        <div className="mb-9">
+          <SearchBar />
         </div>
 
         {/* Search Results */}

@@ -24,7 +24,7 @@ export default function LandingPage() {
               <div className="flex flex-col justify-center space-y-4">
                 <div className="space-y-2">
                   <h1 className="text-3xl font-serif font-bold tracking-tighter text-amber-900 sm:text-5xl xl:text-6xl/none">
-                    Your Personal Library, Reimagined
+                    Alexandria, <br/>the Library of Today
                   </h1>
                   <p className="max-w-[600px] text-amber-800 md:text-xl">
                     Alexandria brings book lovers together. Track your reading
@@ -36,14 +36,14 @@ export default function LandingPage() {
                   <Button className="bg-amber-800 text-amber-50 hover:bg-amber-700">
                     Start Your Library
                   </Button>
-                  <Button className="border border-amber-800 text-amber-800 hover:bg-amber-100">
+                  <Button className="bg-amber-800 text-amber-50 hover:bg-amber-700">
                     Explore Books
                   </Button>
                 </div>
                 <div className="flex items-center space-x-4 text-sm text-amber-700 pt-4">
                   <div className="flex items-center space-x-1">
                     <BookMarked className="h-4 w-4" />
-                    <span>10,000+ Books</span>
+                    <span>1,000,000+ Books</span>
                   </div>
                   <div className="flex items-center space-x-1">
                     <Users className="h-4 w-4" />
@@ -61,8 +61,8 @@ export default function LandingPage() {
                 <div className="relative h-[500px] w-[400px] rounded-2xl bg-amber-300 shadow-xl">
                   <Image
                     src="/Gatsby.jpg"
-                    width="500"
-                    height="350"
+                    width="400"
+                    height="400"
                     alt="Stack of books"
                     className="rounded-2xl object-cover"
                   />
@@ -134,44 +134,14 @@ export default function LandingPage() {
           <div className="container px-4 md:px-6 mx-auto max-w-7xl">
             <div className="grid gap-10 lg:grid-cols-2 lg:gap-16 items-center">
               <div>
-                <div className="grid grid-cols-2 gap-4">
-                  <div className="space-y-4">
-                    <div className="overflow-hidden rounded-lg bg-amber-200 shadow-lg h-48">
+                <div className="gap-4">
+                  <div className="flex justify-center">
+                    <div className="relative w-72 aspect-[2/3] overflow-hidden rounded-lg bg-amber-200 shadow-lg">
                       <Image
-                        src="/placeholder.svg?height=200&width=150"
+                        src="https://covers.openlibrary.org/b/id/14637497-L.jpg"
                         alt="Book cover"
-                        width={150}
-                        height={200}
-                        className="h-full w-full object-cover"
-                      />
-                    </div>
-                    <div className="overflow-hidden rounded-lg bg-amber-200 shadow-lg h-64">
-                      <Image
-                        src="/placeholder.svg?height=250&width=180"
-                        alt="Book cover"
-                        width={180}
-                        height={250}
-                        className="h-full w-full object-cover"
-                      />
-                    </div>
-                  </div>
-                  <div className="space-y-4 pt-8">
-                    <div className="overflow-hidden rounded-lg bg-amber-200 shadow-lg h-64">
-                      <Image
-                        src="/placeholder.svg?height=250&width=180"
-                        alt="Book cover"
-                        width={180}
-                        height={250}
-                        className="h-full w-full object-cover"
-                      />
-                    </div>
-                    <div className="overflow-hidden rounded-lg bg-amber-200 shadow-lg h-48">
-                      <Image
-                        src="/placeholder.svg?height=200&width=150"
-                        alt="Book cover"
-                        width={150}
-                        height={200}
-                        className="h-full w-full object-cover"
+                        fill
+                        className="object-cover"
                       />
                     </div>
                   </div>
@@ -208,11 +178,6 @@ export default function LandingPage() {
                     <span>New releases and classics</span>
                   </li>
                 </ul>
-                <div className="pt-4">
-                  <Button className="bg-amber-800 text-amber-50 hover:bg-amber-700">
-                    Explore Library
-                  </Button>
-                </div>
               </div>
             </div>
           </div>
@@ -289,17 +254,14 @@ export default function LandingPage() {
               <div className="mx-auto w-full max-w-sm space-y-2">
                 <form className="flex flex-col gap-2 sm:flex-row">
                   <input
-                    className="flex h-10 w-full rounded-md border border-amber-300 bg-amber-50 px-3 py-2 text-sm placeholder:text-amber-600 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-600"
+                    className="flex h-10 w-full rounded-md border border-amber-300 bg-amber-50 px-3 py-2 text-sm placeholder:text-amber-600 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-600 text-black"
                     placeholder="Enter your email"
                     type="email"
                   />
-                  <Button className="bg-amber-800 text-amber-50 hover:bg-amber-700">
+                  <Button className="bg-amber-800 text-amber-50 hover:bg-amber-700 mt-0.5">
                     Get Started
                   </Button>
                 </form>
-                <p className="text-xs text-amber-700">
-                  Join for free. No credit card required.
-                </p>
               </div>
             </div>
           </div>
