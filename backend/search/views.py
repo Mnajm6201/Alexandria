@@ -45,7 +45,7 @@ class SearchBarView(APIView):
             filters=book_filters,
             query=query,
             limit=5,
-            fields_list=["id", "title"]
+            fields_list=["book_id", "title"]
         )
 
         # RETURNS AUTHORS MATCHING THE SPECIFIED QUERY WITH THE SPECIFIED FIELDS
@@ -55,7 +55,7 @@ class SearchBarView(APIView):
             filters=author_filters,
             query=query,
             limit=5,
-            fields_list=["id", "name"]
+            fields_list=["author_id", "name"]
         )
 
         # add any search result other than the ones listed above here:

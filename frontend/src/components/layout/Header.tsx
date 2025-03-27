@@ -4,7 +4,7 @@
 import Link from "next/link";
 import { BookOpen } from "lucide-react";
 import { useAuth } from "@clerk/nextjs";
-import { Button } from "@/components/ui/button";
+import { Button, buttonVariants } from "@/components/ui/button";
 
 // A header prop for including in each function components to either it's an app header or landing page header
 interface HeaderProps {
@@ -63,22 +63,22 @@ export function Header({ variant = "app" }: HeaderProps) {
           // You can add application-specific navigation links here
           <nav className="hidden md:flex items-center gap-6">
             <Link
-              href="/browse"
+              href="/discovery"
               className="text-sm font-medium text-amber-900 hover:text-amber-700"
             >
-              Browse
-            </Link>
-            <Link
-              href="/my-books"
-              className="text-sm font-medium text-amber-900 hover:text-amber-700"
-            >
-              My Books
+              Discover
             </Link>
             <Link
               href="/community"
               className="text-sm font-medium text-amber-900 hover:text-amber-700"
             >
               Community
+            </Link>
+            <Link
+              href="/club"
+              className="text-sm font-medium text-amber-900 hover:text-amber-700"
+            >
+              Book Club
             </Link>
           </nav>
         )}
@@ -107,9 +107,9 @@ export function Header({ variant = "app" }: HeaderProps) {
               >
                 Log in
               </Link>
-              <Button className="bg-amber-800 text-amber-50 hover:bg-amber-700">
+              <Link href="/auth/sign-up" className={buttonVariants({ variant: "search" })} >
                 Sign up
-              </Button>
+              </Link>
             </div>
           )}
         </div>

@@ -17,7 +17,7 @@ module.exports = {
         },
         border: "var(--border)",
         primary: {
-          DEFAULT: "var(--primary)",
+          DEFAULT: "#111111",
           foreground: "var(--primary-foreground)",
         },
       },

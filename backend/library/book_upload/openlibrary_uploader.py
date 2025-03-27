@@ -135,11 +135,11 @@ class LibraryUpload:
                 bio = bio.get('value', '')
             
             # Create a unique hash for the author
-            unique_hash = self._create_hash(key)
+            author_id = self._create_hash(key)
             
             # Get or create the author
             author, created = Author.objects.get_or_create(
-                unique_hash=unique_hash,
+                author_id=author_id,
                 defaults={
                     'name': name[:250], 
                     'biography': bio,

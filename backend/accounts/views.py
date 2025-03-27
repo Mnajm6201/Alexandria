@@ -194,6 +194,70 @@ class UserProfileView(APIView):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
+# To handle the update user profile changes on the front end
+class UserProfileUpdateView(APIView):
+    permission_classes = [IsAuthenticated]
+
+    def post(self, request):
+        user = request.user
+        
+        try:
+            # Get or create the profile - this is key!
+            profile, created = UserProfile.objects.get_or_create(user=user)
+            
+            # Update the profile data
+            if 'displayName' in request.data:
+                new_username = request.data['displayName']
+
+                # Check if the username already exists
+                if User.objects.exclude(id = user.id).filter(username=new_username).exists():
+                    return Response({
+                        'success': False,
+                        'message': 'Username already taken',
+                        'field': 'displayName'
+                    }, status=status.HTTP_400_BAD_REQUEST)
+
+                user.username = new_username
+                user.save()
+
+            if 'bio' in request.data:
+                profile.bio = request.data['bio']
+                profile.save()
+
+            return Response({
+                'success': True,
+                'message': 'Profile updated successfully'
+            })
+            
+        except Exception as e:
+            # logging the error into a log file
+            import traceback
+            print(f"Error in profile update: {str(e)}")
+            print(traceback.format_exc())
+            
+            return Response({
+                'success': False,
+                'message': str(e)
+            }, status=500)
+
+
+# User delete view
+class UserDeleteView(APIView):
+    permission_classes = [IsAuthenticated]
+
+    def delete(self, request):
+        print("Delete request received")
+        user = request.user
+        try:
+            user.delete()
+            return Response({"success": True, "message": "Account deleted successfully"}, status=status.HTTP_200_OK)
+        except Exception as e:
+            import traceback
+            traceback.print_exc()
+            return Response({"success": False, "message": str(e)}, status=500)
+
+
+
 
 # Password reset view
 class PasswordResetRequestView(APIView):
@@ -265,3 +329,6 @@ class PasswordResetConfirmView(APIView):
 
 # Maybe goign to list it as a ticket to create a webhook for clerk and database connection that way when admin want 
 # to drop an user from database clerk will also
+
+
+# Testing

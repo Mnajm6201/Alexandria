@@ -10,8 +10,11 @@ import {
 import { Button } from "@/components/ui/button";
 import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
 import SearchBar from "@/components/ui/SearchBar";
+import ItemCarousel from "@/components/ui/ItemCarousel";
+import CoverImage from "@/components/ui/CoverImage";
+import { topRated, topRomance, topFiction } from "@/components/ui/book_details/StaticCurated";
 
-    export default function DiscoveryPage() {
+export default function DiscoveryPage() {
     return (
         /**
          * NAVBAR AND SEARCH BAR
@@ -56,62 +59,26 @@ import SearchBar from "@/components/ui/SearchBar";
 
             {/** SUB FEATURE 1 */}
             <section>
-                <h2 className="text-xl font-semibold mb-4 text-[#4A4238]">
-                Top Rated This Week
-                </h2>
-                <ScrollArea>
-                <div className="flex space-x-4 pb-4">
-                    {[1, 2, 3, 4, 5, 6].map((book) => (
-                    <BookCard key={book} />
-                    ))}
-                </div>
-                <ScrollBar orientation="horizontal" />
-                </ScrollArea>
+                <ItemCarousel 
+                    title="Top Rated this Week"
+                    items={topRated}
+                />
             </section>
             
             {/** SUB FEATURE 2 */}
             <section>
-                <h2 className="text-xl font-semibold mb-4 text-[#4A4238]">
-                Because You Read "The Great Gatsby"
-                </h2>
-                <ScrollArea>
-                <div className="flex space-x-4 pb-4">
-                    {[1, 2, 3, 4, 5, 6].map((book) => (
-                    <BookCard key={book} />
-                    ))}
-                </div>
-                <ScrollBar orientation="horizontal" />
-                </ScrollArea>
+                <ItemCarousel 
+                    title="Popular in Fiction"
+                    items={topFiction}
+                />
             </section>
 
             {/** SUB FEATURE 3 */}
             <section>
-                <h2 className="text-xl font-semibold mb-4 text-[#4A4238]">
-                Popular in Mystery
-                </h2>
-                <ScrollArea>
-                <div className="flex space-x-4 pb-4">
-                    {[1, 2, 3, 4, 5, 6].map((book) => (
-                    <BookCard key={book} />
-                    ))}
-                </div>
-                <ScrollBar orientation="horizontal" />
-                </ScrollArea>
-            </section>
-
-            {/** SUB FEATURE 4 */}
-            <section>
-                <h2 className="text-xl font-semibold mb-4 text-[#4A4238]">
-                New Releases
-                </h2>
-                <ScrollArea>
-                <div className="flex space-x-4 pb-4">
-                    {[1, 2, 3, 4, 5, 6].map((book) => (
-                    <BookCard key={book} />
-                    ))}
-                </div>
-                <ScrollBar orientation="horizontal" />
-                </ScrollArea>
+                <ItemCarousel 
+                    title="Popular in Romance"
+                    items={topRomance}
+                />
             </section>
             </div>
         </main>
@@ -152,3 +119,20 @@ import SearchBar from "@/components/ui/SearchBar";
         </div>
     );
     }
+
+    // ADD BACK TMR:
+
+    // {/** SUB FEATURE 2 */}
+    // <section>
+    //     <h2 className="text-xl font-semibold mb-4 text-[#4A4238]">
+    //     Because You Read "The Great Gatsby"
+    //     </h2>
+    //     <ScrollArea>
+    //     <div className="flex space-x-4 pb-4">
+    //         {[1, 2, 3, 4, 5, 6].map((book) => (
+    //         <BookCard key={book} />
+    //         ))}
+    //     </div>
+    //     <ScrollBar orientation="horizontal" />
+    //     </ScrollArea>
+    // </section>
