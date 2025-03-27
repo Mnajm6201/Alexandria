@@ -1,0 +1,60 @@
+[
+  {
+    "photos": [
+      14323006,
+      12916655
+    ],
+    "key": "/authors/OL7315784A",
+    "bio": {
+      "type": "/type/text",
+      "value": "Colleen Hoover is the #1 New York Times and International bestselling author of multiple novels and novellas. She lives in Texas with her husband and their three boys. She is the founder of The Bookworm Box, a non-profit book subscription service and bookstore in Sulphur Springs, Texas. \r\n\r\nFor more information and for a schedule of events, please visit colleenhoover.com. \r\n\r\nTo contact Colleen and her team (Her team's name is Stephanie), please email hooverink@outlook.com"
+    },
+    "remote_ids": {
+      "viaf": "259222571",
+      "goodreads": "5430144",
+      "amazon": "B0BBTHZLRB",
+      "librarything": "hoovercolleen",
+      "isni": "000000038024412X",
+      "wikidata": "Q18348293"
+    },
+    "source_records": [
+      "amazon:8408257668",
+      "amazon:6051736034",
+      "amazon:9124136530",
+      "amazon:6254140705",
+      "bwb:9781432899806",
+      "bwb:9798885786034",
+      "amazon:3423740345",
+      "amazon:504163355X",
+      "bwb:9780008620486",
+      "amazon:2755693444",
+      "bwb:9786073911030"
+    ],
+    "name": "Colleen Hoover",
+    "type": {
+      "key": "/type/author"
+    },
+    "alternate_names": [
+      "Margaret Colleen Fennell",
+      "Margaret Fennell",
+      "Colleen Fennell",
+      "Margaret Hoover",
+      "\ucf5c\ub9b0 \ud6c4\ubc84",
+      "C. Hoover",
+      "Cooleen Hoover",
+      "Hoover  Colleen",
+      "Collen Hoover"
+    ],
+    "birth_date": "December 11, 1979",
+    "latest_revision": 23,
+    "revision": 23,
+    "created": {
+      "type": "/type/datetime",
+      "value": "2016-10-14T08:24:20.294877"
+    },
+    "last_modified": {
+      "type": "/type/datetime",
+      "value": "2024-08-13T03:27:47.420323"
+    }
+  }
+]

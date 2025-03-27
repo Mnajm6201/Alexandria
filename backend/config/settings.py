@@ -133,9 +133,10 @@ AUTH_PASSWORD_VALIDATORS = [
         "NAME": "django.contrib.auth.password_validation.NumericPasswordValidator",
     },
     # adding our password validator.py we created
-    {
-        "NAME": "library.validators.CustomPasswordValidator"
-    },
+    
+    # {
+    #     "NAME": "library.validators.CustomPasswordValidator"
+    # },
 ]
 
 # Internationalization
