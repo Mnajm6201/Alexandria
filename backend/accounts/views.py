@@ -241,6 +241,23 @@ class UserProfileUpdateView(APIView):
             }, status=500)
 
 
+# User delete view
+class UserDeleteView(APIView):
+    permission_classes = [IsAuthenticated]
+
+    def delete(self, request):
+        print("Delete request received")
+        user = request.user
+        try:
+            user.delete()
+            return Response({"success": True, "message": "Account deleted successfully"}, status=status.HTTP_200_OK)
+        except Exception as e:
+            import traceback
+            traceback.print_exc()
+            return Response({"success": False, "message": str(e)}, status=500)
+
+
+
 
 # Password reset view
 class PasswordResetRequestView(APIView):

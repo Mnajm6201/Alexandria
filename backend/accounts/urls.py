@@ -1,6 +1,6 @@
 # accounts/urls.py
 from django.urls import path
-from .views import UserRegistrationView, UserProfileView, UserProfileUpdateView, PasswordResetRequestView, PasswordResetConfirmView, ClerkVerificationView
+from .views import UserRegistrationView, UserProfileView, UserProfileUpdateView, UserDeleteView, PasswordResetRequestView, PasswordResetConfirmView, ClerkVerificationView
 from rest_framework_simplejwt.views import (
     TokenObtainPairView,
     TokenRefreshView,
@@ -13,7 +13,10 @@ urlpatterns = [
     path('clerk/verify/', ClerkVerificationView.as_view(), name='clerk_verify'),
 
     # User profile update
-    path('user/profile/update', UserProfileUpdateView.as_view(), name='profile-update'),
+    path('user/profile/update/', UserProfileUpdateView.as_view(), name='profile-update'),
+
+    # User profile delete
+    path('user/delete', UserDeleteView.as_view(), name='user-delete'),
     
     # Authentication endpoints
     path('register/', UserRegistrationView.as_view(), name='register'),
