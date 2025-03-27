@@ -13,6 +13,7 @@ import {
   BookText,
   Users,
   Coffee,
+  X,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
@@ -21,19 +22,25 @@ import { useEffect, useState } from "react";
 import { useUser } from "@clerk/nextjs";
 import { EditProfileModal } from "@/components/ui/edit/EditProfileModal";
 import { useJWToken } from "../../utils/getJWToken";
-
-
+import { DeleteAccountDialog } from "@/components/ui/delete/DeleteAccountDialog";
+import { useRouter } from "next/navigation";
+import { useAuth } from "@clerk/nextjs";
 
 export default function UserProfile() {
   const { user, isLoaded } = useUser();
+  const { signOut } = useAuth();
   const [userName, setUsername] = useState<string | "">("");
+  const [showDeleteDialog, setShowDeleteDialog] = useState(false);
+  const [isDeleting, setIsDeleting] = useState<boolean>(false);
   const [edit, setEdit] = useState<boolean>(false);
   const [profileData, setProfileData] = useState({
     displayName: "",
     bio: "loading..",
   });
 
-  const { jwtToken, fetchJWToken} = useJWToken();
+  const router = useRouter();
+
+  const { jwtToken, fetchJWToken } = useJWToken();
   useEffect(() => {
     fetchJWToken();
   }, [fetchJWToken]);
@@ -46,36 +53,35 @@ export default function UserProfile() {
     }
   }, [user, isLoaded, jwtToken]);
 
-//   const fetchProfileData = async () => {
-//     try{
-//         const token = await getToken();
-//         const response = await fetch("http://localhost:8000/");
-//     }
-//     catch(error){
-//         console.log("error, ", error);
-//     }
-//   }
+  //   const fetchProfileData = async () => {
+  //     try{
+  //         const token = await getToken();
+  //         const response = await fetch("http://localhost:8000/");
+  //     }
+  //     catch(error){
+  //         console.log("error, ", error);
+  //     }
+  //   }
 
   //Fetching the user's profile data
   const fetchProfileData = async () => {
-    try{
-      const token = jwtToken || await fetchJWToken();
+    try {
+      const token = jwtToken || (await fetchJWToken());
 
-      if(!token){
+      if (!token) {
         console.error("Cannot fetch the JWT token");
         return;
       }
 
-      const response = await fetch('http://localhost:8000/api/auth/profile/', {
+      const response = await fetch("http://localhost:8000/api/auth/profile/", {
         headers: {
-          "Authorization": `Bearer ${token}`,
-          'Content-Type': 'application/json',
-        }
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
       });
 
-
       const data = await response.json();
-      if (response.ok){
+      if (response.ok) {
         console.log("Data is: ", data);
 
         // update the proile with the updated data
@@ -84,24 +90,90 @@ export default function UserProfile() {
           bio: data.bio || "loading..",
         });
 
-
-        if(data.username){
+        if (data.username) {
           setUsername(data.username);
         }
+      } else {
+        console.error("Failed to fetch profile");
+        return {
+          success: false,
+          error: data.message,
+          field: data.field,
+        };
       }
-        else{
-          console.error("Failed to fetch profile");
-          return {
-            success: false,
-            error: data.message,
-            field: data.field
-          }
-        }
-    }
-    catch(err){
+    } catch (err) {
       console.error("error: ", err);
     }
-  }
+  };
+
+ const handleDeleteAccount = async () => {
+   setIsDeleting(true);
+
+   try {
+     const token = jwtToken || (await fetchJWToken());
+
+     if (!token) {
+       console.error("Cannot delete account: No Valid JWT token");
+       setIsDeleting(false);
+       return;
+     }
+
+     console.log("Delete Request Details:");
+     console.log(
+       "JWT Token (first/last 5):",
+       token.slice(0, 5) + "..." + token.slice(-5)
+     );
+     console.log(
+       "Full Endpoint:",
+       "http://localhost:8000/api/auth/user/delete"
+     );
+
+     try {
+       const response = await fetch(
+         "http://localhost:8000/api/auth/user/delete",
+         {
+           method: "DELETE",
+           headers: {
+             Authorization: `Bearer ${token}`,
+             "Content-Type": "application/json",
+           },
+         }
+       );
+
+       console.log("Delete Response Details:");
+       console.log("Response Status:", response.status);
+       console.log("Response Status Text:", response.statusText);
+
+       // Try to get response body for more context
+       const responseBody = await response.text();
+       console.log("Response Body:", responseBody);
+
+       if (response.ok) {
+         const deleteClerk = await fetch("/api/clerk/delete", {
+           method: "POST",
+           credentials: "include",
+         });
+
+         if (!deleteClerk.ok) {
+           console.log("Clerk api error", await deleteClerk.text());
+         }
+
+         console.log("Proceeding to sign out and redirect");
+         await signOut();
+         router.push("/");
+       } else {
+         console.error("Delete failed with response:", responseBody);
+         throw new Error(`Delete failed: ${responseBody}`);
+       }
+     } catch (fetchError) {
+       console.error("Fetch Error:", fetchError);
+     }
+   } catch (error) {
+     console.error("Outer Error:", error);
+   } finally {
+     setIsDeleting(false);
+   }
+ };
 
   // Handling the profile changes
   interface ProfileData {
@@ -114,18 +186,18 @@ export default function UserProfile() {
     setUsername(newProfileData.displayName);
 
     try {
-      const token = jwtToken || await fetchJWToken();
+      const token = jwtToken || (await fetchJWToken());
 
-      if (!token){
+      if (!token) {
         console.error("Cannot save profile: No Valid JWT");
         return;
       }
       const response = await fetch(
-        "http://localhost:8000/api/auth/user/profile/update",
+        "http://localhost:8000/api/auth/user/profile/update/",
         {
           method: "POST",
           headers: {
-            'Authorization': `Bearer ${token}`,
+            Authorization: `Bearer ${token}`,
             "Content-Type": "application/json",
           },
           body: JSON.stringify({
@@ -149,7 +221,6 @@ export default function UserProfile() {
       }
       fetchProfileData();
       console.log("Profile Updated successfully");
-
     } catch (error) {
       if (error instanceof Error) {
         console.error("Error updating profile:", error.message, error.stack);
@@ -189,13 +260,18 @@ export default function UserProfile() {
                     <h1 className="text-2xl font-serif font-bold text-amber-900">
                       {userName}
                     </h1>
-                
 
                     <EditProfileModal
                       isOpen={edit}
                       onClose={() => setEdit(false)}
                       onSave={handleSaveProfile}
                       initialData={profileData}
+                    />
+                    <DeleteAccountDialog
+                      isOpen={showDeleteDialog}
+                      onClose={() => setShowDeleteDialog(false)}
+                      onConfirm={handleDeleteAccount}
+                      isLoading={isDeleting}
                     />
                   </div>
                   <div className="flex gap-2">
@@ -215,6 +291,16 @@ export default function UserProfile() {
                     >
                       <Settings className="h-4 w-4 text-amber-800" />
                       <span className="sr-only">Settings</span>
+                    </Button>
+
+                    <Button
+                      variant="outline"
+                      size="icon"
+                      className="h-8 w-8 border-amber-300"
+                      onClick={() => setShowDeleteDialog(true)}
+                    >
+                      <X className="h-4 w-4 text-amber-800" />
+                      <span className="sr-only">Delete Account</span>
                     </Button>
                   </div>
                 </div>
