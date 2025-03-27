@@ -32,9 +32,11 @@ class UserRegistrationSerializer(serializers.ModelSerializer):
         return user
 
 class UserProfileSerializer(serializers.ModelSerializer):
+    username = serializers.CharField(source='user.username', read_only=True)
+    
     class Meta:
         model = UserProfile
-        fields = ('bio', 'user_location', 'social_links')
+        fields = ('bio', 'user_location', 'social_links', 'username')
 
 # Password forget classes 
 class PasswordResetRequestSerializer(serializers.Serializer):

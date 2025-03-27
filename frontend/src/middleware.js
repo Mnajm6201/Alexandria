@@ -1,24 +1,38 @@
-import { clerkMiddleware } from "@clerk/nextjs/server";
-import { createRouteMatcher } from "@clerk/nextjs/server";
+// middleware.js
+import { NextResponse } from "next/server";
 
-// Define public routes that shouldn't require authentication
-const isPublicRoute = createRouteMatcher([
-  "/",
-  "/auth/sign-in(.*)",
-  "/auth/sign-up(.*)",
-  "/auth/reset-password(.*)",
-  "/auth/sso-callback(.*)",
-]);
+// Define protected routes
+const protectedRoutes = ["/bookclubs", "/profile", "/shelf"];
 
-export default clerkMiddleware({
-  publicRoutes: (req) => isPublicRoute(req),
-});
+export function middleware(req) {
+  const path = req.nextUrl.pathname;
+  console.log(`Middleware running for path: ${path}`);
+
+  // Check if the path is protected
+  const isProtected = protectedRoutes.some(
+    (route) => path === route || path.startsWith(`${route}/`)
+  );
+
+  if (!isProtected) {
+    return NextResponse.next();
+  }
+
+  // Check for your auth cookies
+  const accessToken = req.cookies.get("access_token");
+  const hasAccessToken = !!accessToken;
+
+  console.log(`Protected route. Has access token: ${hasAccessToken}`);
+
+  if (!hasAccessToken) {
+    console.log("No access token, redirecting to home");
+    return NextResponse.redirect(new URL("/", req.url));
+  }
+
+  return NextResponse.next();
+}
 
 export const config = {
   matcher: [
-    // Skip Next.js internals and all static files, unless found in search params
     "/((?!_next|[^?]*\\.(?:html?|css|js(?!on)|jpe?g|webp|png|gif|svg|ttf|woff2?|ico|csv|docx?|xlsx?|zip|webmanifest)).*)",
-    // Always run for API routes
-    "/(api|trpc)(.*)",
   ],
 };

@@ -649,7 +649,7 @@ class BookClub(models.Model):
         related_name='related_book_club',
         null=True,
         blank=True
-        )
+    )
     class Meta:
         verbose_name = "BookClub"
         verbose_name_plural = "BookClubs"
