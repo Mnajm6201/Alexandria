@@ -1,10 +1,133 @@
 {
-  "title": "It Ends With Us",
-  "key": "/works/OL18020194W",
+  "title": "The Great Gatsby",
+  "subjects": [
+    "Married people, fiction",
+    "American fiction (fictional works by one author)",
+    "Fiction, psychological",
+    "Long island (n.y.), fiction",
+    "Fiction",
+    "Rich people",
+    "Mistresses",
+    "Married women",
+    "Traffic accidents",
+    "First loves",
+    "Revenge",
+    "American Manuscripts",
+    "Facsimiles",
+    "Manuscripts",
+    "Antiheroes, l fiction",
+    "Man-woman relationships, fiction",
+    "Upper class",
+    "American literature",
+    "Young adult fiction, comics & graphic novels, classic adaptation",
+    "Young adult fiction, social themes, class differences",
+    "Young adult fiction, classics",
+    "Fiction, historical,  New york (n.y.)",
+    "fiction\"",
+    "Comic books, strips",
+    "Love",
+    "YOUNG ADULT FICTION",
+    "Comics & Graphic Novels",
+    "Classic Adaptation",
+    "Social Themes",
+    "Class Differences",
+    "Historical",
+    "Literary",
+    "Rich",
+    "Criticism and interpretation",
+    "Drama",
+    "Modern fiction",
+    "Classics",
+    "Literature",
+    "Open Library Staff Picks",
+    "Wealth",
+    "Readers",
+    "Economic conditions",
+    "American fiction",
+    "Social life and customs",
+    "Long Now Manual for Civilization",
+    "Fictional Works Publication Type",
+    "Rich people -- Fiction",
+    "Romance fiction",
+    "Long Island (N.Y.) -- Fiction",
+    "Psychological fiction",
+    "Love stories",
+    "Novela",
+    "Relaciones hombre-mujer",
+    "Spanish language materials",
+    "Nouveau riche",
+    "Reading Level-Grade 11",
+    "Reading Level-Grade 12",
+    "FICTION / General",
+    "Moral conditions",
+    "Manners and customs",
+    "Fitzgerald, f. scott (francis scott), 1896-1940",
+    "Large type books",
+    "Nineteen twenties",
+    "English fiction",
+    "New york (state), fiction",
+    "Wives",
+    "Relations entre hommes et femmes",
+    "Romans, nouvelles",
+    "Classes sup\u00e9rieures",
+    "Nouveaux riches",
+    "Premier amour",
+    "Riches",
+    "Ma\u00eetresses",
+    "Vengeance",
+    "Roman am\u00e9ricain",
+    "Textual Criticism",
+    "Great Gatsby (Fitzgerald, F. Scott)",
+    "Romance Norte Americano",
+    "Fiction, friendship",
+    "Fiction, classics",
+    "Adultery",
+    "Accidents de la route",
+    "Millionaires",
+    "American Dream",
+    "Millionnaires",
+    "R\u00eave am\u00e9ricain",
+    "Ann\u00e9es vingt (Vingti\u00e8me si\u00e8cle)",
+    "Tr\u00e1nsito",
+    "Accidentes",
+    "Mujeres casadas",
+    "Primer amor",
+    "Cuentos de amor",
+    "Fiction, city life",
+    "Fiction, romance, historical, american",
+    "Fiction, romance, historical, 20th century",
+    "Fiction, historical, world war i",
+    "Traffic accidents--Fiction",
+    "First loves--Fiction",
+    "Rich people--Fiction",
+    "Mistresses--Fiction",
+    "Revenge--Fiction",
+    "Long Island (N.Y.)--Fiction",
+    "Novel",
+    "American fiction (collections), 20th century",
+    "Fiction, fantasy, romance",
+    "Fiction, action & adventure",
+    "Translations into Chinese",
+    "American literature, history and criticism, 19th century",
+    "Chang pian xiao shuo",
+    "New York (State)",
+    "First loves -- Fiction",
+    "Rich people -- New York (State) -- New York -- Fiction",
+    "New York (State) -- Long Island",
+    "New York (State) -- New York",
+    "Fictional works [publication type]",
+    "Man-woman relationships--new york (state)--long island--fiction",
+    "Upper class--new york (state)--long island--fiction",
+    "Ps3511.i9 g7 1995b",
+    "813/.52",
+    "Fiction, general",
+    "Fiction, romance, general"
+  ],
+  "key": "/works/OL468431W",
   "authors": [
     {
       "author": {
-        "key": "/authors/OL7315784A"
+        "key": "/authors/OL27349A"
       },
       "type": {
         "key": "/type/author_role"
@@ -14,44 +137,149 @@
   "type": {
     "key": "/type/work"
   },
-  "description": {
-    "type": "/type/text",
-    "value": "Lily hasn\u2019t always had it easy, but that\u2019s never stopped her from working hard for the life she wants. She\u2019s come a long way from the small town where she grew up\u2014she graduated from college, moved to Boston, and started her own business. And when she feels a spark with a gorgeous neurosurgeon named Ryle Kincaid, everything in Lily\u2019s life seems too good to be true.\r\n\r\nRyle is assertive, stubborn, maybe even a little arrogant. He\u2019s also sensitive, brilliant, and has a total soft spot for Lily. And the way he looks in scrubs certainly doesn\u2019t hurt. Lily can\u2019t get him out of her head. But Ryle\u2019s complete aversion to relationships is disturbing. Even as Lily finds herself becoming the exception to his \u201cno dating\u201d rule, she can\u2019t help but wonder what made him that way in the first place.\r\n\r\nAs questions about her new relationship overwhelm her, so do thoughts of Atlas Corrigan\u2014her first love and a link to the past she left behind. He was her kindred spirit, her protector. When Atlas suddenly reappears, everything Lily has built with Ryle is threatened.\r\n\r\nWith this bold and deeply personal novel, It Ends With Us is a heart-wrenching story and an unforgettable tale of love that comes at the ultimate price."
-  },
   "covers": [
-    10473609,
-    12501970,
-    10126667,
-    12498414,
-    12503959,
-    12209375
+    10590366,
+    -1,
+    8972771,
+    10113819,
+    10643511,
+    11510034,
+    10502606,
+    10552715,
+    10654844,
+    10843903,
+    11502190,
+    11972211,
+    8432047,
+    9367463,
+    14578,
+    10245055,
+    10757874,
+    12815620,
+    12339847,
+    12622069,
+    12752072,
+    12906899,
+    12918723,
+    2206155,
+    3169298,
+    3191857,
+    2207242,
+    2206154,
+    8943199,
+    8955841,
+    9248279,
+    10446518,
+    10492048,
+    10549499,
+    10549500,
+    10849944,
+    10851231,
+    10854642,
+    10862567,
+    10862568,
+    10862569,
+    12111502,
+    12219625,
+    12224850,
+    12253320,
+    12300274,
+    12306931,
+    12348634,
+    12460229,
+    12461562,
+    12543834,
+    12655917,
+    12882405,
+    12973272,
+    10780935
+  ],
+  "description": "Here is a novel, glamorous, ironical, compassionate \u2013 a marvelous fusion into unity of the curious incongruities of the life of the period \u2013 which reveals a hero like no other \u2013 one who could live at no other time and in no other place. But he will live as a character, we surmise, as long as the memory of any reader lasts.\r\n\r\n\"There was something gorgeous about him, some heightened sensitivity to the promises of life.... It was an extraordinary gift for hope, a romantic readiness such as I have never found in any other person and which it is not likely I shall ever find again.\"\r\n\r\nIt is the story of this Jay Gatsby who came so mysteriously to West Egg, of his sumptuous entertainments, and of his love for Daisy Buchanan \u2013 a story that ranges from pure lyrical beauty to sheer brutal realism, and is infused with a sense of the strangeness of human circumstance in a heedless universe.\r\n\r\nIt is a magical, living book, blended of irony, romance, and mysticism.\r\n\r\n--first edition jacket\r\n\r\n\r\n----------\r\nAlso contained in:\r\n\r\n - [The Fitzgerald Reader](https://openlibrary.org/works/OL468551W/The_Fitzgerald_Reader)\r\n - [Three Novels of F. Scott Fitzgerald ](https://openlibrary.org/works/OL468557W)",
+  "links": [
+    {
+      "title": "VIAF ID: 186355688 (Work)",
+      "url": "http://viaf.org/viaf/186355688",
+      "type": {
+        "key": "/type/link"
+      }
+    },
+    {
+      "title": "Wikipedia",
+      "url": "http://en.wikipedia.org/wiki/The_Great_Gatsby",
+      "type": {
+        "key": "/type/link"
+      }
+    },
+    {
+      "title": "The Great Gatsby: Book Summary | CliffsNotes",
+      "url": "https://www.cliffsnotes.com/literature/g/the-great-gatsby/book-summary",
+      "type": {
+        "key": "/type/link"
+      }
+    },
+    {
+      "title": "SparkNotes: The Great Gatsby",
+      "url": "http://www.sparknotes.com/lit/gatsby/",
+      "type": {
+        "key": "/type/link"
+      }
+    },
+    {
+      "title": "The Great Gatsby by F Scott Fitzgerald - review | The Guardian",
+      "url": "https://www.theguardian.com/childrens-books-site/2013/sep/12/review-great-gatsby-f-scott-fitzgerald",
+      "type": {
+        "key": "/type/link"
+      }
+    },
+    {
+      "title": "F. Scott Fitzgerald on Writing 'The Great Gatsby' | Big Think",
+      "url": "http://bigthink.com/purpose-inc/f-scott-fitzgerald-on-writing-the-great-gatsby",
+      "type": {
+        "key": "/type/link"
+      }
+    }
   ],
   "subject_places": [
-    "Boston (Mass.)"
+    "Long Island",
+    "New York",
+    "United States",
+    "East Egg",
+    "West Egg",
+    "Long Island (N.Y.)",
+    "New York (State)",
+    "America",
+    "New York (\u00c9tat)",
+    "Mei guo"
   ],
-  "subjects": [
-    "Fiction, Romance, Contemporary, Life change events",
-    "Triangles (Interpersonal relations)",
-    "Man-woman relationships",
-    "Neurosurgeons",
-    "First loves",
-    "Businesswomen",
-    "Fiction",
-    "Contemporary Women",
-    "New York Times bestseller",
-    "Fiction, romance, contemporary",
-    "Man-woman relationships, fiction",
-    "Fiction, women",
-    "collectionid:nyt2020s"
+  "subject_people": [
+    "Nick Carraway",
+    "Jay Gatsby",
+    "Daisy Buchanan",
+    "Tom Buchanan",
+    "F. Scott Fitzgerald (1896-1940)"
   ],
-  "latest_revision": 67,
-  "revision": 67,
+  "subject_times": [
+    "1922",
+    "Modern times",
+    "Xian dai"
+  ],
+  "excerpts": [
+    {
+      "excerpt": "In my younger and more vulnerable years my father gave me some advice that I've been turning over in my mind ever since.",
+      "comment": "first sentence",
+      "author": {
+        "key": "/people/seabelis"
+      }
+    }
+  ],
+  "latest_revision": 78,
+  "revision": 78,
   "created": {
     "type": "/type/datetime",
-    "value": "2018-12-06T15:20:02.050673"
+    "value": "2009-12-08T02:51:38.468599"
   },
   "last_modified": {
     "type": "/type/datetime",
-    "value": "2024-12-23T09:10:28.372342"
+    "value": "2024-10-02T10:56:48.809594"
   }
 }

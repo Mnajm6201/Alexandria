@@ -109,6 +109,20 @@ search page calls the search results with size 20
 # SearchBar --> searchResults(5)
 # SearchPage --> searchresults[20]
 
+searchBarView already returns a filtered list of books and authors. if we want the search results to do the same we honestly can
+if we want the search results page to contain authors too. for now it will books
+
+we need to modularize the searchBarView to work with search results and the search bar, since search results will use the same
+searching property. search bar will return the closest matches of either books or authors. search bar will return the top 5
+but search results will return a lot more but we will find a healthy cap to not render so many books (might be fast tho with
+indexed searches)
+
+we can have the SearchBarView actually include books or authors in the final returned list (next to each result have a grayed
+out word indicating if this result is a book or author *but how we do determine the difference?*), then use those results for
+the search bar or search results and from there we can specify how many to return. this will keep it modular so when we edit the
+View it take effect in all search areas (if we wanted to add genre searching for example, changing the view to do so will take 
+effect everywhere)
+
 
 SEARCH RESULTS PAGE
 

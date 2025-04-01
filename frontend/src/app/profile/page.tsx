@@ -244,7 +244,7 @@ export default function UserProfile() {
               <div className="relative">
                 <div className="h-32 w-32 rounded-full overflow-hidden border-4 border-amber-200 bg-amber-100">
                   <Image
-                    src="/placeholder.svg?height=128&width=128"
+                    src="/me.jpg"
                     alt="Profile"
                     width={128}
                     height={128}
@@ -387,9 +387,9 @@ export default function UserProfile() {
                     href="#"
                     className="text-sm font-medium text-amber-900 hover:underline line-clamp-1"
                   >
-                    Book Title 1
+                    Dune
                   </Link>
-                  <p className="text-xs text-amber-700 line-clamp-1">Author Name</p>
+                  <p className="text-xs text-amber-700 line-clamp-1">Frank Herbert</p>
                 </div>
               </div>
 
@@ -409,9 +409,9 @@ export default function UserProfile() {
                     href="#"
                     className="text-sm font-medium text-amber-900 hover:underline line-clamp-1"
                   >
-                    Book Title 2
+                    Fourth Wing
                   </Link>
-                  <p className="text-xs text-amber-700 line-clamp-1">Author Name</p>
+                  <p className="text-xs text-amber-700 line-clamp-1">Rebecca Yarros</p>
                 </div>
               </div>
 
@@ -431,9 +431,9 @@ export default function UserProfile() {
                     href="#"
                     className="text-sm font-medium text-amber-900 hover:underline line-clamp-1"
                   >
-                    Book Title 3
+                    Catch-22
                   </Link>
-                  <p className="text-xs text-amber-700 line-clamp-1">Author Name</p>
+                  <p className="text-xs text-amber-700 line-clamp-1">Joseph Heller</p>
                 </div>
               </div>
 
@@ -441,7 +441,7 @@ export default function UserProfile() {
               <div className="space-y-2">
                 <div className="aspect-[2/3] overflow-hidden rounded-md bg-amber-200">
                   <Image
-                    src="https://covers.openlibrary.org/b/id/14422282-L.jpg"
+                    src="https://covers.openlibrary.org/b/id/191078-L.jpg"
                     alt="Book 4"
                     width={100}
                     height={150}
@@ -453,9 +453,9 @@ export default function UserProfile() {
                     href="#"
                     className="text-sm font-medium text-amber-900 hover:underline line-clamp-1"
                   >
-                    Book Title 4
+                    Infinite Jest
                   </Link>
-                  <p className="text-xs text-amber-700 line-clamp-1">Author Name</p>
+                  <p className="text-xs text-amber-700 line-clamp-1">David Foster Wallace</p>
                 </div>
               </div>
             </div>
@@ -485,13 +485,6 @@ export default function UserProfile() {
                   </div>
                 ))}
               </div>
-              <Button
-                variant="ghost"
-                size="sm"
-                className="mt-4 w-full text-amber-800"
-              >
-                View All Achievements
-              </Button>
             </div>
 
             {/* Quick Links */}
@@ -541,8 +534,8 @@ export default function UserProfile() {
               </h2>
               <div className="space-y-4">
                 <div className="flex justify-between">
-                  <span className="text-amber-800">Books Read (2023):</span>
-                  <span className="font-medium text-amber-900">32</span>
+                  <span className="text-amber-800">Books Read (2025):</span>
+                  <span className="font-medium text-amber-900">3</span>
                 </div>
                 <div className="flex justify-between">
                   <span className="text-amber-800">Reading Goal:</span>
@@ -556,21 +549,6 @@ export default function UserProfile() {
                   <span className="text-amber-800">Favorite Genre:</span>
                   <span className="font-medium text-amber-900">Fiction</span>
                 </div>
-              </div>
-              <div className="mt-4 rounded-lg bg-amber-100 p-3">
-                <div className="flex items-center justify-between">
-                  <span className="text-sm text-amber-800">
-                    2023 Reading Challenge
-                  </span>
-                  <span className="text-sm font-medium text-amber-900">
-                    64% Complete
-                  </span>
-                </div>
-                <Progress
-                  value={64}
-                  className="mt-2 h-2 bg-amber-200"
-                  indicatorclassname="bg-amber-600"
-                />
               </div>
             </div>
 
