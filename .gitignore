@@ -25,5 +25,8 @@ __pycache__/
 logs/
 *.logs
 
+# Ignore all content of media directory but keep the directory itself
+media/*
+!media/.gitkeep
 
 node_modules
