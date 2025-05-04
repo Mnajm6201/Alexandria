@@ -423,14 +423,14 @@ class UserProfile(models.Model):
 
     user = models.OneToOneField('User', on_delete=models.CASCADE, related_name="related_user_profile")
     bio = models.TextField(null=True, blank=True)
-    user_location = models.CharField(max_length=100, blank=True, null=True)
+    zip_code = models.CharField(max_length=10, blank=False, null=False, default="11210") 
     social_links = models.CharField(blank=True, null=True)
 
     class Meta:
         verbose_name = "UserProfile"
         verbose_name_plural = "UserProfiles"
         indexes = [
-            models.Index(fields=['user_location'])
+            models.Index(fields=['zip_code'])
         ]
 
     def __str__(self):

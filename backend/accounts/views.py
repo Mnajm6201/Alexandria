@@ -6,6 +6,7 @@ from rest_framework.response import Response
 from rest_framework import status
 from rest_framework_simplejwt.tokens import RefreshToken
 from django.conf import settings
+from django.core.files.storage import FileSystemStorage
 from .models import User
 
 class ClerkVerificationView(APIView):
@@ -94,6 +95,7 @@ class ClerkVerificationView(APIView):
                 try:
                     print("Explicitly checking if user exists in database...")
                     existing_user = User.objects.filter(email=email).first()
+                    created = False # More dynamic when user are creating their profile
                     if existing_user:
                         print(f"Found existing user in database: id={existing_user.id}, email={existing_user.email}")
                         user = existing_user
@@ -127,7 +129,7 @@ class ClerkVerificationView(APIView):
                     'access': str(refresh.access_token),
                     'user_id': user.id,
                     'email': user.email,
-                    'is_new_user': created if 'created' in locals() else False
+                    'is_new_user': created 
                 })
                 
             except jwt.DecodeError:
@@ -152,6 +154,7 @@ from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework.permissions import AllowAny, IsAuthenticated
+from rest_framework.parsers import MultiPartParser, FormParser
 from .serializers import UserRegistrationSerializer, UserProfileSerializer
 from django.contrib.auth.tokens import default_token_generator
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
@@ -183,7 +186,12 @@ class UserProfileView(APIView):
     def get(self, request):
         profile = request.user.related_user_profile
         serializer = UserProfileSerializer(profile)
-        return Response(serializer.data)
+
+        # checking if the email == to the username
+        response_data = serializer.data
+        response_data['need_setup'] = (request.user.username == request.user.email) # boolean flag
+        response_data['profile_pic'] = request.user.profile_pic
+        return Response(response_data)
 
     def put(self, request):
         profile = request.user.related_user_profile
@@ -196,13 +204,13 @@ class UserProfileView(APIView):
 
 # To handle the update user profile changes on the front end
 class UserProfileUpdateView(APIView):
-    permission_classes = [IsAuthenticated]
+    permission_classes = [IsAuthenticated]  
 
+    
     def post(self, request):
         user = request.user
-        
         try:
-            # Get or create the profile - this is key!
+            # Get or create the profile
             profile, created = UserProfile.objects.get_or_create(user=user)
             
             # Update the profile data
@@ -222,7 +230,14 @@ class UserProfileUpdateView(APIView):
 
             if 'bio' in request.data:
                 profile.bio = request.data['bio']
-                profile.save()
+                
+            if 'zipCode' in request.data:
+                profile.zip_code = request.data['zipCode']
+                
+            if 'socialLinks' in request.data:
+                profile.social_links = request.data['socialLinks']
+
+            profile.save()
 
             return Response({
                 'success': True,
@@ -240,6 +255,59 @@ class UserProfileUpdateView(APIView):
                 'message': str(e)
             }, status=500)
 
+
+# New endpoint for user uploading their profile picture
+class UserProfilePictureUpdateView(APIView):
+    permission_classes = [IsAuthenticated]
+    parser_classes = [MultiPartParser, FormParser]
+
+    def post(self, request):
+        user = request.user
+
+        try:
+            # Get or create the profile
+            profile, created = UserProfile.objects.get_or_create(user=user)
+
+            # Debugging statements
+            print("Content-Type:", request.META.get('CONTENT_TYPE'))
+            print("Request FILES:", request.FILES)
+
+            if 'profilePicture' in request.FILES:
+                profile_pic = request.FILES['profilePicture']
+
+                # making sure that we have a media directory
+                import os
+                profile_pic_dir = os.path.join(settings.MEDIA_ROOT, "profile_pics")
+                os.makedirs(profile_pic_dir, exist_ok=True)
+
+                # Save the file 
+                fs = FileSystemStorage()
+                filename = fs.save(f"profile_pics/{user.id}_{profile_pic.name}", profile_pic)
+                uploaded_file_url = fs.url(filename)
+                user.profile_pic = uploaded_file_url
+                user.save()
+
+                return Response({
+                    'success': True,
+                    'message': 'Profile picture updated successfully',
+                    'profile_pic_url': uploaded_file_url
+                })
+            else:   
+                return Response({
+                    'success': False,
+                    'message': 'No profile picture provided'
+                }, status=400)
+        
+        except Exception as e:
+            # Log the error
+            import traceback
+            print(f"Error in profile picture update: {str(e)}")
+            print(traceback.format_exc())
+            
+            return Response({
+                'success': False,
+                'message': str(e)
+            }, status=500)
 
 # User delete view
 class UserDeleteView(APIView):

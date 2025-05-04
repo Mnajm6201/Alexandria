@@ -1,6 +1,6 @@
 # accounts/urls.py
 from django.urls import path
-from .views import UserRegistrationView, UserProfileView, UserProfileUpdateView, UserDeleteView, PasswordResetRequestView, PasswordResetConfirmView, ClerkVerificationView
+from .views import UserRegistrationView, UserProfileView, UserProfileUpdateView, UserProfilePictureUpdateView, UserDeleteView, PasswordResetRequestView, PasswordResetConfirmView, ClerkVerificationView
 from rest_framework_simplejwt.views import (
     TokenObtainPairView,
     TokenRefreshView,
@@ -14,6 +14,9 @@ urlpatterns = [
 
     # User profile update
     path('user/profile/update/', UserProfileUpdateView.as_view(), name='profile-update'),
+
+    # User profile pic upload
+    path('user/profile/update-picture/', UserProfilePictureUpdateView.as_view(), name='update-profile-picture'),
 
     # User profile delete
     path('user/delete', UserDeleteView.as_view(), name='user-delete'),
