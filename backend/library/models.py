@@ -329,7 +329,7 @@ class UserBook(models.Model):
 
     user = models.ForeignKey('User', on_delete=models.CASCADE, related_name='related_user_books')
     book = models.ForeignKey('Book', on_delete=models.CASCADE, related_name='related_user_books')
-    read_status = models.CharField(max_length=20, choices=READ_STATUS_CHOICES, default='Want to Read')
+    read_status = models.CharField(max_length=20, choices=READ_STATUS_CHOICES, null=True, blank=True)
     page_num = models.PositiveBigIntegerField(default=0)
     is_owned = models.BooleanField(default=False)
     date_started = models.DateField(blank=True, null=True)
