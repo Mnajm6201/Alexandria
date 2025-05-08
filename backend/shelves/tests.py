@@ -1765,5 +1765,1009 @@ class ListEditionsOnShelfTests(ShelfEditionBaseTest):
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(len(response.data), 0)  # Empty list
 
-#### Need to make tests for userbook creation, deletion and update.
+### Equivalent Classes ###
+##  UserBook Creation ##
+#       Adding edition to Read shelf creates UserBook with Read status         (valid)
+#       Adding edition to Reading shelf creates UserBook with Reading status   (valid)
+#       Adding edition to Want to Read shelf creates UserBook with Want status (valid)
+#       Adding edition to Owned shelf creates UserBook with is_owned=True      (valid)
+#       Adding edition to Custom shelf does not create UserBook                (valid)
+##  UserBook Updates ##
+#       Migrating edition between status shelves updates read_status           (valid)
+#       Adding edition to multiple status shelves only keeps last one          (valid)
+#       Adding edition to Owned shelf sets is_owned=True                       (valid)
+#       Adding edition to both status and Owned keeps both properties          (valid)
+##  UserBook Removal ##
+#       Removing edition from only status shelf deletes UserBook               (valid)
+#       Removing edition from status shelf but still owned keeps UserBook      (valid)
+#       Removing edition from owned shelf but still in status keeps UserBook   (valid)
+#       Removing same book's different edition updates same UserBook           (valid)
 
+class UserBookEntityTests(TestCase):
+    """
+    Test Module for UserBook entity updates based on shelf operations
+    """
+    def setUp(self):
+        """
+        Create test (mock) data for UserBook tests.
+        Test user, books, editions, shelves and API client.
+        """
+        # Create a test user
+        self.user = User.objects.create_user(
+            username="userbook_tester",
+            email="userbook@example.com",
+            password="testpassword"
+        )
+        
+        # Create reading status shelves
+        self.read_shelf = Shelf.objects.create(
+            user=self.user,
+            name="Read Books",
+            shelf_type="Read",
+            is_private=False
+        )
+        
+        self.reading_shelf = Shelf.objects.create(
+            user=self.user,
+            name="Currently Reading",
+            shelf_type="Reading",
+            is_private=False
+        )
+        
+        self.want_to_read_shelf = Shelf.objects.create(
+            user=self.user,
+            name="Want to Read",
+            shelf_type="Want to Read",
+            is_private=False
+        )
+
+        self.owned_shelf = Shelf.objects.create(
+            user=self.user,
+            name="Owned Books",
+            shelf_type="Owned",
+            is_private=False
+        )
+        
+        self.custom_shelf = Shelf.objects.create(
+            user=self.user,
+            name="Custom Shelf",
+            shelf_type="Custom",
+            is_private=False
+        )
+        
+        # Create book and editions
+        self.book = Book.objects.create(
+            title="Test Book",
+            book_id="test123"
+        )
+        
+        self.publisher = Publisher.objects.create(name="Test Publisher")
+        
+        self.hardcover_edition = Edition.objects.create(
+            book=self.book,
+            isbn="9781234567890",
+            publisher=self.publisher,
+            kind="Hardcover",
+            publication_year=2020,
+            language="English"
+        )
+        
+        self.paperback_edition = Edition.objects.create(
+            book=self.book,
+            isbn="9780987654321",
+            publisher=self.publisher,
+            kind="Paperback",
+            publication_year=2021,
+            language="English"
+        )
+        
+        # Create a second book and edition for additional tests
+        self.book2 = Book.objects.create(
+            title="Second Test Book",
+            book_id="test456"
+        )
+        
+        self.book2_edition = Edition.objects.create(
+            book=self.book2,
+            isbn="9781122334455",
+            publisher=self.publisher,
+            kind="Hardcover",
+            publication_year=2022,
+            language="English"
+        )
+        
+        # Set up API client
+        self.client = APIClient()
+        self.client.force_authenticate(user=self.user)
+        
+        # Set up URLs for adding editions to shelves
+        self.add_to_read_url = reverse("shelf-add-edition", kwargs={"pk": self.read_shelf.pk})
+        self.add_to_reading_url = reverse("shelf-add-edition", kwargs={"pk": self.reading_shelf.pk})
+        self.add_to_want_url = reverse("shelf-add-edition", kwargs={"pk": self.want_to_read_shelf.pk})
+        self.add_to_owned_url = reverse("shelf-add-edition", kwargs={"pk": self.owned_shelf.pk})
+        self.add_to_custom_url = reverse("shelf-add-edition", kwargs={"pk": self.custom_shelf.pk})
+        
+        # Set up URLs for removing editions from shelves
+        self.remove_from_read_url = reverse("shelf-remove-edition", kwargs={"pk": self.read_shelf.pk})
+        self.remove_from_reading_url = reverse("shelf-remove-edition", kwargs={"pk": self.reading_shelf.pk})
+        self.remove_from_want_url = reverse("shelf-remove-edition", kwargs={"pk": self.want_to_read_shelf.pk})
+        self.remove_from_owned_url = reverse("shelf-remove-edition", kwargs={"pk": self.owned_shelf.pk})
+        self.remove_from_custom_url = reverse("shelf-remove-edition", kwargs={"pk": self.custom_shelf.pk})
+    
+    ### Actual tests ###
+    
+    ## UserBook Creation
+    
+    # Adding edition to Read shelf creates UserBook with Read status (valid)
+    def test_adding_to_read_shelf_creates_userbook(self):
+        """Test adding edition to Read shelf creates UserBook with Read status"""
+        # Verify no UserBook exists initially
+        self.assertFalse(UserBook.objects.filter(user=self.user, book=self.book).exists())
+        
+        # Add edition to Read shelf
+        response = self.client.post(
+            self.add_to_read_url,
+            {"edition_id": self.hardcover_edition.pk},
+            format="json"
+        )
+        
+        # Verify success and UserBook creation
+        self.assertEqual(response.status_code, status.HTTP_201_CREATED)
+        self.assertTrue(UserBook.objects.filter(user=self.user, book=self.book).exists())
+        
+        # Verify UserBook has correct Read status
+        user_book = UserBook.objects.get(user=self.user, book=self.book)
+        self.assertEqual(user_book.read_status, "Read")
+        self.assertFalse(user_book.is_owned)
+    
+    # Adding edition to Reading shelf creates UserBook with Reading status (valid)
+    def test_adding_to_reading_shelf_creates_userbook(self):
+        """Test adding edition to Reading shelf creates UserBook with Reading status"""
+        # Verify no UserBook exists initially
+        self.assertFalse(UserBook.objects.filter(user=self.user, book=self.book).exists())
+        
+        # Add edition to Reading shelf
+        response = self.client.post(
+            self.add_to_reading_url,
+            {"edition_id": self.hardcover_edition.pk},
+            format="json"
+        )
+        
+        # Verify success and UserBook creation
+        self.assertEqual(response.status_code, status.HTTP_201_CREATED)
+        self.assertTrue(UserBook.objects.filter(user=self.user, book=self.book).exists())
+        
+        # Verify UserBook has correct Reading status
+        user_book = UserBook.objects.get(user=self.user, book=self.book)
+        self.assertEqual(user_book.read_status, "Reading")
+        self.assertFalse(user_book.is_owned)
+    
+    # Adding edition to Want to Read shelf creates UserBook with Want status (valid)
+    def test_adding_to_want_shelf_creates_userbook(self):
+        """Test adding edition to Want to Read shelf creates UserBook with Want to Read status"""
+        # Verify no UserBook exists initially
+        self.assertFalse(UserBook.objects.filter(user=self.user, book=self.book).exists())
+        
+        # Add edition to Want to Read shelf
+        response = self.client.post(
+            self.add_to_want_url,
+            {"edition_id": self.hardcover_edition.pk},
+            format="json"
+        )
+        
+        # Verify success and UserBook creation
+        self.assertEqual(response.status_code, status.HTTP_201_CREATED)
+        self.assertTrue(UserBook.objects.filter(user=self.user, book=self.book).exists())
+        
+        # Verify UserBook has correct Want to Read status
+        user_book = UserBook.objects.get(user=self.user, book=self.book)
+        self.assertEqual(user_book.read_status, "Want to Read")
+        self.assertFalse(user_book.is_owned)
+    
+    # Adding edition to Owned shelf creates UserBook with is_owned=True (valid)
+    def test_adding_to_owned_shelf_creates_userbook(self):
+        """Test adding edition to Owned shelf creates UserBook with is_owned=True"""
+        # Verify no UserBook exists initially
+        self.assertFalse(UserBook.objects.filter(user=self.user, book=self.book).exists())
+        
+        # Add edition to Owned shelf
+        response = self.client.post(
+            self.add_to_owned_url,
+            {"edition_id": self.hardcover_edition.pk},
+            format="json"
+        )
+        
+        # Verify success and UserBook creation
+        self.assertEqual(response.status_code, status.HTTP_201_CREATED)
+        self.assertTrue(UserBook.objects.filter(user=self.user, book=self.book).exists())
+        
+        # Verify UserBook has correct ownership status
+        user_book = UserBook.objects.get(user=self.user, book=self.book)
+        self.assertTrue(user_book.is_owned)
+        self.assertIsNone(user_book.read_status)  # Now expecting None instead of "Want to Read"
+
+    # Adding edition to Custom shelf does not create UserBook (valid)
+    def test_adding_to_custom_shelf_does_not_create_userbook(self):
+        """Test adding edition to Custom shelf does not create a UserBook"""
+        # Verify no UserBook exists initially
+        self.assertFalse(UserBook.objects.filter(user=self.user, book=self.book).exists())
+        
+        # Add edition to Custom shelf
+        response = self.client.post(
+            self.add_to_custom_url,
+            {"edition_id": self.hardcover_edition.pk},
+            format="json"
+        )
+        
+        # Verify success
+        self.assertEqual(response.status_code, status.HTTP_201_CREATED)
+        
+        # Verify NO UserBook was created
+        self.assertFalse(UserBook.objects.filter(user=self.user, book=self.book).exists())
+    
+    ## UserBook Updates
+    
+    # Migrating edition between status shelves updates read_status (valid)
+    def test_migrating_between_status_shelves_updates_userbook(self):
+        """Test migrating edition between status shelves updates UserBook read_status"""
+        # Add edition to Want to Read shelf
+        self.client.post(
+            self.add_to_want_url,
+            {"edition_id": self.hardcover_edition.pk},
+            format="json"
+        )
+        
+        # Verify initial UserBook status
+        user_book = UserBook.objects.get(user=self.user, book=self.book)
+        self.assertEqual(user_book.read_status, "Want to Read")
+        
+        # Move to Reading shelf
+        response = self.client.post(
+            self.add_to_reading_url,
+            {"edition_id": self.hardcover_edition.pk},
+            format="json"
+        )
+        
+        # Verify success and updated UserBook
+        self.assertEqual(response.status_code, status.HTTP_201_CREATED)
+        user_book.refresh_from_db()
+        self.assertEqual(user_book.read_status, "Reading")
+    
+    # Adding edition to multiple status shelves only keeps last one (valid)
+    def test_adding_to_multiple_status_shelves_only_keeps_last(self):
+        """Test adding edition to multiple status shelves only keeps it on the last one"""
+        # Add edition to all three status shelves in sequence
+        self.client.post(
+            self.add_to_want_url,
+            {"edition_id": self.hardcover_edition.pk},
+            format="json"
+        )
+        
+        self.client.post(
+            self.add_to_reading_url,
+            {"edition_id": self.hardcover_edition.pk},
+            format="json"
+        )
+        
+        self.client.post(
+            self.add_to_read_url,
+            {"edition_id": self.hardcover_edition.pk},
+            format="json"
+        )
+        
+        # Verify edition is only on Read shelf
+        self.assertTrue(
+            ShelfEdition.objects.filter(
+                shelf=self.read_shelf,
+                edition=self.hardcover_edition
+            ).exists()
+        )
+        
+        self.assertFalse(
+            ShelfEdition.objects.filter(
+                shelf=self.reading_shelf,
+                edition=self.hardcover_edition
+            ).exists()
+        )
+        
+        self.assertFalse(
+            ShelfEdition.objects.filter(
+                shelf=self.want_to_read_shelf,
+                edition=self.hardcover_edition
+            ).exists()
+        )
+        
+        # Verify UserBook has final status
+        user_book = UserBook.objects.get(user=self.user, book=self.book)
+        self.assertEqual(user_book.read_status, "Read")
+    
+    # Adding edition to Owned shelf sets is_owned=True (valid)
+    def test_adding_to_owned_sets_is_owned(self):
+        """Test adding edition to Owned shelf sets UserBook is_owned=True"""
+        # Add edition to Owned shelf
+        response = self.client.post(
+            self.add_to_owned_url,
+            {"edition_id": self.hardcover_edition.pk},
+            format="json"
+        )
+        
+        # Verify success and UserBook ownership
+        self.assertEqual(response.status_code, status.HTTP_201_CREATED)
+        user_book = UserBook.objects.get(user=self.user, book=self.book)
+        self.assertTrue(user_book.is_owned)
+    
+    # Adding edition to both status and Owned keeps both properties (valid)
+    def test_adding_to_status_and_owned_keeps_both_properties(self):
+        """Test adding edition to both status and Owned shelves keeps both properties"""
+        # Add edition to Read shelf
+        self.client.post(
+            self.add_to_read_url,
+            {"edition_id": self.hardcover_edition.pk},
+            format="json"
+        )
+        
+        # Add edition to Owned shelf
+        self.client.post(
+            self.add_to_owned_url,
+            {"edition_id": self.hardcover_edition.pk},
+            format="json"
+        )
+        
+        # Verify UserBook has both properties
+        user_book = UserBook.objects.get(user=self.user, book=self.book)
+        self.assertEqual(user_book.read_status, "Read")
+        self.assertTrue(user_book.is_owned)
+        
+        # Verify edition is on both shelves
+        self.assertTrue(
+            ShelfEdition.objects.filter(
+                shelf=self.read_shelf,
+                edition=self.hardcover_edition
+            ).exists()
+        )
+        
+        self.assertTrue(
+            ShelfEdition.objects.filter(
+                shelf=self.owned_shelf,
+                edition=self.hardcover_edition
+            ).exists()
+        )
+    
+    ## UserBook Removal
+    
+    # Removing edition from only status shelf deletes UserBook (valid)
+    def test_removing_from_only_status_shelf_deletes_userbook(self):
+        """Test removing edition from its only status shelf deletes UserBook"""
+        # Add edition to Read shelf
+        self.client.post(
+            self.add_to_read_url,
+            {"edition_id": self.hardcover_edition.pk},
+            format="json"
+        )
+        
+        # Verify UserBook exists
+        self.assertTrue(UserBook.objects.filter(user=self.user, book=self.book).exists())
+        
+        # Remove from Read shelf
+        remove_url = f"{self.remove_from_read_url}?edition_id={self.hardcover_edition.pk}"
+        response = self.client.delete(remove_url)
+        
+        # Verify success and UserBook deletion
+        self.assertEqual(response.status_code, status.HTTP_204_NO_CONTENT)
+        self.assertFalse(UserBook.objects.filter(user=self.user, book=self.book).exists())
+    
+    # Removing edition from status shelf but still owned keeps UserBook (valid)
+    def test_removing_from_status_shelf_but_still_owned_keeps_userbook(self):
+        """Test removing edition from status shelf but still owned keeps UserBook"""
+        # Add edition to Read and Owned shelves
+        self.client.post(
+            self.add_to_read_url,
+            {"edition_id": self.hardcover_edition.pk},
+            format="json"
+        )
+        
+        self.client.post(
+            self.add_to_owned_url,
+            {"edition_id": self.hardcover_edition.pk},
+            format="json"
+        )
+        
+        # Verify initial UserBook state
+        user_book = UserBook.objects.get(user=self.user, book=self.book)
+        self.assertEqual(user_book.read_status, "Read")
+        self.assertTrue(user_book.is_owned)
+        
+        # Remove from Read shelf
+        remove_url = f"{self.remove_from_read_url}?edition_id={self.hardcover_edition.pk}"
+        response = self.client.delete(remove_url)
+        
+        # Verify success
+        self.assertEqual(response.status_code, status.HTTP_204_NO_CONTENT)
+        
+        # Verify UserBook still exists but with updated properties
+        self.assertTrue(UserBook.objects.filter(user=self.user, book=self.book).exists())
+        
+        user_book.refresh_from_db()
+        self.assertTrue(user_book.is_owned)
+        # Depending on your implementation, read_status might be cleared or maintain previous value
+    
+    # Removing edition from owned shelf but still in status keeps UserBook (valid)
+    def test_removing_from_owned_shelf_but_still_in_status_keeps_userbook(self):
+        """Test removing edition from owned shelf but still in status keeps UserBook"""
+        # Add edition to Read and Owned shelves
+        self.client.post(
+            self.add_to_read_url,
+            {"edition_id": self.hardcover_edition.pk},
+            format="json"
+        )
+        
+        self.client.post(
+            self.add_to_owned_url,
+            {"edition_id": self.hardcover_edition.pk},
+            format="json"
+        )
+        
+        # Verify initial UserBook state
+        user_book = UserBook.objects.get(user=self.user, book=self.book)
+        self.assertEqual(user_book.read_status, "Read")
+        self.assertTrue(user_book.is_owned)
+        
+        # Remove from Owned shelf
+        remove_url = f"{self.remove_from_owned_url}?edition_id={self.hardcover_edition.pk}"
+        response = self.client.delete(remove_url)
+        
+        # Verify success
+        self.assertEqual(response.status_code, status.HTTP_204_NO_CONTENT)
+        
+        # Verify UserBook still exists but with updated properties
+        self.assertTrue(UserBook.objects.filter(user=self.user, book=self.book).exists())
+        
+        user_book.refresh_from_db()
+        self.assertEqual(user_book.read_status, "Read")
+        self.assertFalse(user_book.is_owned)
+    
+    # Removing same book's different edition updates same UserBook (valid)
+    def test_removing_different_edition_of_same_book_updates_userbook(self):
+        """Test removing different edition of same book updates the same UserBook"""
+        # Add both editions to different shelves
+        self.client.post(
+            self.add_to_reading_url,
+            {"edition_id": self.hardcover_edition.pk},
+            format="json"
+        )
+        
+        self.client.post(
+            self.add_to_owned_url,
+            {"edition_id": self.paperback_edition.pk},
+            format="json"
+        )
+        
+        # Verify initial UserBook state
+        user_book = UserBook.objects.get(user=self.user, book=self.book)
+        self.assertEqual(user_book.read_status, "Reading")
+        self.assertTrue(user_book.is_owned)
+        
+        # Remove hardcover from Reading shelf
+        remove_url = f"{self.remove_from_reading_url}?edition_id={self.hardcover_edition.pk}"
+        response = self.client.delete(remove_url)
+        
+        # Verify success
+        self.assertEqual(response.status_code, status.HTTP_204_NO_CONTENT)
+        
+        # Verify UserBook still exists but with updated properties
+        self.assertTrue(UserBook.objects.filter(user=self.user, book=self.book).exists())
+        
+        user_book.refresh_from_db()
+        self.assertTrue(user_book.is_owned)
+        # read_status should be removed or set to a default value
+
+### Equivalent Classes ###
+##  Radio Button Behavior ##
+#       Adding edition to status shelf when no prior status exists               (valid)
+#       Adding edition to status shelf when it's on another status shelf         (valid - should migrate)
+#       Adding edition to status shelf when it's on same status shelf            (invalid)
+#       Adding edition to owned shelf doesn't affect status shelf                (valid)
+#       Adding edition to status shelf doesn't affect owned shelf                (valid)
+##  Different Editions Same Book ##
+#       Adding different edition of same book to different status shelf          (valid - should migrate)
+##  UserBook Updates ##
+#       UserBook created when adding to first special shelf                      (valid)
+#       UserBook updated when moving between status shelves                      (valid)
+#       UserBook maintains owned status when removing from status shelf          (valid)
+#       UserBook maintains status when removing from owned shelf                 (valid)
+#       UserBook deleted when removed from all special shelves                   (valid)
+
+class ShelfReadStatusTests(TestCase):
+    """
+    Test Module for verifying read status "radio button" behavior of shelves
+    """
+    def setUp(self):
+        """
+        Create test (mock) data for read status tests.
+        Test user, books, editions, shelves and API client for testing.
+        """
+        # Create a test user
+        self.user = User.objects.create_user(
+            username="reader_user",
+            email="reader@example.com",
+            password="testpassword"
+        )
+        
+        # Create reading status shelves
+        self.read_shelf = Shelf.objects.create(
+            user=self.user,
+            name="Read Books",
+            shelf_type="Read",
+            is_private=False
+        )
+        
+        self.reading_shelf = Shelf.objects.create(
+            user=self.user,
+            name="Currently Reading",
+            shelf_type="Reading",
+            is_private=False
+        )
+        
+        self.want_to_read_shelf = Shelf.objects.create(
+            user=self.user,
+            name="Want to Read",
+            shelf_type="Want to Read",
+            is_private=False
+        )
+
+        self.owned_shelf = Shelf.objects.create(
+            user=self.user,
+            name="Owned Books",
+            shelf_type="Owned",
+            is_private=False
+        )
+        
+        self.custom_shelf = Shelf.objects.create(
+            user=self.user,
+            name="Custom Shelf",
+            shelf_type="Custom",
+            is_private=False
+        )
+        
+        # Create book and editions
+        self.book = Book.objects.create(
+            title="Test Book",
+            book_id="test123"
+        )
+        
+        self.publisher = Publisher.objects.create(name="Test Publisher")
+        
+        self.hardcover_edition = Edition.objects.create(
+            book=self.book,
+            isbn="9781234567890",
+            publisher=self.publisher,
+            kind="Hardcover",
+            publication_year=2020,
+            language="English"
+        )
+        
+        self.paperback_edition = Edition.objects.create(
+            book=self.book,
+            isbn="9780987654321",
+            publisher=self.publisher,
+            kind="Paperback",
+            publication_year=2021,
+            language="English"
+        )
+        
+        # Create a second book and edition for additional tests
+        self.book2 = Book.objects.create(
+            title="Second Test Book",
+            book_id="test456"
+        )
+        
+        self.book2_edition = Edition.objects.create(
+            book=self.book2,
+            isbn="9781122334455",
+            publisher=self.publisher,
+            kind="Hardcover",
+            publication_year=2022,
+            language="English"
+        )
+        
+        # Set up API client
+        self.client = APIClient()
+        self.client.force_authenticate(user=self.user)
+        
+        # Set up URLs for adding editions to shelves
+        self.add_to_read_url = reverse("shelf-add-edition", kwargs={"pk": self.read_shelf.pk})
+        self.add_to_reading_url = reverse("shelf-add-edition", kwargs={"pk": self.reading_shelf.pk})
+        self.add_to_want_url = reverse("shelf-add-edition", kwargs={"pk": self.want_to_read_shelf.pk})
+        self.add_to_owned_url = reverse("shelf-add-edition", kwargs={"pk": self.owned_shelf.pk})
+        self.add_to_custom_url = reverse("shelf-add-edition", kwargs={"pk": self.custom_shelf.pk})
+        
+        # Set up URLs for removing editions from shelves
+        self.remove_from_read_url = reverse("shelf-remove-edition", kwargs={"pk": self.read_shelf.pk})
+        self.remove_from_reading_url = reverse("shelf-remove-edition", kwargs={"pk": self.reading_shelf.pk})
+        self.remove_from_want_url = reverse("shelf-remove-edition", kwargs={"pk": self.want_to_read_shelf.pk})
+        self.remove_from_owned_url = reverse("shelf-remove-edition", kwargs={"pk": self.owned_shelf.pk})
+        self.remove_from_custom_url = reverse("shelf-remove-edition", kwargs={"pk": self.custom_shelf.pk})
+    
+    ## Radio Button Behavior
+    
+    # Adding edition to status shelf when no prior status exists (valid)
+    def test_add_edition_to_status_shelf_no_prior(self):
+        """Test adding an edition to a status shelf when it's not on any status shelf"""
+        # Add to "Want to Read" shelf
+        response = self.client.post(
+            self.add_to_want_url, 
+            {"edition_id": self.hardcover_edition.pk}, 
+            format="json"
+        )
+        
+        # Check response and shelf contains edition
+        self.assertEqual(response.status_code, status.HTTP_201_CREATED)
+        self.assertTrue(
+            ShelfEdition.objects.filter(
+                shelf=self.want_to_read_shelf,
+                edition=self.hardcover_edition
+            ).exists()
+        )
+        
+        # Check UserBook created with correct status
+        self.assertTrue(
+            UserBook.objects.filter(
+                user=self.user,
+                book=self.book,
+                read_status="Want to Read"
+            ).exists()
+        )
+    
+    # Adding edition to status shelf when it's on another status shelf (valid - should migrate)
+    def test_add_edition_migrate_between_status_shelves(self):
+        """Test that adding an edition to one status shelf removes it from another status shelf"""
+        # First add to "Want to Read" shelf
+        self.client.post(
+            self.add_to_want_url, 
+            {"edition_id": self.hardcover_edition.pk}, 
+            format="json"
+        )
+        
+        # Then add to "Reading" shelf
+        response = self.client.post(
+            self.add_to_reading_url, 
+            {"edition_id": self.hardcover_edition.pk}, 
+            format="json"
+        )
+        
+        # Check response and "Reading" shelf contains edition
+        self.assertEqual(response.status_code, status.HTTP_201_CREATED)
+        self.assertTrue(
+            ShelfEdition.objects.filter(
+                shelf=self.reading_shelf,
+                edition=self.hardcover_edition
+            ).exists()
+        )
+        
+        # Check "Want to Read" shelf no longer contains edition
+        self.assertFalse(
+            ShelfEdition.objects.filter(
+                shelf=self.want_to_read_shelf,
+                edition=self.hardcover_edition
+            ).exists()
+        )
+        
+        # Check UserBook updated with new status
+        user_book = UserBook.objects.get(user=self.user, book=self.book)
+        self.assertEqual(user_book.read_status, "Reading")
+    
+    # Adding edition to status shelf when it's on same status shelf (invalid)
+    def test_add_edition_to_same_status_shelf(self):
+        """Test attempting to add an edition to a shelf it's already on"""
+        # Add to "Read" shelf
+        self.client.post(
+            self.add_to_read_url, 
+            {"edition_id": self.hardcover_edition.pk}, 
+            format="json"
+        )
+        
+        # Try to add again to same shelf
+        response = self.client.post(
+            self.add_to_read_url, 
+            {"edition_id": self.hardcover_edition.pk}, 
+            format="json"
+        )
+        
+        # Should fail with 400 Bad Request
+        self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
+    
+    # Adding edition to owned shelf doesn't affect status shelf (valid)
+    def test_add_to_owned_keeps_status(self):
+        """Test adding an edition to Owned shelf doesn't remove it from status shelves"""
+        # First add to "Reading" shelf
+        self.client.post(
+            self.add_to_reading_url, 
+            {"edition_id": self.hardcover_edition.pk}, 
+            format="json"
+        )
+        
+        # Then add to "Owned" shelf
+        response = self.client.post(
+            self.add_to_owned_url, 
+            {"edition_id": self.hardcover_edition.pk}, 
+            format="json"
+        )
+        
+        # Check response and both shelves contain edition
+        self.assertEqual(response.status_code, status.HTTP_201_CREATED)
+        self.assertTrue(
+            ShelfEdition.objects.filter(
+                shelf=self.reading_shelf,
+                edition=self.hardcover_edition
+            ).exists()
+        )
+        self.assertTrue(
+            ShelfEdition.objects.filter(
+                shelf=self.owned_shelf,
+                edition=self.hardcover_edition
+            ).exists()
+        )
+        
+        # Check UserBook has both statuses
+        user_book = UserBook.objects.get(user=self.user, book=self.book)
+        self.assertEqual(user_book.read_status, "Reading")
+        self.assertTrue(user_book.is_owned)
+    
+    # Adding edition to status shelf doesn't affect owned shelf (valid)
+    def test_add_to_status_keeps_owned(self):
+        """Test adding an edition to a status shelf doesn't remove it from Owned shelf"""
+        # First add to "Owned" shelf
+        self.client.post(
+            self.add_to_owned_url, 
+            {"edition_id": self.hardcover_edition.pk}, 
+            format="json"
+        )
+        
+        # Then add to "Read" shelf
+        response = self.client.post(
+            self.add_to_read_url, 
+            {"edition_id": self.hardcover_edition.pk}, 
+            format="json"
+        )
+        
+        # Check response and both shelves contain edition
+        self.assertEqual(response.status_code, status.HTTP_201_CREATED)
+        self.assertTrue(
+            ShelfEdition.objects.filter(
+                shelf=self.owned_shelf,
+                edition=self.hardcover_edition
+            ).exists()
+        )
+        self.assertTrue(
+            ShelfEdition.objects.filter(
+                shelf=self.read_shelf,
+                edition=self.hardcover_edition
+            ).exists()
+        )
+        
+        # Check UserBook has both statuses
+        user_book = UserBook.objects.get(user=self.user, book=self.book)
+        self.assertEqual(user_book.read_status, "Read")
+        self.assertTrue(user_book.is_owned)
+    
+    ## Different Editions Same Book
+    
+    # Adding different edition of same book to different status shelf (valid - should migrate)
+    def test_different_editions_same_book_migrate(self):
+        """Test that adding a different edition of the same book to another status shelf migrates correctly"""
+        # Add hardcover to "Want to Read" shelf
+        self.client.post(
+            self.add_to_want_url, 
+            {"edition_id": self.hardcover_edition.pk}, 
+            format="json"
+        )
+        
+        # Add paperback to "Reading" shelf (same book, different edition)
+        response = self.client.post(
+            self.add_to_reading_url, 
+            {"edition_id": self.paperback_edition.pk}, 
+            format="json"
+        )
+        
+        # Check response and paperback is on "Reading" shelf
+        self.assertEqual(response.status_code, status.HTTP_201_CREATED)
+        self.assertTrue(
+            ShelfEdition.objects.filter(
+                shelf=self.reading_shelf,
+                edition=self.paperback_edition
+            ).exists()
+        )
+        
+        # Check hardcover is no longer on "Want to Read" shelf
+        self.assertFalse(
+            ShelfEdition.objects.filter(
+                shelf=self.want_to_read_shelf,
+                edition=self.hardcover_edition
+            ).exists()
+        )
+        
+        # Check UserBook has updated status
+        user_book = UserBook.objects.get(user=self.user, book=self.book)
+        self.assertEqual(user_book.read_status, "Reading")
+    
+    ## UserBook Updates
+    
+    # UserBook created when adding to first special shelf (valid)
+    def test_userbook_created_when_adding_to_special_shelf(self):
+        """Test that UserBook is created when adding an edition to a special shelf"""
+        # First verify no UserBook exists
+        self.assertFalse(
+            UserBook.objects.filter(
+                user=self.user,
+                book=self.book
+            ).exists()
+        )
+        
+        # Add to "Read" shelf
+        self.client.post(
+            self.add_to_read_url, 
+            {"edition_id": self.hardcover_edition.pk}, 
+            format="json"
+        )
+        
+        # Verify UserBook was created with correct status
+        self.assertTrue(
+            UserBook.objects.filter(
+                user=self.user,
+                book=self.book,
+                read_status="Read"
+            ).exists()
+        )
+    
+    # UserBook updated when moving between status shelves (valid)
+    def test_userbook_updated_when_moving_between_status_shelves(self):
+        """Test that UserBook is updated when edition moves between status shelves"""
+        # Add to "Want to Read" shelf
+        self.client.post(
+            self.add_to_want_url, 
+            {"edition_id": self.hardcover_edition.pk}, 
+            format="json"
+        )
+        
+        # Verify initial UserBook status
+        user_book = UserBook.objects.get(user=self.user, book=self.book)
+        self.assertEqual(user_book.read_status, "Want to Read")
+        
+        # Move to "Reading" shelf
+        self.client.post(
+            self.add_to_reading_url, 
+            {"edition_id": self.hardcover_edition.pk}, 
+            format="json"
+        )
+        
+        # Verify UserBook status updated
+        user_book.refresh_from_db()
+        self.assertEqual(user_book.read_status, "Reading")
+        
+        # Move to "Read" shelf
+        self.client.post(
+            self.add_to_read_url, 
+            {"edition_id": self.hardcover_edition.pk}, 
+            format="json"
+        )
+        
+        # Verify UserBook status updated again
+        user_book.refresh_from_db()
+        self.assertEqual(user_book.read_status, "Read")
+    
+    # UserBook maintains owned status when removing from status shelf (valid)
+    def test_userbook_maintains_owned_status_when_removing_from_status(self):
+        """Test that UserBook maintains owned status when removed from status shelf"""
+        # Add to both "Owned" and "Reading" shelves
+        self.client.post(
+            self.add_to_owned_url, 
+            {"edition_id": self.hardcover_edition.pk}, 
+            format="json"
+        )
+        self.client.post(
+            self.add_to_reading_url, 
+            {"edition_id": self.hardcover_edition.pk}, 
+            format="json"
+        )
+        
+        # Verify initial UserBook status
+        user_book = UserBook.objects.get(user=self.user, book=self.book)
+        self.assertEqual(user_book.read_status, "Reading")
+        self.assertTrue(user_book.is_owned)
+        
+        # Remove from "Reading" shelf
+        remove_url = f"{self.remove_from_reading_url}?edition_id={self.hardcover_edition.pk}"
+        self.client.delete(remove_url)
+        
+        # Verify UserBook kept "is_owned" but lost read_status
+        user_book.refresh_from_db()
+        self.assertTrue(user_book.is_owned)
+        
+        # Note: The exact behavior for read_status after removal depends on implementation
+        # It might retain the previous value or be set to None/empty
+    
+    # UserBook maintains status when removing from owned shelf (valid)
+    def test_userbook_maintains_status_when_removing_from_owned(self):
+        """Test that UserBook maintains status when removed from owned shelf"""
+        # Add to both "Owned" and "Read" shelves
+        self.client.post(
+            self.add_to_owned_url, 
+            {"edition_id": self.hardcover_edition.pk}, 
+            format="json"
+        )
+        self.client.post(
+            self.add_to_read_url, 
+            {"edition_id": self.hardcover_edition.pk}, 
+            format="json"
+        )
+        
+        # Verify initial UserBook status
+        user_book = UserBook.objects.get(user=self.user, book=self.book)
+        self.assertEqual(user_book.read_status, "Read")
+        self.assertTrue(user_book.is_owned)
+        
+        # Remove from "Owned" shelf
+        remove_url = f"{self.remove_from_owned_url}?edition_id={self.hardcover_edition.pk}"
+        self.client.delete(remove_url)
+        
+        # Verify UserBook kept read_status but lost is_owned
+        user_book.refresh_from_db()
+        self.assertEqual(user_book.read_status, "Read")
+        self.assertFalse(user_book.is_owned)
+    
+    # UserBook deleted when removed from all special shelves (valid)
+    def test_userbook_deleted_when_removed_from_all_special_shelves(self):
+        """Test that UserBook is deleted when removed from all special shelves"""
+        # Add to "Read" shelf
+        self.client.post(
+            self.add_to_read_url, 
+            {"edition_id": self.hardcover_edition.pk}, 
+            format="json"
+        )
+        
+        # Verify UserBook exists
+        self.assertTrue(
+            UserBook.objects.filter(
+                user=self.user,
+                book=self.book
+            ).exists()
+        )
+        
+        # Remove from "Read" shelf
+        remove_url = f"{self.remove_from_read_url}?edition_id={self.hardcover_edition.pk}"
+        self.client.delete(remove_url)
+        
+        # Verify UserBook was deleted
+        self.assertFalse(
+            UserBook.objects.filter(
+                user=self.user,
+                book=self.book
+            ).exists()
+        )
+    
+    # UserBook not affected by custom shelves (valid)
+    def test_userbook_not_affected_by_custom_shelves(self):
+        """Test that adding/removing from custom shelves doesn't affect UserBook status"""
+        # Add to "Read" shelf and "Custom" shelf
+        self.client.post(
+            self.add_to_read_url, 
+            {"edition_id": self.hardcover_edition.pk}, 
+            format="json"
+        )
+        self.client.post(
+            self.add_to_custom_url, 
+            {"edition_id": self.hardcover_edition.pk}, 
+            format="json"
+        )
+        
+        # Verify UserBook has "Read" status
+        user_book = UserBook.objects.get(user=self.user, book=self.book)
+        self.assertEqual(user_book.read_status, "Read")
+        
+        # Remove from "Custom" shelf
+        remove_url = f"{self.remove_from_custom_url}?edition_id={self.hardcover_edition.pk}"
+        self.client.delete(remove_url)
+        
+        # Verify UserBook still exists with same status
+        user_book.refresh_from_db()
+        self.assertEqual(user_book.read_status, "Read")

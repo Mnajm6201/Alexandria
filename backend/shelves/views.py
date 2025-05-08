@@ -136,40 +136,49 @@ class ShelfViewSet(viewsets.ModelViewSet):
     def _update_userbook_after_add(self, shelf, edition):
         """
         Update UserBook after adding an edition to a shelf.
+        Also ensures proper "radio button" behavior for Read status shelves
+        by removing the edition from any other status shelves.
         
         Args:
             shelf: The Shelf object the edition was added to
             edition: The Edition object that was added
         """
+        # Define shelf types that represent reading status (for radio button behavior)
+        status_shelf_types = ["Read", "Reading", "Want to Read"]
+        
+        # If adding to a reading status shelf, remove from other status shelves first
+        if shelf.shelf_type in status_shelf_types:
+            # Find all other shelves of this user with status types that contain this edition
+            other_status_shelves = ShelfEdition.objects.filter(
+                shelf__user=shelf.user,
+                shelf__shelf_type__in=status_shelf_types,
+                edition__book=edition.book
+            ).exclude(shelf=shelf)
+            
+            # Remove this edition from those shelves
+            for shelf_edition in other_status_shelves:
+                # Delete the relationship
+                shelf_edition.delete()
+        
         # Only handle special shelf types (Read, Reading, Want to Read, Owned)
-        special_shelf_types = {
-            "Read": "Read",
-            "Reading": "Reading",
-            "Want to Read": "Want to Read",
-            "Owned": None  # Special case for is_owned=True
-        }
+        special_shelf_types = ["Read", "Reading", "Want to Read", "Owned"]
         
         if shelf.shelf_type in special_shelf_types:
             # Get or create a UserBook record
             user_book, created = UserBook.objects.get_or_create(
                 user=shelf.user,
-                book=edition.book,
-                defaults={
-                    'read_status': special_shelf_types.get(shelf.shelf_type, "Want to Read"),
-                    'is_owned': shelf.shelf_type == "Owned"
-                }
+                book=edition.book
             )
             
             # If not created, update the fields
-            if not created:
-                if shelf.shelf_type in ["Read", "Reading", "Want to Read"]:
-                    user_book.read_status = special_shelf_types[shelf.shelf_type]
-                
-                if shelf.shelf_type == "Owned":
-                    user_book.is_owned = True
-                
-                user_book.save()
-    
+            if shelf.shelf_type in ["Read", "Reading", "Want to Read"]:
+                user_book.read_status = shelf.shelf_type
+            
+            if shelf.shelf_type == "Owned":
+                user_book.is_owned = True
+            
+            user_book.save()
+
     def _update_userbook_after_remove(self, shelf, edition):
         """
         Update UserBook after removing an edition from a shelf.
@@ -205,15 +214,16 @@ class ShelfViewSet(viewsets.ModelViewSet):
                         shelf__user=shelf.user,
                         shelf__shelf_type__in=["Read", "Reading", "Want to Read"],
                         edition__book=edition.book
-                    ).exclude(
-                        shelf=shelf
                     ).values_list('shelf__shelf_type', flat=True).first()
                     
                     if other_status_shelf:
                         # Update to the status of the other shelf
                         user_book.read_status = other_status_shelf
                     else:
-                        # If no other status shelf and not owned, delete the UserBook
+                        # If no other status shelf, set read_status to null
+                        user_book.read_status = None
+                        
+                        # If not owned either, delete the UserBook
                         if not user_book.is_owned:
                             user_book.delete()
                             return
@@ -224,7 +234,7 @@ class ShelfViewSet(viewsets.ModelViewSet):
             except UserBook.DoesNotExist:
                 # No UserBook to update
                 pass
-    
+            
     @action(detail=True, methods=['post'], permission_classes=[IsAuthenticated, IsShelfOwnerOrReadOnly])
     def add_edition(self, request, pk=None):
         """
