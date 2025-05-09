@@ -2,7 +2,7 @@
   Name: page.tsx
   Date: 03/23/2025
   Description: React client component that displays detailed information for a specific book.
-  This component extracts the bookId directly from the URL to avoid Next.js 15.1.7 params issues.
+  This component extracts the bookId directly from the URL.
   
   Output:
     - Renders a fully detailed book page with sections for header, summary, details, editions, 
@@ -22,6 +22,8 @@ import {
 } from '@/components/ui/book_details'
 import ItemCarousel from '@/components/ui/ItemCarousel'
 import CoverImage from '@/components/ui/CoverImage'
+import { useRouter } from 'next/navigation'
+import Link from 'next/link'
 
 // Define the types needed for component
 interface Author {
@@ -37,6 +39,7 @@ interface Edition {
   publication_date?: string;
   format?: string;
   language?: string;
+  isbn?: string;
 }
 
 interface Vendor {
@@ -151,7 +154,8 @@ function adaptBookData(apiData: any): BookData {
         ? String(primaryEdition.publication_year) 
         : undefined,
       format: primaryEdition.kind || '',
-      language: primaryEdition.language || ''
+      language: primaryEdition.language || '',
+      isbn: primaryEdition.isbn
     });
   }
 
@@ -167,7 +171,8 @@ function adaptBookData(apiData: any): BookData {
             ? String(edition.publication_year) 
             : undefined,
           format: edition.kind || '',
-          language: edition.language || ''
+          language: edition.language || '',
+          isbn: edition.isbn
         });
       }
     });
@@ -202,6 +207,7 @@ export default function BookPage() {
   const [book, setBook] = useState<BookData>(DEFAULT_BOOK);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
+  const router = useRouter();
 
   // Get bookId from URL on first render
   useEffect(() => {
@@ -303,33 +309,68 @@ export default function BookPage() {
       
       {book.editions && book.editions.length > 0 && (
         <div className="mt-8">
-          <ItemCarousel 
-            items={book.editions}
-            title="Editions"
-            onItemClick={(edition) => {
-              // Navigate to edition page or handle click
-              console.log(`Edition clicked: ${edition.id}`);
-              // Need to add navigation here
-              // i.e. /books/${book.book_id}/editions/${edition.id}`;
-            }}
-            renderItem={(edition) => (
-              <div className="flex flex-col">
-                <CoverImage 
-                  src={edition.cover_image}
-                  alt={`Cover for ${edition.title || book.title}`}
-                  width="100%"
-                  height="h-72"
-                  className="mb-2"
-                />
-                {edition.format && (
-                  <span className="mt-2 text-sm text-gray-700 dark:text-gray-300">{edition.format}</span>
-                )}
-                {edition.publication_date && (
-                  <span className="text-xs text-gray-500 dark:text-gray-400">{edition.publication_date}</span>
-                )}
+          <div className="bg-white rounded-lg shadow p-6">
+            <h2 className="text-xl font-semibold text-gray-900 mb-4">Editions</h2>
+            
+            <div className="w-full overflow-x-auto">
+              <div className="flex space-x-4 pb-4">
+                {/* Sort editions to prioritize those with cover images */}
+                {[...book.editions]
+                  .sort((a, b) => {
+                    // Put editions with cover images first
+                    if (a.cover_image && !b.cover_image) return -1;
+                    if (!a.cover_image && b.cover_image) return 1;
+                    return 0;
+                  })
+                  .map((edition) => (
+                    <Link 
+                      key={edition.id}
+                      href={edition.isbn ? `/edition/${edition.isbn}` : "#"}
+                      className="flex-shrink-0 w-48 cursor-pointer"
+                      onClick={(e) => {
+                        if (!edition.isbn) {
+                          e.preventDefault();
+                          console.log(`Edition clicked but no ISBN available: ${edition.id}`);
+                        } else {
+                          console.log(`Navigating to edition: ${edition.isbn}`);
+                        }
+                      }}
+                    >
+                      <div className="flex flex-col">
+                        <div className="relative h-72 w-full">
+                          {edition.cover_image ? (
+                            <img
+                              src={edition.cover_image}
+                              alt={`Cover for ${edition.title || book.title}`}
+                              className="w-full h-full object-cover rounded-md shadow-lg"
+                              loading="lazy"
+                            />
+                          ) : (
+                            <div className="w-full h-full bg-gray-200 flex items-center justify-center rounded-md">
+                              <span className="text-gray-500">No cover</span>
+                            </div>
+                          )}
+                        </div>
+                        
+                        {edition.format && (
+                          <span className="mt-2 text-sm text-gray-700 dark:text-gray-300">{edition.format}</span>
+                        )}
+                        
+                        {edition.publication_date && (
+                          <span className="text-xs text-gray-500 dark:text-gray-400">{edition.publication_date}</span>
+                        )}
+                        
+                        {edition.isbn && (
+                          <span className="text-xs text-blue-500 font-medium mt-1 hover:underline">
+                            View edition details →
+                          </span>
+                        )}
+                      </div>
+                    </Link>
+                  ))}
               </div>
-            )}
-          />
+            </div>
+          </div>
         </div>
       )}
       
