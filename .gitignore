@@ -30,3 +30,5 @@ media/*
 !media/.gitkeep
 
 node_modules
+
+*/makefile
