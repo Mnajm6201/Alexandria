@@ -25,23 +25,37 @@
 */
 'use client'
 
+// Add these imports at the top of BookDetails.tsx
 import { useState } from 'react'
-import { Calendar, BookOpen, Tag, Globe } from 'lucide-react'
+import { Calendar, BookOpen, Tag, Globe, Book, Building, Hash, FileText } from 'lucide-react'
 
+// frontend/src/components/ui/book_details/BookDetails.tsx - Update this existing file
+
+// Add these additional props to the BookDetailsProps interface:
 interface BookDetailsProps {
   pageCount?: number
   publicationDate?: string
   isbn?: string
   genres?: string[]
   language?: string
+  // New props specific to editions
+  editionNumber?: number
+  format?: string
+  publisher?: string
+  isAbridged?: boolean
 }
+
 
 export default function BookDetails({ 
   pageCount, 
   publicationDate, 
   isbn, 
   genres = [], 
-  language 
+  language,
+  editionNumber,
+  format,
+  publisher,
+  isAbridged
 }: BookDetailsProps) {
   const [isExpanded, setIsExpanded] = useState(false)
   
@@ -76,7 +90,7 @@ export default function BookDetails({
           <div className="flex items-start">
             <Calendar className="h-5 w-5 text-gray-400 mr-2 mt-0.5" />
             <div>
-              <p className="text-sm font-medium text-gray-500">First published</p>
+              <p className="text-sm font-medium text-gray-500">Published</p>
               <p className="text-gray-900">{formattedDate}</p>
             </div>
           </div>
@@ -100,6 +114,47 @@ export default function BookDetails({
             <div>
               <p className="text-sm font-medium text-gray-500">Language</p>
               <p className="text-gray-900">{language}</p>
+            </div>
+          </div>
+        )}
+        
+        {/* edition-specific details */}
+        {format && (
+          <div className="flex items-start">
+            <Book className="h-5 w-5 text-gray-400 mr-2 mt-0.5" />
+            <div>
+              <p className="text-sm font-medium text-gray-500">Format</p>
+              <p className="text-gray-900">{format}</p>
+            </div>
+          </div>
+        )}
+        
+        {publisher && (
+          <div className="flex items-start">
+            <Building className="h-5 w-5 text-gray-400 mr-2 mt-0.5" />
+            <div>
+              <p className="text-sm font-medium text-gray-500">Publisher</p>
+              <p className="text-gray-900">{publisher}</p>
+            </div>
+          </div>
+        )}
+        
+        {editionNumber && (
+          <div className="flex items-start">
+            <Hash className="h-5 w-5 text-gray-400 mr-2 mt-0.5" />
+            <div>
+              <p className="text-sm font-medium text-gray-500">Edition</p>
+              <p className="text-gray-900">{editionNumber}{getOrdinalSuffix(editionNumber)} Edition</p>
+            </div>
+          </div>
+        )}
+        
+        {isAbridged !== undefined && (
+          <div className="flex items-start">
+            <FileText className="h-5 w-5 text-gray-400 mr-2 mt-0.5" />
+            <div>
+              <p className="text-sm font-medium text-gray-500">Abridged</p>
+              <p className="text-gray-900">{isAbridged ? 'Yes' : 'No'}</p>
             </div>
           </div>
         )}
@@ -137,4 +192,20 @@ export default function BookDetails({
       )}
     </div>
   )
+}
+
+// Helper function to get ordinal suffix (1st, 2nd, 3rd, etc.)
+function getOrdinalSuffix(num: number): string {
+  const j = num % 10;
+  const k = num % 100;
+  if (j === 1 && k !== 11) {
+    return 'st';
+  }
+  if (j === 2 && k !== 12) {
+    return 'nd';
+  }
+  if (j === 3 && k !== 13) {
+    return 'rd';
+  }
+  return 'th';
 }

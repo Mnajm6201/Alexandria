@@ -16,9 +16,11 @@
     - This configuration enables the REST API endpoint for fetching detailed book information.
 """
 from django.urls import path
-from .views import BookDetailView, AuthorDetailView
+from .views import BookDetailView, AuthorDetailView, EditionDetailView
 
 urlpatterns = [
     path('api/books/<str:book_id>/', BookDetailView.as_view(), name='book-detail'),
     path('api/authors/<str:author_id>/', AuthorDetailView.as_view(), name='author-detail'),
+    path('api/editions/<str:isbn>/', EditionDetailView.as_view(), name='edition-detail'),
+
 ]
