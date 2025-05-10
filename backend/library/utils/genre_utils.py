@@ -1,8 +1,6 @@
-# backend/library/utils/genre_utils.py
+from typing import List, Set, Optional
 
-from typing import Dict, List, Set, Optional, Tuple
-
-# Primary genre whitelist - exact matches take priority
+# Primary genre whitelist 
 PRIMARY_GENRES = {
     # Fiction Genres
     "fantasy", "science fiction", "mystery", "thriller", "horror", 
@@ -39,7 +37,7 @@ PRIMARY_GENRES = {
     "medicine", "law", "engineering", "architecture"
 }
 
-# This maps common variations and subcategories to our primary genres
+# Maps common variations and subcategories to our primary genres
 GENRE_MAPPING = {
     # Fantasy variations
     "fantasy fiction": "fantasy",
@@ -300,7 +298,7 @@ def normalize_genre(subject: str) -> Optional[str]:
     Returns:
         A normalized genre string or None if no match is found
     """
-    # Convert to lowercase for case-insensitive matching
+    # Convert to lowercase
     subject_lower = subject.lower().strip()
     
     # 1. Check for exact match in primary genres
