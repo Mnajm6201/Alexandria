@@ -39,7 +39,7 @@ export default function DiscoveryPage() {
             <div className="max-w-6xl mx-auto px-4 py-6 space-y-8">
             <section className="relative h-64 rounded-lg overflow-hidden">
                 <img
-                src="/placeholder.svg?height=256&width=1024"
+                src="/bettersummer.webp"
                 alt=""
                 className="w-full h-full object-cover"
                 />

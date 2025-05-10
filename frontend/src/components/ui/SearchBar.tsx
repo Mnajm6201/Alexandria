@@ -7,6 +7,7 @@ import React, { useState, useEffect } from "react";
 import { Input } from "@/components/ui/input";
 import { Search } from "lucide-react";
 import { useRouter } from "next/navigation";
+import { Button } from "./button";
 
 const SearchBar = () => {
     /**
@@ -28,6 +29,21 @@ const SearchBar = () => {
     const [results, setResults] = useState<SearchResults>({ books: [], authors: []});
     const [showDropdown, setShowDropdown] = useState<boolean>(false);
     const router = useRouter();
+
+    /**
+     * Keyboard event listener for search results page. Directs users to /search page when "Enter" is pressed, then fetches
+     * results for the given query using the SearchBarView
+     */
+    const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+        if (e.key === "Enter" && query.trim() !== "") {
+            router.push(`/search?q=${encodeURIComponent(query)}`);
+            setShowDropdown(false);
+        }
+    };
+
+    const handleSubmit = () => {
+        router.push(`/search?q=${encodeURIComponent(query)}`);
+    };
 
     /**
      * Fetches data from endpoint
@@ -61,58 +77,69 @@ const SearchBar = () => {
     }, [query]);
 
     return (
-        <div className="w-full flex justify-center">
-            <div className="relative w-full" style={{ maxWidth: "75%", minWidth: "650px" }}>
-                <Search className="absolute left-2 top-1/2 transform -translate-y-1/2 text-gray-400" />
+        <div className="mb-8 rounded-lg border border-amber-200 bg-white p-6">
+            <div className="flex flex-col gap-4 sm:flex-row">
+                <div className="relative flex-1">
+                <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-amber-600" />
                     <Input
-                    type="search"
-                    placeholder="Search books by title, ISBN, genre, or author"
-                    className="pl-8 bg-white text-black w-full"
-                    value={query}
-                    onChange={(e) => setQuery(e.target.value)}
-                />
-
+                        type="search"
+                        placeholder="Search books by title, ISBN, genre, or author"
+                        className="pl-9 border-amber-300 bg-amber-50 focus-visible:ring-amber-600 text-black w-full"
+                        value={query}
+                        onChange={(e) => setQuery(e.target.value)}
+                        onKeyDown={handleKeyDown}
+                    />
+                
                 {showDropdown && (results.books.length > 0 || results.authors.length > 0) && (
-                <div className="absolute top-full mt-1 left-0 w-full bg-white border rounded shadow z-10 max-h-60 overflow-y-auto">
+                    <div className="absolute top-full mt-2 left-0 w-full bg-white border border-amber-200 rounded shadow z-10 max-h-60 overflow-y-auto">
                     {isLoading && <p className="p-2 text-sm text-gray-500">Loading...</p>}
-
+        
                     {/* BOOK RESULTS */}
                     {results.books.length > 0 && (
-                    <>
+                        <>
                         <div className="px-3 py-2 text-sm font-semibold text-black border-b">Books</div>
                         {results.books.map((book) => (
-                        <div
+                            <div
                             key={`book-${book.book_id}`}
                             className="px-3 py-2 hover:bg-gray-100 cursor-pointer text-black"
                             onClick={() => router.push(`/book/${book.book_id}`)}
-                        >
+                            >
                             {book.title}
-                        </div>
+                            </div>
                         ))}
-                    </>
+                        </>
                     )}
-
+        
                     {/* AUTHOR RESULTS */}
                     {results.authors.length > 0 && (
-                    <>
+                        <>
                         <div className="px-3 py-2 text-sm font-semibold text-black border-b">Authors</div>
                         {results.authors.map((author) => (
-                        <div
+                            <div
                             key={`author-${author.author_id}`}
                             className="px-3 py-2 hover:bg-gray-100 cursor-pointer text-black"
                             onClick={() => router.push(`/author/${author.author_id}`)}
-                        >
+                            >
                             {author.name}
-                        </div>
+                            </div>
                         ))}
-                    </>
+                        </>
                     )}
-
+        
                     {results.books.length === 0 && results.authors.length === 0 && (
-                    <div className="px-3 py-2 text-sm text-gray-500">No results found.</div>
+                        <div className="px-3 py-2 text-sm text-gray-500">No results found.</div>
                     )}
-                </div>
+                    </div>
                 )}
+                </div>
+                <div className="flex gap-2">
+                    <Button 
+                        className="bg-amber-800 text-amber-50 hover:bg-amber-700"
+                        onClick={handleSubmit}
+                    >
+                        <Search className="h-4 w-4" />
+                    </Button>
+                </div> 
             </div>
         </div>
     );
