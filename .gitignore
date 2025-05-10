@@ -32,3 +32,5 @@ media/*
 node_modules
 
 */makefile
+
+#comment
