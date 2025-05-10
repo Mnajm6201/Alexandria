@@ -1,10 +1,11 @@
+// src/app/discovery/page.tsx
 'use client'
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import {
     BookOpen,
-    Home,
+    Home as HomeIcon, 
     Compass,
     BookmarkIcon,
     User,
@@ -15,6 +16,7 @@ import SearchBar from "@/components/ui/SearchBar";
 import ShelfComponent from "@/components/ui/shelves/ShelfComponent";
 import { useRouter } from "next/navigation";
 import { useJWToken } from '@/utils/getJWToken';
+import { Header } from "@/components/layout/Header";
 
 // Fallback to static data if API fails
 import { topRated, topRomance, topFiction } from "@/components/ui/book_details/StaticCurated";
@@ -135,29 +137,22 @@ export default function DiscoveryPage() {
     }, [jwtToken, fetchJWToken]);
 
     return (
-        <div className="flex flex-col min-h-screen bg-[#F8F5F1]">
-            <header className="sticky top-0 z-10 bg-[#F8F5F1] border-b border-[#E2D9C9] p-4">
-                <div className="flex items-center justify-between max-w-6xl mx-auto">
-                    <Link href="/" className="text-2xl font-bold text-[#4A4238]">
-                        Alexandria
-                    </Link>
-                    <div className="relative w-full max-w-sm mx-4">
-                        <SearchBar />
-                    </div>
-                    <Button variant="ghost" size="icon">
-                        <BookOpen className="h-6 w-6 text-[#4A4238]" />
-                    </Button>
-                </div>
-            </header>
+        <div className="flex flex-col min-h-screen bg-background">
+            {/* Use the shared Header component */}
+            <Header variant="app" />
             
-            {/** FEATURED BOOK COLLECTION */}
             <main className="flex-grow overflow-auto">
                 <div className="max-w-6xl mx-auto px-4 py-6 space-y-8">
+                    {/* Search bar */}
+                    <div className="mb-2">
+                        <SearchBar />
+                    </div>
+
                     {/* Banner section */}
                     <section className="relative h-64 rounded-lg overflow-hidden">
                         <img
                             src="/bettersummer.webp"
-                            alt=""
+                            alt="Summer Reading Collection"
                             className="w-full h-full object-cover"
                         />
                         <div className="absolute inset-0 bg-gradient-to-r from-black/60 to-transparent flex items-end p-6">
@@ -230,11 +225,11 @@ export default function DiscoveryPage() {
                 </div>
             </main>
 
-            {/** FOOTER */}
-            <footer className="sticky bottom-0 bg-white border-t border-[#E2D9C9] py-2 md:hidden">
+            {/* Mobile footer navigation */}
+            <footer className="sticky bottom-0 bg-card border-t border-border py-2 md:hidden">
                 <nav className="flex justify-around">
                     <Button variant="ghost" size="icon">
-                        <Home className="h-6 w-6" />
+                        <HomeIcon className="h-6 w-6" />
                     </Button>
                     <Button variant="ghost" size="icon">
                         <Compass className="h-6 w-6" />

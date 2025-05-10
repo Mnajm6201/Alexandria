@@ -25,20 +25,17 @@
 */
 'use client'
 
-// Add these imports at the top of BookDetails.tsx
 import { useState } from 'react'
 import { Calendar, BookOpen, Tag, Globe, Book, Building, Hash, FileText } from 'lucide-react'
 
-// frontend/src/components/ui/book_details/BookDetails.tsx - Update this existing file
 
-// Add these additional props to the BookDetailsProps interface:
+
 interface BookDetailsProps {
   pageCount?: number
   publicationDate?: string
   isbn?: string
   genres?: string[]
   language?: string
-  // New props specific to editions
   editionNumber?: number
   format?: string
   publisher?: string
@@ -171,8 +168,8 @@ export default function BookDetails({
             {displayGenres.map(genre => (
               <span 
                 key={genre} 
-                className="bg-blue-100 text-blue-800 text-xs font-medium px-2.5 py-0.5 rounded"
-              >
+                className="bg-blue-100 text-blue-800 text-xs font-medium px-2.5 py-0.5 rounded badge"
+                >
                 {genre}
               </span>
             ))}

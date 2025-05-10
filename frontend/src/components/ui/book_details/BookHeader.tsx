@@ -125,7 +125,7 @@ export default function BookHeader({
                   <span key={author.id}>
                     <Link 
                       href={`/author/${author.id}`} 
-                      className="text-blue-500 hover:underline"
+                      className="text-blue-500 hover:text-blue-700 font-medium"
                     >
                       {author.name}
                     </Link>

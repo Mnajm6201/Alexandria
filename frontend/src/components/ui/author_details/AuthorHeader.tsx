@@ -9,21 +9,21 @@ interface AuthorHeaderProps {
 
 export default function AuthorHeader({ name, image }: AuthorHeaderProps) {
   return (
-    <div className="flex flex-col md:flex-row items-center md:items-start">
+    <div className="flex flex-col md:flex-row items-center md:items-start bg-card rounded-lg shadow p-6">
       {/* Author image */}
       <div className="flex-shrink-0 w-full md:w-48 mb-4 md:mb-0">
         {image ? (
           <div className="relative w-40 h-40 md:w-48 md:h-48 mx-auto md:mx-0">
             <Image
               src={image}
-              alt={`${name}`}
+              alt={name}
               fill
               className="object-cover rounded-full shadow-lg"
             />
           </div>
         ) : (
-          <div className="bg-gray-200 dark:bg-gray-700 w-40 h-40 md:w-48 md:h-48 mx-auto md:mx-0 rounded-full shadow-lg flex items-center justify-center">
-            <span className="text-3xl font-bold text-gray-400 dark:text-gray-500">
+          <div className="bg-accent w-40 h-40 md:w-48 md:h-48 mx-auto md:mx-0 rounded-full shadow-lg flex items-center justify-center">
+            <span className="text-3xl font-bold text-muted-foreground">
               {name.charAt(0).toUpperCase()}
             </span>
           </div>
@@ -32,11 +32,11 @@ export default function AuthorHeader({ name, image }: AuthorHeaderProps) {
       
       {/* Author info */}
       <div className="md:ml-8 flex-1 text-center md:text-left">
-        <h1 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-gray-100">
+        <h1 className="text-3xl md:text-4xl font-bold text-card-foreground">
           {name}
         </h1>
         
-        <div className="mt-4 flex items-center text-primary dark:text-gray-300">
+        <div className="mt-4 flex items-center text-foreground">
           <svg 
             xmlns="http://www.w3.org/2000/svg" 
             className="h-5 w-5 mr-2" 
