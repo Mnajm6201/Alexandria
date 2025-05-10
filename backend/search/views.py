@@ -3,6 +3,7 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from django.db.models import Q, Case, When, IntegerField
 from library.models import Book, Author
+from .serializers.book_search_serializer import BookSearchSerializer
 
 """
 SEARCH BAR FUNCTION
@@ -24,43 +25,44 @@ class SearchBarView(APIView):
     def get(self, request):
         query = request.GET.get("q", "").strip()
 
+        try:
+            limit = int(request.GET.get("limit", 5))
+        except ValueError:
+            limit = 5  # default fallback
+
         if not query:
             return Response({"books": [], "authors": []})
 
-        # filters for BOOK searches
-        book_filters = (
-            Q(title__icontains=query) |
-            Q(editions__isbn__icontains=query)
-        )
+        # BOOKS (gets the full object and skip fields_list so we use BookSearchSerializer to retrieve Book's attributes)
+        book_filters = Q(title__icontains=query) | Q(editions__isbn__icontains=query)
 
-        # filters for AUTHOR searches
-        author_filters = (
-            Q(name__icontains=query)
-        )
-
-        # RETURNS BOOKS MATCHING THE SPECIFIED QUERY WITH THE SPECIFIED FIELDS
-        books = self.get_query_set(
+        books_queryset = self.get_query_set(
             model=Book,
             field_name="title",
             filters=book_filters,
             query=query,
-            limit=5,
-            fields_list=["book_id", "title"]
+            limit=limit,
+            fields_list=None
         )
 
-        # RETURNS AUTHORS MATCHING THE SPECIFIED QUERY WITH THE SPECIFIED FIELDS
+        serialized_books = BookSearchSerializer(books_queryset, many=True).data
+        books = [{"type": "book", **book} for book in serialized_books]
+
+        # AUTHORS (this does not retrieve the full object, just the fields_list for name and author_id)
+        author_filters = Q(name__icontains=query)
+
         authors = self.get_query_set(
             model=Author,
             field_name="name",
             filters=author_filters,
             query=query,
-            limit=5,
+            limit=limit,
             fields_list=["author_id", "name"]
         )
 
-        # add any search result other than the ones listed above here:
+        authors = [{"type": "author", **author} for author in authors]
 
-        return Response({"books": list(books), "authors": list(authors)})
+        return Response({"books": books, "authors": authors})
 
 
     """
@@ -78,7 +80,6 @@ class SearchBarView(APIView):
         fields_list: List of fields to return to search results (default: empty)
     """
     def get_query_set(self, model, field_name, filters, query, limit, fields_list=None):
-
         query_set = (
             model.objects.filter(filters)
             .distinct()
@@ -93,9 +94,9 @@ class SearchBarView(APIView):
         )
 
         if fields_list:
-            query_set = query_set.values(*fields_list)
-        
-        return query_set[:limit]
+            return query_set.values(*fields_list)[:limit]  # old behavior for authors
+
+        return query_set[:limit] 
 
 
 """
@@ -122,6 +123,12 @@ out word indicating if this result is a book or author *but how we do determine 
 the search bar or search results and from there we can specify how many to return. this will keep it modular so when we edit the
 View it take effect in all search areas (if we wanted to add genre searching for example, changing the view to do so will take 
 effect everywhere)
+
+
+INDEXED SEARCHES ARE NOT FAST WITH icontains:
+
+look into this:
+Enable trigram search with GIN indexes
 
 
 SEARCH RESULTS PAGE

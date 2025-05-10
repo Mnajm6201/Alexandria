@@ -33,10 +33,18 @@ class UserRegistrationSerializer(serializers.ModelSerializer):
 
 class UserProfileSerializer(serializers.ModelSerializer):
     username = serializers.CharField(source='user.username', read_only=True)
-    
+    profile_pic =serializers.SerializerMethodField()
     class Meta:
         model = UserProfile
-        fields = ('bio', 'user_location', 'social_links', 'username')
+        fields = ('bio', 'zip_code', 'social_links', 'username', 'profile_pic')
+
+    def get_profile_pic(self, obj):
+        # Get the profile picture from the user model
+        return obj.user.profile_pic if obj.user else None
+        
+    def get_username(self, obj):
+        # Get the username from the user model
+        return obj.user.username if obj.user else None
 
 # Password forget classes 
 class PasswordResetRequestSerializer(serializers.Serializer):

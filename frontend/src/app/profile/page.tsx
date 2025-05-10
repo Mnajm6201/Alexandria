@@ -14,6 +14,7 @@ import {
   Users,
   Coffee,
   X,
+  User,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
@@ -25,6 +26,7 @@ import { useJWToken } from "../../utils/getJWToken";
 import { DeleteAccountDialog } from "@/components/ui/delete/DeleteAccountDialog";
 import { useRouter } from "next/navigation";
 import { useAuth } from "@clerk/nextjs";
+import { UserSetupModal } from "@/components/ui/userprofile/UserSetupModal";
 
 export default function UserProfile() {
   const { user, isLoaded } = useUser();
@@ -33,9 +35,15 @@ export default function UserProfile() {
   const [showDeleteDialog, setShowDeleteDialog] = useState(false);
   const [isDeleting, setIsDeleting] = useState<boolean>(false);
   const [edit, setEdit] = useState<boolean>(false);
+  const [showModal, setShowModal] = useState<boolean>(false);
+
   const [profileData, setProfileData] = useState({
     displayName: "",
-    bio: "loading..",
+    bio: "",
+    zipCode: "",
+    socialLinks: "",
+    need_setup: true,
+    profilePicUrl: "",
   });
 
   const router = useRouter();
@@ -52,16 +60,6 @@ export default function UserProfile() {
       fetchProfileData();
     }
   }, [user, isLoaded, jwtToken]);
-
-  //   const fetchProfileData = async () => {
-  //     try{
-  //         const token = await getToken();
-  //         const response = await fetch("http://localhost:8000/");
-  //     }
-  //     catch(error){
-  //         console.log("error, ", error);
-  //     }
-  //   }
 
   //Fetching the user's profile data
   const fetchProfileData = async () => {
@@ -81,13 +79,18 @@ export default function UserProfile() {
       });
 
       const data = await response.json();
+      if (data.need_setup) setShowModal(true);
       if (response.ok) {
         console.log("Data is: ", data);
 
         // update the proile with the updated data
         setProfileData({
           displayName: data.username || userName,
-          bio: data.bio || "loading..",
+          bio: data.bio || "",
+          zipCode: data.zip_code || "",
+          socialLinks: data.social_links || "",
+          need_setup: data.need_setup,
+          profilePicUrl: data.profile_pic || "",
         });
 
         if (data.username) {
@@ -106,92 +109,149 @@ export default function UserProfile() {
     }
   };
 
- const handleDeleteAccount = async () => {
-   setIsDeleting(true);
+  const handleDeleteAccount = async () => {
+    setIsDeleting(true);
 
-   try {
-     const token = jwtToken || (await fetchJWToken());
+    try {
+      const token = jwtToken || (await fetchJWToken());
 
-     if (!token) {
-       console.error("Cannot delete account: No Valid JWT token");
-       setIsDeleting(false);
-       return;
-     }
+      if (!token) {
+        console.error("Cannot delete account: No Valid JWT token");
+        setIsDeleting(false);
+        return;
+      }
 
-     console.log("Delete Request Details:");
-     console.log(
-       "JWT Token (first/last 5):",
-       token.slice(0, 5) + "..." + token.slice(-5)
-     );
-     console.log(
-       "Full Endpoint:",
-       "http://localhost:8000/api/auth/user/delete"
-     );
+      console.log("Delete Request Details:");
+      console.log(
+        "JWT Token (first/last 5):",
+        token.slice(0, 5) + "..." + token.slice(-5)
+      );
+      console.log(
+        "Full Endpoint:",
+        "http://localhost:8000/api/auth/user/delete"
+      );
 
-     try {
-       const response = await fetch(
-         "http://localhost:8000/api/auth/user/delete",
-         {
-           method: "DELETE",
-           headers: {
-             Authorization: `Bearer ${token}`,
-             "Content-Type": "application/json",
-           },
-         }
-       );
+      try {
+        const response = await fetch(
+          "http://localhost:8000/api/auth/user/delete",
+          {
+            method: "DELETE",
+            headers: {
+              Authorization: `Bearer ${token}`,
+              "Content-Type": "application/json",
+            },
+          }
+        );
 
-       console.log("Delete Response Details:");
-       console.log("Response Status:", response.status);
-       console.log("Response Status Text:", response.statusText);
+        console.log("Delete Response Details:");
+        console.log("Response Status:", response.status);
+        console.log("Response Status Text:", response.statusText);
 
-       // Try to get response body for more context
-       const responseBody = await response.text();
-       console.log("Response Body:", responseBody);
+        // Try to get response body for more context
+        const responseBody = await response.text();
+        console.log("Response Body:", responseBody);
 
-       if (response.ok) {
-         const deleteClerk = await fetch("/api/clerk/delete", {
-           method: "POST",
-           credentials: "include",
-         });
+        if (response.ok) {
+          const deleteClerk = await fetch("/api/clerk/delete", {
+            method: "POST",
+            credentials: "include",
+          });
 
-         if (!deleteClerk.ok) {
-           console.log("Clerk api error", await deleteClerk.text());
-         }
+          if (!deleteClerk.ok) {
+            console.log("Clerk api error", await deleteClerk.text());
+          }
 
-         console.log("Proceeding to sign out and redirect");
-         await signOut();
-         router.push("/");
-       } else {
-         console.error("Delete failed with response:", responseBody);
-         throw new Error(`Delete failed: ${responseBody}`);
-       }
-     } catch (fetchError) {
-       console.error("Fetch Error:", fetchError);
-     }
-   } catch (error) {
-     console.error("Outer Error:", error);
-   } finally {
-     setIsDeleting(false);
-   }
- };
+          console.log("Proceeding to sign out and redirect");
+          await signOut();
+          router.push("/");
+        } else {
+          console.error("Delete failed with response:", responseBody);
+          throw new Error(`Delete failed: ${responseBody}`);
+        }
+      } catch (fetchError) {
+        console.error("Fetch Error:", fetchError);
+      }
+    } catch (error) {
+      console.error("Outer Error:", error);
+    } finally {
+      setIsDeleting(false);
+    }
+  };
 
   // Handling the profile changes
   interface ProfileData {
     displayName: string;
     bio: string;
+    zipCode: string;
+    socialLinks: string;
+    need_setup: boolean;
+    profilePicture?: File | null;
+    profileUrl?: string;
   }
 
   const handleSaveProfile = async (newProfileData: ProfileData) => {
-    setProfileData(newProfileData);
-    setUsername(newProfileData.displayName);
-
     try {
+
+      console.log("Profile data being sent: ", newProfileData);
+
       const token = jwtToken || (await fetchJWToken());
 
       if (!token) {
         console.error("Cannot save profile: No Valid JWT");
         return;
       }
+
+      // First handle the profile pic if it exists
+      let profilePicUrl = profileData.profilePicUrl;
+
+      if (newProfileData.profilePicture) {
+        try {
+          const pictureFormData = new FormData();
+          pictureFormData.append(
+            "profilePicture",
+            newProfileData.profilePicture
+          );
+
+          const pictureResponse = await fetch(
+            "http://localhost:8000/api/auth/user/profile/update-picture/",
+            {
+              method: "POST",
+              headers: {
+                Authorization: `Bearer ${token}`,
+              },
+              body: pictureFormData,
+            }
+          );
+
+          if (pictureResponse.ok) {
+            const pictureData = await pictureResponse.json();
+            profilePicUrl = pictureData.profile_pic_url;
+            console.log("Profile picture updated successfully");
+          } else {
+            const errorText = await pictureResponse.text();
+            console.error(
+              "Failed to upload profile picture. Status:",
+              pictureResponse.status,
+              "Error:",
+              errorText
+            );
+          }
+        } catch (pictureError) {
+          console.error("Error uploading profile picture:", pictureError);
+        }
+      }
+
+       console.log(
+         "JSON data being sent:",
+         JSON.stringify({
+           displayName: newProfileData.displayName,
+           bio: newProfileData.bio || "",
+           zipCode: newProfileData.zipCode || "",
+           socialLinks: newProfileData.socialLinks || "",
+         })
+       );
+
+      // Then we update the profile data
       const response = await fetch(
         "http://localhost:8000/api/auth/user/profile/update/",
         {
@@ -203,6 +263,8 @@ export default function UserProfile() {
           body: JSON.stringify({
             displayName: newProfileData.displayName,
             bio: newProfileData.bio,
+            zipCode: newProfileData.zipCode || "",
+            socialLinks: newProfileData.socialLinks || "",
           }),
         }
       );
@@ -219,6 +281,16 @@ export default function UserProfile() {
         );
         return;
       }
+
+      // Update the local state with the new  data including the profile pic url if it was uplodaed
+      setProfileData({
+        ...newProfileData,
+        profilePicUrl: profilePicUrl,
+      });
+
+      setUsername(newProfileData.displayName);
+
+    // Refresh profile data from server to ensure we have the latest
       fetchProfileData();
       console.log("Profile Updated successfully");
     } catch (error) {
@@ -241,16 +313,20 @@ export default function UserProfile() {
           <div className="md:col-span-2">
             <div className="flex flex-col md:flex-row gap-6 items-start mb-8">
               {/* Profile Image */}
-              <div className="relative">
-                <div className="h-32 w-32 rounded-full overflow-hidden border-4 border-amber-200 bg-amber-100">
+              <div className="h-32 w-32 rounded-full overflow-hidden border-4 border-amber-200 bg-amber-100">
+                {profileData.profilePicUrl ? (
                   <Image
-                    src="/me.jpg"
+                    src={`http://localhost:8000${profileData.profilePicUrl}`}
                     alt="Profile"
                     width={128}
                     height={128}
                     className="h-full w-full object-cover"
                   />
-                </div>
+                ) : (
+                  <div className="flex items-center justify-center h-full w-full bg-amber-100 text-amber-700">
+                    <User className="h-16 w-16" />
+                  </div>
+                )}
               </div>
 
               {/* User Info */}
@@ -331,7 +407,7 @@ export default function UserProfile() {
               <div className="flex gap-4">
                 <div className="h-24 w-16 flex-shrink-0 overflow-hidden rounded-md bg-amber-200">
                   <Image
-                    src="https://covers.openlibrary.org/b/id/10504392-L.jpg"
+                    src=""
                     alt="Book cover"
                     width={64}
                     height={96}
@@ -375,7 +451,7 @@ export default function UserProfile() {
               <div className="space-y-2">
                 <div className="aspect-[2/3] overflow-hidden rounded-md bg-amber-200">
                   <Image
-                    src="https://covers.openlibrary.org/b/id/14637497-L.jpg"
+                    src=""
                     alt="Book 1"
                     width={100}
                     height={150}
@@ -397,7 +473,7 @@ export default function UserProfile() {
               <div className="space-y-2">
                 <div className="aspect-[2/3] overflow-hidden rounded-md bg-amber-200">
                   <Image
-                    src="https://covers.openlibrary.org/b/id/14596711-L.jpg"
+                    src=""
                     alt="Book 2"
                     width={100}
                     height={150}
@@ -419,7 +495,7 @@ export default function UserProfile() {
               <div className="space-y-2">
                 <div className="aspect-[2/3] overflow-hidden rounded-md bg-amber-200">
                   <Image
-                    src="https://covers.openlibrary.org/b/id/14303933-L.jpg"
+                    src=""
                     alt="Book 3"
                     width={100}
                     height={150}
@@ -441,7 +517,7 @@ export default function UserProfile() {
               <div className="space-y-2">
                 <div className="aspect-[2/3] overflow-hidden rounded-md bg-amber-200">
                   <Image
-                    src="https://covers.openlibrary.org/b/id/191078-L.jpg"
+                    src=""
                     alt="Book 4"
                     width={100}
                     height={150}
@@ -589,6 +665,13 @@ export default function UserProfile() {
           </div>
         </div>
       </main>
+
+      <UserSetupModal
+        isOpen={showModal}
+        onClose={() => setShowModal(false)}
+        onSave={handleSaveProfile}
+        initialData={profileData}
+      />
     </div>
   );
 }

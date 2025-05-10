@@ -173,8 +173,8 @@ class ReviewAdmin(admin.ModelAdmin):
 
 @admin.register(UserProfile)
 class UserProfileAdmin(admin.ModelAdmin):
-    list_display = ('user', 'user_location')
-    search_fields = ('user__username', 'user_location')
+    list_display = ('user', 'zip_code')
+    search_fields = ('user__username', 'zip_code')
     
 
 @admin.register(JournalEntry)
