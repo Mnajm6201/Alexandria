@@ -24,10 +24,12 @@
     - Implements client-side interactions using React's useState hook.
     - Employs Next.js Link for author profile navigation.
 */
+// src/components/ui/book_details/BookHeader.tsx
 'use client'
 
 import { useState } from 'react'
 import Link from 'next/link'
+import AddToShelfModal from '../shelves/AddToShelfModal'
 
 enum ReadStatusOptions {
   WANT_TO_READ = 'want_to_read',
@@ -51,13 +53,15 @@ interface BookHeaderProps {
   coverImage?: string
   authors?: Author[]
   userStatus?: UserStatus
+  primaryEditionId?: number // Add this prop
 }
 
 export default function BookHeader({ 
   title, 
   coverImage, 
   authors = [], 
-  userStatus 
+  userStatus,
+  primaryEditionId
 }: BookHeaderProps) {
   const [readStatus, setReadStatus] = useState<string>(
     userStatus?.read_status || ReadStatusOptions.NONE
@@ -65,6 +69,7 @@ export default function BookHeader({
   const [isOwned, setIsOwned] = useState<boolean>(
     userStatus?.is_owned || false
   )
+  const [showAddToShelf, setShowAddToShelf] = useState(false)
   
   const handleReadStatusChange = async (newStatus: string) => {
     try {
@@ -85,8 +90,8 @@ export default function BookHeader({
   }
   
   const handleAddToShelf = () => {
-    // Placeholder for future add-to-shelf popup functionality
-    console.log('Add to Shelf clicked')
+    // Open the "Add to Shelf" modal
+    setShowAddToShelf(true)
   }
   
   return (
@@ -191,8 +196,18 @@ export default function BookHeader({
           </button>
         </div>
       </div>
+
+      {/* Add to Shelf Modal */}
+      {primaryEditionId && (
+        <AddToShelfModal
+          isOpen={showAddToShelf}
+          onClose={() => setShowAddToShelf(false)}
+          editionId={primaryEditionId}
+          onSuccess={() => {
+            setTimeout(() => setShowAddToShelf(false), 1000)
+          }}
+        />
+      )}
     </div>
   )
 }
-
-

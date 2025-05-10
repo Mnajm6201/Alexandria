@@ -95,6 +95,7 @@ interface BookData {
   library_availability: Library[];
   reviews: Review[];
   user_status?: UserStatus;
+  primaryEditionId?: number;
 }
 
 // Default empty book object
@@ -109,6 +110,7 @@ const DEFAULT_BOOK: BookData = {
   reviews: []
 }
 
+// Define the function with explicit typing
 // Define the function with explicit typing
 function adaptBookData(apiData: any): BookData {
   if (!apiData) {
@@ -145,6 +147,13 @@ function adaptBookData(apiData: any): BookData {
 
   // Handle primary edition
   const primaryEdition = apiData.primary_edition || {};
+  
+  // Extract primary edition ID
+  let primaryEditionId: number | undefined = undefined;
+  if (primaryEdition && primaryEdition.id) {
+    primaryEditionId = parseInt(String(primaryEdition.id));
+  }
+  
   if (primaryEdition && Object.keys(primaryEdition).length > 0) {
     editions.push({
       id: String(primaryEdition.id || ''),
@@ -192,6 +201,7 @@ function adaptBookData(apiData: any): BookData {
     isbn: primaryEdition.isbn || undefined,
     genres: genres,
     language: apiData.original_language || undefined,
+    primaryEditionId: primaryEditionId, // Added this property
     editions: editions,
     vendor_links: vendorLinks,
     library_availability: libraryAvailability,
@@ -291,6 +301,7 @@ export default function BookPage() {
         coverImage={book.cover_image}
         authors={book.authors}
         userStatus={book.user_status}
+        primaryEditionId={book.primaryEditionId}
       />
       
       <div className="mt-8">
