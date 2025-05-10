@@ -111,7 +111,6 @@ const DEFAULT_BOOK: BookData = {
 }
 
 // Define the function with explicit typing
-// Define the function with explicit typing
 function adaptBookData(apiData: any): BookData {
   if (!apiData) {
     return DEFAULT_BOOK;
@@ -210,7 +209,7 @@ function adaptBookData(apiData: any): BookData {
   };
 }
 
-// Main component that bypasses params entirely
+
 export default function BookPage() {
   // Extract bookId directly from the URL path to avoid Next.js params issues
   const [bookId, setBookId] = useState<string>('');

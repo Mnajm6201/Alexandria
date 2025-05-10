@@ -53,7 +53,7 @@ interface BookHeaderProps {
   coverImage?: string
   authors?: Author[]
   userStatus?: UserStatus
-  primaryEditionId?: number // Add this prop
+  primaryEditionId?: number 
 }
 
 export default function BookHeader({ 

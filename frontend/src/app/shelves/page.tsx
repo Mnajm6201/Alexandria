@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation'
 import { Header } from '@/components/layout/Header'
 import ShelfComponent from '@/components/ui/shelves/ShelfComponent'
 import NewShelfModal from '@/components/ui/shelves/NewShelfModal'
+import EditShelfModal from '@/components/ui/shelves/EditShelfModal'
 import { useJWToken } from '../../utils/getJWToken'
 import { BookOpen, Plus } from 'lucide-react'
 
@@ -38,6 +39,10 @@ export default function ShelvesPage() {
   const [error, setError] = useState<string | null>(null)
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [isCreatingShelf, setIsCreatingShelf] = useState(false)
+  // New state variables for edit/delete
+  const [isEditModalOpen, setIsEditModalOpen] = useState(false)
+  const [currentShelf, setCurrentShelf] = useState<Shelf | null>(null)
+  const [isDeletingShelf, setIsDeletingShelf] = useState(false)
 
   // Fetch user's shelves
   useEffect(() => {
@@ -231,6 +236,64 @@ export default function ShelvesPage() {
     }
   }
 
+  // handle the edit button click
+  const handleEditShelf = (shelfId: string) => {
+    const shelf = shelves.find(s => s.id === parseInt(shelfId));
+    if (shelf) {
+      setCurrentShelf(shelf);
+      setIsEditModalOpen(true);
+    }
+  }
+
+  // handle shelf deletion
+  const handleDeleteShelf = async (shelfId: number) => {
+    try {
+      setIsDeletingShelf(true);
+      
+      const token = jwtToken || await fetchJWToken();
+      if (!token) {
+        router.push('/auth/sign-in');
+        return;
+      }
+
+      console.log(`Deleting shelf ${shelfId}`);
+      
+      const response = await fetch(`http://localhost:8000/${shelfId}/`, {
+        method: 'DELETE',
+        headers: {
+          'Authorization': `Bearer ${token}`
+        }
+      });
+
+      console.log('Delete shelf response status:', response.status);
+      
+      if (!response.ok) {
+        alert(`Failed to delete shelf: ${response.status} ${response.statusText}`);
+        return;
+      }
+      
+      // Update shelf list in UI
+      setShelves(prev => prev.filter(s => s.id !== shelfId));
+      
+      // Close the modal
+      setIsEditModalOpen(false);
+      setCurrentShelf(null);
+      
+    } catch (err) {
+      console.error('Error deleting shelf:', err);
+      alert(err instanceof Error ? err.message : 'Failed to delete shelf. Please try again.');
+    } finally {
+      setIsDeletingShelf(false);
+    }
+  }
+  
+  // Handle updating a shelf
+  const handleUpdateShelf = (updatedShelf: Shelf) => {
+    setShelves(prev => prev.map(s => 
+      s.id === updatedShelf.id ? updatedShelf : s
+    ));
+  }
+
   return (
     <div className="min-h-screen bg-amber-50">
       <Header variant="app" />
@@ -279,7 +342,7 @@ export default function ShelvesPage() {
                 is_private={shelf.is_private}
                 editions={shelfEditions[shelf.id] || []}
                 isOwner={true}
-                onEdit={(id) => console.log(`Edit shelf ${id}`)}
+                onEdit={handleEditShelf}
               />
             ))}
           </div>
@@ -291,6 +354,19 @@ export default function ShelvesPage() {
         onClose={() => setIsModalOpen(false)}
         onSave={handleCreateShelf}
         isLoading={isCreatingShelf}
+      />
+
+      {/* EditShelfModal component */}
+      <EditShelfModal
+        isOpen={isEditModalOpen}
+        onClose={() => {
+          setIsEditModalOpen(false);
+          setCurrentShelf(null);
+        }}
+        shelf={currentShelf}
+        onDelete={handleDeleteShelf}
+        onUpdate={handleUpdateShelf}
+        isLoading={isDeletingShelf}
       />
     </div>
   )

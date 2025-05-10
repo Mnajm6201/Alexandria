@@ -127,7 +127,7 @@ const DEFAULT_EDITION: EditionData = {
 }
 
 export default function EditionPage() {
-  // Extract ISBN directly from the URL path to avoid Next.js params issues
+  // Extract ISBN directly from the URL path
   const [isbn, setIsbn] = useState<string>('');
   const [edition, setEdition] = useState<EditionData>(DEFAULT_EDITION);
   const [loading, setLoading] = useState<boolean>(true);
