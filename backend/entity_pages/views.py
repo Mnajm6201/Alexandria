@@ -24,8 +24,8 @@
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
-from library.models import Book, UserBook, Author
-from .serializers import BookPageSerializer, AuthorPageSerializer
+from library.models import Book, UserBook, Author, Edition
+from .serializers import BookPageSerializer, AuthorPageSerializer, EditionPageSerializer
 
 class BookDetailView(APIView):
     """
@@ -91,3 +91,41 @@ class AuthorDetailView(APIView):
                 status=status.HTTP_404_NOT_FOUND
             )
         
+class EditionDetailView(APIView):
+    """
+    API view for retrieving detailed information about a specific edition.
+    """
+    def get(self, request, isbn):
+        if request.method == 'OPTIONS':
+            return Response(status=status.HTTP_200_OK)
+        try:
+            # Get record for edition based on passed isbn
+            edition = Edition.objects.prefetch_related(
+                'related_edition_image',
+                'book',
+                'book__authors',
+                'book__genres'
+            ).select_related('publisher').get(isbn=isbn)
+            
+            serializer = EditionPageSerializer(edition)
+            data = serializer.data
+            
+            # Add user-specific data if user is authenticated
+            if request.user.is_authenticated:
+                user_book = UserBook.objects.filter(user=request.user, book=edition.book).first()
+                
+                # Add user status if a UserBook exists
+                if user_book:
+                    data['user_status'] = {
+                        'read_status': user_book.read_status,
+                        'is_owned': user_book.is_owned
+                    }
+                
+            return Response(data)
+        
+        # Return error status if edition not found
+        except Edition.DoesNotExist:
+            return Response(
+                {"error": "Edition not found"}, 
+                status=status.HTTP_404_NOT_FOUND
+            )
