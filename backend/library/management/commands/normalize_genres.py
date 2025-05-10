@@ -99,9 +99,6 @@ class Command(BaseCommand):
         """Process a book in dry run mode - just print what would be done"""
         # Get all existing genres for the book
         existing_genres = [bg.genre.name.lower() for bg in BookGenre.objects.filter(book=book)]
-        
-        # Get subject data (this is a simplification, in reality we'd need to fetch this from somewhere)
-        # For now, we'll just use the existing genres as subjects
         subjects = existing_genres
         
         # Extract normalized genres
@@ -131,8 +128,7 @@ class Command(BaseCommand):
             existing_genres.add(bg.genre.name.lower())
             book_genre_objects[bg.genre.name.lower()] = bg
         
-        # Get subject data - here we use existing genres as subjects
-        # In a real scenario, you might want to retrieve the original subjects from somewhere
+        # Get subject data
         subjects = list(existing_genres)
         
         # Extract normalized genres
