@@ -22,24 +22,15 @@ from library.models import (
     Edition, Publisher, CoverImage
 )
 
-# Define valid genres to filter the subjects
-# This is not working for some reason, but i'll leave list here for now.
-VALID_GENRES = {
-    'fantasy', 'fantasy fiction', 'epic fantasy', 'fiction', 
-    'adventure fiction', 'high fantasy', 'english fantasy fiction',
-    'fantasy fiction, english', 'fiction in english', 'literature',
-    'english literature', 'fiction, fantasy, epic', 'fiction, fantasy, general',
-    'fiction in english', 'science fiction', 'mystery', 'thriller',
-    'historical fiction', 'romance', 'horror', 'adventure', 'detective',
-    'young adult', 'ya', 'children\'s fiction', 'dystopian', 'supernatural',
-    'paranormal', 'steampunk', 'urban fantasy', 'contemporary fiction',
-    'literary fiction', 'magical realism', 'speculative fiction',
-    'suspense', 'historical fantasy', 'dark fantasy', 'coming of age',
-    'classics', 'crime fiction', 'mystery fiction', 'teen fiction',
-    'action', 'adventure stories', 'love stories', 'war stories',
-    'spy stories', 'drama', 'bildungsroman', 'space opera',
-    'alternate history', 'time travel', 'cyberpunk'
-}
+# Get the parent directory of the current script
+SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
+PARENT_DIR = os.path.dirname(SCRIPT_DIR)
+
+# Add the parent directory to the path if not already there
+if str(PARENT_DIR) not in sys.path:
+    sys.path.append(str(PARENT_DIR))
+
+from utils.genre_utils import extract_genres_from_subjects, get_primary_genre
 
 class LibraryUpload:
     """Uploads book data from local JSON files into database.."""
@@ -103,17 +94,6 @@ class LibraryUpload:
             print(f"Created new genre: {name}")
         
         return genre
-    
-    def _is_valid_genre(self, subject: str) -> bool:
-        """Check if a subject from Open Library is a valid genre for our system."""
-        subject_lower = subject.lower()
-        
-        # Check if it's in our valid genres list
-        for genre in VALID_GENRES:
-            if genre in subject_lower:
-                return True
-        
-        return False
     
     @transaction.atomic
     def upload_authors(self) -> Dict[str, Author]:
@@ -236,33 +216,41 @@ class LibraryUpload:
             )
             print(f"Linked author {author_obj.name} to book {book.title}")
         
-        # Add genres
+        # Extract subjects from different fields
         subjects = []
-        
+
         # Extract subjects from different fields
         if 'subjects' in self.work_data:
             subjects.extend([s.get('name', s) if isinstance(s, dict) else s 
                            for s in self.work_data['subjects']])
-        
+
         if 'subject_places' in self.work_data:
             subjects.extend(self.work_data['subject_places'])
-        
+
         if 'subject_times' in self.work_data:
             subjects.extend(self.work_data['subject_times'])
-        
-        for subject_name in set(subjects):
-            if not subject_name:
-                continue
+
+        # Extract normalized genres using our utility function
+        normalized_genres = extract_genres_from_subjects(subjects)
                 
-            # Filter to include only valid genres
-            if self._is_valid_genre(subject_name):
-                genre = self._get_or_create_genre(subject_name)
+        if normalized_genres:
+            for genre_name in normalized_genres:
+                genre = self._get_or_create_genre(genre_name)
                 if genre:
                     BookGenre.objects.get_or_create(
                         book=book,
                         genre=genre
                     )
                     print(f"Added genre {genre.name} to book {book.title}")
+        else:
+            # Add a default genre if no valid genres were found
+            default_genre = self._get_or_create_genre("fiction")
+            if default_genre:
+                BookGenre.objects.get_or_create(
+                    book=book,
+                    genre=default_genre
+                )
+                print(f"Added default genre 'fiction' to book {book.title}")
         
         return book
     

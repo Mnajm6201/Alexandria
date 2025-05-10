@@ -74,12 +74,36 @@ class BookPageSerializer(serializers.ModelSerializer):
     def get_primary_edition(self, obj):
         """
         Find and return the primary edition for display on the book page.
-        Prioritizes editions with primary cover images, then any edition with
-        a cover image, then defaults to the first edition.
+        First tries to find the edition marked as primary, then falls back to
+        editions with primary cover images, then any edition with a cover image,
+        then defaults to the first edition.
         """
         editions = obj.editions.all().prefetch_related('related_edition_image').select_related('publisher')
         
-        # Try to find edition with primary cover image
+        # First check for the edition marked as primary
+        primary_editions = [edition for edition in editions if edition.is_primary]
+        if primary_editions:
+            edition = primary_editions[0]
+            # Get the cover image
+            images = edition.related_edition_image.all()
+            primary_images = [img for img in images if img.is_primary]
+            cover_image = primary_images[0].image_url if primary_images else None
+            
+            if not cover_image and images:
+                cover_image = images[0].image_url
+                
+            return {
+                'id': edition.id,
+                'isbn': edition.isbn,
+                'kind': edition.kind,
+                'publication_year': edition.publication_year,
+                'page_count': edition.page_count,
+                'language': edition.language,
+                'publisher_name': edition.publisher.name if edition.publisher else None,
+                'cover_image': cover_image
+            }
+        
+        # If no primary edition is set, fall back to editions with primary cover images
         for edition in editions:
             images = edition.related_edition_image.all()
             primary_images = [img for img in images if img.is_primary]
@@ -95,7 +119,7 @@ class BookPageSerializer(serializers.ModelSerializer):
                     'cover_image': primary_images[0].image_url
                 }
         
-        # If no edition with primary image, try to find any edition with a cover image
+        # If no edition with primary cover image, try to find any edition with a cover image
         for edition in editions:
             images = edition.related_edition_image.all()
             if images:
@@ -125,7 +149,7 @@ class BookPageSerializer(serializers.ModelSerializer):
             }
         
         return None
-    
+
     def get_other_editions(self, obj):
         """
         Return a simplified list of other editions (excluding the primary one)

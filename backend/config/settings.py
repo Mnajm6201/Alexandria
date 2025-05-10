@@ -41,7 +41,8 @@ INSTALLED_APPS = [
     'rest_framework_simplejwt',
     'accounts',
     "search",
-    "shelves"
+    "shelves",
+    "discovery"
 ]
 
 # Set custom user model
