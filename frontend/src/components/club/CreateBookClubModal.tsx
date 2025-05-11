@@ -7,7 +7,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Checkbox } from "../ui/checkbox";
 import { Label } from "../ui/label";
 import { useJWToken } from "@/utils/getJWToken";
-import { X, Search, BookOpen, Upload, Image as ImageIcon } from "lucide-react";
+import { X, Search, BookOpen, Image as ImageIcon } from "lucide-react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 

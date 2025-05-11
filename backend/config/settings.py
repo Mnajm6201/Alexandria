@@ -32,6 +32,7 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    'django_filters',
     "mptt",
     "corsheaders",
     "library",
@@ -40,6 +41,8 @@ INSTALLED_APPS = [
     'rest_framework_simplejwt',
     'accounts',
     "search",
+    "shelves",
+    "discovery",
     "bookclubs"
 ]
 
@@ -47,6 +50,7 @@ INSTALLED_APPS = [
 AUTH_USER_MODEL = "library.User"
 
 MIDDLEWARE = [
+    "corsheaders.middleware.CorsMiddleware",
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
@@ -54,7 +58,6 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
-    "corsheaders.middleware.CorsMiddleware",
 ]
 
 ROOT_URLCONF = "config.urls"
@@ -103,7 +106,8 @@ CORS_ALLOW_METHODS = [
     "PUT",
     "HEAD",
     "OPTIONS",
-    "DELETE"
+    "DELETE",
+    "Patch"
 ]
 
 # Database

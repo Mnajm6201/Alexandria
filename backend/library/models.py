@@ -202,6 +202,7 @@ class Edition(models.Model):
     isbn = models.CharField(max_length=13, unique=True)
     publisher = models.ForeignKey("Publisher", on_delete=models.SET_NULL, related_name='editions', null=True, blank=True)
     kind = models.CharField(max_length=10, choices=FORMAT_CHOICES, null=False)
+    is_primary = models.BooleanField(default=False)
     publication_year = models.PositiveIntegerField(
             validators=[
                 MinValueValidator(1500),
@@ -651,11 +652,20 @@ class BookClub(models.Model):
     users = models.ManyToManyField("User", through="ClubMember")
     book = models.ForeignKey(
         "Book",
+        "Book",
         on_delete=models.CASCADE,
         related_name='related_book_club',
         null=True,
         blank=True
     )
+    upcoming_book = models.ForeignKey(
+        "Book",
+        on_delete=models.SET_NULL,
+        related_name='upcoming_in_clubs',
+        null=True,
+        blank=True,
+    )
+    created_on = models.DateTimeField(auto_now_add=True)
     upcoming_book = models.ForeignKey(
         "Book",
         on_delete=models.SET_NULL,
@@ -693,6 +703,18 @@ class ClubMember(models.Model):
         ('Completed', 'Completed'),
         ('On Hold', 'On Hold')
     ]
+        club: Foreign Key to BookClub
+        user: Foreign Key to User
+        join_date: When the user joined the club
+        is_admin: Whether this member has admin privileges
+        reading_status: Optional status for current book
+    """
+    READING_STATUS_CHOICES = [
+        ('Not Started', 'Not Started'),
+        ('Reading', 'Reading'),
+        ('Completed', 'Completed'),
+        ('On Hold', 'On Hold')
+    ]
 
     club = models.ForeignKey('BookClub', on_delete=models.CASCADE)
     user = models.ForeignKey('User', on_delete=models.CASCADE)
@@ -704,10 +726,23 @@ class ClubMember(models.Model):
         default='Not Started'
     )
     current_page = models.PositiveIntegerField(default=0)
+    join_date = models.DateTimeField(auto_now_add=True)
+    is_admin = models.BooleanField(default=False)
+    reading_status = models.CharField(
+        max_length=20, 
+        choices=READING_STATUS_CHOICES,
+        default='Not Started'
+    )
+    current_page = models.PositiveIntegerField(default=0)
 
     class Meta:
         constraints = [
+        constraints = [
             models.UniqueConstraint(fields=['user', 'club'], name='unique_club_user')
+        ]
+        indexes = [
+            models.Index(fields=['club', 'is_admin']),
+            models.Index(fields=['reading_status'])
         ]
         indexes = [
             models.Index(fields=['club', 'is_admin']),
@@ -716,6 +751,191 @@ class ClubMember(models.Model):
 
     def __str__(self):
         return f"{self.user.username} in {self.club.name}"
+    
+
+
+class BookClubHistory(models.Model):
+    """
+    Book Club History Table
+    
+    Tracks books that a book club has read in the past.
+    
+    Variables:
+        club: Foreign Key to BookClub
+        book: Foreign Key to Book (the book that was read)
+        start_date: When the club started reading this book
+        end_date: When the club finished reading this book
+        club_rating: Optional club consensus rating for the book
+        order: Chronological order in the club's reading history
+    """
+    club = models.ForeignKey(
+        "BookClub", 
+        on_delete=models.CASCADE, 
+        related_name="reading_history"
+    )
+    book = models.ForeignKey(
+        "Book", 
+        on_delete=models.CASCADE, 
+        related_name="read_by_clubs"
+    )
+    start_date = models.DateField(null=True, blank=True)
+    end_date = models.DateField(null=True, blank=True)
+    club_rating = models.DecimalField(
+        max_digits=3, 
+        decimal_places=2,
+        validators=[
+            MinValueValidator(0.00),
+            MaxValueValidator(5.00)
+        ],
+        null=True,
+        blank=True
+    )
+    order = models.PositiveIntegerField(
+        default=1
+    )
+
+    class Meta:
+        verbose_name = "Book Club History"
+        verbose_name_plural = "Book Club Histories"
+        ordering = ['club', '-end_date']
+        indexes = [
+            models.Index(fields=['club', 'book']),
+            models.Index(fields=['end_date'])
+        ]
+        constraints = [
+            models.UniqueConstraint(
+                fields=['club', 'book', 'order'],
+                name='unique_club_book_order'
+            )
+        ]
+
+    def __str__(self):
+        return f"{self.club.name} - {self.book.title}"
+
+class Announcement(models.Model):
+    """
+    Announcement Table
+    
+    For club announcements and updates.
+    
+    Variables:
+        club: Foreign Key to BookClub
+        title: Title of the announcement
+        content: Text content of the announcement
+        created_by: User who created the announcement
+        created_on: When the announcement was created
+        is_pinned: Whether the announcement should be pinned to the top
+    """
+    club = models.ForeignKey(
+        "BookClub", 
+        on_delete=models.CASCADE, 
+        related_name="announcements"
+    )
+    title = models.CharField(max_length=250)
+    content = models.TextField()
+    created_by = models.ForeignKey(
+        "User", 
+        on_delete=models.CASCADE, 
+        related_name="created_announcements"
+    )
+    created_on = models.DateTimeField(auto_now_add=True)
+    is_pinned = models.BooleanField(default=False)
+
+    class Meta:
+        verbose_name = "Announcement"
+        verbose_name_plural = "Announcements"
+        ordering = ['-is_pinned', '-created_on']
+        indexes = [
+            models.Index(fields=['club']),
+            models.Index(fields=['created_on']),
+            models.Index(fields=['is_pinned'])
+        ]
+
+    def __str__(self):
+        return f"{self.club.name} - {self.title}"
+    
+class ReadingSchedule(models.Model):
+    """
+    Reading Schedule Table
+    
+    Defines reading goals and deadlines for book clubs.
+    
+    Variables:
+        club: Foreign Key to BookClub
+        book: Foreign Key to Book (the book being scheduled)
+        start_date: When to start reading
+        end_date: Target completion date
+        is_active: Whether this is the currently active schedule
+    """
+    club = models.ForeignKey(
+        "BookClub", 
+        on_delete=models.CASCADE, 
+        related_name="reading_schedules"
+    )
+    book = models.ForeignKey(
+        "Book", 
+        on_delete=models.CASCADE, 
+        related_name="reading_schedules"
+    )
+    start_date = models.DateField()
+    end_date = models.DateField()
+    is_active = models.BooleanField(default=True)
+    created_on = models.DateTimeField(auto_now_add=True)
+    
+    class Meta:
+        verbose_name = "Reading Schedule"
+        verbose_name_plural = "Reading Schedules"
+        ordering = ['-is_active', '-start_date']
+        indexes = [
+            models.Index(fields=['club', 'book']),
+            models.Index(fields=['is_active']),
+            models.Index(fields=['start_date']),
+            models.Index(fields=['end_date'])
+        ]
+
+    def __str__(self):
+        return f"{self.club.name} - {self.book.title} ({self.start_date} to {self.end_date})"
+
+class ScheduleMilestone(models.Model):
+    """
+    Schedule Milestone Table
+    
+    Defines specific milestones/checkpoints in a reading schedule.
+    
+    Variables:
+        schedule: Foreign Key to ReadingSchedule
+        title: Title of the milestone 
+        target_date: When this milestone should be completed by
+        page_start: Starting page for this milestone
+        page_end: Ending page for this milestone
+        description: Optional description with more details
+    """
+    schedule = models.ForeignKey(
+        "ReadingSchedule", 
+        on_delete=models.CASCADE, 
+        related_name="milestones"
+    )
+    title = models.CharField(max_length=100)
+    target_date = models.DateField()
+    page_start = models.PositiveIntegerField(null=True, blank=True)
+    page_end = models.PositiveIntegerField(null=True, blank=True)
+    chapter_start = models.CharField(max_length=50, null=True, blank=True)
+    chapter_end = models.CharField(max_length=50, null=True, blank=True)
+    description = models.TextField(null=True, blank=True)
+    
+    class Meta:
+        verbose_name = "Schedule Milestone"
+        verbose_name_plural = "Schedule Milestones"
+        ordering = ['schedule', 'target_date']
+        indexes = [
+            models.Index(fields=['schedule']),
+            models.Index(fields=['target_date'])
+        ]
+
+    def __str__(self):
+        return f"{self.schedule.club.name} - {self.title} ({self.target_date})"
+
+
     
 
 

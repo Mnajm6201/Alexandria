@@ -24,9 +24,11 @@ urlpatterns = [
     path("admin/", admin.site.urls),
    # path('', include('library.urls')),
     path('', include('entity_pages.urls')),
+    path('', include('shelves.urls')),
     path('api/auth/', include('accounts.urls', namespace='accounts')),
     path('api/', include("search.urls")),
-    path('api/bookclubs/', include("bookclubs.urls"))
+    path('api/bookclubs/', include("bookclubs.urls")),
+    path('api/discovery/', include('discovery.urls')),
 ]
 
 if settings.DEBUG:

@@ -25,6 +25,7 @@ import React from 'react'
 
 interface Item {
   id: string
+  isbn?: string // Added isbn property for edition items
   cover_image?: string
   [key: string]: any 
 }
@@ -32,7 +33,7 @@ interface Item {
 interface CarouselProps<T extends Item> {
   items: T[]
   title?: string
-  onItemClick?: (item: T) => void
+  onItemClick?: (item: T) => void // Updated to pass the entire item object
   renderItem?: (item: T) => React.ReactNode
 }
 

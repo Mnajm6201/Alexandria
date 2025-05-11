@@ -30,3 +30,10 @@ media/*
 !media/.gitkeep
 
 node_modules
+
+*/makefile
+
+backend/library/book_upload/authors_data.json
+backend/library/book_upload/editions_data.json
+backend/library/book_upload/work_data.json
+backend/library/book_upload/books.txt

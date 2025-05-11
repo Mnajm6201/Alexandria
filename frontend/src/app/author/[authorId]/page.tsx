@@ -1,13 +1,3 @@
-/*
-  Name: page.tsx
-  Date: 03/27/2025
-  Description: React client component that displays detailed information for a specific author.
-  This component extracts the authorId directly from the URL to avoid Next.js 15.1.7 params issues.
-  
-  Output:
-    - Renders a complete author page with sections for author header, biography, and a list of books by the author.
-    - Displays appropriate loading and error states during the data fetching process.
-*/
 'use client'
 
 import { useState, useEffect } from 'react'
@@ -17,6 +7,7 @@ import {
 } from '@/components/ui/author_details'
 import ItemCarousel from '@/components/ui/ItemCarousel'
 import CoverImage from '@/components/ui/CoverImage'
+import { Header } from "@/components/layout/Header"
 
 interface Book {
   id: string;
@@ -113,9 +104,12 @@ export default function AuthorPage() {
   
   if (loading) {
     return (
-      <div className="flex justify-center items-center min-h-screen">
-        <div className="animate-pulse text-xl">
-          Loading author details...
+      <div>
+        <Header variant="app" />
+        <div className="flex justify-center items-center min-h-screen">
+          <div className="animate-pulse text-xl">
+            Loading author details...
+          </div>
         </div>
       </div>
     );
@@ -123,16 +117,19 @@ export default function AuthorPage() {
   
   if (error) {
     return (
-      <div className="flex justify-center items-center min-h-screen p-8">
-        <div className="text-red-500 text-center">
-          <h2 className="text-2xl font-bold mb-4">Error Loading Author</h2>
-          <p>{error}</p>
-          <button 
-            onClick={() => window.location.reload()}
-            className="mt-4 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
-          >
-            Try Again
-          </button>
+      <div>
+        <Header variant="app" />
+        <div className="flex justify-center items-center min-h-screen p-8">
+          <div className="text-red-500 text-center">
+            <h2 className="text-2xl font-bold mb-4">Error Loading Author</h2>
+            <p>{error}</p>
+            <button 
+              onClick={() => window.location.reload()}
+              className="mt-4 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
+            >
+              Try Again
+            </button>
+          </div>
         </div>
       </div>
     );
@@ -140,12 +137,9 @@ export default function AuthorPage() {
   
   return (
     <>
-      {/* NUCLEAR OVERRIDE: force all text within .author-page to #111111 */}
-      <style jsx global>{`
-        .author-page, .author-page * {
-          color: #111111 !important;
-        }
-      `}</style>
+      <Header variant="app" />
+
+      
       <div className="author-page max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <AuthorHeader 
           name={author.name}

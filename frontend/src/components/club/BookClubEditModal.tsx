@@ -11,9 +11,7 @@ import {
   X,
   Search,
   BookOpen,
-  Upload,
   Image as ImageIcon,
-  Edit,
 } from "lucide-react";
 import Image from "next/image";
 

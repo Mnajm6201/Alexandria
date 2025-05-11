@@ -1,26 +1,4 @@
-/*
-  Name: ThemeToggle.tsx
-  Date: 03/22/2025
-  Description: React client component that provides a toggle button for switching between light and dark themes. 
-  On mount, it retrieves the user's theme preference from localStorage (defaulting to "light" if not set) 
-  and applies it by setting the "data-theme" attribute on the document's root element. When the button is clicked, 
-  the theme toggles between "light" and "dark", updates localStorage, and adjusts the document's attribute accordingly.
-
-  Input:
-    - No external props are required.
-    - localStorage: Reads the "theme" key to determine the user's preferred theme, defaulting to "light".
-
-  Output:
-    - Renders a fixed button at the top-right of the viewport.
-    - Displays "🌙" when in light mode and "☀️" when in dark mode.
-    - Updates the theme state, localStorage, and the document's "data-theme" attribute upon user interaction.
-    - Returns null on the initial render until the component has mounted to prevent hydration mismatches.
-
-  Notes:
-    - Uses the "use client" directive to enforce client-side rendering.
-    - Employs useEffect to handle client-side only operations.
-    - Ensures a smooth user experience by preventing initial render issues related to server-client theme mismatches.
-*/
+// src/components/ui/ThemeToggle.tsx
 'use client';
 
 import { useEffect, useState } from 'react';
@@ -50,10 +28,27 @@ export default function ThemeToggle() {
   return (
     <button
       onClick={toggleTheme}
-      className="fixed top-4 right-4 z-50 p-2 rounded-full bg-white dark:bg-gray-800 shadow-md"
+      style={{ 
+        background: 'none',
+        border: 'none',
+        padding: 0,
+        cursor: 'pointer',
+        fontSize: '1.75rem', // Make the emoji larger
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center'
+      }}
       aria-label="Toggle theme"
     >
-      {theme === 'dark' ? '☀️' : '🌙'}
+      {theme === 'dark' ? (
+        <span role="img" aria-label="Sun" style={{ fontSize: '1.75rem' }}>
+          ☀️
+        </span>
+      ) : (
+        <span role="img" aria-label="Moon" style={{ fontSize: '1.75rem' }}>
+          🌙
+        </span>
+      )}
     </button>
   );
 }

@@ -5,11 +5,11 @@ export const topRated = [
     },
     {
         id: '2',
-        cover_image: 'https://covers.openlibrary.org/b/id/10618916-L.jpg',
+        cover_image: 'https://ia902309.us.archive.org/view_archive.php?archive=/20/items/l_covers_0008/l_covers_0008_09.zip&file=0008095021-L.jpg',
     },
     {
         id: '3',
-        cover_image: 'https://covers.openlibrary.org/b/id/8279591-L.jpg',
+        cover_image: 'https://covers.openlibrary.org/b/id/14813225-L.jpg',
     },
     {
         id: '4',
@@ -17,15 +17,15 @@ export const topRated = [
     },
     {
         id: '5',
-        cover_image: 'https://covers.openlibrary.org/b/id/12236669-L.jpg',
+        cover_image: 'https://covers.openlibrary.org/b/id/107499-L.jpg',
     },
     {
         id: '6',
-        cover_image: 'https://covers.openlibrary.org/b/id/10515650-L.jpg',
+        cover_image: 'https://covers.openlibrary.org/b/id/8314545-L.jpg',
     },
     {
         id: '7',
-        cover_image: 'https://covers.openlibrary.org/b/id/14831798-L.jpg',
+        cover_image: 'https://ia802309.us.archive.org/view_archive.php?archive=/20/items/l_covers_0008/l_covers_0008_40.zip&file=0008401686-L.jpg',
     },
     {
         id: '8',

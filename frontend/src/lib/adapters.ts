@@ -41,6 +41,7 @@ interface Author {
     publication_date?: string;
     format?: string;
     language?: string;
+    isbn?: string;
   }
   
   interface Vendor {
@@ -150,7 +151,8 @@ interface Author {
           ? String(primaryEdition.publication_year) 
           : undefined,
         format: primaryEdition.kind || 'Unknown format',
-        language: primaryEdition.language || 'Unknown language'
+        language: primaryEdition.language || 'Unknown language',
+        isbn: primaryEdition.isbn
       });
     }
     
@@ -166,7 +168,8 @@ interface Author {
               ? String(edition.publication_year) 
               : undefined,
             format: edition.kind || 'Unknown format',
-            language: edition.language || 'Unknown language'
+            language: edition.language || 'Unknown language',
+            isbn: edition.isbn
           });
         }
       });
