@@ -14,6 +14,9 @@ import CoverImage from '@/components/ui/CoverImage'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { Header } from "@/components/layout/Header"
+import { ShoppingCart } from 'lucide-react'
+import { Button } from '@/components/ui/button'
+import { Badge } from '@/components/ui/badge'
 
 // Define the types needed for component
 interface Author {
@@ -292,16 +295,37 @@ export default function EditionPage() {
         )}
         
         {/* Vendor Links or Placeholder */}
-        {edition.vendor_links && edition.vendor_links.length > 0 ? (
-          <div className="mt-8">
-            <VendorLinks vendors={edition.vendor_links} />
-          </div>
-        ) : (
-          <div className="mt-8 bg-white dark:bg-gray-800 rounded-lg shadow p-6">
-            <h2 className="text-xl font-semibold text-gray-900 dark:text-gray-100">Where to Buy</h2>
-            <p className="text-gray-500 dark:text-gray-300 mt-2">No vendors available</p>
-          </div>
-        )}
+        <div className="mt-8 bg-white dark:bg-gray-800 rounded-lg shadow p-6">
+              <h2 className="text-xl font-semibold text-gray-900 dark:text-gray-100 mb-3">Where to Buy</h2>
+              <p className="text-gray-500 dark:text-gray-300 mb-4">Available on Amazon:</p>
+
+              <div className="flex items-center gap-4">
+                <Button asChild className="bg-[#FF9900] hover:bg-[#E88B00] text-white rounded-2xl">
+                  <Link
+                    href={`https://www.amazon.com/s?k=${encodeURIComponent(edition.isbn!)}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center justify-start px-4 py-2"
+                  >
+                    Buy on Amazon 
+                    <ShoppingCart className="h-4 w-4" stroke="white" />
+                  </Link>
+                </Button>
+
+                 {/* Barnes & Noble */}
+                <Button asChild className="bg-[#FF9900] hover:bg-[#E88B00] text-white rounded-2xl">
+                  <Link
+                    href={`https://www.barnesandnoble.com/s/${encodeURIComponent(edition.book_info.title!)}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center justify-start px-4 py-2"
+                  >
+                    Buy on Barnes & Noble 
+                    <ShoppingCart className="h-4 w-4" stroke="white" />
+                  </Link>
+                </Button>
+              </div>
+            </div>
         
         {/* Library Availability or Placeholder */}
         {edition.library_availability && edition.library_availability.length > 0 ? (

@@ -2,7 +2,7 @@ from django.db import models
 from library.models import Shelf
 
 class FeaturedShelf(models.Model):
-    shelf = models.ForeignKey(Shelf, on_delete=models.CASCADE, related_name="discovery_features")
+    shelf = models.ForeignKey(Shelf, on_delete=models.CASCADE, related_name="discovery_features", null=True)
     display_title = models.CharField(max_length=255)
     description = models.TextField(blank=True)
     display_order = models.IntegerField(default=0)
