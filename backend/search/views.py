@@ -4,6 +4,7 @@ from rest_framework.response import Response
 from django.db.models import Q, Case, When, IntegerField
 from library.models import Book, Author
 from .serializers.book_search_serializer import BookSearchSerializer
+from .serializers.author_search_serializer import AuthorSearchSerializer
 
 """
 SEARCH BAR FUNCTION
@@ -51,16 +52,17 @@ class SearchBarView(APIView):
         # AUTHORS (this does not retrieve the full object, just the fields_list for name and author_id)
         author_filters = Q(name__icontains=query)
 
-        authors = self.get_query_set(
+        authors_queryset = self.get_query_set(
             model=Author,
             field_name="name",
             filters=author_filters,
             query=query,
             limit=limit,
-            fields_list=["author_id", "name"]
+            fields_list=None
         )
 
-        authors = [{"type": "author", **author} for author in authors]
+        serialized_authors = AuthorSearchSerializer(authors_queryset, many=True).data
+        authors = [{"type": "author", **author} for author in serialized_authors]
 
         return Response({"books": books, "authors": authors})
 

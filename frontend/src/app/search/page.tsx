@@ -9,11 +9,13 @@ import {
   BookMarked,
   ChevronRight,
   ChevronLeft,
+  User,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Header } from "@/components/layout/Header";
 import SearchBar from "@/components/ui/SearchBar";
+import AddToShelfModal from "@/components/ui/shelves/AddToShelfModal";
 
 // types for results
 type Book = {
@@ -31,6 +33,8 @@ type Author = {
   type: "author";
   author_id: string;
   name: string;
+  biography: string | null;
+  author_image: string | null;
 };
 
 type SearchItem = Book | Author;
@@ -154,23 +158,11 @@ export default function SearchResults() {
                       </div>
 
                       <div className="flex flex-wrap gap-2">
-                        <Button
-                          variant="outline"
-                          size="sm"
-                          className="border-amber-300 text-amber-800"
-                        >
-                          <PlusCircle className="mr-2 h-4 w-4" /> Want to Read
-                        </Button>
-                        <Button
-                          variant="outline"
-                          size="sm"
-                          className="border-amber-300 text-amber-800"
-                        >
-                          <BookMarked className="mr-2 h-4 w-4" /> Add to Shelf
-                        </Button>
-                        <Button variant="ghost" size="sm" className="text-amber-800">
-                          View Details
-                        </Button>
+                        <Link href={`/book/${item.book_id}`}>
+                          <Button variant="ghost" size="lg" className="text-amber-800 hover:underline px-1">
+                            View Book
+                          </Button>
+                        </Link>
                       </div>
                     </div>
                   </div>
@@ -181,17 +173,42 @@ export default function SearchResults() {
                 return (
                   <div
                     key={`author-${item.author_id}`}
-                    className="flex items-center justify-between rounded-lg border border-amber-200 bg-white px-6 py-4"
+                    className="flex flex-col rounded-lg border border-amber-200 bg-white p-4 sm:flex-row sm:items-start sm:p-6"
                   >
-                    <div className="text-lg font-serif font-semibold text-amber-900">
-                      {item.name}
+                    <div className="mb-4 flex justify-center sm:mb-0 sm:mr-6">
+                      <div className="h-[120px] w-[120px] overflow-hidden rounded-full border border-amber-200 bg-amber-100 shadow-md">
+                        <Image
+                          src={item.author_image || "/placeholder.svg?height=120&width=120&text=Author"}
+                          alt={item.name}
+                          width={120}
+                          height={120}
+                          className="h-full w-full object-cover"
+                        />
+                      </div>
                     </div>
-                    <Link
-                      href={`/author/${item.author_id}`}
-                      className="text-sm text-amber-800 hover:underline"
-                    >
-                      View Author
-                    </Link>
+
+                    <div className="flex-1">
+                      <div className="mb-2">
+                        <Link
+                          href={`/author/${item.author_id}`}
+                          className="text-xl font-serif font-bold text-amber-900 hover:underline"
+                        >
+                          {item.name}
+                        </Link>
+                      </div>
+
+                      <p className="mb-4 text-amber-800 line-clamp-3">
+                        {item.biography || "Biography coming soon..."}
+                      </p>
+
+                      <div className="flex-1">
+                        <Link href={`/author/${item.author_id}`}>
+                          <Button variant="ghost" size="lg" className="text-amber-800 px-0 hover:underline">
+                            View Author
+                          </Button>
+                        </Link>
+                      </div>
+                    </div>
                   </div>
                 );
               }

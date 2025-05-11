@@ -16,7 +16,6 @@ import {
     BookHeader, 
     BookSummary, 
     BookDetails,
-    VendorLinks,
     LibraryAvailability,
     ReviewSection 
 } from '@/components/ui/book_details'
@@ -25,6 +24,9 @@ import CoverImage from '@/components/ui/CoverImage'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
 import { Header } from "@/components/layout/Header"
+import { ShoppingCart } from 'lucide-react'
+import { Button } from '@/components/ui/button'
+import { Badge } from '@/components/ui/badge'
 
 // Define the types needed for component
 interface Author {
@@ -390,16 +392,31 @@ export default function BookPage() {
             )}
             
             {/* Vendor Links or Placeholder */}
-            {book.vendor_links && book.vendor_links.length > 0 ? (
-              <div className="mt-8">
-                <VendorLinks vendors={book.vendor_links} />
+            <div className="mt-8 bg-white dark:bg-gray-800 rounded-lg shadow p-6">
+              <h2 className="text-xl font-semibold text-gray-900 dark:text-gray-100 mb-3">Where to Buy</h2>
+              <p className="text-gray-500 dark:text-gray-300 mb-4">Available on Amazon:</p>
+
+              <div className="flex items-center gap-4">
+                <Button asChild className="bg-[#FF9900] hover:bg-[#E88B00] text-white rounded-2xl">
+                  <Link
+                    href={`https://www.amazon.com/s?k=${encodeURIComponent(book.isbn!)}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center justify-start px-4 py-2"
+                  >
+                    Buy on Amazon
+                    <ShoppingCart className="h-4 w-4" stroke="white" />
+                  </Link>
+                </Button>
+
+                <Badge variant="outline" className="bg-green-200 text-green-700 border-green-600 rounded-2xl">
+                  In Stock
+                </Badge>
               </div>
-            ) : (
-              <div className="mt-8 bg-white dark:bg-gray-800 rounded-lg shadow p-6">
-                <h2 className="text-xl font-semibold text-gray-900 dark:text-gray-100">Where to Buy</h2>
-                <p className="text-gray-500 dark:text-gray-300 mt-2">No vendors available</p>
-              </div>
-            )}
+            </div>
+
+
+
             
             {/* Library Availability or Placeholder */}
             {book.library_availability && book.library_availability.length > 0 ? (

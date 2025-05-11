@@ -1,6 +1,7 @@
 # backend/library/management/commands/update_author_images.py
 
 from django.core.management.base import BaseCommand
+from django.db import models
 from library.models import Author
 import requests
 import time
