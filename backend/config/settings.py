@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     "search",
     "shelves",
     "discovery",
+    "reviews",
     "bookclubs"
 ]
 
