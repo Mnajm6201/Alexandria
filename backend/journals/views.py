@@ -1,135 +1,217 @@
-# backend/journals/views.py
-
-from rest_framework import viewsets, permissions, status, filters
+from rest_framework import viewsets, filters, status
 from rest_framework.decorators import action
 from rest_framework.response import Response
-from django.db import models
+from rest_framework.permissions import IsAuthenticated
+from rest_framework.exceptions import ValidationError
 from django_filters.rest_framework import DjangoFilterBackend
-from library.models import Journal, JournalEntry
-from .serializers import (
-    JournalSerializer, JournalEntrySerializer, JournalCreateSerializer
-)
-from .permissions import IsOwnerOrReadOnlyIfPublic, IsJournalOwnerOrReadOnlyIfPublic
+from django.db.models import Q
+from library.models import Journal, JournalEntry, Book, UserBook
+from .serializers import JournalSerializer, JournalEntrySerializer, JournalListSerializer
+from .permissions import IsJournalOwnerOrReadOnlyIfPublic, IsEntryOwnerOrReadOnlyIfPublic
+from django.shortcuts import get_object_or_404
+from django.utils import timezone
+
 
 
 class JournalViewSet(viewsets.ModelViewSet):
     """
-    ViewSet for Journal model
+    API endpoint for managing journals.
     
-    Allows users to create, read, update, and delete journals.
-    Users can only see their own private journals, but can see other users' public journals.
+    Allows users to create, view, update, and delete their journals.
+    Public journals can be viewed by any authenticated user.
     """
-    permission_classes = [permissions.IsAuthenticated, IsOwnerOrReadOnlyIfPublic]
+    serializer_class = JournalSerializer
+    permission_classes = [IsJournalOwnerOrReadOnlyIfPublic]
     filter_backends = [DjangoFilterBackend, filters.SearchFilter, filters.OrderingFilter]
     filterset_fields = ['is_private']
-    search_fields = ['book__title']
-    ordering_fields = ['created_on', 'updated_on']
+    search_fields = ['user_book__book__title']
+    ordering_fields = ['created_on', 'updated_on', 'user_book__book__title']
     ordering = ['-updated_on']
     
     def get_serializer_class(self):
-        if self.action == 'create':
-            return JournalCreateSerializer
+        """Return different serializers based on the action"""
+        if self.action == 'list':
+            return JournalListSerializer
         return JournalSerializer
     
     def get_queryset(self):
+        """
+        Return journals based on permissions:
+        - Owner sees all their journals
+        - Others only see public journals
+        """
         user = self.request.user
-        # Users can see all their own journals plus public journals from others
-        return Journal.objects.filter(
-            user=user
-        ) | Journal.objects.filter(
-            is_private=False
-        ).distinct()
+        if user.is_authenticated:
+            # Show all of the user's journals plus other public journals
+            return Journal.objects.filter(
+                Q(user_book__user=user) | Q(is_private=False)
+            ).select_related('user_book__user', 'user_book__book')
+        return Journal.objects.none()
+    
+    def perform_create(self, serializer):
+        """Handle journal creation with book ID if provided"""
+        book_id = self.request.data.get('book')
+        
+        if book_id and not serializer.validated_data.get('user_book'):
+            try:
+                book = Book.objects.get(id=book_id)
+                user_book, created = UserBook.objects.get_or_create(
+                    user=self.request.user,
+                    book=book
+                )
+                serializer.save(user_book=user_book)
+            except Book.DoesNotExist:
+                raise ValidationError({"book": "Book not found"})
+        else:
+            serializer.save()
     
     @action(detail=True, methods=['get'])
     def entries(self, request, pk=None):
         """
-        List all entries for a specific journal
+        Get all entries for a specific journal
         """
         journal = self.get_object()
         
-        # Determine which entries the user can see
-        if journal.user == request.user:
-            # User owns the journal, so can see all entries
+        # Filter entries based on permissions
+        if journal.user_book.user == request.user:
+            # User can see all their own entries
             entries = journal.entries.all()
         else:
-            # User doesn't own the journal, so can only see public entries
+            # Others can only see public entries in public journals
+            if journal.is_private:
+                return Response(
+                    {"detail": "You don't have permission to view entries of this journal."},
+                    status=status.HTTP_403_FORBIDDEN
+                )
             entries = journal.entries.filter(is_private=False)
         
-        # Apply filters and ordering
-        page_num = request.query_params.get('page_num')
-        if page_num:
-            entries = entries.filter(page_num=page_num)
+        # Apply sorting
+        sort_by = request.query_params.get('sort_by', 'updated_on')
+        order = request.query_params.get('order', 'desc')
         
-        is_private = request.query_params.get('is_private')
-        if is_private is not None:
-            is_private = is_private.lower() == 'true'
-            entries = entries.filter(is_private=is_private)
+        valid_sort_fields = {
+            'created_on': 'created_on',
+            'updated_on': 'updated_on',
+            'page_num': 'page_num',
+        }
         
-        # Apply search
-        search = request.query_params.get('search')
-        if search:
-            entries = entries.filter(
-                models.Q(title__icontains=search) | 
-                models.Q(content__icontains=search)
-            )
+        if sort_by in valid_sort_fields:
+            order_prefix = '-' if order == 'desc' else ''
+            entries = entries.order_by(f'{order_prefix}{valid_sort_fields[sort_by]}')
         
-        # Ordering
-        ordering = request.query_params.get('ordering')
-        if ordering:
-            if ordering == 'word_count':
-                # Sort by word count (Python-side since it's a property)
-                entries = sorted(entries, key=lambda x: len(x.content.split()))
-            elif ordering == '-word_count':
-                entries = sorted(entries, key=lambda x: len(x.content.split()), reverse=True)
-            else:
-                entries = entries.order_by(ordering)
-        
+        page = self.paginate_queryset(entries)
+        if page is not None:
+            serializer = JournalEntrySerializer(page, many=True)
+            return self.get_paginated_response(serializer.data)
+            
         serializer = JournalEntrySerializer(entries, many=True)
         return Response(serializer.data)
+    
+    @action(detail=False, methods=['get'])
+    def my_journals(self, request):
+        """
+        Get only the current user's journals
+        """
+        journals = Journal.objects.filter(user_book__user=request.user)
+        
+        # Apply filters
+        book_id = request.query_params.get('book_id')
+        if book_id:
+            journals = journals.filter(user_book__book__book_id=book_id)
+            
+        # Add filter for is_private parameter
+        is_private = request.query_params.get('is_private')
+        if is_private is not None:
+            # Convert string to boolean
+            is_private_bool = is_private.lower() == 'true'
+            journals = journals.filter(is_private=is_private_bool)
+        
+        # Apply sorting
+        sort_by = request.query_params.get('sort_by', 'updated_on')
+        order = request.query_params.get('order', 'desc')
+        
+        valid_sort_fields = {
+            'created_on': 'created_on',
+            'updated_on': 'updated_on',
+            'book_title': 'user_book__book__title'
+        }
+        
+        if sort_by in valid_sort_fields:
+            order_prefix = '-' if order == 'desc' else ''
+            journals = journals.order_by(f'{order_prefix}{valid_sort_fields[sort_by]}')
+        
+        page = self.paginate_queryset(journals)
+        if page is not None:
+            serializer = JournalListSerializer(page, many=True)
+            return self.get_paginated_response(serializer.data)
+            
+        serializer = JournalListSerializer(journals, many=True)
+        return Response(serializer.data)
 
-
+    @action(detail=False, methods=['get'])
+    def for_book(self, request):
+        """
+        Get journals for a specific book
+        """
+        book_id = request.query_params.get('book_id')
+        if not book_id:
+            return Response(
+                {"detail": "Book ID is required"},
+                status=status.HTTP_400_BAD_REQUEST
+            )
+        
+        book = get_object_or_404(Book, book_id=book_id)
+        
+        # Filter journals based on permissions
+        if request.user.is_authenticated:
+            journals = Journal.objects.filter(
+                Q(user_book__book=book) & (Q(user_book__user=request.user) | Q(is_private=False))
+            )
+        else:
+            journals = Journal.objects.none()
+        
+        serializer = JournalListSerializer(journals, many=True)
+        return Response(serializer.data)
+    
+# This is correct indentation - JournalEntryViewSet should be at the same level as JournalViewSet
 class JournalEntryViewSet(viewsets.ModelViewSet):
     """
-    ViewSet for JournalEntry model within a Journal
+    API endpoint for managing journal entries.
     
-    Allows users to create, read, update, and delete journal entries.
-    Users can only see their own private entries, but can see other users' public entries
-    in public journals.
+    Allows users to create, view, update, and delete entries in their journals.
+    Public entries in public journals can be viewed by any authenticated user.
     """
     serializer_class = JournalEntrySerializer
-    permission_classes = [permissions.IsAuthenticated, IsJournalOwnerOrReadOnlyIfPublic]
-    filter_backends = [DjangoFilterBackend, filters.OrderingFilter, filters.SearchFilter]
-    filterset_fields = ['is_private', 'page_num']
+    permission_classes = [IsEntryOwnerOrReadOnlyIfPublic]
+    filter_backends = [DjangoFilterBackend, filters.SearchFilter, filters.OrderingFilter]
+    filterset_fields = ['is_private', 'page_num', 'journal']
     search_fields = ['title', 'content']
     ordering_fields = ['created_on', 'updated_on', 'page_num']
-    ordering = ['-created_on']
+    ordering = ['-updated_on']
     
     def get_queryset(self):
-        journal_pk = self.kwargs.get('journal_pk')
-        if not journal_pk:
-            return JournalEntry.objects.none()
-        
+        """
+        Return entries based on permissions:
+        - Owner sees all their entries
+        - Others only see public entries in public journals
+        """
         user = self.request.user
-        
-        try:
-            journal = Journal.objects.get(pk=journal_pk)
-            
-            # User can see all entries of their own journal
-            if journal.user == user:
-                return journal.entries.all()
-            
-            # For other users' journals, they can only see public entries
-            # if the journal itself is public
-            if not journal.is_private:
-                return journal.entries.filter(is_private=False)
-            
-            # If journal is private and user is not the owner, return empty queryset
-            return JournalEntry.objects.none()
-            
-        except Journal.DoesNotExist:
-            return JournalEntry.objects.none()
+        if user.is_authenticated:
+            # Show all of the user's entries plus other public entries in public journals
+            return JournalEntry.objects.filter(
+                Q(journal__user_book__user=user) | 
+                (Q(is_private=False) & Q(journal__is_private=False))
+            ).select_related('journal', 'journal__user_book__user', 'journal__user_book__book')
+        return JournalEntry.objects.none()
     
     def perform_create(self, serializer):
-        journal_pk = self.kwargs.get('journal_pk')
-        journal = Journal.objects.get(pk=journal_pk)
-        serializer.save(journal=journal)
+        """Set additional validation before creating"""
+        journal_id = self.request.data.get('journal')
+        journal = get_object_or_404(Journal, id=journal_id)
+        
+        # Ensure user can only add entries to their own journals
+        if journal.user_book.user != self.request.user:
+            # Fixed: Raise a ValidationError instead of returning a Response
+            raise ValidationError({"detail": "You can only add entries to your own journals."})
+        
+        serializer.save()

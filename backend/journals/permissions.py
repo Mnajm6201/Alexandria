@@ -1,74 +1,38 @@
-# backend/journals/permissions.py
-
 from rest_framework import permissions
-
-class IsOwnerOrReadOnlyIfPublic(permissions.BasePermission):
-    """
-    Custom permission to only allow owners of an object to edit it.
-    Others can only view it if it's public.
-    """
-    
-    def has_object_permission(self, request, view, obj):
-        # Read permissions are allowed to anyone if the object is public
-        if request.method in permissions.SAFE_METHODS:
-            # Check if object has user attribute (Journal/JournalEntry)
-            if hasattr(obj, 'user'):
-                if obj.user == request.user:
-                    return True
-                return not obj.is_private
-            
-            # Check if object has journal attribute (JournalEntry)
-            if hasattr(obj, 'journal'):
-                if obj.journal.user == request.user:
-                    return True
-                # Others can only see public entries in public journals
-                return not obj.is_private and not obj.journal.is_private
-        
-        # Write permissions are only allowed to the owner
-        if hasattr(obj, 'user'):
-            return obj.user == request.user
-        
-        if hasattr(obj, 'journal'):
-            return obj.journal.user == request.user
-        
-        return False
-
 
 class IsJournalOwnerOrReadOnlyIfPublic(permissions.BasePermission):
     """
-    Custom permission for journal entries within a journal.
-    Only allows journal owners to create/edit entries.
-    Others can only view public entries in public journals.
+    Custom permission to only allow owners of a journal to edit it.
+    Others can only view if the journal is public.
     """
     
     def has_permission(self, request, view):
-        journal_pk = view.kwargs.get('journal_pk')
-        if not journal_pk:
-            return True  # Will be handled by has_object_permission
-        
-        try:
-            from library.models import Journal
-            journal = Journal.objects.get(pk=journal_pk)
-            
-            # For reading operations
-            if request.method in permissions.SAFE_METHODS:
-                if journal.user == request.user:
-                    return True
-                return not journal.is_private
-            
-            # For write operations, only the journal owner can modify
-            return journal.user == request.user
-            
-        except Journal.DoesNotExist:
-            return False
+        # Allow all authenticated users to list or create journals
+        return request.user and request.user.is_authenticated
     
     def has_object_permission(self, request, view, obj):
-        # For entries, check both entry privacy and journal privacy
-        if request.method in permissions.SAFE_METHODS:
-            if obj.journal.user == request.user:
-                return True
-            # Others can only see public entries in public journals
-            return not obj.is_private and not obj.journal.is_private
+        # Always allow GET, HEAD or OPTIONS requests if the journal is public
+        if request.method in permissions.SAFE_METHODS and not obj.is_private:
+            return True
         
-        # Write permissions only for the journal owner
-        return obj.journal.user == request.user
+        # Write permissions are only allowed to the owner of the journal
+        return obj.user_book.user == request.user
+
+
+class IsEntryOwnerOrReadOnlyIfPublic(permissions.BasePermission):
+    """
+    Custom permission to only allow owners of an entry to edit it.
+    Others can only view if both the journal and entry are public.
+    """
+    
+    def has_permission(self, request, view):
+        # Allow all authenticated users
+        return request.user and request.user.is_authenticated
+    
+    def has_object_permission(self, request, view, obj):
+        # Allow GET, HEAD or OPTIONS requests if both journal and entry are public
+        if request.method in permissions.SAFE_METHODS and not obj.is_private and not obj.journal.is_private:
+            return True
+        
+        # Write permissions are only allowed to the owner
+        return obj.journal.user_book.user == request.user
