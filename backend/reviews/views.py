@@ -145,3 +145,89 @@ class ReviewViewSet(viewsets.ModelViewSet):
         }
         
         return Response(stats)
+        
+    @action(detail=False, methods=['get'])
+    def my_book_review(self, request):
+        """
+        Get the current user's review for a specific book
+        """
+        if not request.user.is_authenticated:
+            return Response({'error': 'Authentication required'}, 
+                          status=status.HTTP_401_UNAUTHORIZED)
+                          
+        book_id = request.query_params.get('book_id', None)
+        if not book_id:
+            return Response({'error': 'book_id parameter is required'}, 
+                          status=status.HTTP_400_BAD_REQUEST)
+        
+        try:
+            book = Book.objects.get(book_id=book_id)
+        except Book.DoesNotExist:
+            return Response({'error': 'Book not found'}, 
+                          status=status.HTTP_404_NOT_FOUND)
+        
+        # Get user's review for this book
+        review = Review.objects.filter(user=request.user, book=book).first()
+        
+        if review:
+            serializer = self.get_serializer(review)
+            return Response(serializer.data)
+        else:
+            return Response(None, status=status.HTTP_204_NO_CONTENT)
+
+    @action(detail=False, methods=['get'])
+    def other_reviews(self, request):
+        """
+        Get all reviews for a book EXCEPT the current user's review
+        """
+        book_id = request.query_params.get('book_id', None)
+        print(f"Fetching other reviews for book_id: {book_id}")
+
+        if not book_id:
+            return Response({'error': 'book_id parameter is required'}, 
+                          status=status.HTTP_400_BAD_REQUEST)
+        
+        try:
+            book = Book.objects.get(book_id=book_id)
+        except Book.DoesNotExist:
+            return Response({'error': 'Book not found'}, 
+                          status=status.HTTP_404_NOT_FOUND)
+        
+        # Get all reviews for this book except the current user's
+        reviews = Review.objects.filter(book=book)
+        if request.user.is_authenticated:
+            reviews = reviews.exclude(user=request.user)
+        
+        # Apply sorting
+        sort_by = request.query_params.get('sort_by', 'created_on')
+        sort_order = request.query_params.get('sort_order', 'desc')
+        
+        if sort_order.lower() == 'asc':
+            reviews = reviews.order_by(sort_by)
+        else:  # Default to descending
+            reviews = reviews.order_by(f'-{sort_by}')
+        
+        # Apply rating filter if specified
+        min_rating = request.query_params.get('min_rating', None)
+        if min_rating and min_rating.isdigit():
+            reviews = reviews.filter(rating__gte=int(min_rating))
+        
+        # Hide flagged reviews (if flagged_count >= 3)
+        hide_flagged = request.query_params.get('hide_flagged', 'true') == 'true'
+        if hide_flagged:
+            reviews = reviews.filter(flagged_count__lt=3)
+        
+        print(f"Found {reviews.count()} reviews for other users")
+
+
+        # Apply pagination
+        page = self.paginate_queryset(reviews)
+        if page is not None:
+            serializer = self.get_serializer(page, many=True)
+            return self.get_paginated_response(serializer.data)
+            print("Response structure:", response.data)  # Inspect response structure
+            return response
+        
+        serializer = self.get_serializer(reviews, many=True)
+        print("Non-paginated response:", serializer.data) 
+        return Response(serializer.data)
