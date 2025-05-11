@@ -199,7 +199,6 @@ const AddToShelfModal: React.FC<AddToShelfModalProps> = ({
                 className="px-4 py-2 bg-amber-600 text-white rounded hover:bg-amber-700 inline-flex items-center"
                 onClick={() => {
                   onClose()
-                  // You could add logic here to redirect to the shelves page
                 }}
               >
                 <Plus className="h-4 w-4 mr-2" />
