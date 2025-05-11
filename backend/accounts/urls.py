@@ -1,6 +1,7 @@
 # accounts/urls.py
 from django.urls import path
-from .views import UserRegistrationView, UserProfileView, UserProfileUpdateView, UserProfilePictureUpdateView, UserDeleteView, PasswordResetRequestView, PasswordResetConfirmView, ClerkVerificationView
+from .views import (UserRegistrationView, UserProfileView, UserProfileUpdateView, UserProfilePictureUpdateView, UserDeleteView, PasswordResetRequestView, PasswordResetConfirmView, ClerkVerificationView,
+                    UserPublicProfileView, UserBookProgressView, UserCurrentlyReadingView, UserBookClubsView)
 from rest_framework_simplejwt.views import (
     TokenObtainPairView,
     TokenRefreshView,
@@ -20,6 +21,9 @@ urlpatterns = [
 
     # User profile delete
     path('user/delete', UserDeleteView.as_view(), name='user-delete'),
+
+    # Other User profiles
+    path("users/<int:pk>/", UserPublicProfileView.as_view(), name="user-public-profile"),
     
     # Authentication endpoints
     path('register/', UserRegistrationView.as_view(), name='register'),
@@ -27,6 +31,17 @@ urlpatterns = [
     path('token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
     path('profile/', UserProfileView.as_view(), name='profile'),
 
+    # Checking user books progress
+    path('books/<str:book_id>/progress/', UserBookProgressView.as_view(), name='book-progress'),
+
+    # Users currently reading
+    path('users/me/currently-reading/', UserCurrentlyReadingView.as_view(), name='user-currently-reading'),
+    path('users/<int:user_id>/currently-reading/', UserCurrentlyReadingView.as_view(), name='other-user-currently-reading'),
+
+    # Users current clubs
+     path('users/<int:user_id>/book-clubs/', UserBookClubsView.as_view(), name='user-book-clubs'),
+    path('users/me/book-clubs/', UserBookClubsView.as_view(), {'user_id': None}, name='my-book-clubs'),
+    
     # Password reset
     path('password-reset/', PasswordResetRequestView.as_view(), name='password_reset'),
     path('password-reset/confirm/', PasswordResetConfirmView.as_view(), name='password_reset_confirm'),

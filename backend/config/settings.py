@@ -43,7 +43,8 @@ INSTALLED_APPS = [
     "search",
     "shelves",
     "discovery",
-    "reviews"
+    "reviews",
+    "bookclubs"
 ]
 
 # Set custom user model
@@ -102,6 +103,8 @@ CORS_ALLOW_METHODS = [
     "GET",
     "POST",
     "OPTIONS",
+    "PATCH",
+    "PUT",
     "HEAD",
     "OPTIONS",
     "DELETE",

@@ -46,6 +46,35 @@ class UserProfileSerializer(serializers.ModelSerializer):
         # Get the username from the user model
         return obj.user.username if obj.user else None
 
+class PublicUserSerializer(serializers.ModelSerializer):
+    """
+    Serializer for public user profiles with enhanced data
+    """
+    profile_pic_url = serializers.SerializerMethodField()
+    
+    class Meta:
+        model = User
+        fields = ['id', 'username', 'first_name', 'last_name', 'profile_pic', 'profile_pic_url']
+    
+    def get_profile_pic_url(self, obj):
+        """
+        Return the full URL for the profile picture if it exists
+        """
+        if not obj.profile_pic:
+            return None
+            
+        # Check if it's already an absolute URL
+        if obj.profile_pic.startswith('http'):
+            return obj.profile_pic
+            
+        # Otherwise, prepend the base URL
+        request = self.context.get('request')
+        if request is not None:
+            base_url = request.build_absolute_uri('/').rstrip('/')
+            return f"{base_url}{obj.profile_pic}"
+        
+        return f"http://localhost:8000{obj.profile_pic}"
+
 # Password forget classes 
 class PasswordResetRequestSerializer(serializers.Serializer):
     email = serializers.EmailField()

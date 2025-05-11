@@ -27,8 +27,10 @@ urlpatterns = [
     path('', include('shelves.urls')),
     path('api/auth/', include('accounts.urls', namespace='accounts')),
     path('api/', include("search.urls")),
+    path('api/bookclubs/', include("bookclubs.urls")),
     path('api/discovery/', include('discovery.urls')),
     path('api/reviews/', include('reviews.urls', namespace='reviews')),
+    path('api/', include('journals.urls'))
 ]
 
 if settings.DEBUG:

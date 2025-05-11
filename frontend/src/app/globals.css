@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+@import '@uiw/react-md-editor/markdown-editor.css';
+@import '@uiw/react-markdown-preview/markdown.css';
+
+
 :root {
   /* Light mode variables - slightly warm, subtly parchment */
   --background: #fbf8f1;         /* Less warm, still slightly off-white */
@@ -629,4 +633,109 @@ footer {
 [data-theme="dark"] .landing-section a:not([class]):hover,
 [data-theme="dark"] .landing-header a:not([class]):hover {
   color: #78350f !important; /* even darker amber on hover */
+}
+
+
+/* Markdown Editor Styles - correct imports for @uiw/react-md-editor */
+@import '@uiw/react-md-editor/markdown-editor.css';
+@import '@uiw/react-markdown-preview/markdown.css';
+
+/* Custom styles for markdown editor */
+.wmde-markdown-var {
+  --color-fg-default: #713f12; /* amber-900 */
+  --color-canvas-default: #fff; /* white */
+  --color-canvas-subtle: #fffbeb; /* amber-50 */
+  --color-border-default: #fcd34d; /* amber-300 */
+  --color-border-muted: #fde68a; /* amber-200 */
+  --color-neutral-muted: #fef3c7; /* amber-100 */
+  --color-accent-fg: #b45309; /* amber-700 */
+  --color-accent-emphasis: #92400e; /* amber-800 */
+  --color-attention-subtle: #fef3c7; /* amber-100 */
+  --color-danger-fg: #dc2626; /* red-600 */
+}
+
+/* Additional prose styling for the rendered markdown */
+.prose-amber {
+  --tw-prose-body: #92400e;
+  --tw-prose-headings: #713f12;
+  --tw-prose-lead: #b45309;
+  --tw-prose-links: #92400e;
+  --tw-prose-bold: #713f12;
+  --tw-prose-counters: #b45309;
+  --tw-prose-bullets: #fbbf24;
+  --tw-prose-hr: #fde68a;
+  --tw-prose-quotes: #92400e;
+  --tw-prose-quote-borders: #fcd34d;
+  --tw-prose-captions: #b45309;
+  --tw-prose-code: #713f12;
+  --tw-prose-pre-code: #fffbeb;
+  --tw-prose-pre-bg: #92400e;
+  --tw-prose-th-borders: #fcd34d;
+  --tw-prose-td-borders: #fde68a;
+}
+
+/* Make sure ReactMarkdown renders correctly */
+.prose-amber a {
+  color: #b45309;
+  text-decoration: underline;
+}
+
+.prose-amber ul {
+  list-style-type: disc;
+  padding-left: 1.5rem;
+}
+
+.prose-amber ol {
+  list-style-type: decimal;
+  padding-left: 1.5rem;
+}
+
+.prose-amber blockquote {
+  border-left: 4px solid #fcd34d;
+  padding-left: 1rem;
+  font-style: italic;
+}
+
+.prose-amber pre {
+  background-color: #92400e;
+  color: #fffbeb;
+  padding: 1rem;
+  border-radius: 0.375rem;
+  overflow-x: auto;
+}
+
+.prose-amber code {
+  background-color: #fef3c7;
+  padding: 0.125rem 0.25rem;
+  border-radius: 0.25rem;
+  font-family: monospace;
+}
+
+/* Custom styles for @uiw/react-md-editor */
+.w-md-editor {
+  border: 1px solid #fde68a; /* amber-200 */
+  border-radius: 0.375rem;
+}
+
+.w-md-editor-toolbar {
+  background-color: #fffbeb; /* amber-50 */
+  border-bottom: 1px solid #fde68a; /* amber-200 */
+}
+
+.w-md-editor-toolbar ul > li > button {
+  color: #92400e; /* amber-800 */
+}
+
+.w-md-editor-toolbar ul > li > button:hover {
+  color: #713f12; /* amber-900 */
+  background-color: #fef3c7; /* amber-100 */
+}
+
+.w-md-editor-text {
+  color: #713f12; /* amber-900 */
+}
+
+.w-md-editor-preview {
+  background-color: #fffbeb; /* amber-50 */
+  box-shadow: inset 1px 0 0 0 #fde68a; /* amber-200 */
 }

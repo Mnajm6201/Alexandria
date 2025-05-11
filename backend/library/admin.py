@@ -2,9 +2,9 @@ from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 from .models import (
     Author, Publisher, Book, BookAuthor, Genre, BookGenre, Edition, CoverImage,
-    User, UserBook, Achievement, UserAchievement, UserProfile, Shelf, ShelfEdition,
+    User, UserBook, Achievement, UserAchievement, UserProfile, Shelf, ShelfEdition, Journal,
     JournalEntry, Review, Community, CommunityUser, BookClub, ClubMember,
-    Post, PostComment, ReviewComment, ShelfComment
+    Post, PostComment, ReviewComment, ShelfComment, Announcement, ReadingSchedule, ScheduleMilestone
 ) 
 
 
@@ -177,12 +177,28 @@ class UserProfileAdmin(admin.ModelAdmin):
     search_fields = ('user__username', 'zip_code')
     
 
+
+class JournalAdmin(admin.ModelAdmin):
+
+    list_display = ['get_user', 'get_book', 'is_private', 'created_on', 'updated_on']
+    list_filter = ['is_private', 'created_on', 'updated_on']
+    search_fields = ['user_book__user__username', 'user_book__book__title']
+    
+
+    def get_user(self, obj):
+        return obj.user_book.user.username
+    get_user.short_description = 'User'
+    
+    def get_book(self, obj):
+        return obj.user_book.book.title
+    get_book.short_description = 'Book'
+
 @admin.register(JournalEntry)
 class JournalEntryAdmin(admin.ModelAdmin):
-    list_display = ("user_book", "title", "created_on")
-    search_fields = ('title', 'user_book__book__title', 'user_book__user__username')
-    list_filter = ('created_on', )
-
+    list_display = ("journal", "title", "created_on", "is_private")
+    search_fields = ('title', 'journal__book__title', 'journal__user__username')
+    list_filter = ('created_on', 'is_private')
+    
 @admin.register(Community)
 class CommunityAdmin(admin.ModelAdmin):
     list_display = ('get_book_title', ) # Since Community can have null therefore we need to do at least show something
@@ -254,3 +270,29 @@ class AchievementAdmin(admin.ModelAdmin):
 class UserAchievementAdmin(admin.ModelAdmin):
     list_display = ('user', 'achievement', 'completed', 'completion_percentage')
     search_fields = ('achievement', 'user')
+
+
+@admin.register(Announcement)
+class AnnouncementAdmin(admin.ModelAdmin):
+    list_display = ('title', 'club', 'created_by', 'created_on', 'is_pinned')
+    list_filter = ('is_pinned', 'created_on')
+    search_fields = ('title', 'content', 'club__name', 'created_by__username')
+    # Newest announcement first
+    ordering = ('-created_on', ) 
+    date_hierarchy = 'created_on'
+
+@admin.register(ReadingSchedule)
+class ReadingScheduleAdmin(admin.ModelAdmin):
+    list_display = ('book', 'club', 'start_date', 'end_date', 'is_active')
+    list_filter = ('is_active', 'start_date', 'end_date')
+    search_fields = ('book__title', 'club__name')
+    autocomplete_fields = ['book', 'club']
+    date_hierarchy = 'start_date'
+
+@admin.register(ScheduleMilestone)
+class ScheduleMilestoneAdmin(admin.ModelAdmin):
+    list_display = ('title', 'schedule', 'target_date', 'page_start', 'page_end', 'chapter_start', 'chapter_end')
+    search_fields = ('title', 'description', 'schedule__book__title', 'schedule__club__name')
+    list_filter = ('target_date',)
+    autocomplete_fields = ['schedule']
+    date_hierarchy = 'target_date'

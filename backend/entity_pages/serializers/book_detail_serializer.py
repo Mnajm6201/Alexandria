@@ -60,3 +60,42 @@ class BookDetailSerializer(serializers.ModelSerializer):
             'year_published', 'original_language',
             'authors', 'editions', 'genres'
         ]
+
+    def get_book_details(self, obj):
+        if not obj.book:
+            return None
+
+        # Get the book
+        book = obj.book
+        
+        # Return basic book details
+        book_details = {
+            'id': book.id,
+            'book_id': book.book_id,
+            'title': book.title,
+            'summary': book.summary,
+            'authors': [author.name for author in book.authors.all()],
+            'year_published': book.year_published
+        }
+        
+        # Add cover image URL if available
+        try:
+            from library.models import Edition
+            editions = Edition.objects.filter(book=book).prefetch_related('related_edition_image')
+            
+            # Look for editions with images
+            for edition in editions:
+                cover_images = edition.related_edition_image.all()
+                if cover_images.exists():
+                    # Prioritize primary images
+                    primary_images = [img for img in cover_images if getattr(img, 'is_primary', False)]
+                    if primary_images:
+                        book_details['cover_url'] = primary_images[0].image_url
+                        break
+                    else:
+                        book_details['cover_url'] = cover_images[0].image_url
+                        break
+        except Exception as e:
+            print(f"Error getting cover image for book details: {str(e)}")
+        
+        return book_details
