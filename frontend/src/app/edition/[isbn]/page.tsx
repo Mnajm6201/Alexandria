@@ -307,14 +307,23 @@ export default function EditionPage() {
                     rel="noopener noreferrer"
                     className="flex items-center justify-start px-4 py-2"
                   >
-                    Buy on Amazon
+                    Buy on Amazon 
                     <ShoppingCart className="h-4 w-4" stroke="white" />
                   </Link>
                 </Button>
 
-                <Badge variant="outline" className="bg-green-200 text-green-700 border-green-600 rounded-2xl">
-                  In Stock
-                </Badge>
+                 {/* Barnes & Noble */}
+                <Button asChild className="bg-[#FF9900] hover:bg-[#E88B00] text-white rounded-2xl">
+                  <Link
+                    href={`https://www.barnesandnoble.com/s/${encodeURIComponent(edition.book_info.title!)}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center justify-start px-4 py-2"
+                  >
+                    Buy on Barnes & Noble 
+                    <ShoppingCart className="h-4 w-4" stroke="white" />
+                  </Link>
+                </Button>
               </div>
             </div>
         
