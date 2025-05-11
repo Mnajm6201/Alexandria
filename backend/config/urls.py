@@ -29,6 +29,7 @@ urlpatterns = [
     path('api/', include("search.urls")),
     path('api/bookclubs/', include("bookclubs.urls")),
     path('api/discovery/', include('discovery.urls')),
+    path('api/', include('journals.urls')),
 ]
 
 if settings.DEBUG:

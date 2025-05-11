@@ -2,7 +2,7 @@ from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 from .models import (
     Author, Publisher, Book, BookAuthor, Genre, BookGenre, Edition, CoverImage,
-    User, UserBook, Achievement, UserAchievement, UserProfile, Shelf, ShelfEdition,
+    User, UserBook, Achievement, UserAchievement, UserProfile, Shelf, ShelfEdition, Journal,
     JournalEntry, Review, Community, CommunityUser, BookClub, ClubMember,
     Post, PostComment, ReviewComment, ShelfComment, Announcement, ReadingSchedule, ScheduleMilestone
 ) 
@@ -177,12 +177,18 @@ class UserProfileAdmin(admin.ModelAdmin):
     search_fields = ('user__username', 'zip_code')
     
 
+@admin.register(Journal)
+class JournalAdmin(admin.ModelAdmin):
+    list_display = ("user", "book", "created_on", "updated_on", "is_private")
+    search_fields = ('user__username', 'book__title')
+    list_filter = ('created_on', 'is_private')
+
 @admin.register(JournalEntry)
 class JournalEntryAdmin(admin.ModelAdmin):
-    list_display = ("user_book", "title", "created_on")
-    search_fields = ('title', 'user_book__book__title', 'user_book__user__username')
-    list_filter = ('created_on', )
-
+    list_display = ("journal", "title", "created_on", "is_private")
+    search_fields = ('title', 'journal__book__title', 'journal__user__username')
+    list_filter = ('created_on', 'is_private')
+    
 @admin.register(Community)
 class CommunityAdmin(admin.ModelAdmin):
     list_display = ('get_book_title', ) # Since Community can have null therefore we need to do at least show something
