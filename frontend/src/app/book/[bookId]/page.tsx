@@ -20,6 +20,8 @@ import {
     LibraryAvailability,
     ReviewSection 
 } from '@/components/ui/book_details'
+import BookClubsReading from "@/components/club/books/BookClubsReading";
+import ClubReadingProgress from "@/components/club/ClubReadingProgress";
 import ItemCarousel from '@/components/ui/ItemCarousel'
 import CoverImage from '@/components/ui/CoverImage'
 import { useRouter } from 'next/navigation'
@@ -228,6 +230,8 @@ export default function BookPage() {
     }
   }, []);
 
+
+  console.log("book id:", bookId)
   // Fetch book data when bookId is available
   useEffect(() => {
     const fetchBookDetails = async () => {
@@ -275,6 +279,64 @@ export default function BookPage() {
   
   // Common layout with header for all states
   return (
+<<<<<<< HEAD
+    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <BookHeader
+        title={book.title}
+        coverImage={book.cover_image}
+        authors={book.authors}
+        userStatus={book.user_status}
+      />
+
+      <ClubReadingProgress bookId={bookId} className="mt-6" />
+
+      <div className="mt-8">
+        <BookSummary summary={book.summary} />
+      </div>
+
+      <div className="mt-8">
+        <BookDetails
+          pageCount={book.page_count}
+          publicationDate={book.original_publication_date}
+          isbn={book.isbn}
+          genres={book.genres || []}
+          language={book.language}
+        />
+      </div>
+
+      <BookClubsReading bookId={bookId} className="mt-8" limit={3} />
+
+      {book.editions && book.editions.length > 0 && (
+        <div className="mt-8">
+          <ItemCarousel
+            items={book.editions}
+            title="Editions"
+            onItemClick={(edition) => {
+              // Navigate to edition page or handle click
+              console.log(`Edition clicked: ${edition.id}`);
+              // Need to add navigation here
+              // i.e. /books/${book.book_id}/editions/${edition.id}`;
+            }}
+            renderItem={(edition) => (
+              <div className="flex flex-col">
+                <CoverImage
+                  src={edition.cover_image}
+                  alt={`Cover for ${edition.title || book.title}`}
+                  width="100%"
+                  height="h-72"
+                  className="mb-2"
+                />
+                {edition.format && (
+                  <span className="mt-2 text-sm text-gray-700 dark:text-gray-300">
+                    {edition.format}
+                  </span>
+                )}
+                {edition.publication_date && (
+                  <span className="text-xs text-gray-500 dark:text-gray-400">
+                    {edition.publication_date}
+                  </span>
+                )}
+=======
     <div className="min-h-screen flex flex-col">
       <Header variant="app" />
       
@@ -386,6 +448,7 @@ export default function BookPage() {
                     </div>
                   </div>
                 </div>
+>>>>>>> main
               </div>
             )}
             
@@ -422,6 +485,43 @@ export default function BookPage() {
           </div>
         </div>
       )}
+<<<<<<< HEAD
+
+      {/* Vendor Links or Placeholder */}
+      {book.vendor_links && book.vendor_links.length > 0 ? (
+        <div className="mt-8">
+          <VendorLinks vendors={book.vendor_links} />
+        </div>
+      ) : (
+        <div className="mt-8 bg-white dark:bg-gray-800 rounded-lg shadow p-6">
+          <h2 className="text-xl font-semibold text-gray-900 dark:text-gray-100">
+            Where to Buy
+          </h2>
+          <p className="text-gray-500 dark:text-gray-300 mt-2">
+            No vendors available
+          </p>
+        </div>
+      )}
+
+      {/* Library Availability or Placeholder */}
+      {book.library_availability && book.library_availability.length > 0 ? (
+        <div className="mt-8">
+          <LibraryAvailability libraries={book.library_availability} />
+        </div>
+      ) : (
+        <div className="mt-8 bg-white dark:bg-gray-800 rounded-lg shadow p-6">
+          <h2 className="text-xl font-semibold text-gray-900 dark:text-gray-100">
+            Library Availability
+          </h2>
+          <p className="text-gray-500 dark:text-gray-300 mt-2">Unavailable</p>
+        </div>
+      )}
+
+      <div className="mt-8">
+        <ReviewSection reviews={book.reviews} bookId={book.book_id} />
+      </div>
+=======
+>>>>>>> main
     </div>
   );
 }

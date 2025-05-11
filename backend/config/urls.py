@@ -27,6 +27,7 @@ urlpatterns = [
     path('', include('shelves.urls')),
     path('api/auth/', include('accounts.urls', namespace='accounts')),
     path('api/', include("search.urls")),
+    path('api/bookclubs/', include("bookclubs.urls")),
     path('api/discovery/', include('discovery.urls')),
 ]
 

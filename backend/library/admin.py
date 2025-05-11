@@ -4,7 +4,7 @@ from .models import (
     Author, Publisher, Book, BookAuthor, Genre, BookGenre, Edition, CoverImage,
     User, UserBook, Achievement, UserAchievement, UserProfile, Shelf, ShelfEdition,
     JournalEntry, Review, Community, CommunityUser, BookClub, ClubMember,
-    Post, PostComment, ReviewComment, ShelfComment
+    Post, PostComment, ReviewComment, ShelfComment, Announcement, ReadingSchedule, ScheduleMilestone
 ) 
 
 
@@ -254,3 +254,29 @@ class AchievementAdmin(admin.ModelAdmin):
 class UserAchievementAdmin(admin.ModelAdmin):
     list_display = ('user', 'achievement', 'completed', 'completion_percentage')
     search_fields = ('achievement', 'user')
+
+
+@admin.register(Announcement)
+class AnnouncementAdmin(admin.ModelAdmin):
+    list_display = ('title', 'club', 'created_by', 'created_on', 'is_pinned')
+    list_filter = ('is_pinned', 'created_on')
+    search_fields = ('title', 'content', 'club__name', 'created_by__username')
+    # Newest announcement first
+    ordering = ('-created_on', ) 
+    date_hierarchy = 'created_on'
+
+@admin.register(ReadingSchedule)
+class ReadingScheduleAdmin(admin.ModelAdmin):
+    list_display = ('book', 'club', 'start_date', 'end_date', 'is_active')
+    list_filter = ('is_active', 'start_date', 'end_date')
+    search_fields = ('book__title', 'club__name')
+    autocomplete_fields = ['book', 'club']
+    date_hierarchy = 'start_date'
+
+@admin.register(ScheduleMilestone)
+class ScheduleMilestoneAdmin(admin.ModelAdmin):
+    list_display = ('title', 'schedule', 'target_date', 'page_start', 'page_end', 'chapter_start', 'chapter_end')
+    search_fields = ('title', 'description', 'schedule__book__title', 'schedule__club__name')
+    list_filter = ('target_date',)
+    autocomplete_fields = ['schedule']
+    date_hierarchy = 'target_date'
