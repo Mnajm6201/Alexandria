@@ -2,12 +2,26 @@ import jwt
 import requests
 import json
 from rest_framework.views import APIView
+from rest_framework import generics, permissions, status
 from rest_framework.response import Response
-from rest_framework import status
+from rest_framework import status, generics
 from rest_framework_simplejwt.tokens import RefreshToken
 from django.conf import settings
 from django.core.files.storage import FileSystemStorage
-from .models import User
+from django.shortcuts import get_object_or_404
+from rest_framework.permissions import AllowAny, IsAuthenticated
+from rest_framework.parsers import MultiPartParser, FormParser
+from django.contrib.auth.tokens import default_token_generator
+from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
+from django.utils.encoding import force_bytes, force_str
+from django.core.mail import send_mail
+from django.conf import settings
+from .models import User, UserProfile
+from library.models import ClubMember
+from .utils import get_book_cover
+from .serializers import (UserRegistrationSerializer, UserProfileSerializer, PasswordResetRequestSerializer, PasswordResetConfirmSerializer,
+                          PublicUserSerializer)
+
 
 class ClerkVerificationView(APIView):
     """
@@ -147,22 +161,6 @@ class ClerkVerificationView(APIView):
             traceback.print_exc()
             return Response({'error': f'Authentication error: {str(e)}'}, 
                            status=status.HTTP_500_INTERNAL_SERVER_ERROR)
-
-
-
-from rest_framework import status
-from rest_framework.response import Response
-from rest_framework.views import APIView
-from rest_framework.permissions import AllowAny, IsAuthenticated
-from rest_framework.parsers import MultiPartParser, FormParser
-from .serializers import UserRegistrationSerializer, UserProfileSerializer
-from django.contrib.auth.tokens import default_token_generator
-from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
-from django.utils.encoding import force_bytes, force_str
-from django.core.mail import send_mail
-from django.conf import settings
-from .models import User, UserProfile
-from .serializers import UserRegistrationSerializer, UserProfileSerializer, PasswordResetRequestSerializer, PasswordResetConfirmSerializer
 
 
 class UserRegistrationView(APIView):
@@ -324,8 +322,103 @@ class UserDeleteView(APIView):
             traceback.print_exc()
             return Response({"success": False, "message": str(e)}, status=500)
 
+# Public profile views
+class UserPublicProfileView(generics.RetrieveAPIView):
+    """
+    API view for retrieving public profile information for any user.
+    """
+    queryset = User.objects.all()
+    serializer_class = PublicUserSerializer
+    permission_classes = [AllowAny]
+    
+    def retrieve(self, request, *args, **kwargs):
+        # Get the user instance
+        instance = self.get_object()
+        
+        # Serialize the user data
+        user_serializer = self.get_serializer(instance)
+        user_data = user_serializer.data
+        
+        try:
+            profile = UserProfile.objects.get(user=instance)
+            profile_serializer = UserProfileSerializer(profile)
+            profile_data = profile_serializer.data
+        
+            response_data = {
+                **user_data,
+                "bio": profile_data.get("bio", ""),
+                "social_links": profile_data.get("social_links", "")
+            }
+            
+            
+            response_data["stats"] = {
+                "books_read": 0, 
+                "average_rating": "N/A",
+                "favorite_genre": "N/A"
+            }
+            
+            response_data["recently_read"] = [] 
+            response_data["book_clubs"] = []
+            
+            return Response(response_data)
+            
+        except UserProfile.DoesNotExist:
+            # Return only user data if profile doesn't exist
+            return Response(user_data)
 
 
+# Users currently reading view
+class UserCurrentlyReadingView(APIView):
+    permission_classes = [permissions.IsAuthenticated]
+    
+    def get(self, request, user_id=None):
+        try:
+            # If user_id is 'me' or not provided, use current user
+            if user_id == 'me' or not user_id:
+                user = request.user
+            else:
+                user = get_object_or_404(User, id=user_id)
+            
+            # Get club memberships where user is reading
+            club_members = ClubMember.objects.filter(
+                user=user,
+                reading_status__in=['reading', 'started']
+            ).select_related('club__book')
+            
+            reading_data = []
+            for membership in club_members:
+                if not membership.club.book:
+                    continue
+                    
+                book = membership.club.book
+                authors = ", ".join([author.name for author in book.authors.all()])
+                
+                book_data = {
+                    "id": book.book_id,
+                    "title": book.title,
+                    "author": authors,
+                    "cover_image": get_book_cover(book),
+                    "current_page": membership.current_page,
+                    "total_pages": book.primary_edition.page_count if book.primary_edition else None,
+                    "progress_percentage": (
+                        (membership.current_page / book.primary_edition.page_count) * 100 
+                        if membership.current_page and book.primary_edition and book.primary_edition.page_count 
+                        else None
+                    ),
+                    "last_updated": membership.last_updated,
+                    "club": {
+                        "id": membership.club.id,
+                        "name": membership.club.name
+                    }
+                }
+                reading_data.append(book_data)
+                
+            return Response(reading_data)
+        except Exception as e:
+            return Response(
+                {"error": f"Failed to fetch currently reading: {str(e)}"},
+                status=status.HTTP_400_BAD_REQUEST
+            )
 
 # Password reset view
 class PasswordResetRequestView(APIView):
@@ -394,6 +487,126 @@ class PasswordResetConfirmView(APIView):
                 return Response({"error": "Invalid reset link"}, status=status.HTTP_400_BAD_REQUEST)
 
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+class UserBookProgressView(APIView):
+    permission_classes = [permissions.IsAuthenticated]
+    
+    def get(self, request, book_id):
+        try:
+            # Log the request
+            print(f"Fetching reading progress for book_id={book_id} and user={request.user.username}")
+            
+            # Check if book_id format is valid
+            if not book_id:
+                return Response(
+                    {"error": "Invalid book_id"},
+                    status=status.HTTP_400_BAD_REQUEST
+                )
+                
+            # Check if user is reading this book in any club
+            club_members = ClubMember.objects.filter(
+                user=request.user,
+                club__book__book_id=book_id
+            )
+            
+            # Log what we found
+            print(f"Found {club_members.count()} club memberships for this user and book")
+            
+            if not club_members.exists():
+                return Response({
+                    "reading": False,
+                    "message": "You are not currently reading this book in any club"
+                })
+            
+            # Get reading progress from the most recent club
+            club_member = club_members.order_by('-id').first()
+            
+            # Safely get the total pages
+            total_pages = None
+            try:
+                if (club_member.club and 
+                    club_member.club.book and 
+                    hasattr(club_member.club.book, 'primary_edition') and 
+                    club_member.club.book.primary_edition):
+                    total_pages = club_member.club.book.primary_edition.page_count
+            except Exception as e:
+                print(f"Error getting total pages: {e}")
+                
+            return Response({
+                "reading": True,
+                "current_page": club_member.current_page or 0,
+                "total_pages": total_pages,
+                "reading_status": club_member.reading_status,
+                "club": {
+                    "id": club_member.club.id,
+                    "name": club_member.club.name
+                }
+            })
+        except Exception as e:
+            import traceback
+            print(f"Error in UserBookProgressView for book_id={book_id}: {e}")
+            print(traceback.format_exc())
+            return Response(
+                {"error": f"Failed to fetch reading progress: {str(e)}"},
+                status=status.HTTP_400_BAD_REQUEST
+            )
+
+class UserBookClubsView(APIView):
+    permission_classes = [permissions.IsAuthenticated]
+    
+    def get(self, request, user_id=None):
+        try:
+            # If user_id is None, use the current user
+            if user_id is None:
+                user = request.user
+            else:
+                user = get_object_or_404(User, id=user_id)
+            
+            # Get all clubs the user is a member of
+            memberships = ClubMember.objects.filter(user=user).select_related('club', 'club__book')
+            
+            # Format the data for API response
+            clubs_data = []
+            for membership in memberships:
+                club = membership.club
+                club_data = {
+                    'id': club.id,
+                    'name': club.name,
+                    'description': club.club_desc,
+                    'is_private': club.is_private,
+                    'member_count': club.users.count(),
+                    'club_image': club.club_image,
+                    'joined_date': membership.join_date,
+                    'is_admin': membership.is_admin,
+                    'reading_status': membership.reading_status,
+                    'current_page': membership.current_page
+                }
+                
+                # Add book info if available
+                if club.book:
+                    book = club.book
+                    authors = [author.name for author in book.authors.all()]
+                    
+                    club_data['book'] = {
+                        'id': book.id,
+                        'book_id': book.book_id,
+                        'title': book.title,
+                        'authors': authors,
+                        'cover_url': get_book_cover(book)  # Use your utility function
+                    }
+                
+                clubs_data.append(club_data)
+            
+            return Response(clubs_data)
+            
+        except Exception as e:
+            import traceback
+            print(f"Error in UserBookClubsView: {e}")
+            print(traceback.format_exc())
+            return Response(
+                {"error": f"Failed to fetch user book clubs: {str(e)}"},
+                status=status.HTTP_400_BAD_REQUEST
+            )
 
 # Maybe goign to list it as a ticket to create a webhook for clerk and database connection that way when admin want 
 # to drop an user from database clerk will also

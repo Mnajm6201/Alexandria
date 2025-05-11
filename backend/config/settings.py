@@ -39,7 +39,8 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework_simplejwt',
     'accounts',
-    "search"
+    "search",
+    "bookclubs"
 ]
 
 # Set custom user model
@@ -98,6 +99,8 @@ CORS_ALLOW_METHODS = [
     "GET",
     "POST",
     "OPTIONS",
+    "PATCH",
+    "PUT",
     "HEAD",
     "OPTIONS",
     "DELETE"

@@ -1,57 +1,136 @@
 {
-  "title": "It Ends With Us",
-  "key": "/works/OL18020194W",
+  "description": {
+    "type": "/type/text",
+    "value": "During the reign of France's King Louis XIV, D'Artagnan and three musketeers unite to defend the honor of Anne of Austria against the plots of Cardinal Richeliu."
+  },
   "authors": [
     {
       "author": {
-        "key": "/authors/OL7315784A"
+        "key": "/authors/OL18236A"
+      },
+      "type": {
+        "key": "/type/author_role"
+      }
+    },
+    {
+      "author": {
+        "key": "/authors/OL6006699A"
       },
       "type": {
         "key": "/type/author_role"
       }
     }
   ],
+  "covers": [
+    11929973,
+    2272148,
+    9034870,
+    12673885,
+    8925538,
+    13777565,
+    9298621,
+    13894910,
+    12370030,
+    12370448
+  ],
+  "first_publish_date": "September 1973",
+  "key": "/works/OL36861W",
+  "links": [
+    {
+      "title": "New York Times review",
+      "url": "http://www.nytimes.com/2006/08/20/books/review/20pevear.html",
+      "type": {
+        "key": "/type/link"
+      }
+    }
+  ],
+  "location": "/works/OL22205671W",
+  "subject_places": [
+    "France",
+    "Fa guo",
+    "Swordsmen",
+    "Great Britain"
+  ],
+  "subject_times": [
+    "Louis XIII, 1610-1643",
+    "17th century",
+    "Jin dai",
+    "Louis XIV, 1643-1715",
+    "Charles I, 1625-1649",
+    "Jin dai .",
+    "1610-1643"
+  ],
+  "subjects": [
+    "History",
+    "Fiction",
+    "Swordsmen",
+    "France in fiction",
+    "Vietnamese language books",
+    "Swordplay",
+    "Juvenile fiction",
+    "Adventure and adventurers",
+    "Spanish language materials",
+    "Romans, nouvelles, etc. pour la jeunesse",
+    "Histoire",
+    "Combat au sabre",
+    "Novela juvenil",
+    "Historia",
+    "Adventure fiction",
+    "Spanish language",
+    "Reading materials",
+    "Fiction, historical",
+    "France, fiction",
+    "Continental european fiction (fictional works by one author)",
+    "Three musketeers (fictitious characters), fiction",
+    "Fiction, action & adventure",
+    "French language materials",
+    "Social conditions",
+    "Adventure stories",
+    "General",
+    "French fiction",
+    "Ying yu",
+    "Yu yan du wu",
+    "Chang pian xiao shuo",
+    "Romance literature",
+    "Fiction, historical, general",
+    "Children's fiction",
+    "Adventure and adventurers, fiction",
+    "Paris (france), fiction",
+    "Mongolian literature",
+    "Historical fiction",
+    "Abenteuerroman",
+    "Russian language materials",
+    "Classic Literature",
+    "New York Times reviewed",
+    "France",
+    "Comics & graphic novels, historical fiction",
+    "France -- History -- Louis XIII, 1610-1643 -- Fiction",
+    "Adventure and adventurers -- Fiction",
+    "Swordsmen -- Fiction",
+    "\u00c9p\u00e9istes",
+    "Fiction, general",
+    "France -- History -- Louis XIII, 1610-1643 -- Fiction.",
+    "Fiction, romance, historical, general",
+    "Continental european drama (dramatic works by one author)",
+    "French language",
+    "Readers",
+    "Long now manual for civilization"
+  ],
+  "title": "Les Trois Mousquetaires",
   "type": {
     "key": "/type/work"
   },
-  "description": {
-    "type": "/type/text",
-    "value": "Lily hasn\u2019t always had it easy, but that\u2019s never stopped her from working hard for the life she wants. She\u2019s come a long way from the small town where she grew up\u2014she graduated from college, moved to Boston, and started her own business. And when she feels a spark with a gorgeous neurosurgeon named Ryle Kincaid, everything in Lily\u2019s life seems too good to be true.\r\n\r\nRyle is assertive, stubborn, maybe even a little arrogant. He\u2019s also sensitive, brilliant, and has a total soft spot for Lily. And the way he looks in scrubs certainly doesn\u2019t hurt. Lily can\u2019t get him out of her head. But Ryle\u2019s complete aversion to relationships is disturbing. Even as Lily finds herself becoming the exception to his \u201cno dating\u201d rule, she can\u2019t help but wonder what made him that way in the first place.\r\n\r\nAs questions about her new relationship overwhelm her, so do thoughts of Atlas Corrigan\u2014her first love and a link to the past she left behind. He was her kindred spirit, her protector. When Atlas suddenly reappears, everything Lily has built with Ryle is threatened.\r\n\r\nWith this bold and deeply personal novel, It Ends With Us is a heart-wrenching story and an unforgettable tale of love that comes at the ultimate price."
-  },
-  "covers": [
-    10473609,
-    12501970,
-    10126667,
-    12498414,
-    12503959,
-    12209375
+  "subject_people": [
+    "Jules Mazarin (1602-1661)"
   ],
-  "subject_places": [
-    "Boston (Mass.)"
-  ],
-  "subjects": [
-    "Fiction, Romance, Contemporary, Life change events",
-    "Triangles (Interpersonal relations)",
-    "Man-woman relationships",
-    "Neurosurgeons",
-    "First loves",
-    "Businesswomen",
-    "Fiction",
-    "Contemporary Women",
-    "New York Times bestseller",
-    "Fiction, romance, contemporary",
-    "Man-woman relationships, fiction",
-    "Fiction, women",
-    "collectionid:nyt2020s"
-  ],
-  "latest_revision": 67,
-  "revision": 67,
+  "latest_revision": 73,
+  "revision": 73,
   "created": {
     "type": "/type/datetime",
-    "value": "2018-12-06T15:20:02.050673"
+    "value": "2009-10-15T08:08:05.006376"
   },
   "last_modified": {
     "type": "/type/datetime",
-    "value": "2024-12-23T09:10:28.372342"
+    "value": "2025-04-26T16:04:11.339246"
   }
 }
