@@ -1,6 +1,7 @@
 from rest_framework import serializers
 from library.models import Review, Book, User
 from django.db.models import Avg
+from decimal import Decimal
 
 class ReviewSerializer(serializers.ModelSerializer):
     user_username = serializers.SerializerMethodField()
@@ -27,12 +28,32 @@ class ReviewSerializer(serializers.ModelSerializer):
     def get_user_profile_pic(self, obj):
         return obj.user.profile_pic if obj.user else None
     
+    def to_internal_value(self, data):
+        # Make a mutable copy of the data
+        mutable_data = data.copy() if hasattr(data, 'copy') else dict(data)
+        
+        # If 'book' is in the data and it's a string that's not a digit
+        if 'book' in mutable_data and isinstance(mutable_data['book'], str) and not mutable_data['book'].isdigit():
+            try:
+                # Look up the Book by book_id
+                book_id = mutable_data['book']
+                book = Book.objects.get(book_id=book_id)
+                # Replace the book_id with the actual primary key
+                mutable_data['book'] = book.id
+            except Book.DoesNotExist:
+                raise serializers.ValidationError({'book': f"Book with book_id '{book_id}' not found"})
+        
+        # Call the parent's to_internal_value with our modified data
+        return super().to_internal_value(mutable_data)
+    
     def create(self, validated_data):
         # Get the user from the request
         user = self.context['request'].user
         
-        # Check if user already has a review for this book
+        # Get the book from validated_data
         book = validated_data.get('book')
+        
+        # Check if user already has a review for this book
         existing_review = Review.objects.filter(user=user, book=book).first()
         
         if existing_review:
@@ -62,6 +83,11 @@ class ReviewSerializer(serializers.ModelSerializer):
     def update(self, instance, validated_data):
         instance.content = validated_data.get('content', instance.content)
         instance.rating = validated_data.get('rating', instance.rating)
+        
+        # Update book if provided
+        if 'book' in validated_data:
+            instance.book = validated_data.get('book')
+            
         instance.save()
         
         # Update book's average rating
@@ -70,8 +96,6 @@ class ReviewSerializer(serializers.ModelSerializer):
         return instance
     
     def _update_book_average_rating(self, book):
-        from decimal import Decimal
-        
         # Calculate new average from all reviews using aggregate
         reviews = Review.objects.filter(book=book)
         if reviews.exists():
@@ -79,6 +103,6 @@ class ReviewSerializer(serializers.ModelSerializer):
             # Convert to Decimal before assigning
             book.average_rating = Decimal(str(avg_rating))
         else:
-            # Use Decimal object since thats what we set in the model. 
+            # Use Decimal object since thats what we set in the model
             book.average_rating = Decimal('0.00')
         book.save()
