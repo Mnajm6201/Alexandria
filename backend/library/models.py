@@ -501,24 +501,60 @@ class ShelfEdition(models.Model):
     def __str__(self):
         return f'{self.shelf.name} - {self.edition}'
 
-# Journal Entry Table for user created journal associated with specific books.
+class Journal(models.Model):
+    """
+    Journal Model
+    
+    Variables:
+    user_book: FK to UserBook - the user-book relationship this journal is for
+    created_on: Date the journal was created
+    updated_on: Date the journal was last updated
+    is_private: Boolean indicating if the journal is private
+    """
+
+
+    user_book = models.OneToOneField(
+        "UserBook", 
+        on_delete=models.CASCADE,
+        related_name="journal"
+
+    )
+    created_on = models.DateTimeField(auto_now_add=True)
+    updated_on = models.DateTimeField(auto_now=True)
+    is_private = models.BooleanField(default=False)
+    
+    class Meta:
+        verbose_name = "Journal"
+        verbose_name_plural = "Journals"
+        indexes = [
+            models.Index(fields=["updated_on"]),
+            models.Index(fields=["is_private"]),
+        ]
+        ordering = ["-updated_on"]
+    
+    def __str__(self):
+        return f"{self.user_book.user.username}'s journal for {self.user_book.book.title}"
+
+
+# Journal Entry Table for entries within a journal
 class JournalEntry(models.Model):
     """
     Journal Entry Model
 
     Variables:
-    user_book: FK to UserBook asscoaites user's journal to a specific book.
+    journal: FK to Journal - the journal this entry belongs to
     title: Optional string to head journal entry
     content: Text content of the journal entry
-    created_on: Date the journal was created
-    updated_on: Date the journal was last updated.
-    page_num: Optional page number refrence.
+    created_on: Date the entry was created
+    updated_on: Date the entry was last updated
+    page_num: Optional page number reference
+    is_private: Boolean indicating if the entry is private (overrides journal privacy if True)
     """
 
-    user_book = models.ForeignKey(
-        "UserBook",
-        on_delete = models.CASCADE,
-        related_name = "journal_entries"
+    journal = models.ForeignKey(
+        "Journal",
+        on_delete=models.CASCADE,
+        related_name="entries"
     )
     title = models.CharField(max_length=255, null=True, blank=True)
     content = models.TextField()
@@ -535,11 +571,12 @@ class JournalEntry(models.Model):
             models.Index(fields=["title"]),
             models.Index(fields=["page_num"]),
             models.Index(fields=["updated_on"]),
+            models.Index(fields=["is_private"]),
         ]
         ordering = ["-updated_on"]
     
     def __str__(self):
-        return f"Journal Entry by {self.user_book.user} on {self.user_book.book.title}"
+        return f"Entry by {self.journal.user.username} on {self.journal.book.title}: {self.title or 'Untitled'}"
 
 
 ##### Community Stuff #####
@@ -648,6 +685,7 @@ class BookClub(models.Model):
         blank=True, 
         help_text="Detailed description for the club's About page, perhaps to be in markdown."
     )
+    club_image = models.URLField(null=True, blank=True)
     users = models.ManyToManyField("User", through="ClubMember")
     book = models.ForeignKey(
         "Book",
