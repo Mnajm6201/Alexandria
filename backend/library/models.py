@@ -501,24 +501,70 @@ class ShelfEdition(models.Model):
     def __str__(self):
         return f'{self.shelf.name} - {self.edition}'
 
-# Journal Entry Table for user created journal associated with specific books.
+# Journal Table for user created journals associated with specific books
+class Journal(models.Model):
+    """
+    Journal Model
+    
+    Variables:
+    user: FK to User - the owner of the journal
+    book: FK to Book - the book this journal is about
+    created_on: Date the journal was created
+    updated_on: Date the journal was last updated
+    is_private: Boolean indicating if the journal is private (default privacy setting for all entries)
+    """
+    
+    user = models.ForeignKey(
+        "User", 
+        on_delete=models.CASCADE,
+        related_name="journals"
+    )
+    book = models.ForeignKey(
+        "Book",
+        on_delete=models.CASCADE,
+        related_name="journals"
+    )
+    created_on = models.DateTimeField(auto_now_add=True)
+    updated_on = models.DateTimeField(auto_now=True)
+    is_private = models.BooleanField(default=False)
+    
+    class Meta:
+        verbose_name = "Journal"
+        verbose_name_plural = "Journals"
+        constraints = [
+            models.UniqueConstraint(fields=['user', 'book'], name='unique_user_book_journal')
+        ]
+        indexes = [
+            models.Index(fields=["user"]),
+            models.Index(fields=["book"]),
+            models.Index(fields=["updated_on"]),
+            models.Index(fields=["is_private"]),
+        ]
+        ordering = ["-updated_on"]
+    
+    def __str__(self):
+        return f"{self.user.username}'s journal for {self.book.title}"
+
+
+# Journal Entry Table for entries within a journal
 class JournalEntry(models.Model):
     """
     Journal Entry Model
 
     Variables:
-    user_book: FK to UserBook asscoaites user's journal to a specific book.
+    journal: FK to Journal - the journal this entry belongs to
     title: Optional string to head journal entry
     content: Text content of the journal entry
-    created_on: Date the journal was created
-    updated_on: Date the journal was last updated.
-    page_num: Optional page number refrence.
+    created_on: Date the entry was created
+    updated_on: Date the entry was last updated
+    page_num: Optional page number reference
+    is_private: Boolean indicating if the entry is private (overrides journal privacy if True)
     """
 
-    user_book = models.ForeignKey(
-        "UserBook",
-        on_delete = models.CASCADE,
-        related_name = "journal_entries"
+    journal = models.ForeignKey(
+        "Journal",
+        on_delete=models.CASCADE,
+        related_name="entries"
     )
     title = models.CharField(max_length=255, null=True, blank=True)
     content = models.TextField()
@@ -535,11 +581,12 @@ class JournalEntry(models.Model):
             models.Index(fields=["title"]),
             models.Index(fields=["page_num"]),
             models.Index(fields=["updated_on"]),
+            models.Index(fields=["is_private"]),
         ]
         ordering = ["-updated_on"]
     
     def __str__(self):
-        return f"Journal Entry by {self.user_book.user} on {self.user_book.book.title}"
+        return f"Entry by {self.journal.user.username} on {self.journal.book.title}: {self.title or 'Untitled'}"
 
 
 ##### Community Stuff #####

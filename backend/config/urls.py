@@ -28,6 +28,7 @@ urlpatterns = [
     path('api/auth/', include('accounts.urls', namespace='accounts')),
     path('api/', include("search.urls")),
     path('api/discovery/', include('discovery.urls')),
+    path('api/', include('journals.urls')),
 ]
 
 if settings.DEBUG:
