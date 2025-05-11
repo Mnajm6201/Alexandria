@@ -42,7 +42,8 @@ INSTALLED_APPS = [
     'accounts',
     "search",
     "shelves",
-    "discovery"
+    "discovery",
+    "reviews"
 ]
 
 # Set custom user model
