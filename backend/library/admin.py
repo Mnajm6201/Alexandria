@@ -177,11 +177,21 @@ class UserProfileAdmin(admin.ModelAdmin):
     search_fields = ('user__username', 'zip_code')
     
 
-@admin.register(Journal)
+
 class JournalAdmin(admin.ModelAdmin):
-    list_display = ("user", "book", "created_on", "updated_on", "is_private")
-    search_fields = ('user__username', 'book__title')
-    list_filter = ('created_on', 'is_private')
+
+    list_display = ['get_user', 'get_book', 'is_private', 'created_on', 'updated_on']
+    list_filter = ['is_private', 'created_on', 'updated_on']
+    search_fields = ['user_book__user__username', 'user_book__book__title']
+    
+
+    def get_user(self, obj):
+        return obj.user_book.user.username
+    get_user.short_description = 'User'
+    
+    def get_book(self, obj):
+        return obj.user_book.book.title
+    get_book.short_description = 'Book'
 
 @admin.register(JournalEntry)
 class JournalEntryAdmin(admin.ModelAdmin):
