@@ -4,8 +4,17 @@ import sys
 import json
 import hashlib
 import django
+import datetime
 from typing import Dict, Any, Optional
 from decimal import Decimal
+import sys
+import os
+
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+from utils.wikipedia_utils import get_wikipedia_image_for_author
+
+
+
 
 # Setup Django 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
@@ -22,24 +31,15 @@ from library.models import (
     Edition, Publisher, CoverImage
 )
 
-# Define valid genres to filter the subjects
-# This is not working for some reason, but i'll leave list here for now.
-VALID_GENRES = {
-    'fantasy', 'fantasy fiction', 'epic fantasy', 'fiction', 
-    'adventure fiction', 'high fantasy', 'english fantasy fiction',
-    'fantasy fiction, english', 'fiction in english', 'literature',
-    'english literature', 'fiction, fantasy, epic', 'fiction, fantasy, general',
-    'fiction in english', 'science fiction', 'mystery', 'thriller',
-    'historical fiction', 'romance', 'horror', 'adventure', 'detective',
-    'young adult', 'ya', 'children\'s fiction', 'dystopian', 'supernatural',
-    'paranormal', 'steampunk', 'urban fantasy', 'contemporary fiction',
-    'literary fiction', 'magical realism', 'speculative fiction',
-    'suspense', 'historical fantasy', 'dark fantasy', 'coming of age',
-    'classics', 'crime fiction', 'mystery fiction', 'teen fiction',
-    'action', 'adventure stories', 'love stories', 'war stories',
-    'spy stories', 'drama', 'bildungsroman', 'space opera',
-    'alternate history', 'time travel', 'cyberpunk'
-}
+# Get the parent directory of the current script
+SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
+PARENT_DIR = os.path.dirname(SCRIPT_DIR)
+
+# Add the parent directory to the path 
+if str(PARENT_DIR) not in sys.path:
+    sys.path.append(str(PARENT_DIR))
+
+from utils.genre_utils import extract_genres_from_subjects, get_primary_genre
 
 class LibraryUpload:
     """Uploads book data from local JSON files into database.."""
@@ -104,16 +104,6 @@ class LibraryUpload:
         
         return genre
     
-    def _is_valid_genre(self, subject: str) -> bool:
-        """Check if a subject from Open Library is a valid genre for our system."""
-        subject_lower = subject.lower()
-        
-        # Check if it's in our valid genres list
-        for genre in VALID_GENRES:
-            if genre in subject_lower:
-                return True
-        
-        return False
     
     @transaction.atomic
     def upload_authors(self) -> Dict[str, Author]:
@@ -137,13 +127,25 @@ class LibraryUpload:
             # Create a unique hash for the author
             author_id = self._create_hash(key)
             
+            # Try to get Wikipedia image, but don't let failure disrupt the process
+            author_image = None
+            try:
+                author_image = get_wikipedia_image_for_author(name)
+            except Exception as e:
+                print(f"Note: Could not fetch Wikipedia image for {name}: {e}")
+                # Continue with no image
+            
+            # If no Wikipedia image, use a default placeholder
+            if not author_image:
+                author_image = "https://via.placeholder.com/150?text=Author"  
+            
             # Get or create the author
             author, created = Author.objects.get_or_create(
                 author_id=author_id,
                 defaults={
                     'name': name[:250], 
                     'biography': bio,
-                    'author_image': f"https://covers.openlibrary.org/a/olid/OL{key}A-M.jpg" if key else None
+                    'author_image': author_image
                 }
             )
             
@@ -175,7 +177,7 @@ class LibraryUpload:
         if isinstance(description, dict):
             description = description.get('value', '')
         
-        # Extract publication year - look at multiple fields to ensure we get it
+        # Extract publication year - look at multiple fields and all editions to ensure we get the oldest
         year_published = None
         
         # Try using the first_publish_year field directly
@@ -190,18 +192,25 @@ class LibraryUpload:
                 year_published = year_str
                 print(f"Extracted year from first_publish_date: {year_published}")
         
-        # Fall back to any publication date we can find
-        if not year_published and self.editions_data and len(self.editions_data) > 0:
-            # Try to get year from first edition's publication date
+        # Extract years from all editions to find the oldest
+        edition_years = []
+        if self.editions_data and len(self.editions_data) > 0:
             for edition in self.editions_data:
                 if 'publish_date' in edition:
                     year_str = self._extract_year(edition['publish_date'])
-                    if year_str:
-                        year_published = year_str
-                        print(f"Using year from first edition: {year_published}")
-                        break
+                    if year_str and 1000 <= year_str <= datetime.date.today().year + 10:
+                        edition_years.append(year_str)
+                        print(f"Found year {year_str} from edition")
         
-        # If we still don't have a year, try to get it from the search result
+        # If we have valid edition years, use the oldest (minimum) one
+        if edition_years:
+            oldest_year = min(edition_years)
+            # Only update if we don't have a year or if the oldest edition year is older
+            if not year_published or oldest_year < year_published:
+                year_published = oldest_year
+                print(f"Using oldest edition year: {year_published}")
+        
+        # If we still don't have a year, use a default
         if not year_published:
             print("WARNING: Could not determine publication year from API data")
             year_published = 1900  # Default fallback value
@@ -222,6 +231,12 @@ class LibraryUpload:
             }
         )
         
+        # If the book already exists, update its year_published if the new one is older
+        if not created and book.year_published and year_published < book.year_published:
+            book.year_published = year_published
+            book.save()
+            print(f"Updated existing book with older year: {year_published}")
+        
         # Print debugging info
         print(f"Book year_published set to: {year_published}")
         
@@ -236,33 +251,41 @@ class LibraryUpload:
             )
             print(f"Linked author {author_obj.name} to book {book.title}")
         
-        # Add genres
+        # Extract subjects from different fields
         subjects = []
-        
+
         # Extract subjects from different fields
         if 'subjects' in self.work_data:
             subjects.extend([s.get('name', s) if isinstance(s, dict) else s 
                            for s in self.work_data['subjects']])
-        
+
         if 'subject_places' in self.work_data:
             subjects.extend(self.work_data['subject_places'])
-        
+
         if 'subject_times' in self.work_data:
             subjects.extend(self.work_data['subject_times'])
-        
-        for subject_name in set(subjects):
-            if not subject_name:
-                continue
+
+        # Extract normalized genres using our utility function
+        normalized_genres = extract_genres_from_subjects(subjects)
                 
-            # Filter to include only valid genres
-            if self._is_valid_genre(subject_name):
-                genre = self._get_or_create_genre(subject_name)
+        if normalized_genres:
+            for genre_name in normalized_genres:
+                genre = self._get_or_create_genre(genre_name)
                 if genre:
                     BookGenre.objects.get_or_create(
                         book=book,
                         genre=genre
                     )
                     print(f"Added genre {genre.name} to book {book.title}")
+        else:
+            # Add a default genre if no valid genres were found
+            default_genre = self._get_or_create_genre("fiction")
+            if default_genre:
+                BookGenre.objects.get_or_create(
+                    book=book,
+                    genre=default_genre
+                )
+                print(f"Added default genre 'fiction' to book {book.title}")
         
         return book
     
@@ -309,7 +332,7 @@ class LibraryUpload:
             publication_year = self._extract_year(publish_date)
             if not publication_year:
                 # Use work's publication year as fallback
-                publication_year = book.year_published or 2000  # Default to 2000 if all else fails
+                publication_year = book.year_published or 2000 
             
             # Get publisher
             publisher_name = edition_data.get('publishers', ['Unknown Publisher'])[0]
@@ -322,11 +345,11 @@ class LibraryUpload:
             # Create the edition
             edition = Edition.objects.create(
                 book=book,
-                isbn=isbn[:13],  # Truncate to fit model field length
+                isbn=isbn[:13],  
                 publisher=publisher,
                 kind=kind,
                 publication_year=publication_year,
-                language=language_code[:50],  # Truncate to fit model field length
+                language=language_code[:50], 
                 page_count=edition_data.get('number_of_pages'),
                 edition_number=edition_data.get('edition_number', 1),
                 abridged=False  # Default value

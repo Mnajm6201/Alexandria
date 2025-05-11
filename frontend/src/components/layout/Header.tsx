@@ -2,9 +2,10 @@
 "use client";
 
 import Link from "next/link";
-import { BookOpen } from "lucide-react";
+import { BookOpen, SunMoon } from "lucide-react";
 import { useAuth } from "@clerk/nextjs";
 import { Button, buttonVariants } from "@/components/ui/button";
+import { useEffect, useState } from "react";
 
 // A header prop for including in each function components to either it's an app header or landing page header
 interface HeaderProps {
@@ -13,9 +14,28 @@ interface HeaderProps {
 
 export function Header({ variant = "app" }: HeaderProps) {
   const { isSignedIn, signOut } = useAuth();
+  const [theme, setTheme] = useState<"light" | "dark">("light");
 
   // variant to specify it's for landing page
   const isLanding = variant === "landing";
+
+  // Effect to initialize theme from localStorage
+  useEffect(() => {
+    // Get theme from localStorage or use system preference
+    const savedTheme = localStorage.getItem('theme') || 
+      (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+    
+    setTheme(savedTheme as "light" | "dark");
+    document.documentElement.setAttribute('data-theme', savedTheme);
+  }, []);
+
+  // Toggle theme function
+  const toggleTheme = () => {
+    const newTheme = theme === 'light' ? 'dark' : 'light';
+    setTheme(newTheme);
+    localStorage.setItem('theme', newTheme);
+    document.documentElement.setAttribute('data-theme', newTheme);
+  };
 
   return (
     <header className="sticky top-0 z-40 border-b border-amber-200 bg-amber-50/80 backdrop-blur-sm">
@@ -30,8 +50,7 @@ export function Header({ variant = "app" }: HeaderProps) {
           </Link>
         </div>
 
-        {/* If we want to change the routing just make the href whever the page is need to route to
-        for instance if for discovery page, just do /discovery              */}
+        {/* Navigation links */}
         {isLanding ? (
           <nav className="hidden md:flex items-center gap-6">
             <Link
@@ -47,7 +66,7 @@ export function Header({ variant = "app" }: HeaderProps) {
               Discover
             </Link>
             <Link
-              href="#community"
+              href="/community"
               className="text-sm font-medium text-amber-900 hover:text-amber-700"
             >
               Community
@@ -60,7 +79,6 @@ export function Header({ variant = "app" }: HeaderProps) {
             </Link>
           </nav>
         ) : (
-          // You can add application-specific navigation links here
           <nav className="hidden md:flex items-center gap-6">
             <Link
               href="/discovery"
@@ -80,10 +98,28 @@ export function Header({ variant = "app" }: HeaderProps) {
             >
               Book Club
             </Link>
+            <Link
+              href="/shelves"
+              className="text-sm font-medium text-amber-900 hover:text-amber-700"
+            >
+              Shelves
+            </Link>
           </nav>
         )}
 
         <div className="flex items-center gap-4">
+          {/* Theme toggle button */}
+          <Button
+            onClick={toggleTheme}
+            variant="ghost"
+            size="icon"
+            className="rounded-full"
+            aria-label="Toggle theme"
+          >
+            <SunMoon className="h-5 w-5 text-amber-800" />
+          </Button>
+
+          {/* Auth buttons */}
           {isSignedIn ? (
             <div className="flex items-center gap-4">
               <Link

@@ -202,6 +202,7 @@ class Edition(models.Model):
     isbn = models.CharField(max_length=13, unique=True)
     publisher = models.ForeignKey("Publisher", on_delete=models.SET_NULL, related_name='editions', null=True, blank=True)
     kind = models.CharField(max_length=10, choices=FORMAT_CHOICES, null=False)
+    is_primary = models.BooleanField(default=False)
     publication_year = models.PositiveIntegerField(
             validators=[
                 MinValueValidator(1500),

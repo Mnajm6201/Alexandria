@@ -1,13 +1,3 @@
-/*
-  Name: page.tsx
-  Date: 05/08/2025
-  Description: React client component that displays detailed information for a specific edition.
-  Extracts the ISBN directly from the URL.
-  
-  Output:
-    - Renders a complete edition page with specific edition details like publication date,
-      page count, and format, as well as information about the parent book.
-*/
 'use client'
 
 import { useState, useEffect } from 'react'
@@ -23,6 +13,7 @@ import ItemCarousel from '@/components/ui/ItemCarousel'
 import CoverImage from '@/components/ui/CoverImage'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
+import { Header } from "@/components/layout/Header"
 
 // Define the types needed for component
 interface Author {
@@ -185,22 +176,28 @@ export default function EditionPage() {
   }, [isbn]);
   
   if (loading) return (
-    <div className="flex justify-center items-center min-h-screen">
-      <div className="animate-pulse text-xl text-gray-500 dark:text-gray-300">Loading edition details...</div>
+    <div>
+      <Header variant="app" />
+      <div className="flex justify-center items-center min-h-screen">
+        <div className="animate-pulse text-xl text-gray-500 dark:text-gray-300">Loading edition details...</div>
+      </div>
     </div>
   );
   
   if (error) return (
-    <div className="flex justify-center items-center min-h-screen p-8">
-      <div className="text-red-500 text-center">
-        <h2 className="text-2xl font-bold mb-4">Error Loading Edition</h2>
-        <p>{error}</p>
-        <button 
-          onClick={() => window.location.reload()}
-          className="mt-4 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
-        >
-          Try Again
-        </button>
+    <div>
+      <Header variant="app" />
+      <div className="flex justify-center items-center min-h-screen p-8">
+        <div className="text-red-500 text-center">
+          <h2 className="text-2xl font-bold mb-4">Error Loading Edition</h2>
+          <p>{error}</p>
+          <button 
+            onClick={() => window.location.reload()}
+            className="mt-4 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
+          >
+            Try Again
+          </button>
+        </div>
       </div>
     </div>
   );
@@ -231,96 +228,99 @@ export default function EditionPage() {
   );
   
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-      <BookHeader 
-        title={`${edition.book_info.title} (${edition.kind} Edition, ${edition.publication_year})`}
-        coverImage={edition.cover_image}
-        authors={edition.book_info.authors}
-        userStatus={edition.user_status}
-        primaryEditionId={parseInt(edition.id)} 
-      />
-
-      <div className="mt-8">
-        <ParentBookLink />
-      </div>
-      
-      <div className="mt-8">
-        <BookSummary summary={edition.book_info.summary} />
-      </div>
-      
-      <div className="mt-8">
-        <BookDetails 
-          pageCount={edition.page_count}
-          publicationDate={String(edition.publication_year)}
-          isbn={edition.isbn}
-          genres={edition.book_info.genres?.map(g => g.name) || []}
-          language={edition.language}
-          editionNumber={edition.edition_number}
-          format={edition.kind}
-          publisher={edition.publisher_name}
-          isAbridged={edition.abridged}
+    <div>
+      <Header variant="app" />
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <BookHeader 
+          title={`${edition.book_info.title} (${edition.kind} Edition, ${edition.publication_year})`}
+          coverImage={edition.cover_image}
+          authors={edition.book_info.authors}
+          userStatus={edition.user_status}
+          primaryEditionId={parseInt(edition.id)} 
         />
-      </div>
-      
-      {edition.other_editions && edition.other_editions.length > 0 && (
+
         <div className="mt-8">
-          <ItemCarousel 
-            items={edition.other_editions}
-            title="Other Editions"
-            onItemClick={(editionItem) => {
-              // Navigate to the edition page when clicked
-              router.push(`/edition/${editionItem.isbn}`);
-            }}
-            renderItem={(editionItem) => (
-              <div className="flex flex-col">
-                <CoverImage 
-                  src={editionItem.cover_image}
-                  alt={`Cover for ${edition.book_info.title} (${editionItem.kind})`}
-                  width="100%"
-                  height="h-72"
-                  className="mb-2"
-                />
-                {editionItem.kind && (
-                  <span className="mt-2 text-sm text-gray-700 dark:text-gray-300">{editionItem.kind}</span>
-                )}
-                {editionItem.publication_year && (
-                  <span className="text-xs text-gray-500 dark:text-gray-400">{editionItem.publication_year}</span>
-                )}
-              </div>
-            )}
+          <ParentBookLink />
+        </div>
+        
+        <div className="mt-8">
+          <BookSummary summary={edition.book_info.summary} />
+        </div>
+        
+        <div className="mt-8">
+          <BookDetails 
+            pageCount={edition.page_count}
+            publicationDate={String(edition.publication_year)}
+            isbn={edition.isbn}
+            genres={edition.book_info.genres?.map(g => g.name) || []}
+            language={edition.language}
+            editionNumber={edition.edition_number}
+            format={edition.kind}
+            publisher={edition.publisher_name}
+            isAbridged={edition.abridged}
           />
         </div>
-      )}
-      
-      {/* Vendor Links or Placeholder */}
-      {edition.vendor_links && edition.vendor_links.length > 0 ? (
+        
+        {edition.other_editions && edition.other_editions.length > 0 && (
+          <div className="mt-8">
+            <ItemCarousel 
+              items={edition.other_editions}
+              title="Other Editions"
+              onItemClick={(editionItem) => {
+                // Navigate to the edition page when clicked
+                router.push(`/edition/${editionItem.isbn}`);
+              }}
+              renderItem={(editionItem) => (
+                <div className="flex flex-col">
+                  <CoverImage 
+                    src={editionItem.cover_image}
+                    alt={`Cover for ${edition.book_info.title} (${editionItem.kind})`}
+                    width="100%"
+                    height="h-72"
+                    className="mb-2"
+                  />
+                  {editionItem.kind && (
+                    <span className="mt-2 text-sm text-gray-700 dark:text-gray-300">{editionItem.kind}</span>
+                  )}
+                  {editionItem.publication_year && (
+                    <span className="text-xs text-gray-500 dark:text-gray-400">{editionItem.publication_year}</span>
+                  )}
+                </div>
+              )}
+            />
+          </div>
+        )}
+        
+        {/* Vendor Links or Placeholder */}
+        {edition.vendor_links && edition.vendor_links.length > 0 ? (
+          <div className="mt-8">
+            <VendorLinks vendors={edition.vendor_links} />
+          </div>
+        ) : (
+          <div className="mt-8 bg-white dark:bg-gray-800 rounded-lg shadow p-6">
+            <h2 className="text-xl font-semibold text-gray-900 dark:text-gray-100">Where to Buy</h2>
+            <p className="text-gray-500 dark:text-gray-300 mt-2">No vendors available</p>
+          </div>
+        )}
+        
+        {/* Library Availability or Placeholder */}
+        {edition.library_availability && edition.library_availability.length > 0 ? (
+          <div className="mt-8">
+            <LibraryAvailability libraries={edition.library_availability} />
+          </div>
+        ) : (
+          <div className="mt-8 bg-white dark:bg-gray-800 rounded-lg shadow p-6">
+            <h2 className="text-xl font-semibold text-gray-900 dark:text-gray-100">Library Availability</h2>
+            <p className="text-gray-500 dark:text-gray-300 mt-2">Unavailable</p>
+          </div>
+        )}
+        
         <div className="mt-8">
-          <VendorLinks vendors={edition.vendor_links} />
+          <ReviewSection 
+            reviews={edition.reviews || []} 
+            bookId={edition.book_info.id}
+          />
         </div>
-      ) : (
-        <div className="mt-8 bg-white dark:bg-gray-800 rounded-lg shadow p-6">
-          <h2 className="text-xl font-semibold text-gray-900 dark:text-gray-100">Where to Buy</h2>
-          <p className="text-gray-500 dark:text-gray-300 mt-2">No vendors available</p>
-        </div>
-      )}
-      
-      {/* Library Availability or Placeholder */}
-      {edition.library_availability && edition.library_availability.length > 0 ? (
-        <div className="mt-8">
-          <LibraryAvailability libraries={edition.library_availability} />
-        </div>
-      ) : (
-        <div className="mt-8 bg-white dark:bg-gray-800 rounded-lg shadow p-6">
-          <h2 className="text-xl font-semibold text-gray-900 dark:text-gray-100">Library Availability</h2>
-          <p className="text-gray-500 dark:text-gray-300 mt-2">Unavailable</p>
-        </div>
-      )}
-      
-      <div className="mt-8">
-        <ReviewSection 
-          reviews={edition.reviews || []} 
-          bookId={edition.book_info.id}
-        />
       </div>
     </div>
   );

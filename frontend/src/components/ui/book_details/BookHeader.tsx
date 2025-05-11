@@ -124,8 +124,8 @@ export default function BookHeader({
                 {authors.map((author, index) => (
                   <span key={author.id}>
                     <Link 
-                      href={`/authors/${author.id}`} 
-                      className="text-blue-500 hover:underline"
+                      href={`/author/${author.id}`} 
+                      className="text-blue-500 hover:text-blue-700 font-medium"
                     >
                       {author.name}
                     </Link>

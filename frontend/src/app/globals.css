@@ -3,95 +3,630 @@
 @tailwind utilities;
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
-  --card-background: #ffffff;
-  --card-foreground: #171717;
-  --border: #e5e7eb;
-  --primary: #3b82f6;
+  /* Light mode variables - slightly warm, subtly parchment */
+  --background: #fbf8f1;         /* Less warm, still slightly off-white */
+  --foreground: #544639;         /* Slightly less warm text color */
+  --card: #fefaf3;               /* Less warm card background */
+  --card-foreground: #3a3026;    /* Slightly less warm card text */
+  --border: #e5dbca;             /* Less warm border color */
+  --primary: #9c6115;            /* Keeping amber primary color */
   --primary-foreground: #ffffff;
+  --secondary: #f5f1e4;          /* Less warm secondary */
+  --secondary-foreground: #544639;
+  --muted: #f2efe4;              /* Less warm muted */
+  --muted-foreground: #867e6f;   /* Less warm muted text */
+  --accent: #f0eadb;             /* Less warm accent */
+  --accent-foreground: #544639;
+  --destructive: #ef4444;
+  --destructive-foreground: #ffffff;
+  --success: #10b981;
+  --success-foreground: #ffffff;
+  
+  /* Button colors */
+  --button-primary: #9c6115;
+  --button-primary-hover: #8b5410;
+  --button-primary-text: #ffffff;
+  
+  /* Link colors */
+  --link: #3b82f6;
+  --link-hover: #2563eb;
+  
+  /* Tag colors */
+  --tag-bg: #e8f0fb;
+  --tag-text: #1e4da1;
+  
+  --radius: 0.5rem;
 }
 
 [data-theme="dark"] {
-  --background: #111827;  /* Dark but not pure black */
-  --foreground: #f3f4f6;  /* Light gray for better readability */
-  --card-background: #1f2937;  /* Slightly lighter than background */
-  --card-foreground: #f9fafb;
-  --border: #374151;
-  --primary: #60a5fa;
-  --primary-foreground: #111827;
+  /* Dark mode variables - rich mocha theme */
+  --background: #1a1714;
+  --foreground: #e6e1d9;
+  --card: #252220;                /* Card background */
+  --card-foreground: #f0ebe4;     /* Brighter for better contrast */
+  --border: #3d3936;
+  --primary: #d4a76a;
+  --primary-foreground: #1a1714;
+  --secondary: #252220;
+  --secondary-foreground: #e6e1d9;
+  --muted: #2c2826;
+  --muted-foreground: #bcb8b1;
+  --accent: #3d3936;
+  --accent-foreground: #e6e1d9;
+  --destructive: #ef4444;
+  --destructive-foreground: #ffffff;
+  --success: #10b981;
+  --success-foreground: #ffffff;
+  
+  /* Button colors */
+  --button-primary: #d4a76a;
+  --button-primary-hover: #c89b5f;
+  --button-primary-text: #1a1714;
+  
+  /* Link colors */
+  --link: #60a5fa;
+  --link-hover: #93c5fd;
+  
+  /* Tag colors */
+  --tag-bg: #1e3a8a;
+  --tag-text: #93c5fd;
 }
 
 body {
   color: var(--foreground);
   background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-geist-sans, Arial, sans-serif);
 }
 
-/* Ensure proper contrast in cards */
-.bg-white {
-  background-color: var(--card-background);
+/* ======= UTILITY CLASSES ======= */
+/* These are design system classes we can use across components */
+
+.bg-card {
+  background-color: var(--card);
 }
 
-.text-gray-900 {
+.text-card-foreground {
   color: var(--card-foreground);
 }
 
-.shadow {
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+.text-foreground {
+  color: var(--foreground);
 }
 
-/* Improve base text contrast in dark mode */
-[data-theme="dark"] {
-  --foreground: #ffffff; /* Brighter white for text */
-  --card-foreground: #ffffff; /* Brighter white for card text */
-  
-  /* Custom radio button and selection styles */
-  --radio-bg-active: #8b5cf6; /* Bright purple for active state */
-  --radio-text-active: #ffffff; /* White text for active state */
-  --radio-bg-inactive: #374151; /* Darker gray for inactive state */
-  --radio-text-inactive: #e5e7eb; /* Light gray text for inactive */
-  
-  /* Text colors for details */
-  --text-muted: #d1d5db; /* Much lighter gray for better readability */
+.text-muted-foreground {
+  color: var(--muted-foreground);
 }
 
-/* Specifically target the summary text in dark mode */
-[data-theme="dark"] .text-gray-700 {
-  color: #e5e7eb !important; /* Force lighter color */
+.bg-accent {
+  background-color: var(--accent);
 }
 
-/* Target book details text in dark mode */
-[data-theme="dark"] .text-gray-500,
-[data-theme="dark"] .text-sm.font-medium.text-gray-500 {
-  color: #d1d5db !important; /* Force lighter color */
+.text-accent-foreground {
+  color: var(--accent-foreground);
 }
 
-/* Radio button styling for both light and dark modes */
-button.py-2.px-4.text-sm.font-medium {
-  border-color: var(--primary);
+.text-link {
+  color: var(--link);
+}
+
+.hover\:text-link-hover:hover {
+  color: var(--link-hover);
+}
+
+.border-default {
+  border-color: var(--border);
+}
+
+/* ======= COMPONENT MAPPINGS ======= */
+/* Map existing Tailwind classes to our theme variables */
+
+.bg-white, 
+.bg-amber-50 {
+  background-color: var(--card);
+}
+
+.text-gray-900,
+.text-amber-900 {
+  color: var(--card-foreground);
+}
+
+.text-gray-800,
+.text-amber-800,
+.text-gray-700 {
+  color: var(--foreground);
+}
+
+.text-gray-600,
+.text-gray-500,
+.text-amber-700,
+.text-amber-600 {
+  color: var(--muted-foreground);
+}
+
+.bg-gray-200 {
+  background-color: var(--accent);
+}
+
+.border-amber-200,
+.border-amber-300 {
+  border-color: var(--border);
+}
+
+/* And the rest of the global CSS */
+
+/* ======= BUTTONS ======= */
+.bg-amber-800,
+.bg-amber-700 {
+  background-color: var(--button-primary);
+  color: var(--button-primary-text);
+}
+
+.hover\:bg-amber-700:hover,
+.hover\:bg-amber-800:hover {
+  background-color: var(--button-primary-hover);
+}
+
+.bg-blue-600,
+.border-blue-600 {
+  background-color: var(--link);
+  border-color: var(--link);
+}
+
+.hover\:bg-blue-700:hover {
+  background-color: var(--link-hover);
+}
+
+/* Purple action buttons (Add to Shelf) */
+.bg-purple-600 {
+  background-color: #8b5cf6;
+}
+
+[data-theme="dark"] .bg-purple-600 {
+  background-color: #a78bfa;
+  color: #1e1b4b;
+}
+
+.hover\:bg-purple-700:hover {
+  background-color: #7c3aed;
+}
+
+[data-theme="dark"] .hover\:bg-purple-700:hover {
+  background-color: #c4b5fd;
+}
+
+/* Green success buttons */
+.bg-green-600,
+.bg-green-500 {
+  background-color: var(--success);
+  color: var(--success-foreground);
+}
+
+.hover\:bg-green-700:hover,
+.hover\:bg-green-600:hover {
+  background-color: #0d9668;
+}
+
+/* Red destructive buttons */
+.bg-red-600,
+.bg-red-500 {
+  background-color: var(--destructive);
+  color: var(--destructive-foreground);
+}
+
+.hover\:bg-red-700:hover,
+.hover\:bg-red-600:hover {
+  background-color: #dc2626;
+}
+
+/* ======= LINKS ======= */
+.text-blue-500,
+.text-blue-600,
+.text-blue-700 {
+  color: var(--link);
+}
+
+.hover\:text-blue-600:hover,
+.hover\:text-blue-700:hover,
+.hover\:text-blue-800:hover {
+  color: var(--link-hover);
+}
+
+/* ======= GENRE TAGS ======= */
+.bg-blue-100 {
+  background-color: var(--tag-bg);
+}
+
+.text-blue-800 {
+  color: var(--tag-text);
+}
+
+/* Update genre badges to ensure they display properly in both modes */
+span.bg-blue-100.text-blue-800 {
+  background-color: var(--tag-bg);
+  color: var(--tag-text);
+  font-weight: medium;
+}
+
+[data-theme="dark"] span.bg-blue-100.text-blue-800 {
+  background-color: var(--tag-bg);
+  color: var(--tag-text);
+}
+
+/* ======= SHADOWS ======= */
+.shadow,
+.shadow-md,
+.shadow-lg {
+  box-shadow: 0 4px 6px -1px rgba(112, 83, 40, 0.1), 0 2px 4px -1px rgba(112, 83, 40, 0.06);
+}
+
+[data-theme="dark"] .shadow,
+[data-theme="dark"] .shadow-md,
+[data-theme="dark"] .shadow-lg {
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.4), 0 4px 6px -4px rgba(0, 0, 0, 0.4);
+}
+
+/* ======= BORDERS ======= */
+.border-amber-200,
+.border-amber-300 {
+  border-color: var(--border);
+}
+
+/* ======= BOOK PAGE SPECIFIC STYLES ======= */
+/* Status buttons (Want to Read/Reading/Read) */
+.status-buttons button {
+  border-color: var(--border);
+  color: var(--foreground);
+}
+
+.status-buttons button.active {
+  background-color: var(--link);
+  color: white;
+  border-color: var(--link);
+}
+
+[data-theme="dark"] .status-buttons button.active {
+  background-color: var(--link);
+  color: white;
+}
+
+/* ======= AUTHOR PAGE SPECIFIC ======= */
+.author-page {
+  background-color: var(--background);
+}
+
+.author-page * {
+  color: inherit;
+}
+
+/* ======= SUMMARIES AND CONTENT ======= */
+.summary-content {
+  color: var(--foreground);
+}
+
+[data-theme="dark"] .summary-content {
+  color: #d4d0c8;
+}
+
+/* ======= PROFILE PAGE SPECIFIC ======= */
+.min-h-screen.bg-amber-50 {
+  background-color: var(--background);
+}
+
+/* ======= DISCOVERY PAGE ======= */
+.discovery-page {
+  background-color: var(--background);
+}
+
+/* ======= ENSURE FORM INPUTS ARE VISIBLE ======= */
+input,
+textarea,
+select {
+  background-color: var(--card);
+  color: var(--foreground);
+  border-color: var(--border);
+}
+
+[data-theme="dark"] input,
+[data-theme="dark"] textarea,
+[data-theme="dark"] select {
+  background-color: #333;
+  color: #e6e1d9;
+  border-color: var(--border);
+}
+
+input::placeholder,
+textarea::placeholder {
+  color: var(--muted-foreground);
+}
+
+[data-theme="dark"] input::placeholder,
+[data-theme="dark"] textarea::placeholder {
+  color: #9ca3af;
+}
+
+/* ======= ICON COLORS ======= */
+svg {
+  color: var(--foreground);
+}
+
+[data-theme="dark"] svg {
+  color: #bcb8b1;
+}
+
+/* ======= TYPOGRAPHY ======= */
+h1, h2, h3, h4, h5, h6 {
+  color: var(--card-foreground);
+}
+
+[data-theme="dark"] h1,
+[data-theme="dark"] h2,
+[data-theme="dark"] h3,
+[data-theme="dark"] h4,
+[data-theme="dark"] h5,
+[data-theme="dark"] h6 {
+  color: #f0ebe4;
+}
+
+/* ======= SHELVES COMPONENTS ======= */
+.shelf-component {
+  background-color: var(--card);
+  border-color: var(--border);
+}
+
+/* Fix for specific sections in profile */
+.profile-stat {
+  color: var(--foreground);
+}
+
+.profile-stat-value {
+  color: var(--card-foreground);
+  font-weight: 600;
+}
+
+/* Book card styling */
+.book-card {
+  background-color: var(--card);
+  border-color: var(--border);
+}
+
+/* ====== SPECIFIC COMPONENT FIXES ====== */
+
+/* Book details page */
+.book-details-section {
+  background-color: var(--card);
+  border-radius: var(--radius);
+  box-shadow: 0 4px 6px -1px rgba(112, 83, 40, 0.1);
+}
+
+[data-theme="dark"] .book-details-section {
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.2);
+}
+
+/* Navigation */
+.nav-link {
+  color: var(--foreground);
+}
+
+.nav-link:hover {
+  color: var(--primary);
+}
+
+/* Improved Tables */
+table {
+  background-color: var(--card);
+  color: var(--foreground);
+}
+
+thead {
+  background-color: var(--secondary);
+  color: var(--secondary-foreground);
+}
+
+tbody tr:nth-child(even) {
+  background-color: var(--accent);
+}
+
+/* Cover image placeholders */
+.cover-placeholder {
+  background-color: var(--accent);
+  color: var(--accent-foreground);
+  border: 1px solid var(--border);
+}
+
+/* Search bar */
+.search-input {
+  background-color: var(--card);
+  color: var(--foreground);
+  border-color: var(--border);
+}
+
+.search-input::placeholder {
+  color: var(--muted-foreground);
+}
+
+/* Fix for book summary section */
+.book-summary {
+  color: var(--foreground);
+}
+
+/* Fix for review section */
+.review-content {
+  color: var(--foreground);
+}
+
+.review-author {
+  color: var(--card-foreground);
+  font-weight: 500;
+}
+
+.review-date {
+  color: var(--muted-foreground);
+}
+
+/* Rating stars */
+.rating-star {
+  color: #f59e0b; /* Amber color for stars */
+}
+
+[data-theme="dark"] .rating-star {
+  color: #fbbf24; /* Slightly brighter in dark mode */
+}
+
+/* Footer styling */
+footer {
+  background-color: var(--background);
+  border-top: 1px solid var(--border);
+}
+
+/* Button styles consistent with theme */
+.btn {
+  border-radius: var(--radius);
   transition: all 0.2s ease;
 }
 
-/* Active state for buttons */
-[data-theme="dark"] button.bg-blue-50 {
-  background-color: var(--radio-bg-active);
-  color: var(--radio-text-active);
+.btn-primary {
+  background-color: var(--button-primary);
+  color: var(--button-primary-text);
 }
 
-/* Inactive state for buttons in dark mode */
-[data-theme="dark"] button.bg-white.border-gray-300 {
-  background-color: var(--radio-bg-inactive);
-  color: var(--radio-text-inactive);
+.btn-primary:hover {
+  background-color: var(--button-primary-hover);
 }
 
-/* Make sure details section and genre tags have better contrast */
-[data-theme="dark"] .bg-blue-100.text-blue-800 {
-  background-color: #4b5563; /* Darker background */
-  color: #e5e7eb; /* Lighter text */
+/* Fix for toast notifications */
+.toast {
+  background-color: var(--card);
+  color: var(--foreground);
+  border: 1px solid var(--border);
+  box-shadow: 0 4px 6px -1px rgba(112, 83, 40, 0.1);
 }
 
-/* This rule applies only in light mode (when data-theme is not "dark") */
-:not([data-theme="dark"]) .author-page {
-  color: #111111 !important;  /* Use a darker color for improved readability */
+[data-theme="dark"] .toast {
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.2);
+}
+
+/* Modal background and content */
+.modal-bg {
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.modal-content {
+  background-color: var(--card);
+  color: var(--foreground);
+  border-radius: var(--radius);
+}
+
+/* Badge styling for common elements */
+.badge {
+  border-radius: 9999px;
+  padding: 0.25rem 0.75rem;
+  font-size: 0.75rem;
+  font-weight: 500;
+}
+
+.badge-primary {
+  background-color: var(--primary);
+  color: var(--primary-foreground);
+}
+
+.badge-secondary {
+  background-color: var(--secondary);
+  color: var(--secondary-foreground);
+}
+
+/* Improved focus styles for accessibility */
+:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--background);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--muted);
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--muted-foreground);
+}
+
+
+
+/* Dark mode header text fixes - with DARKER text */
+[data-theme="dark"] header .text-amber-800 {
+  color: #b45309 !important; /* darker amber color for the book icon */
+}
+
+[data-theme="dark"] header .text-amber-900 {
+  color: #92400e !important; /* darker amber for text */
+}
+
+[data-theme="dark"] header .hover\:text-amber-700:hover {
+  color: #78350f !important; /* even darker amber for hover state */
+}
+
+/* Keep button styling with good contrast */
+[data-theme="dark"] header .bg-amber-800 {
+  background-color: #92400e !important;
+}
+
+[data-theme="dark"] header .hover\:bg-amber-700:hover {
+  background-color: #78350f !important;
+}
+
+
+
+/* Dark mode landing page text fixes - with DARKER text */
+[data-theme="dark"] .landing-header h1,
+[data-theme="dark"] .landing-header h2,
+[data-theme="dark"] .landing-section h1,
+[data-theme="dark"] .landing-section h2,
+[data-theme="dark"] .landing-section h3 {
+  color: #92400e !important; /* darker amber for headings */
+}
+
+[data-theme="dark"] .landing-header p,
+[data-theme="dark"] .landing-section p,
+[data-theme="dark"] .landing-section li {
+  color: #b45309 !important; /* darker amber for paragraph text */
+}
+
+/* Make feature cards text darker in dark mode */
+[data-theme="dark"] .feature-card h3 {
+  color: #92400e !important; /* darker amber for card headings */
+}
+
+[data-theme="dark"] .feature-card p {
+  color: #b45309 !important; /* darker amber for card text */
+}
+
+/* Fix button text contrast in dark mode */
+[data-theme="dark"] .landing-section .bg-amber-800,
+[data-theme="dark"] .landing-header .bg-amber-800 {
+  background-color: #92400e !important;
+}
+
+[data-theme="dark"] .landing-section .hover\:bg-amber-700:hover,
+[data-theme="dark"] .landing-header .hover\:bg-amber-700:hover {
+  background-color: #78350f !important;
+}
+
+/* Fix links in dark mode */
+[data-theme="dark"] .landing-section a:not([class]),
+[data-theme="dark"] .landing-header a:not([class]) {
+  color: #92400e !important; /* darker amber for links */
+}
+
+[data-theme="dark"] .landing-section a:not([class]):hover,
+[data-theme="dark"] .landing-header a:not([class]):hover {
+  color: #78350f !important; /* even darker amber on hover */
 }
