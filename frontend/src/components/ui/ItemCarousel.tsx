@@ -56,7 +56,7 @@ export default function ItemCarousel<T extends Item>({
 
   // Choose the appropriate container class based on showBackground prop
   const containerClass = showBackground 
-    ? "bg-white rounded-lg shadow p-6" // Original style with background
+    ? "bg-white rounded-lg shadow p-6" 
     : ""; // No background or padding
 
   return (

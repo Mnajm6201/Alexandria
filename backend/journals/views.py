@@ -48,20 +48,22 @@ class JournalViewSet(viewsets.ModelViewSet):
             ).select_related('user_book__user', 'user_book__book')
         return Journal.objects.none()
     
+    # Modified version
     def perform_create(self, serializer):
         """Handle journal creation with book ID if provided"""
-        book_id = self.request.data.get('book')
+        book_id = self.request.data.get('book_id')
         
         if book_id and not serializer.validated_data.get('user_book'):
             try:
-                book = Book.objects.get(id=book_id)
+                # Look up book by book_id string
+                book = Book.objects.get(book_id=book_id)
                 user_book, created = UserBook.objects.get_or_create(
                     user=self.request.user,
                     book=book
                 )
                 serializer.save(user_book=user_book)
             except Book.DoesNotExist:
-                raise ValidationError({"book": "Book not found"})
+                raise ValidationError({"book_id": "Book not found"})
         else:
             serializer.save()
     

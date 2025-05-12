@@ -38,14 +38,42 @@ class JournalSerializer(serializers.ModelSerializer):
     user_username = serializers.CharField(source='user_book.user.username', read_only=True)
     book_title = serializers.CharField(source='user_book.book.title', read_only=True)
     user_id = serializers.IntegerField(source='user_book.user.id', read_only=True)
+    book_id = serializers.CharField(source='user_book.book.book_id', read_only=True)
+    entry_count = serializers.SerializerMethodField()
+    latest_entry = serializers.SerializerMethodField()
+    entries = JournalEntrySerializer(many=True, read_only=True, source='entries.all')
+    
+    # Add a book_id field for input only
+    book_id_input = serializers.CharField(
+        write_only=True,
+        required=True,
+        source='book_id'  
+    )
+    
+    class Meta:
+        model = Journal
+        fields = [
+            'id', 'book_id_input', 'user_id', 'book_id', 'created_on', 'updated_on', 'is_private',
+            'user_username', 'book_title', 'entry_count', 'latest_entry', 'entries'
+        ]
+        read_only_fields = ['created_on', 'updated_on', 'user_username', 'book_title', 'user_id', 'book_id']
+        extra_kwargs = {
+            'user_book': {'required': False, 'allow_null': True}  # This is the key change
+        }
+    """
+    Serializer for journals.
+    Handles creation, updating, and listing of journals with optional entry details.
+    """
+    user_username = serializers.CharField(source='user_book.user.username', read_only=True)
+    book_title = serializers.CharField(source='user_book.book.title', read_only=True)
+    user_id = serializers.IntegerField(source='user_book.user.id', read_only=True)
     book_id = serializers.IntegerField(source='user_book.book.id', read_only=True)
     entry_count = serializers.SerializerMethodField()
     latest_entry = serializers.SerializerMethodField()
     entries = JournalEntrySerializer(many=True, read_only=True, source='entries.all')
     
-    # Add a book field for input only
-    book = serializers.PrimaryKeyRelatedField(
-        queryset=Book.objects.all(),
+
+    book_id = serializers.CharField(
         write_only=True,
         required=False
     )
@@ -54,7 +82,7 @@ class JournalSerializer(serializers.ModelSerializer):
         model = Journal
         fields = [
             'id', 'user_book', 'user_id', 'book_id', 'created_on', 'updated_on', 'is_private',
-            'user_username', 'book_title', 'entry_count', 'latest_entry', 'entries', 'book'
+            'user_username', 'book_title', 'entry_count', 'latest_entry', 'entries', 'book_id'
         ]
         read_only_fields = ['created_on', 'updated_on', 'user_username', 'book_title']
     
@@ -79,20 +107,27 @@ class JournalSerializer(serializers.ModelSerializer):
         Validate that a user doesn't create duplicate journals for the same book
         """
         # Check if we have a book field in input
-        book = data.pop('book', None)
+# Modified version
+        book_id = data.pop('book_id', None)
         request = self.context.get('request')
-        
+
         # If updating, we skip this validation
-        if not self.instance and book and request:
-            # Check if user already has a journal for this book
-            if Journal.objects.filter(
-                user_book__user=request.user,
-                user_book__book=book
-            ).exists():
-                raise serializers.ValidationError("You already have a journal for this book.")
-            
-            # If not, set a temporary attribute to use in create method
-            self._book_for_userbook = book
+        if not self.instance and book_id and request:
+            try:
+                # Look up book by book_id string
+                book = Book.objects.get(book_id=book_id)
+                
+                # Check if user already has a journal for this book
+                if Journal.objects.filter(
+                    user_book__user=request.user,
+                    user_book__book=book
+                ).exists():
+                    raise serializers.ValidationError("You already have a journal for this book.")
+                
+                # If not, set a temporary attribute to use in create method
+                self._book_for_userbook = book
+            except Book.DoesNotExist:
+                raise serializers.ValidationError({"book_id": "Book with this ID does not exist"})
             
         return data
     
