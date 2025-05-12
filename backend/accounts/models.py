@@ -15,7 +15,7 @@ def create_user_profile(sender, instance, created, **kwargs):
 def save_user_profile(sender, instance, **kwargs):
     """Save the UserProile when the User is saved"""
     try:
-        # Try to get the profile
+        # Try to get the profile    
         profile = instance.related_user_profile
         profile.save()
 

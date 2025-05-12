@@ -467,7 +467,7 @@ export default function BookPage() {
             )}
 
             <div className="mt-8">
-              <ReviewSection reviews={book.reviews} bookId={book.book_id} />
+              <ReviewSection bookId={book.book_id} />
             </div>
           </div>
         </div>
