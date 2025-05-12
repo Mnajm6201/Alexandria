@@ -82,7 +82,6 @@ export default function BookClubDetailPage({
             Authorization: `Bearer ${token}`,
             "Content-Type": "application/json",
           },
-          // Disable cache when forcing refresh
           cache: forceRefresh ? "no-store" : "default",
         }
       );
@@ -92,6 +91,7 @@ export default function BookClubDetailPage({
       }
 
       const data = await response.json();
+      console.log("data:", data)
       // Check if book changed from previous data
       if (clubData && clubData.book !== data.book) {
         console.log(
@@ -121,7 +121,7 @@ export default function BookClubDetailPage({
     // If switching to the books tab, force a refresh of club data
     if (value === "books") {
       console.log("Switching to Books tab - forcing refresh of club data");
-      fetchClubDetails(true); // Force refresh
+      fetchClubDetails(true);
     }
   };
 

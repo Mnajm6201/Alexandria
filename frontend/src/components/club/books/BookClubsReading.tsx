@@ -3,29 +3,39 @@
 import { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { Coffee, Users, ChevronRight } from "lucide-react";
+import { Coffee, Users, ChevronRight, PlusCircle } from "lucide-react";
 import { useJWToken } from "@/utils/getJWToken";
 
 interface BookClub {
   id: string;
   name: string;
-  description?: string; // This stays as description since the API will map club_desc to this
+  description?: string;
   member_count: number;
   is_private: boolean;
   club_image?: string;
   is_member?: boolean;
 }
 
+interface BookDetails {
+  book_id: string;
+  title: string;
+  authors: string[];
+  cover_url?: string;
+  year_published?: number;
+}
+
 interface BookClubsReadingProps {
   bookId: string;
   className?: string;
   limit?: number;
+  bookDetails?: BookDetails;
 }
 
 export default function BookClubsReading({
   bookId,
   className = "",
   limit = 3,
+  bookDetails,
 }: BookClubsReadingProps) {
   const [clubs, setClubs] = useState<BookClub[]>([]);
   const [loading, setLoading] = useState(true);
@@ -145,7 +155,7 @@ export default function BookClubsReading({
           <p className="text-amber-700">
             No book clubs are currently reading this book
           </p>
-          <Link href="/club/create">
+          <Link href="/club">
             <button className="mt-4 px-4 py-2 bg-amber-600 text-white rounded-lg hover:bg-amber-700">
               Start a Book Club
             </button>
@@ -181,7 +191,7 @@ export default function BookClubsReading({
         {displayedClubs.map((club) => (
           <Link href={`/club/${club.id}`} key={club.id}>
             <div className="flex items-start gap-4 p-4 border border-amber-100 rounded-lg hover:bg-amber-50 transition-colors">
-              {/* Club Image */}
+              {/* Club Image - using book cover as fallback */}
               <div className="h-14 w-14 rounded-full overflow-hidden bg-amber-100 flex-shrink-0">
                 {club.club_image ? (
                   <Image
@@ -192,7 +202,15 @@ export default function BookClubsReading({
                     className="h-full w-full object-cover"
                     unoptimized
                   />
+                ) : bookDetails && bookDetails.cover_url ? (
+                  // Use book cover image as fallback if available
+                  <img
+                    src={bookDetails.cover_url}
+                    alt={`Cover for ${bookDetails.title}`}
+                    className="h-full w-full object-cover"
+                  />
                 ) : (
+                  // Fallback to club initials if neither club image nor book cover is available
                   <div className="h-full w-full flex items-center justify-center bg-amber-200 text-amber-800 font-bold">
                     {club.name.substring(0, 2).toUpperCase()}
                   </div>
@@ -235,6 +253,15 @@ export default function BookClubsReading({
             </div>
           </Link>
         ))}
+
+        <Link href="/club">
+          <div className="flex items-center justify-center p-4 border border-dashed border-amber-300 rounded-lg hover:bg-amber-50 transition-colors">
+            <div className="flex items-center text-amber-700 font-medium">
+              <PlusCircle className="h-5 w-5 mr-2 text-amber-600" />
+              Start a Book Club for this book
+            </div>
+          </div>
+        </Link>
       </div>
     </div>
   );

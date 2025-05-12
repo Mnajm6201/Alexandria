@@ -331,7 +331,20 @@ export default function BookPage() {
               />
             </div>
 
-            <BookClubsReading bookId={bookId} className="mt-8" limit={3} />
+            <BookClubsReading
+              bookId={bookId}
+              className="mt-8"
+              limit={3}
+              bookDetails={{
+                book_id: book.book_id,
+                title: book.title,
+                authors: book.authors.map((author) => author.name),
+                cover_url: book.cover_image,
+                year_published: book.original_publication_date
+                  ? parseInt(book.original_publication_date)
+                  : undefined,
+              }}
+            />
 
             {book.editions && book.editions.length > 0 && (
               <div className="mt-8">
@@ -418,13 +431,22 @@ export default function BookPage() {
 
             {/* Vendor Links or Placeholder */}
             <div className="mt-8 bg-white dark:bg-gray-800 rounded-lg shadow p-6">
-              <h2 className="text-xl font-semibold text-gray-900 dark:text-gray-100 mb-3">Where to Buy</h2>
-              <p className="text-gray-500 dark:text-gray-300 mb-4">Available on:</p>
+              <h2 className="text-xl font-semibold text-gray-900 dark:text-gray-100 mb-3">
+                Where to Buy
+              </h2>
+              <p className="text-gray-500 dark:text-gray-300 mb-4">
+                Available on Amazon:
+              </p>
 
               <div className="flex items-center gap-4">
-                <Button asChild className="bg-[#FF9900] hover:bg-[#e68a00] text-white rounded-full h-10 px-6">
+                <Button
+                  asChild
+                  className="bg-[#FF9900] hover:bg-[#E88B00] text-white rounded-2xl"
+                >
                   <Link
-                    href={`https://www.amazon.com/s?k=${encodeURIComponent(book.isbn!)}`}
+                    href={`https://www.amazon.com/s?k=${encodeURIComponent(
+                      book.isbn!
+                    )}`}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="flex items-center justify-start px-4 py-2"
@@ -434,14 +456,20 @@ export default function BookPage() {
                 </Button>
 
                 {/* Barnes & Noble */}
-                <Button asChild className="flex items-center gap-2 bg-[#046A38] hover:bg-[#035c30] text-white rounded-full h-10 px-6">
+                <Button
+                  asChild
+                  className="bg-[#FF9900] hover:bg-[#E88B00] text-white rounded-2xl"
+                >
                   <Link
-                    href={`https://www.barnesandnoble.com/s/${encodeURIComponent(book.title)}`}
+                    href={`https://www.barnesandnoble.com/s/${encodeURIComponent(
+                      book.title
+                    )}`}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="flex items-center justify-start px-4 py-2"
                   >
-                    Buy on Barnes & Noble 
+                    Buy on Barnes & Noble
+                    <ShoppingCart className="h-4 w-4" stroke="white" />
                   </Link>
                 </Button>
               </div>
@@ -464,9 +492,9 @@ export default function BookPage() {
                 </p>
               </div>
             )}
-
+          
             <div className="mt-8">
-              <ReviewSection reviews={book.reviews} bookId={book.book_id} />
+              <ReviewSection bookId={bookId} />
             </div>
           </div>
         </div>

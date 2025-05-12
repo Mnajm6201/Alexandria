@@ -339,7 +339,6 @@ export default function EditionPage() {
         
         <div className="mt-8">
           <ReviewSection 
-
             bookId={edition.book_info.id}
           />
         </div>

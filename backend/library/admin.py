@@ -179,7 +179,6 @@ class UserProfileAdmin(admin.ModelAdmin):
 
 
 class JournalAdmin(admin.ModelAdmin):
-
     list_display = ['get_user', 'get_book', 'is_private', 'created_on', 'updated_on']
     list_filter = ['is_private', 'created_on', 'updated_on']
     search_fields = ['user_book__user__username', 'user_book__book__title']
