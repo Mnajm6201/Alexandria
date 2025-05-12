@@ -333,6 +333,7 @@ class UserBook(models.Model):
     read_status = models.CharField(max_length=20, choices=READ_STATUS_CHOICES, null=True, blank=True)
     page_num = models.PositiveBigIntegerField(default=0)
     is_owned = models.BooleanField(default=False)
+    is_favorite = models.BooleanField(default=False)
     date_started = models.DateField(blank=True, null=True)
     date_ended = models.DateField(blank=True, null=True)
     
@@ -457,6 +458,7 @@ class Shelf (models.Model):
         ("Read", "Read"),
         ("Reading", "Reading"),
         ("Want to Read", "Want to Read"),
+        ("Favorites", "Favorites"),
         ("Available", "Available"),
         ("Lent Out", "Lent Out"),
         ("Custom", "Custom"),

@@ -32,7 +32,8 @@ def create_default_shelves(sender, instance, created, **kwargs):
             {"name": "Want to Read", "shelf_type": "Want to Read", "shelf_desc": "Books you want to read"},
             {"name": "Currently Reading", "shelf_type": "Reading", "shelf_desc": "Books you are currently reading"},
             {"name": "Read", "shelf_type": "Read", "shelf_desc": "Books you have already read"},
-            {"name": "Owned", "shelf_type": "Owned", "shelf_desc": "Books you own"}
+            {"name": "Owned", "shelf_type": "Owned", "shelf_desc": "Books you own"},
+            {"name": "Favorites", "shelf_type": "Favorites", "shelf_desc": "Your favorite books"}
         ]
         
         for shelf_data in default_shelves:

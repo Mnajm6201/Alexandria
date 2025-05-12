@@ -161,7 +161,7 @@ class ShelfViewSet(viewsets.ModelViewSet):
                 shelf_edition.delete()
         
         # Only handle special shelf types (Read, Reading, Want to Read, Owned)
-        special_shelf_types = ["Read", "Reading", "Want to Read", "Owned"]
+        special_shelf_types = ["Read", "Reading", "Want to Read", "Owned", "Favorites"]
         
         if shelf.shelf_type in special_shelf_types:
             # Get or create a UserBook record
@@ -176,6 +176,9 @@ class ShelfViewSet(viewsets.ModelViewSet):
             
             if shelf.shelf_type == "Owned":
                 user_book.is_owned = True
+            
+            if shelf.shelf_type == "Favorites":
+                user_book.is_favorite = True
             
             user_book.save()
 
@@ -206,6 +209,18 @@ class ShelfViewSet(viewsets.ModelViewSet):
                     
                     if not other_owned_editions:
                         user_book.is_owned = False
+
+                    # Check if we need to update favorites status
+                    if shelf.shelf_type == "Favorites":
+                        # Check if there are any other editions of this book on Favorites shelves
+                        other_favorite_editions = ShelfEdition.objects.filter(
+                            shelf__user=shelf.user,
+                            shelf__shelf_type="Favorites",
+                            edition__book=edition.book
+                        ).exists()
+                        
+                        if not other_favorite_editions:
+                            user_book.is_favorite = False
                 
                 # Check if we need to update read status
                 if shelf.shelf_type in ["Read", "Reading", "Want to Read"]:
@@ -224,7 +239,7 @@ class ShelfViewSet(viewsets.ModelViewSet):
                         user_book.read_status = None
                         
                         # If not owned either, delete the UserBook
-                        if not user_book.is_owned:
+                        if not user_book.is_owned and not user_book.is_favorite:
                             user_book.delete()
                             return
                 
