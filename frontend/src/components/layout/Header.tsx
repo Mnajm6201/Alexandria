@@ -6,6 +6,7 @@ import { BookOpen, SunMoon } from "lucide-react";
 import { useAuth } from "@clerk/nextjs";
 import { Button, buttonVariants } from "@/components/ui/button";
 import { useEffect, useState } from "react";
+import { motion } from "framer-motion";
 
 // A header prop for including in each function components to either it's an app header or landing page header
 interface HeaderProps {
@@ -87,10 +88,10 @@ export function Header({ variant = "app" }: HeaderProps) {
               Discover
             </Link>
             <Link
-              href="/community"
+              href="/journals"
               className="text-sm font-medium text-amber-900 hover:text-amber-700"
             >
-              Community
+              Journals
             </Link>
             <Link
               href="/club"
@@ -128,12 +129,17 @@ export function Header({ variant = "app" }: HeaderProps) {
               >
                 My Profile
               </Link>
-              <Button
-                onClick={() => signOut()}
-                className="bg-amber-800 text-amber-50 hover:bg-amber-700"
-              >
-                Sign Out
-              </Button>
+              <motion.div 
+                    whileHover={{ scale: 1.07 }}
+                    whileTap={{ scale: 0.9 }}  
+                > 
+                <Button
+                  onClick={() => signOut()}
+                  className="bg-amber-800 text-amber-50 hover:bg-amber-900 rounded-full"
+                >
+                  Sign Out
+                </Button>
+              </motion.div>
             </div>
           ) : (
             <div className="flex items-center gap-4">

@@ -17,6 +17,7 @@ import {
     import { Input } from "@/components/ui/input"
     import { Label } from "@/components/ui/label"
     import { Textarea } from "@/components/ui/textarea"
+    import { motion } from "framer-motion"
 
     type NewEntryModalProps = {
     journalId: string
@@ -52,10 +53,15 @@ import {
     return (
         <Dialog open={open} onOpenChange={setOpen}>
         <DialogTrigger asChild>
-            <Button>
-            <PlusCircle className="mr-2 h-4 w-4" />
-            New Entry
-            </Button>
+            <motion.div 
+                whileHover={{ scale: 1.07 }}
+                whileTap={{ scale: 0.9 }}  
+            > 
+                <Button className="bg-amber-800 hover:bg-amber-900 rounded-full">
+                <PlusCircle className="h-4 w-4 text-white" />
+                New Entry
+                </Button>
+            </motion.div>
         </DialogTrigger>
         <DialogContent className="sm:max-w-[625px]">
             <DialogHeader>
@@ -99,10 +105,15 @@ import {
             </div>
             </div>
             <DialogFooter>
-            <Button onClick={handleSave} disabled={!entryData.title || !entryData.pages}>
-                <Save className="mr-2 h-4 w-4" />
-                Save Entry
-            </Button>
+            <motion.div 
+                whileHover={{ scale: 1.07 }}
+                whileTap={{ scale: 0.9 }}  
+            > 
+                <Button onClick={handleSave} disabled={!entryData.title || !entryData.pages} className="rounded-full">
+                    <Save className="h-4 w-4 text-white" />
+                    Save Entry
+                </Button>
+            </motion.div>
             </DialogFooter>
         </DialogContent>
         </Dialog>

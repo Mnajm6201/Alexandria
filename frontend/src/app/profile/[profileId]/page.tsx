@@ -620,7 +620,7 @@ export default function ProfilePage({
                   </span>
                 </Link>
                 <Link
-                  href="/journal"
+                  href="/journals"
                   className="flex flex-col items-center justify-center rounded-lg border border-amber-200 bg-white p-4 text-center transition-colors hover:bg-amber-100"
                 >
                   <BookText className="h-8 w-8 text-amber-800" />
