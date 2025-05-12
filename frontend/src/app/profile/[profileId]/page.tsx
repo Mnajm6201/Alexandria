@@ -28,6 +28,7 @@ import { UserSetupModal } from "@/components/ui/userprofile/UserSetupModal";
 import CurrentlyReading from "@/components/profiles/CurrentlyReading";
 import UserBookClubs from "@/components/profiles/UserBookClubs";
 import { toast } from "@/hooks/use-toast";
+import ProfileShelves from '@/components/profiles/ProfileShelves';
 
 // Define profile data interface
 interface ProfileData {
@@ -540,6 +541,17 @@ export default function ProfilePage({
               showAddButton={isCurrentUser}
               className="mb-8"
             />
+
+  
+          {/*user shelves */}
+          <div className="mb-8">
+            <h2 className="text-xl font-serif font-bold text-amber-900 mb-4">My Shelves</h2>
+            <ProfileShelves 
+              userId={profileData.username}
+              shelfTypes={["Reading", "Favorites", "Read", "Want to Read", "Owned"]}
+            />
+          </div>
+
 
             {/* Recent Books / Want to Read - Only show if there's actual data */}
             {profileData.recently_read &&
