@@ -3,9 +3,10 @@
 import { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { BookOpen, PlusCircle, Coffee } from "lucide-react";
+import { BookOpen, Loader2, Plus } from "lucide-react";
 import { Progress } from "@/components/ui/progress";
 import { useJWToken } from "@/utils/getJWToken";
+import { Button } from "@/components/ui/button";
 
 interface ReadingBook {
   id: string;
@@ -22,7 +23,7 @@ interface ReadingBook {
 }
 
 interface CurrentlyReadingProps {
-  userId?: string; // If not provided, shows current user's books
+  userId?: string;
   showAddButton?: boolean;
   limit?: number;
   className?: string;
@@ -51,11 +52,12 @@ export default function CurrentlyReading({
           setLoading(false);
           return;
         }
-
-        // Construct the URL based on whether we're fetching for a specific user or the current user
+        // Use query parameter approach - userId is optional
         const url = userId
-          ? `http://localhost:8000/api/auth/users/${userId}/currently-reading/`
-          : `http://localhost:8000/api/auth/users/me/currently-reading/`;
+          ? `http://localhost:8000/api/auth/users/currently-reading/?user_id=${userId}`
+          : "http://localhost:8000/api/auth/users/currently-reading/";
+          
+        console.log(`Fetching currently reading from: ${url}`);
 
         const response = await fetch(url, {
           headers: {
@@ -106,14 +108,8 @@ export default function CurrentlyReading({
             Currently Reading
           </h2>
         </div>
-        <div className="animate-pulse flex space-x-4">
-          <div className="bg-amber-100 h-24 w-16 rounded"></div>
-          <div className="flex-1 space-y-2 py-1">
-            <div className="h-4 bg-amber-100 rounded w-2/3"></div>
-            <div className="h-4 bg-amber-100 rounded w-1/2"></div>
-            <div className="h-4 bg-amber-100 rounded w-3/4"></div>
-            <div className="h-2 bg-amber-100 rounded w-full"></div>
-          </div>
+        <div className="flex justify-center py-4">
+          <Loader2 className="h-6 w-6 text-amber-600 animate-spin" />
         </div>
       </div>
     );
@@ -144,12 +140,16 @@ export default function CurrentlyReading({
             Currently Reading
           </h2>
           {showAddButton && (
-            <Link href="/book">
-              <button className="text-sm bg-amber-600 text-white px-3 py-1.5 rounded hover:bg-amber-700 flex items-center">
-                <PlusCircle className="h-4 w-4 mr-1" />
-                Add Book
-              </button>
-            </Link>
+            <Button
+              variant="outline"
+              size="sm"
+              className="border-amber-300 text-amber-800"
+              asChild
+            >
+              <Link href="/book/search">
+                <Plus className="mr-1 h-4 w-4" /> Add Book
+              </Link>
+            </Button>
           )}
         </div>
 
@@ -161,11 +161,16 @@ export default function CurrentlyReading({
               : "You're not currently reading any books"}
           </p>
           {showAddButton && (
-            <Link href="/book">
-              <button className="mt-2 px-4 py-2 bg-amber-600 text-white rounded hover:bg-amber-700">
+            <Button
+              variant="outline"
+              size="sm"
+              className="mt-2 border-amber-300 text-amber-800"
+              asChild
+            >
+              <Link href="/book/search">
                 Find Books to Read
-              </button>
-            </Link>
+              </Link>
+            </Button>
           )}
         </div>
       </div>
@@ -184,12 +189,16 @@ export default function CurrentlyReading({
           Currently Reading
         </h2>
         {showAddButton && (
-          <Link href="/book">
-            <button className="text-sm bg-amber-600 text-white px-3 py-1.5 rounded hover:bg-amber-700 flex items-center">
-              <PlusCircle className="h-4 w-4 mr-1" />
-              Add Book
-            </button>
-          </Link>
+          <Button
+            variant="outline"
+            size="sm"
+            className="border-amber-300 text-amber-800"
+            asChild
+          >
+            <Link href="/book/search">
+              <Plus className="mr-1 h-4 w-4" /> Add Book
+            </Link>
+          </Button>
         )}
       </div>
 
@@ -240,7 +249,7 @@ export default function CurrentlyReading({
 
               {/* Book club info */}
               {book.club && (
-                <div className="text-xs text-amber-600 mt-1">
+                <div className="text-xs text-amber-600">
                   <Link
                     href={`/club/${book.club.id}`}
                     className="hover:underline"
@@ -255,14 +264,17 @@ export default function CurrentlyReading({
 
         {/* Show "View all" if there are more books */}
         {books.length > limit && (
-          <div className="text-center">
-            <Link
-              href={userId ? `/profile/${userId}/reading` : "/profile/reading"}
+          <div className="text-center pt-2">
+            <Button
+              variant="ghost"
+              size="sm"
+              className="text-amber-800"
+              asChild
             >
-              <button className="text-sm text-amber-600 hover:text-amber-800 hover:underline">
+              <Link href="/reading">
                 View all ({books.length})
-              </button>
-            </Link>
+              </Link>
+            </Button>
           </div>
         )}
       </div>

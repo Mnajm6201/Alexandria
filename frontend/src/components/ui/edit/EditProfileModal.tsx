@@ -1,170 +1,184 @@
+// Updated EditProfileModal.tsx
 import { useState, useEffect, useRef } from "react";
 import { Button } from "../button";
 import { Input } from "../input";
 import { Textarea } from "../textarea";
 import { X } from "lucide-react";
+import { toast } from "@/hooks/use-toast";
 
-// Defining the props interface for the modal
-/* 
-    The interface definition are:
-    isOpen: if the modal is opened
-    onClose: a function that executes when the modal is closed
-    onSave: a function with storing the profileData after the profileData is filled or whatever the use has edited
-    initialData: the original data before we make an edit
-*/
 interface EditProfileModalProps {
   isOpen: boolean;
   onClose: () => void;
-  onSave: (profileData: ProfileData) => void;
-  initialData: ProfileData;
+  onSave: (profileData: ProfileData) => Promise<boolean>;
+  initialData: {
+    username: string;
+    bio: string;
+    zipCode?: string;
+    socialLinks?: string;
+    profilePicUrl?: string;
+  };
 }
 
-/* 
-    The interface of the profile data
-    displayName: the name of the user (username)
-    bio: the bio of the user
-    tags: the tags stored in for users like based on the achievements they've gotten
-*/
 interface ProfileData {
   displayName: string;
   bio: string;
   zipCode?: string;
+  socialLinks?: string;
   profilePicture?: File | null;
   profilePicUrl?: string;
 }
-/*
-    formData, setFormData: a useState that handles state change
-*/
+
 export function EditProfileModal({
   isOpen,
   onClose,
   onSave,
   initialData,
 }: EditProfileModalProps) {
-  const [formData, setFormData] = useState<ProfileData>(initialData);
+  const [formData, setFormData] = useState<ProfileData>({
+    displayName: initialData.username || "",
+    bio: initialData.bio || "",
+    zipCode: initialData.zipCode || "",
+    socialLinks: initialData.socialLinks || "",
+    profilePicture: null,
+    profilePicUrl: initialData.profilePicUrl || "",
+  });
 
-  // State validation errors
   const [errors, setErrors] = useState<Record<string, string>>({});
-
-  // State for image preview
-  const [previewUrl, setPreviewUrl] = useState<string>(initialData.profilePicUrl || "");
-  
-  // State for submission status
+  const [previewUrl, setPreviewUrl] = useState<string>("");
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
-
-  // Ref for file input
   const fileInputRef = useRef<HTMLInputElement>(null);
 
-
-  // Update form data when initial data changes
   useEffect(() => {
     if (isOpen) {
-      setFormData(initialData);
+      setFormData((prev) => ({
+        displayName: initialData.username || "",
+        bio: initialData.bio || "",
+        zipCode: initialData.zipCode || "",
+        socialLinks: initialData.socialLinks || "",
+        profilePicture: prev.profilePicture || null,
+        profilePicUrl: initialData.profilePicUrl || "",
+      }));
 
-      // Checking if the url already incldues the full server path if its use it directly 
-      // Otherwise we'll prepend the server url if needed
-      if(initialData.profilePicUrl){
+      if (initialData.profilePicUrl) {
         const url = initialData.profilePicUrl;
-        if(url.startsWith("http") || !url.startsWith("/")){
-          setPreviewUrl(url);
-        }
-        else{
-          setPreviewUrl(`http://localhost:8000${url}`);
-        }
+        setPreviewUrl(
+          url.startsWith("http") || url.startsWith("blob:")
+            ? url
+            : `http://localhost:8000${url}`
+        );
+      } else {
+        setPreviewUrl("");
       }
-      else{
-        setPreviewUrl('');
-      }
+
       setErrors({});
     }
   }, [isOpen, initialData]);
+  
+  
 
-  // Handle the input changes
+  useEffect(() => {
+    let prevUrl = previewUrl;
+
+    return () => {
+      if (prevUrl && prevUrl.startsWith("blob:")) {
+        URL.revokeObjectURL(prevUrl);
+      }
+    };
+  }, [previewUrl]);
+
+
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
     const { name, value } = e.target;
-    setFormData((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
+    setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
-  // Handling profile pic change
-  const handleProfileChange = (e : React.ChangeEvent<HTMLInputElement>) => {
-    // store the file from the event
-    const file = e.target.files?.[0];
+  const handleProfileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const files = e.target.files;
+    if (files && files.length > 0) {
+      const file = files[0];
 
-    // Validate the file if it's not empty
-    if (file){
-      // Create an preview url
+      const validTypes = ["image/jpeg", "image/png", "image/gif"];
+      const maxSize = 5 * 1024 * 1024;
+
+      if (!validTypes.includes(file.type)) {
+        toast({
+          title: "Invalid File Type",
+          description: "Please upload a JPEG, PNG, or GIF image.",
+          variant: "destructive",
+        });
+        return;
+      }
+
+      if (file.size > maxSize) {
+        toast({
+          title: "File Too Large",
+          description: "Image must be smaller than 5MB.",
+          variant: "destructive",
+        });
+        return;
+      }
+
+      if (previewUrl.startsWith("blob:")) {
+        URL.revokeObjectURL(previewUrl);
+      }
+
       const objectUrl = URL.createObjectURL(file);
       setPreviewUrl(objectUrl);
-
-      // Update the data with the new preview url
-      setFormData(prev => ({
+      setFormData((prev) => ({
         ...prev,
-        profilePicture: file
+        profilePicture: file,
+        profilePicUrl: objectUrl,
       }));
     }
   };
 
-  // clean up the object url when component unmounts
-  useEffect(() => {
-    return () => {
-      if(previewUrl && previewUrl.startsWith("blob")){
-        URL.revokeObjectURL(previewUrl);
-      }
-    }
-  }, [previewUrl]);
-
-  // Trigger file input click
   const triggerFileInput = () => {
     fileInputRef.current?.click();
   };
 
-
-
-  // Validate zip code (US Format for now)
   const validateZipCode = (zipCode: string) => {
-    // basic regex format for us zipcode
-    const zipRegex = /^\d{5}(-\d{4})?$/;
-    return zipRegex.test(zipCode);
-  }
+    return !zipCode || /^\d{5}(-\d{4})?$/.test(zipCode);
+  };
 
-
-  // handle form submission
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Validate input
-    const newErrors : Record<string, string> = {};
+    const newErrors: Record<string, string> = {};
 
-    if (!formData.displayName.trim()){
+    if (!formData.displayName.trim())
       newErrors.displayName = "Name is required";
-    }
+    if (formData.zipCode && !validateZipCode(formData.zipCode))
+      newErrors.zipCode = "Invalid zip code";
 
-    if (formData.zipCode && !validateZipCode(formData.zipCode)) {
-      newErrors.zipCode = "Please enter a valid zip code";
-    }
-
-    // If errors exist, stop submission
     if (Object.keys(newErrors).length > 0) {
       setErrors(newErrors);
       return;
     }
 
     setIsSubmitting(true);
-
-
-    try{
-      // Saving the data to the parent component for API processing
-      onSave(formData);
-      onClose();
-    }
-    catch(error){
-      console.error('Error submitting form', error);
-    }
-    finally{
+    try {
+      const success = await onSave(formData);
+      if (success) {
+        toast({
+          title: "Profile Updated",
+          description: "Your profile has been successfully updated.",
+        });
+        onClose();
+      } else {
+        toast({
+          title: "Update Failed",
+          description: "Could not update profile. Please try again later.",
+          variant: "destructive",
+        });
+      }
+    } catch (err) {
+      toast({
+        title: "Update Failed",
+        description: String(err),
+        variant: "destructive",
+      });
+    } finally {
       setIsSubmitting(false);
     }
   };
@@ -189,7 +203,6 @@ export function EditProfileModal({
         </div>
 
         <form onSubmit={handleSubmit} className="space-y-4">
-          {/* Profile Picture Upload */}
           <div className="flex flex-col items-center mb-4">
             <div
               className="h-24 w-24 rounded-full overflow-hidden border-4 border-amber-200 bg-amber-100 mb-2 flex items-center justify-center cursor-pointer"
@@ -200,30 +213,12 @@ export function EditProfileModal({
                   src={previewUrl}
                   alt="Profile preview"
                   className="h-full w-full object-cover"
-                  onError={(e) => {
-                    console.error("Error loading profile image:", previewUrl);
-                    // Set a fallback if image fails to load
-                    e.currentTarget.src = "/default-profile.png";
-                  }}
+                  onError={(e) =>
+                    (e.currentTarget.src = "/default-profile.png")
+                  }
                 />
               ) : (
-                <div className="flex flex-col items-center justify-center text-amber-800">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    className="h-8 w-8"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M12 6v6m0 0v6m0-6h6m-6 0H6"
-                    />
-                  </svg>
-                  <span className="text-xs mt-1">Upload</span>
-                </div>
+                <div className="text-amber-800">Upload</div>
               )}
             </div>
             <input
@@ -241,66 +236,41 @@ export function EditProfileModal({
               Upload profile picture
             </button>
           </div>
+          <Input
+            id='displayName'
+            name="displayName"
+            value={formData.displayName}
+            onChange={handleChange}
+            placeholder="Display Name"
+          />
+          {errors.displayName && (
+            <p className="text-red-500 text-sm">{errors.displayName}</p>
+          )}
 
-          <div>
-            <label
-              htmlFor="displayName"
-              className="block text-sm font-medium text-amber-800 mb-1"
-            >
-              Display Name
-            </label>
-            <Input
-              id="displayName"
-              name="displayName"
-              value={formData.displayName}
-              onChange={handleChange}
-              className="border-amber-300 bg-amber-50 focus-visible:ring-amber-600"
-            />
-            {errors.displayName && (
-              <p className="text-red-500 text-sm mt-1">{errors.displayName}</p>
-            )}
-          </div>
+          <Input
+            name="zipCode"
+            value={formData.zipCode}
+            onChange={handleChange}
+            placeholder="Zip Code"
+          />
+          {errors.zipCode && (
+            <p className="text-red-500 text-sm">{errors.zipCode}</p>
+          )}
 
-          {/* New Zip Code Field */}
-          <div>
-            <label
-              htmlFor="zipCode"
-              className="block text-sm font-medium text-amber-800 mb-1"
-            >
-              Zip Code
-            </label>
-            <Input
-              id="zipCode"
-              name="zipCode"
-              value={formData.zipCode || ""}
-              onChange={handleChange}
-              placeholder="Enter your zip code"
-              className="border-amber-300 bg-amber-50 focus-visible:ring-amber-600"
-            />
-            {errors.zipCode && (
-              <p className="text-red-500 text-sm mt-1">{errors.zipCode}</p>
-            )}
-            <p className="text-xs text-amber-700 mt-1">
-              We only collect your zip code to help find libraries near you.
-            </p>
-          </div>
+          <Input
+            name="socialLinks"
+            value={formData.socialLinks}
+            onChange={handleChange}
+            placeholder="Social Links"
+          />
 
-          <div>
-            <label
-              htmlFor="bio"
-              className="block text-sm font-medium text-amber-800 mb-1"
-            >
-              Bio
-            </label>
-            <Textarea
-              id="bio"
-              name="bio"
-              value={formData.bio}
-              onChange={handleChange}
-              rows={4}
-              className="border-amber-300 bg-amber-50 focus-visible:ring-amber-600"
-            />
-          </div>
+          <Textarea
+            name="bio"
+            value={formData.bio}
+            onChange={handleChange}
+            rows={4}
+            placeholder="Your bio..."
+          />
 
           <div className="flex justify-end gap-2 pt-2">
             <Button
@@ -308,15 +278,10 @@ export function EditProfileModal({
               variant="outline"
               onClick={onClose}
               disabled={isSubmitting}
-              className="border-amber-300 text-amber-800"
             >
               Cancel
             </Button>
-            <Button
-              type="submit"
-              disabled={isSubmitting}
-              className="bg-amber-800 text-amber-50 hover:bg-amber-700"
-            >
+            <Button type="submit" disabled={isSubmitting}>
               {isSubmitting ? "Saving..." : "Save Changes"}
             </Button>
           </div>
