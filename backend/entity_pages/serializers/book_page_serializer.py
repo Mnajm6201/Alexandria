@@ -60,7 +60,7 @@ class BookPageSerializer(serializers.ModelSerializer):
         """Return essential author information including images for the book page."""
         return [
             {
-                'id': author.id, 
+                'id': author.author_id, 
                 'name': author.name,
                 'author_image': author.author_image
             } 
