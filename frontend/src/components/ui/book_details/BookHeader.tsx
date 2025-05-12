@@ -25,12 +25,14 @@
     - Employs Next.js Link for author profile navigation.
 */
 // frontend/src/components/ui/book_details/BookHeader.tsx
+// frontend/src/components/ui/book_details/BookHeader.tsx
 'use client'
 
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import AddToShelfModal from '../shelves/AddToShelfModal'
 import { useJWToken } from '../../../utils/getJWToken'
+import { Heart } from 'lucide-react'
 
 enum ReadStatusOptions {
   WANT_TO_READ = 'Want to Read',
@@ -47,6 +49,7 @@ interface Author {
 interface UserStatus {
   read_status: string
   is_owned: boolean
+  is_favorite?: boolean
 }
 
 interface BookHeaderProps {
@@ -70,6 +73,9 @@ export default function BookHeader({
   const [isOwned, setIsOwned] = useState<boolean>(
     userStatus?.is_owned || false
   )
+  const [isFavorite, setIsFavorite] = useState<boolean>(
+    userStatus?.is_favorite || false
+  )
   const [showAddToShelf, setShowAddToShelf] = useState(false)
   const [isUpdating, setIsUpdating] = useState(false)
   const { jwtToken, fetchJWToken } = useJWToken()
@@ -79,6 +85,7 @@ export default function BookHeader({
     if (userStatus) {
       setReadStatus(userStatus.read_status || ReadStatusOptions.NONE)
       setIsOwned(userStatus.is_owned || false)
+      setIsFavorite(userStatus.is_favorite || false)
     }
   }, [userStatus])
 
@@ -105,7 +112,7 @@ export default function BookHeader({
         
         // Check each special shelf for this edition
         for (const shelf of shelves) {
-          if (![ReadStatusOptions.WANT_TO_READ, ReadStatusOptions.READING, ReadStatusOptions.READ, 'Owned'].includes(shelf.shelf_type)) {
+          if (![ReadStatusOptions.WANT_TO_READ, ReadStatusOptions.READING, ReadStatusOptions.READ, 'Owned', 'Favorites'].includes(shelf.shelf_type)) {
             continue
           }
           
@@ -125,6 +132,8 @@ export default function BookHeader({
             // Update state based on which shelf contains the edition
             if (shelf.shelf_type === 'Owned') {
               setIsOwned(true)
+            } else if (shelf.shelf_type === 'Favorites') {
+              setIsFavorite(true)
             } else {
               setReadStatus(shelf.shelf_type)
             }
@@ -197,6 +206,8 @@ export default function BookHeader({
         setReadStatus(shelfType)
       } else if (shelfType === 'Owned') {
         setIsOwned(true)
+      } else if (shelfType === 'Favorites') {
+        setIsFavorite(true)
       }
 
       console.log(`Successfully added to ${shelfType} shelf`)
@@ -262,6 +273,8 @@ export default function BookHeader({
         setReadStatus(ReadStatusOptions.NONE)
       } else if (shelfType === 'Owned') {
         setIsOwned(false)
+      } else if (shelfType === 'Favorites') {
+        setIsFavorite(false)
       }
 
       console.log(`Successfully removed from ${shelfType} shelf`)
@@ -302,6 +315,20 @@ export default function BookHeader({
     }
   }
   
+  // Add a new handler for favorite toggle
+  const toggleFavorite = async () => {
+    if (!primaryEditionId) {
+      console.error("No edition available for this book")
+      return
+    }
+    
+    if (isFavorite) {
+      await removeFromShelf('Favorites', primaryEditionId)
+    } else {
+      await addToShelf('Favorites', primaryEditionId)
+    }
+  }
+  
   const handleAddToShelf = () => {
     // Open the "Add to Shelf" modal
     setShowAddToShelf(true)
@@ -328,26 +355,43 @@ export default function BookHeader({
       
       {/* Book info */}
       <div className="flex-1 flex flex-col justify-between">
-        <div>
-          <h1 className="text-4xl font-extrabold text-gray-900">{title}</h1>
-          {authors.length > 0 && (
-            <div className="mt-2">
-              <p className="text-base text-gray-600">
-                By{' '}
-                {authors.map((author, index) => (
-                  <span key={author.id}>
-                    <Link 
-                      href={`/author/${author.id}`} 
-                      className="text-blue-500 hover:text-blue-700 font-medium"
-                    >
-                      {author.name}
-                    </Link>
-                    {index < authors.length - 1 && ', '}
-                  </span>
-                ))}
-              </p>
-            </div>
-          )}
+        <div className="flex justify-between">
+          <div>
+            <h1 className="text-4xl font-extrabold text-gray-900">{title}</h1>
+            {authors.length > 0 && (
+              <div className="mt-2">
+                <p className="text-base text-gray-600">
+                  By{' '}
+                  {authors.map((author, index) => (
+                    <span key={author.id}>
+                      <Link 
+                        href={`/author/${author.id}`} 
+                        className="text-blue-500 hover:text-blue-700 font-medium"
+                      >
+                        {author.name}
+                      </Link>
+                      {index < authors.length - 1 && ', '}
+                    </span>
+                  ))}
+                </p>
+              </div>
+            )}
+          </div>
+          
+          {/* Favorite heart icon button */}
+          <button
+            type="button"
+            className={`p-2 rounded-full transition-colors duration-200 ${
+              isFavorite 
+                ? 'text-red-500 bg-red-50 hover:bg-red-100' 
+                : 'text-gray-400 hover:text-red-400 hover:bg-gray-100'
+            } ${isUpdating ? 'opacity-50 cursor-not-allowed' : ''} h-12 w-12 flex items-center justify-center`}
+            onClick={toggleFavorite}
+            disabled={isUpdating}
+            aria-label={isFavorite ? 'Remove from favorites' : 'Add to favorites'}
+          >
+            <Heart className={`h-7 w-7 ${isFavorite ? 'fill-current' : ''}`} />
+          </button>
         </div>
         
         {/* Action Buttons */}
@@ -391,26 +435,28 @@ export default function BookHeader({
             </button>
           </div>
           
-          <button
-            type="button"
-            className={`px-4 py-2 text-sm font-medium rounded-md transition duration-200 ${
-              isOwned 
-                ? 'bg-green-500 text-white border border-green-500'
-                : 'bg-white text-gray-700 border border-gray-300 hover:bg-gray-100'
-            } ${isUpdating ? 'opacity-50 cursor-not-allowed' : ''}`}
-            onClick={toggleOwned}
-            disabled={isUpdating}
-          >
-            {isOwned ? 'Owned' : 'I Own This'}
-          </button>
-
-          <button
-            type="button"
-            className="px-4 py-2 text-sm font-medium rounded-md bg-purple-600 text-white border border-purple-600 hover:bg-purple-700 transition duration-200"
-            onClick={handleAddToShelf}
-          >
-            Add to Shelf
-          </button>
+          <div className="ml-auto flex gap-2">
+            <button
+              type="button"
+              className={`px-4 py-2 text-sm font-medium rounded-md transition duration-200 ${
+                isOwned 
+                  ? 'bg-green-500 text-white border border-green-500'
+                  : 'bg-white text-gray-700 border border-gray-300 hover:bg-gray-100'
+              } ${isUpdating ? 'opacity-50 cursor-not-allowed' : ''}`}
+              onClick={toggleOwned}
+              disabled={isUpdating}
+            >
+              {isOwned ? 'Owned' : 'I Own This'}
+            </button>
+  
+            <button
+              type="button"
+              className="px-4 py-2 text-sm font-medium rounded-md bg-purple-600 text-white border border-purple-600 hover:bg-purple-700 transition duration-200"
+              onClick={handleAddToShelf}
+            >
+              Add to Shelf
+            </button>
+          </div>
         </div>
       </div>
 
