@@ -35,13 +35,15 @@ interface CarouselProps<T extends Item> {
   title?: string
   onItemClick?: (item: T) => void // Updated to pass the entire item object
   renderItem?: (item: T) => React.ReactNode
+  showBackground?: boolean // New prop to control background visibility
 }
 
 export default function ItemCarousel<T extends Item>({ 
   items = [], 
   title = "Items",
   onItemClick,
-  renderItem 
+  renderItem,
+  showBackground = false // Default to no background
 }: CarouselProps<T>) {
   // Prioritize items with cover images
   const withImages = items.filter(item => item.cover_image)
@@ -52,9 +54,14 @@ export default function ItemCarousel<T extends Item>({
     return null
   }
 
+  // Choose the appropriate container class based on showBackground prop
+  const containerClass = showBackground 
+    ? "bg-white rounded-lg shadow p-6" // Original style with background
+    : ""; // No background or padding
+
   return (
-    <div className="bg-white rounded-lg shadow p-6">
-      <h2 className="text-xl font-semibold text-gray-900 mb-4">{title}</h2>
+    <div className={containerClass}>
+      {title && <h2 className="text-xl font-semibold text-gray-900 mb-4">{title}</h2>}
       
       <div className="w-full overflow-x-auto">
         <div className="flex space-x-4 pb-4">
