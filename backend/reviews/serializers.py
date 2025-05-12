@@ -3,9 +3,14 @@ from library.models import Review, Book, User
 from django.db.models import Avg
 from decimal import Decimal
 
+
+    
 class ReviewSerializer(serializers.ModelSerializer):
     user_username = serializers.SerializerMethodField()
     user_profile_pic = serializers.SerializerMethodField()
+    book_title = serializers.SerializerMethodField()
+    book_author = serializers.SerializerMethodField()
+    book_cover = serializers.SerializerMethodField()
     
     class Meta:
         model = Review
@@ -15,6 +20,9 @@ class ReviewSerializer(serializers.ModelSerializer):
             'user_username',
             'user_profile_pic',
             'book', 
+            'book_title',
+            'book_author',
+            'book_cover',
             'content', 
             'rating', 
             'created_on', 
@@ -27,6 +35,46 @@ class ReviewSerializer(serializers.ModelSerializer):
     
     def get_user_profile_pic(self, obj):
         return obj.user.profile_pic if obj.user else None
+    
+    def get_book_title(self, obj):
+        return obj.book.title if obj.book else "Unknown Book"
+    
+    def get_book_author(self, obj):
+        if obj.book:
+            authors = obj.book.authors.all()
+            if authors.exists():
+                return authors[0].name
+        return "Unknown Author"
+    
+    def get_book_cover(self, obj):
+        if not obj.book:
+            return None
+        
+        # First try to find primary edition
+        primary_editions = obj.book.editions.filter(is_primary=True)
+        if primary_editions.exists():
+            primary_edition = primary_editions.first()
+            # Get cover image from primary edition
+            primary_covers = primary_edition.related_edition_image.filter(is_primary=True)
+            if primary_covers.exists():
+                return primary_covers.first().image_url
+            
+            # If no primary cover, get any cover
+            any_covers = primary_edition.related_edition_image.all()
+            if any_covers.exists():
+                return any_covers.first().image_url
+        
+        # If no primary edition, check all editions for covers
+        for edition in obj.book.editions.all():
+            primary_covers = edition.related_edition_image.filter(is_primary=True)
+            if primary_covers.exists():
+                return primary_covers.first().image_url
+            
+            any_covers = edition.related_edition_image.all()
+            if any_covers.exists():
+                return any_covers.first().image_url
+                
+        return None
     
     def to_internal_value(self, data):
         # Make a mutable copy of the data

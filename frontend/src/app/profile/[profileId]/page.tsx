@@ -30,6 +30,7 @@ import UserBookClubs from "@/components/profiles/UserBookClubs";
 import { toast } from "@/hooks/use-toast";
 import UserProfileQuiz from "@/components/profiles/UserProfileQuiz";
 import ProfileShelves from '@/components/profiles/ProfileShelves';
+import UserReviews from '@/components/profiles/UserReviews';
 
 
 // Define profile data interface
@@ -590,6 +591,13 @@ export default function ProfilePage({
               shelfTypes={["Reading", "Favorites", "Read", "Want to Read", "Owned"]}
             />
           </div>
+
+         {/* Add the new User Reviews section */}
+        <UserReviews 
+          userId={profileId === "me" ? undefined : profileId} 
+          className="mb-8"
+        />
+
 
 
             {/* Recent Books / Want to Read - Only show if there's actual data */}
