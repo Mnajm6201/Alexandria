@@ -2,6 +2,7 @@
 
 import { useState } from 'react'
 import { X } from 'lucide-react'
+import { motion } from 'framer-motion'
 
 interface NewShelfModalProps {
   isOpen: boolean
@@ -103,21 +104,31 @@ const NewShelfModal: React.FC<NewShelfModalProps> = ({
           </div>
 
           <div className="flex justify-end">
+          <motion.div 
+                    whileHover={{ scale: 1.07 }}
+                    whileTap={{ scale: 0.9 }}  
+                > 
             <button
               type="button"
               onClick={onClose}
-              className="px-4 py-2 mr-2 text-amber-800 border border-amber-300 rounded hover:bg-amber-50"
+              className="px-4 py-2 mr-2 text-amber-800 border border-amber-300 rounded-full hover:bg-amber-50"
               disabled={isLoading}
             >
               Cancel
             </button>
+            </motion.div>
+            <motion.div 
+                    whileHover={{ scale: 1.07 }}
+                    whileTap={{ scale: 0.9 }}  
+                > 
             <button
               type="submit"
-              className="px-4 py-2 bg-amber-600 text-white rounded hover:bg-amber-700 disabled:opacity-50"
+              className="px-4 py-2 bg-amber-700 text-white rounded-full hover:bg-amber-900 disabled:opacity-50"
               disabled={isLoading}
             >
               {isLoading ? 'Creating...' : 'Create Shelf'}
             </button>
+            </motion.div>
           </div>
         </form>
       </div>

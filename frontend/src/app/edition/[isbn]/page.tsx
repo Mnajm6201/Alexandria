@@ -341,7 +341,7 @@ export default function EditionPage() {
           <ReviewSection 
             bookId={edition.book_info.id}
           />
-        </div>
+        </div>  
       </div>
     </div>
   );

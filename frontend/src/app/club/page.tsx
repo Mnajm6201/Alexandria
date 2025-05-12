@@ -19,6 +19,7 @@ import { useState, useEffect } from "react";
 import { CreateBookClubModal } from "@/components/club/CreateBookClubModal";
 import { useJWToken } from "@/utils/getJWToken";
 import axios from "axios";
+import { motion } from "framer-motion";
 
 interface BookClubResponse {
   id: number;
@@ -81,16 +82,12 @@ export default function BookClubsPage() {
         const data = await response.json();
         console.log("API Response data:", data);
 
-        // Process the response data
         const allClubs = data || [];
 
-        //Filter clubs that the user is a member of
         const userClubs = allClubs.filter((club) => club.is_user_member);
 
-        // Get other clubs for featured section (non - member clubs)
         const otherClubs = allClubs.filter((club) => !club.is_user_member);
 
-        // Format the data to display with consistent property naming
         const formattedUserClubs: FormattedBookClub[] = userClubs.map(
           (club) => ({
             id: club.id,
@@ -101,10 +98,10 @@ export default function BookClubsPage() {
               club.book_title?.split(" ")[0] || "Book"
             }`,
             description: club.club_desc || "",
-            tags: [], // You might need to add this to your backend API
-            nextMeeting: "No upcoming meetings", // You might need to add this to your backend API
-            unreadMessages: 0, // You might need to add this to your backend API
-            clubImage: club.club_image // Make sure this property name matches what we use in JSX
+            tags: [], 
+            nextMeeting: "No upcoming meetings", 
+            unreadMessages: 0, 
+            clubImage: club.club_image 
               ? `http://localhost:8000${club.club_image}`
               : undefined,
           })
@@ -184,13 +181,18 @@ export default function BookClubsPage() {
               Join a community of readers and discuss your favorite books
             </p>
           </div>
-          <Button
-            className="bg-amber-800 text-amber-50 hover:bg-amber-700"
-            onClick={() => setShowCreateModal(true)}
-          >
-            <Plus className="mr-2 h-4 w-4" />
-            Create New Club
-          </Button>
+          <motion.div 
+            whileHover={{ scale: 1.07 }}
+            whileTap={{ scale: 0.9 }}  
+          > 
+            <Button
+              className="bg-amber-800 text-amber-50 hover:bg-amber-900 rounded-full"
+              onClick={() => setShowCreateModal(true)}
+            >
+              <Plus className="h-4 w-4 text-white" />
+              Create New Club
+            </Button>
+          </motion.div>
         </div>
 
         {/* Search and Filter */}
@@ -210,19 +212,17 @@ export default function BookClubsPage() {
               />
             </div>
             <div className="flex gap-2">
-              <Button
-                variant="outline"
-                className="border-amber-300 text-amber-800"
-              >
-                <Filter className="mr-2 h-4 w-4" />
-                Filters
-              </Button>
-              <Button
-                className="bg-amber-800 text-amber-50 hover:bg-amber-700"
-                onClick={handleSearch}
-              >
-                Search
-              </Button>
+            <motion.div 
+                whileHover={{ scale: 1.07 }}
+                whileTap={{ scale: 0.9 }}  
+              > 
+                <Button
+                  className="bg-amber-800 text-amber-50 hover:bg-amber-900 rounded-full"
+                  onClick={handleSearch}
+                >
+                  Search
+                </Button>
+              </motion.div>
             </div>
           </div>
         </div>
@@ -235,7 +235,7 @@ export default function BookClubsPage() {
                 Your Book Clubs
               </h2>
               <Button variant="ghost" className="text-amber-800">
-                View All <ChevronRight className="ml-1 h-4 w-4" />
+                View All <ChevronRight className="h-4 w-4 text-white" />
               </Button>
             </div>
 
@@ -377,7 +377,7 @@ export default function BookClubsPage() {
                   <Link href={`/club/${club.id}`}>
                     <Button
                       variant="outline"
-                      className="border-amber-300 text-amber-800"
+                      className="border-amber-300 text-amber-800 rounded-full"
                     >
                       View Club
                     </Button>
@@ -399,13 +399,18 @@ export default function BookClubsPage() {
                 Start a community around your favorite books or genres. Invite
                 friends, set reading schedules, and host discussions.
               </p>
-              <Button
-                className="mt-4 bg-amber-800 text-amber-50 hover:bg-amber-700"
-                onClick={() => setShowCreateModal(true)}
-              >
-                <Plus className="mr-2 h-4 w-4" />
-                Create New Club
-              </Button>
+              <motion.div 
+                  whileHover={{ scale: 1.04 }}
+                  whileTap={{ scale: 0.9 }}  
+              > 
+                <Button
+                  className="mt-4 bg-amber-800 text-amber-50 hover:bg-amber-900 rounded-full"
+                  onClick={() => setShowCreateModal(true)}
+                >
+                  <Plus className="h-4 w-4 text-white" />
+                  Create New Club
+                </Button>
+              </motion.div>
             </div>
             <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:w-2/3"></div>
           </div>

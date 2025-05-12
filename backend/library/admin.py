@@ -177,7 +177,7 @@ class UserProfileAdmin(admin.ModelAdmin):
     search_fields = ('user__username', 'zip_code')
     
 
-
+@admin.register(Journal)
 class JournalAdmin(admin.ModelAdmin):
     list_display = ['get_user', 'get_book', 'is_private', 'created_on', 'updated_on']
     list_filter = ['is_private', 'created_on', 'updated_on']
