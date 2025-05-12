@@ -536,7 +536,7 @@ class AnnouncementUpdateView(generics.UpdateAPIView):
             serializer = self.get_serializer(
                 instance, 
                 data=request.data, 
-                partial=True  # Important - allows partial updates
+                partial=True 
             )
             
             if not serializer.is_valid():
