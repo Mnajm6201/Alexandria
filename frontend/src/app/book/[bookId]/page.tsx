@@ -431,13 +431,6 @@ export default function BookPage() {
 
             {/* Vendor Links or Placeholder */}
             <div className="mt-8 bg-white dark:bg-gray-800 rounded-lg shadow p-6">
-<<<<<<< Updated upstream
-              <h2 className="text-xl font-semibold text-gray-900 dark:text-gray-100 mb-3">Where to Buy</h2>
-              <p className="text-gray-500 dark:text-gray-300 mb-4">Available on:</p>
-
-              <div className="flex items-center gap-4">
-                <Button asChild className="bg-[#FF9900] hover:bg-[#e68a00] text-white rounded-full h-10 px-6">
-=======
               <h2 className="text-xl font-semibold text-gray-900 dark:text-gray-100 mb-3">
                 Where to Buy
               </h2>
@@ -450,7 +443,6 @@ export default function BookPage() {
                   asChild
                   className="bg-[#FF9900] hover:bg-[#E88B00] text-white rounded-2xl"
                 >
->>>>>>> Stashed changes
                   <Link
                     href={`https://www.amazon.com/s?k=${encodeURIComponent(
                       book.isbn!
@@ -464,14 +456,10 @@ export default function BookPage() {
                 </Button>
 
                 {/* Barnes & Noble */}
-<<<<<<< Updated upstream
-                <Button asChild className="flex items-center gap-2 bg-[#046A38] hover:bg-[#035c30] text-white rounded-full h-10 px-6">
-=======
                 <Button
                   asChild
                   className="bg-[#FF9900] hover:bg-[#E88B00] text-white rounded-2xl"
                 >
->>>>>>> Stashed changes
                   <Link
                     href={`https://www.barnesandnoble.com/s/${encodeURIComponent(
                       book.title
@@ -480,12 +468,8 @@ export default function BookPage() {
                     rel="noopener noreferrer"
                     className="flex items-center justify-start px-4 py-2"
                   >
-<<<<<<< Updated upstream
-                    Buy on Barnes & Noble 
-=======
                     Buy on Barnes & Noble
                     <ShoppingCart className="h-4 w-4" stroke="white" />
->>>>>>> Stashed changes
                   </Link>
                 </Button>
               </div>
