@@ -47,9 +47,6 @@ class UserProfileSerializer(serializers.ModelSerializer):
         return obj.user.username if obj.user else None
 
 class PublicUserSerializer(serializers.ModelSerializer):
-    """
-    Serializer for public user profiles with enhanced data
-    """
     profile_pic_url = serializers.SerializerMethodField()
     
     class Meta:
@@ -63,17 +60,24 @@ class PublicUserSerializer(serializers.ModelSerializer):
         if not obj.profile_pic:
             return None
             
-        # Check if it's already an absolute URL
-        if obj.profile_pic.startswith('http'):
+        # If it's already a full URL, return as-is
+        if obj.profile_pic.startswith(('http://', 'https://')):
             return obj.profile_pic
-            
-        # Otherwise, prepend the base URL
-        request = self.context.get('request')
-        if request is not None:
-            base_url = request.build_absolute_uri('/').rstrip('/')
-            return f"{base_url}{obj.profile_pic}"
         
-        return f"http://localhost:8000{obj.profile_pic}"
+        # Get the request from context
+        request = self.context.get('request')
+        
+        # If request is available, use build_absolute_uri
+        if request:
+            return request.build_absolute_uri(obj.profile_pic)
+        
+        # Fallback to hardcoded URL
+        base_url = 'http://localhost:8000'
+        
+        # Ensure the path starts with /media/
+        profile_pic = obj.profile_pic if obj.profile_pic.startswith('/media/') else f'/media/{obj.profile_pic}'
+        
+        return f"{base_url}{profile_pic}"
 
 # Password forget classes 
 class PasswordResetRequestSerializer(serializers.Serializer):

@@ -1,7 +1,6 @@
 // app/club/layout.tsx
 import { Header } from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
-import { Toaster } from "@/components/ui/toaster";
 
 export default function ClubLayout({
   children,
@@ -14,7 +13,6 @@ export default function ClubLayout({
       <main className="container max-w-7xl mx-auto px-4 py-8 md:px-6">
         {children}
       </main>
-      <Toaster/>
       <Footer />
     </>
   );

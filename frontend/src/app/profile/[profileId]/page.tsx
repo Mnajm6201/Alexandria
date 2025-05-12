@@ -27,6 +27,7 @@ import { DeleteAccountDialog } from "@/components/ui/delete/DeleteAccountDialog"
 import { UserSetupModal } from "@/components/ui/userprofile/UserSetupModal";
 import CurrentlyReading from "@/components/profiles/CurrentlyReading";
 import UserBookClubs from "@/components/profiles/UserBookClubs";
+import { toast } from "@/hooks/use-toast";
 
 // Define profile data interface
 interface ProfileData {
@@ -86,6 +87,33 @@ export default function ProfilePage({
   const { signOut } = useAuth();
   const router = useRouter();
   const { profileId } = use(params);
+
+  useEffect(() => {
+    const initProfile = async () => {
+      if (!isLoaded) return;
+
+      try {
+        // Ensure we have a token before making any requests
+        const token = await fetchJWToken();
+        if (!token) {
+          console.error("No JWT token available");
+          setError("Authentication required. Please log in.");
+          setLoading(false);
+          return;
+        }
+
+        console.log("JWT token retrieved successfully");
+
+        // Rest of your initialization code...
+      } catch (err) {
+        console.error("Error during profile initialization:", err);
+        setError("Failed to load profile data. Please try again.");
+        setLoading(false);
+      }
+    };
+
+    initProfile();
+  }, [profileId, isLoaded, user]);
 
   // Fetch profile data when component mounts
   useEffect(() => {
@@ -185,7 +213,7 @@ export default function ProfilePage({
         socialLinks: data.social_links || "",
         need_setup: data.need_setup || false,
         profile_pic: data.profile_pic || "",
-        profilePicUrl: data.profile_pic || "", // For backward compatibility
+        profilePicUrl: data.profile_pic || "",
         stats: {
           books_read: 0,
           average_rating: "N/A",
@@ -320,49 +348,18 @@ export default function ProfilePage({
     }
   };
 
-  // Handle profile updates
-  const handleSaveProfile = async (newProfileData: ProfileData) => {
+  const handleSaveProfile = async (
+    newProfileData: ProfileData
+  ): Promise<boolean> => {
     try {
       const token = jwtToken || (await fetchJWToken());
-
       if (!token) {
-        console.error("Cannot save profile: No Valid JWT");
-        return;
+        console.error("No valid token");
+        return false;
       }
 
-      // Handle profile picture upload if provided
-      let profilePicUrl = profileData.profile_pic || profileData.profilePicUrl;
-
-      if (newProfileData.profilePicture) {
-        try {
-          const pictureFormData = new FormData();
-          pictureFormData.append(
-            "profilePicture",
-            newProfileData.profilePicture
-          );
-
-          const pictureResponse = await fetch(
-            "http://localhost:8000/api/auth/user/profile/update-picture/",
-            {
-              method: "POST",
-              headers: {
-                Authorization: `Bearer ${token}`,
-              },
-              body: pictureFormData,
-            }
-          );
-
-          if (pictureResponse.ok) {
-            const pictureData = await pictureResponse.json();
-            profilePicUrl = pictureData.profile_pic_url;
-          }
-        } catch (pictureError) {
-          console.error("Error uploading profile picture:", pictureError);
-        }
-      }
-
-      // Update profile data
-      const response = await fetch(
+      
+      const profileUpdateResponse = await fetch(
         "http://localhost:8000/api/auth/user/profile/update/",
         {
           method: "POST",
@@ -371,40 +368,68 @@ export default function ProfilePage({
             "Content-Type": "application/json",
           },
           body: JSON.stringify({
-            displayName: newProfileData.username,
-            bio: newProfileData.bio,
+            displayName: newProfileData.displayName,
+            bio: newProfileData.bio || "",
             zipCode: newProfileData.zipCode || "",
             socialLinks: newProfileData.socialLinks || "",
           }),
         }
       );
 
-      if (!response.ok) {
-        throw new Error("Failed to update profile");
+      if (!profileUpdateResponse.ok) {
+        const errorText = await profileUpdateResponse.text();
+        console.error("Profile update failed:", errorText);
+        return false;
       }
 
-      // Update local state with new data
-      setProfileData({
-        ...profileData,
-        username: newProfileData.username,
-        bio: newProfileData.bio || "",
-        zipCode: newProfileData.zipCode || "",
-        socialLinks: newProfileData.socialLinks || "",
-        profile_pic: profilePicUrl,
-        profilePicUrl: profilePicUrl,
-      });
+      
+      if (newProfileData.profilePicture instanceof File) {
+        console.log(
+          "Uploading file:",
+          newProfileData.profilePicture.name,
+          newProfileData.profilePicture.size
+        );
+        const imageFormData = new FormData();
+        imageFormData.append("profilePicture", newProfileData.profilePicture);
 
-      // Refresh profile to ensure we have latest data
-      if (isCurrentUser) {
-        fetchCurrentUserProfile();
+        const imageUploadResponse = await fetch(
+          "http://localhost:8000/api/auth/user/profile/update-picture/",
+          {
+            method: "POST",
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+            body: imageFormData,
+          }
+        );
+
+        if (!imageUploadResponse.ok) {
+          const errorText = await imageUploadResponse.text();
+          console.error("Image upload failed:", errorText);
+          return false;
+        }
+
+        const result = await imageUploadResponse.json();
+        console.log("Upload result:", result);
+        if (result.profile_pic_url) {
+          setProfileData((prev) => ({
+            ...prev,
+            profile_pic: result.profile_pic_url,
+            profilePicUrl: result.profile_pic_url,
+          }));
+        }
       }
 
-      console.log("Profile updated successfully");
+      if (isCurrentUser) await fetchCurrentUserProfile();
+
+      return true;
     } catch (error) {
-      console.error("Error updating profile:", error);
+      console.error("Error saving profile:", error);
+      return false;
     }
   };
 
+  
   // Show loading state
   if (loading) {
     return (
@@ -446,6 +471,9 @@ export default function ProfilePage({
                     width={128}
                     height={128}
                     className="h-full w-full object-cover"
+                    onError={(e) => {
+                      e.currentTarget.style.display = "none";
+                    }}
                     unoptimized
                   />
                 ) : (

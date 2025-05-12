@@ -2,10 +2,13 @@
 "use client";
 
 import Link from "next/link";
-import { BookOpen, SunMoon } from "lucide-react";
+import { BookOpen, SunMoon, User } from "lucide-react";
 import { useAuth } from "@clerk/nextjs";
 import { Button, buttonVariants } from "@/components/ui/button";
 import { useEffect, useState } from "react";
+import { useJWToken } from "@/utils/getJWToken";
+import { useRouter } from "next/navigation";
+
 
 // A header prop for including in each function components to either it's an app header or landing page header
 interface HeaderProps {
@@ -15,6 +18,11 @@ interface HeaderProps {
 export function Header({ variant = "app" }: HeaderProps) {
   const { isSignedIn, signOut } = useAuth();
   const [theme, setTheme] = useState<"light" | "dark">("light");
+  const [loading, setLoading] = useState(false);
+  const [userId, setUserId] = useState<string | null>(null);
+  const { jwtToken, fetchJWToken } = useJWToken();
+  const router = useRouter();
+
 
   // variant to specify it's for landing page
   const isLanding = variant === "landing";
@@ -28,6 +36,93 @@ export function Header({ variant = "app" }: HeaderProps) {
     setTheme(savedTheme as "light" | "dark");
     document.documentElement.setAttribute('data-theme', savedTheme);
   }, []);
+
+  // Fetch the user ID on component mount when user logs in
+  useEffect(() => {
+    const fetchUserId = async () => {
+      if (!isSignedIn) return;
+
+      try {
+        const token = jwtToken || (await fetchJWToken());
+        if (!token) return;
+
+        const response = await fetch(
+          "http://localhost:8000/api/auth/profile/",
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+              "Content-Type": "application/json",
+            },
+          }
+        );
+
+        if (response.ok) {
+          const data = await response.json();
+          if (data.id) {
+            setUserId(data.id.toString());
+            console.log("User ID fetched:", data.id);
+          }
+        }
+      } catch (error) {
+        console.error("Error fetching user ID:", error);
+      }
+    };
+
+    fetchUserId();
+  }, [isSignedIn, jwtToken, fetchJWToken]);
+
+
+  // Handling profile clicks
+  const handleProfileClick = async (e: React.MouseEvent) => {
+    if (userId) {
+      // If we already have the user ID, navigate directly
+      router.push(`/profile/${userId}`);
+    } else {
+      // Otherwise, fetch it first
+      e.preventDefault();
+      setLoading(true);
+
+      try {
+        const token = jwtToken || (await fetchJWToken());
+        if (!token) {
+          console.error("No token available");
+          router.push("/auth/sign-in");
+          return;
+        }
+
+        const response = await fetch(
+          "http://localhost:8000/api/auth/profile/",
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+              "Content-Type": "application/json",
+            },
+          }
+        );
+
+        if (response.ok) {
+          const data = await response.json();
+          if (data.id) {
+            setUserId(data.id.toString());
+            router.push(`/profile/${data.id}`);
+          } else {
+            console.error("User ID not found in profile data");
+            router.push("/profile");
+          }
+        } else {
+          console.error("Failed to fetch profile");
+          router.push("/profile"); 
+        }
+      } catch (error) {
+        console.error("Error navigating to profile:", error);
+        router.push("/profile"); 
+      } finally {
+        setLoading(false);
+      }
+    }
+  };
+
+
 
   // Toggle theme function
   const toggleTheme = () => {
@@ -122,12 +217,14 @@ export function Header({ variant = "app" }: HeaderProps) {
           {/* Auth buttons */}
           {isSignedIn ? (
             <div className="flex items-center gap-4">
-              <Link
-                href="/profile"
-                className="text-sm font-medium text-amber-900 hover:text-amber-700"
+              <button
+                onClick={handleProfileClick}
+                className="flex items-center gap-1.5 text-sm font-medium text-amber-900 hover:text-amber-700 disabled:opacity-70"
+                disabled={loading}
               >
-                My Profile
-              </Link>
+                <User className="h-4 w-4" />
+                {loading ? "Loading..." : "My Profile"}
+              </button>
               <Button
                 onClick={() => signOut()}
                 className="bg-amber-800 text-amber-50 hover:bg-amber-700"
@@ -143,7 +240,10 @@ export function Header({ variant = "app" }: HeaderProps) {
               >
                 Log in
               </Link>
-              <Link href="/auth/sign-up" className={buttonVariants({ variant: "search" })} >
+              <Link
+                href="/auth/sign-up"
+                className={buttonVariants({ variant: "search" })}
+              >
                 Sign up
               </Link>
             </div>

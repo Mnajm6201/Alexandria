@@ -3,8 +3,9 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { Users, ChevronRight } from "lucide-react";
+import { Users, ChevronRight, Loader2, Plus } from "lucide-react";
 import { useJWToken } from "@/utils/getJWToken";
+import { Button } from "@/components/ui/button";
 
 interface BookClub {
   id: number;
@@ -27,13 +28,15 @@ interface BookClub {
 }
 
 interface UserBookClubsProps {
-  userId: string;
+  userId?: string;
+  showAddButton?: boolean;
   className?: string;
   limit?: number;
 }
 
 export default function UserBookClubs({
   userId,
+  showAddButton = false,
   className = "",
   limit = 3,
 }: UserBookClubsProps) {
@@ -55,10 +58,11 @@ export default function UserBookClubs({
           return;
         }
 
-        const url =
-          userId === "me"
-            ? `http://localhost:8000/api/auth/users/${userId}/book-clubs/`
-            : "http://localhost:8000/api/auth/users/me/book-clubs/";
+        // Use query parameter approach - userId is optional
+        const url = userId
+          ? `http://localhost:8000/api/auth/users/book-clubs/?user_id=${userId}`
+          : "http://localhost:8000/api/auth/users/book-clubs/";
+
         console.log(`Fetching user clubs from: ${url}`);
 
         const response = await fetch(url, {
@@ -113,9 +117,10 @@ export default function UserBookClubs({
   // Loading state
   if (loading) {
     return (
-      <div className="space-y-3">
-        <div className="animate-pulse h-16 bg-amber-100 rounded-lg w-full"></div>
-        <div className="animate-pulse h-16 bg-amber-100 rounded-lg w-full"></div>
+      <div className={`${className}`}>
+        <div className="flex justify-center py-4">
+          <Loader2 className="h-6 w-6 text-amber-600 animate-spin" />
+        </div>
       </div>
     );
   }
@@ -123,7 +128,7 @@ export default function UserBookClubs({
   // Error state
   if (error) {
     return (
-      <div className="text-red-500 p-4 text-center">
+      <div className={`text-red-500 p-4 text-center ${className}`}>
         <p>Error: {error}</p>
       </div>
     );
@@ -132,7 +137,23 @@ export default function UserBookClubs({
   // No clubs found
   if (bookClubs.length === 0) {
     return (
-      <p className="text-center text-amber-700 py-2">No book clubs joined</p>
+      <div className={`${className}`}>
+        <div className="flex flex-col items-center justify-center py-4 space-y-3">
+          <p className="text-center text-amber-700">No book clubs joined</p>
+          {showAddButton && (
+            <Button
+              variant="outline"
+              size="sm"
+              className="border-amber-300 text-amber-800"
+              asChild
+            >
+              <Link href="/club">
+                <Plus className="mr-1 h-4 w-4" /> Create a Book Club
+              </Link>
+            </Button>
+          )}
+        </div>
+      </div>
     );
   }
 
@@ -140,12 +161,12 @@ export default function UserBookClubs({
   const displayedClubs = limit ? bookClubs.slice(0, limit) : bookClubs;
 
   return (
-    <div className="space-y-3">
+    <div className={`space-y-3 ${className}`}>
       {displayedClubs.map((club) => (
         <Link
           key={club.id}
           href={`/club/${club.id}`}
-          className="flex items-center gap-3 rounded-lg p-2 transition-colors hover:bg-amber-50"
+          className="flex items-center gap-3 rounded-lg p-2 transition-colors hover:bg-amber-50 border border-amber-100"
         >
           <div className="h-12 w-12 flex-shrink-0 rounded-full overflow-hidden bg-amber-100">
             {club.club_image ? (
@@ -157,21 +178,56 @@ export default function UserBookClubs({
                 className="h-full w-full object-cover"
                 unoptimized
               />
+            ) : club.book?.cover_url ? (
+              <Image
+                src={club.book.cover_url}
+                alt={club.book.title}
+                width={48}
+                height={48}
+                className="h-full w-full object-cover"
+                unoptimized
+              />
             ) : (
               <div className="flex h-full w-full items-center justify-center bg-amber-200 text-amber-800">
                 {club.name.substring(0, 2).toUpperCase()}
               </div>
             )}
           </div>
-          <div>
-            <p className="font-medium text-amber-900">{club.name}</p>
-            <p className="text-xs text-amber-700">
+          <div className="flex-1 min-w-0">
+            <p className="font-medium text-amber-900 truncate">{club.name}</p>
+            <p className="text-xs text-amber-700 truncate">
               {club.member_count} members
+              {club.is_private && " • Private"}
               {club.is_admin && " • Admin"}
             </p>
           </div>
         </Link>
       ))}
+
+      {bookClubs.length > limit && (
+        <div className="text-center pt-2">
+          <Button variant="ghost" size="sm" className="text-amber-800" asChild>
+            <Link href="/club">
+              View All <ChevronRight className="ml-1 h-4 w-4" />
+            </Link>
+          </Button>
+        </div>
+      )}
+
+      {showAddButton && (
+        <div className="text-center pt-3">
+          <Button
+            variant="outline"
+            size="sm"
+            className="border-amber-300 text-amber-800"
+            asChild
+          >
+            <Link href="/club">
+              <Plus className="mr-1 h-4 w-4" /> Create a Book Club
+            </Link>
+          </Button>
+        </div>
+      )}
     </div>
   );
 }
