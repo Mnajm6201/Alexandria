@@ -28,6 +28,8 @@ import { UserSetupModal } from "@/components/ui/userprofile/UserSetupModal";
 import CurrentlyReading from "@/components/profiles/CurrentlyReading";
 import UserBookClubs from "@/components/profiles/UserBookClubs";
 import { toast } from "@/hooks/use-toast";
+import UserProfileQuiz from "@/components/profiles/UserProfileQuiz";
+
 
 // Define profile data interface
 interface ProfileData {
@@ -46,7 +48,7 @@ interface ProfileData {
   };
   recently_read?: any[];
   book_clubs?: any[];
-  profilePicUrl?: string; // For backward compatibility
+  profilePicUrl?: string;
 }
 
 // Default profile data
@@ -80,6 +82,7 @@ export default function ProfilePage({
   const [isDeleting, setIsDeleting] = useState<boolean>(false);
   const [showEditModal, setShowEditModal] = useState<boolean>(false);
   const [showSetupModal, setShowSetupModal] = useState<boolean>(false);
+  const [showQuizModal, setShowQuizModal] = useState<boolean>(false);
 
   // Hooks
   const { jwtToken, fetchJWToken } = useJWToken();
@@ -93,7 +96,6 @@ export default function ProfilePage({
       if (!isLoaded) return;
 
       try {
-        // Ensure we have a token before making any requests
         const token = await fetchJWToken();
         if (!token) {
           console.error("No JWT token available");
@@ -104,7 +106,6 @@ export default function ProfilePage({
 
         console.log("JWT token retrieved successfully");
 
-        // Rest of your initialization code...
       } catch (err) {
         console.error("Error during profile initialization:", err);
         setError("Failed to load profile data. Please try again.");
@@ -138,16 +139,12 @@ export default function ProfilePage({
           if (currentUserResponse.ok) {
             const currentUserData = await currentUserResponse.json();
 
-            // If profileId is "me" or matches the current user's ID, set as current user
             setIsCurrentUser(
-              profileId === "me" ||
                 profileId === user.id ||
                 profileId === currentUserData.id?.toString()
             );
 
-            // If this is the current user, fetch their profile
             if (
-              profileId === "me" ||
               profileId === user.id ||
               profileId === currentUserData.id?.toString()
             ) {
@@ -171,6 +168,30 @@ export default function ProfilePage({
 
     initProfile();
   }, [profileId, isLoaded, user]);
+
+  // Handling when user completes the quiz
+  const handleQuizComplete = async (
+    quizAnswers: Record<string, string | number | boolean>
+  ): Promise<boolean> => {
+    try {
+      // For now, just log the answers and close the modal
+      console.log("Quiz answers:", quizAnswers);
+
+      // Later, you'll send these to your backend
+      setShowQuizModal(false);
+
+      toast({
+        title: "Reading preferences saved!",
+        description: "We'll use these to personalize your experience.",
+        variant: "default",
+      });
+
+      return true;
+    } catch (error) {
+      console.error("Error saving quiz answers:", error);
+      return false;
+    }
+  };
 
   // Function to fetch current user's profile
   const fetchCurrentUserProfile = async () => {
@@ -203,8 +224,9 @@ export default function ProfilePage({
       // Check if user needs setup
       if (data.need_setup) {
         setShowSetupModal(true);
+      } else if (data.has_completed_quiz === false) {
+        setShowQuizModal(true);
       }
-
       // Format the data to match our ProfileData interface
       setProfileData({
         username: data.username || "",
@@ -347,6 +369,23 @@ export default function ProfilePage({
       setIsDeleting(false);
     }
   };
+
+  const handleSetupComplete = async (newProfileData : ProfileData): Promise <boolean> => {
+    try {
+      // Save the profile data first
+      const success = await handleSaveProfile(newProfileData);
+
+      if (success) {
+        // After successful profile setup, show the quiz
+        setShowQuizModal(true);
+        return true;
+      }
+      return false;
+    } catch (error) {
+      console.error("Error completing setup:", error);
+      return false;
+    }
+  }
 
   const handleSaveProfile = async (
     newProfileData: ProfileData
@@ -722,7 +761,6 @@ export default function ProfilePage({
         </div>
       </main>
 
-      {/* Modals - Only for current user */}
       {isCurrentUser && (
         <>
           <EditProfileModal
@@ -748,8 +786,13 @@ export default function ProfilePage({
 
           <UserSetupModal
             isOpen={showSetupModal}
-            onClose={() => setShowSetupModal(false)}
-            onSave={handleSaveProfile}
+            onClose={() => {
+              setShowSetupModal(false);
+              if (!profileData.need_setup) {
+                setShowQuizModal(true);
+              }
+            }}
+            onSave={handleSetupComplete}
             initialData={{
               username: profileData.username,
               bio: profileData.bio || "",
@@ -759,6 +802,12 @@ export default function ProfilePage({
               profilePicUrl:
                 profileData.profile_pic || profileData.profilePicUrl || "",
             }}
+          />
+
+          <UserProfileQuiz
+            isOpen={showQuizModal}
+            onComplete={handleQuizComplete}
+            onSkip={() => setShowQuizModal(false)}
           />
         </>
       )}
