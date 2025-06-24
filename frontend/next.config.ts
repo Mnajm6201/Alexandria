@@ -47,6 +47,7 @@ const nextConfig: NextConfig = {
     domains: [
       'covers.openlibrary.org',
       'localhost',
+      'via.placeholder.com',
     ],
   },
 }
