@@ -10,7 +10,7 @@ from .serializers import JournalSerializer, JournalEntrySerializer, JournalListS
 from .permissions import IsJournalOwnerOrReadOnlyIfPublic, IsEntryOwnerOrReadOnlyIfPublic
 from django.shortcuts import get_object_or_404
 from django.utils import timezone
-
+import django_filters
 
 
 class JournalViewSet(viewsets.ModelViewSet):
@@ -20,10 +20,19 @@ class JournalViewSet(viewsets.ModelViewSet):
     Allows users to create, view, update, and delete their journals.
     Public journals can be viewed by any authenticated user.
     """
+class JournalFilter(django_filters.FilterSet):
+    book_id = django_filters.CharFilter(field_name='user_book__book__book_id')
+    
+    class Meta:
+        model = Journal
+        fields = ['is_private', 'book_id']
+
+
+class JournalViewSet(viewsets.ModelViewSet):
     serializer_class = JournalSerializer
     permission_classes = [IsJournalOwnerOrReadOnlyIfPublic]
     filter_backends = [DjangoFilterBackend, filters.SearchFilter, filters.OrderingFilter]
-    filterset_fields = ['is_private']
+    filterset_class = JournalFilter  # Use the custom filter class
     search_fields = ['user_book__book__title']
     ordering_fields = ['created_on', 'updated_on', 'user_book__book__title']
     ordering = ['-updated_on']
@@ -48,26 +57,10 @@ class JournalViewSet(viewsets.ModelViewSet):
             ).select_related('user_book__user', 'user_book__book')
         return Journal.objects.none()
     
-    # Modified version
     def perform_create(self, serializer):
-        book_id = self.request.data.get('book')
-        
-        if book_id:
-            try:
-                # Look up the book by book_id (string field), not by pk
-                book = Book.objects.get(book_id=book_id)
-                
-                # Get or create UserBook
-                user_book, created = UserBook.objects.get_or_create(
-                    user=self.request.user,
-                    book=book
-                )
-                
-                serializer.save(user_book=user_book)
-            except Book.DoesNotExist:
-                raise ValidationError({"book_id": "Book not found"})
-        else:
-            serializer.save()
+        """Handle journal creation - the serializer will handle UserBook creation"""
+        # The serializer's validate and create methods will handle book lookup and UserBook creation
+        serializer.save()
     
     @action(detail=True, methods=['get'])
     def entries(self, request, pk=None):
@@ -176,8 +169,8 @@ class JournalViewSet(viewsets.ModelViewSet):
         
         serializer = JournalListSerializer(journals, many=True)
         return Response(serializer.data)
-    
-# This is correct indentation - JournalEntryViewSet should be at the same level as JournalViewSet
+
+
 class JournalEntryViewSet(viewsets.ModelViewSet):
     """
     API endpoint for managing journal entries.
@@ -215,7 +208,6 @@ class JournalEntryViewSet(viewsets.ModelViewSet):
         
         # Ensure user can only add entries to their own journals
         if journal.user_book.user != self.request.user:
-            # Fixed: Raise a ValidationError instead of returning a Response
-            raise ValidationError({"detail": "You can only add entries to your own journals."})
+            raise ValidationError({"journal": "You can only add entries to your own journals."})
         
         serializer.save()

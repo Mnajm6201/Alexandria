@@ -1,5 +1,6 @@
 from rest_framework import serializers
 from library.models import Journal, JournalEntry, Book, User, UserBook
+from django_filters import rest_framework as django_filters
 
 class JournalEntrySerializer(serializers.ModelSerializer):
     """
@@ -43,48 +44,19 @@ class JournalSerializer(serializers.ModelSerializer):
     latest_entry = serializers.SerializerMethodField()
     entries = JournalEntrySerializer(many=True, read_only=True, source='entries.all')
     
-    # Add a book_id field for input only
-    book_id_input = serializers.CharField(
-        write_only=True,
-        required=True,
-        source='book_id'  
-    )
+    # Add a book field for input - this will be used to create the UserBook relationship
+    book = serializers.CharField(write_only=True, required=False)
     
     class Meta:
         model = Journal
         fields = [
-            'id', 'book_id_input', 'user_id', 'book_id', 'created_on', 'updated_on', 'is_private',
+            'id', 'user_book', 'user_id', 'book_id', 'book', 'created_on', 'updated_on', 'is_private',
             'user_username', 'book_title', 'entry_count', 'latest_entry', 'entries'
         ]
         read_only_fields = ['created_on', 'updated_on', 'user_username', 'book_title', 'user_id', 'book_id']
         extra_kwargs = {
-            'user_book': {'required': False, 'allow_null': True}  # This is the key change
+            'user_book': {'required': False, 'allow_null': True}
         }
-    """
-    Serializer for journals.
-    Handles creation, updating, and listing of journals with optional entry details.
-    """
-    user_username = serializers.CharField(source='user_book.user.username', read_only=True)
-    book_title = serializers.CharField(source='user_book.book.title', read_only=True)
-    user_id = serializers.IntegerField(source='user_book.user.id', read_only=True)
-    book_id = serializers.IntegerField(source='user_book.book.id', read_only=True)
-    entry_count = serializers.SerializerMethodField()
-    latest_entry = serializers.SerializerMethodField()
-    entries = JournalEntrySerializer(many=True, read_only=True, source='entries.all')
-    
-
-    book_id = serializers.CharField(
-        write_only=True,
-        required=False
-    )
-    
-    class Meta:
-        model = Journal
-        fields = [
-            'id', 'user_book', 'user_id', 'book_id', 'created_on', 'updated_on', 'is_private',
-            'user_username', 'book_title', 'entry_count', 'latest_entry', 'entries', 'book_id'
-        ]
-        read_only_fields = ['created_on', 'updated_on', 'user_username', 'book_title']
     
     def get_entry_count(self, obj):
         """Get count of entries in this journal"""
@@ -106,9 +78,7 @@ class JournalSerializer(serializers.ModelSerializer):
         """
         Validate that a user doesn't create duplicate journals for the same book
         """
-        # Check if we have a book field in input
-# Modified version
-        book_id = data.pop('book_id', None)
+        book_id = data.pop('book', None)
         request = self.context.get('request')
 
         # If updating, we skip this validation
@@ -124,10 +94,10 @@ class JournalSerializer(serializers.ModelSerializer):
                 ).exists():
                     raise serializers.ValidationError("You already have a journal for this book.")
                 
-                # If not, set a temporary attribute to use in create method
+                # Store the book for use in create method
                 self._book_for_userbook = book
             except Book.DoesNotExist:
-                raise serializers.ValidationError({"book_id": "Book with this ID does not exist"})
+                raise serializers.ValidationError({"book": "Book with this ID does not exist"})
             
         return data
     
@@ -160,3 +130,4 @@ class JournalListSerializer(JournalSerializer):
             'id', 'user_book', 'user_id', 'book_id', 'created_on', 'updated_on', 'is_private',
             'user_username', 'book_title', 'entry_count', 'latest_entry'
         ]
+

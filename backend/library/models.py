@@ -578,7 +578,7 @@ class JournalEntry(models.Model):
         ordering = ["-updated_on"]
     
     def __str__(self):
-        return f"Entry by {self.journal.user.username} on {self.journal.book.title}: {self.title or 'Untitled'}"
+        return f"Entry by {self.journal.user_book.user.username} on {self.journal.user_book.book.title}: {self.title or 'Untitled'}"
 
 
 ##### Community Stuff #####

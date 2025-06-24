@@ -509,26 +509,23 @@ class JournalListTests(TestCase):
     
     ## List Filtering
     
-    # Filter by book (valid)
     def test_filter_journals_by_book(self):
         """Test filtering journals by book"""
         self.client.force_authenticate(user=self.user)
         
-        # Filter URL for book1
-        filter_url = f"{self.url}?user_book__book={self.book1.id}"
+        # Filter URL for book3
+        filter_url = f"{self.url}?book_id={self.book3.book_id}"
         response = self.client.get(filter_url)
         
-        # Should only see journals for book1
+        # Should only see journals for book3
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         
-        # Find journals with the specified book
-        book1_journals = []
+        # All returned journals should be for book3
         for journal in response.data:
-            if 'book_id' in journal and journal['book_id'] == self.book1.id:
-                book1_journals.append(journal)
+            self.assertEqual(journal.get('book_id'), self.book3.book_id)
                 
-        self.assertGreater(len(book1_journals), 0)  # Should find at least one
-    
+        self.assertGreater(len(response.data), 0)  # Should find at least one
+        
     # Filter by privacy (valid)
     def test_filter_journals_by_privacy(self):
         """Test filtering journals by privacy setting"""
