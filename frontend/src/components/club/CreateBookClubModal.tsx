@@ -10,6 +10,7 @@ import { useJWToken } from "@/utils/getJWToken";
 import { X, Search, BookOpen, Image as ImageIcon } from "lucide-react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
+import { motion } from "framer-motion";
 
 interface Book {
   book_id: number;
@@ -345,19 +346,29 @@ export function CreateBookClubModal({
             </div>
 
             <div className="mt-6 flex justify-end space-x-3">
-              <Button
-                variant="outline"
-                onClick={onClose}
-                className="border-amber-300 text-amber-800"
-              >
-                Cancel
-              </Button>
-              <Button
-                onClick={() => setStep(2)}
-                className="bg-amber-800 text-amber-50 hover:bg-amber-700"
-              >
-                Next: Select Book
-              </Button>
+            <motion.div 
+                    whileHover={{ scale: 1.07 }}
+                    whileTap={{ scale: 0.9 }}  
+                > 
+                <Button
+                  variant="outline"
+                  onClick={onClose}
+                  className="border-amber-300 text-amber-800 rounded-full"
+                >
+                  Cancel
+                </Button>
+              </motion.div>
+              <motion.div 
+                  whileHover={{ scale: 1.07 }}
+                  whileTap={{ scale: 0.9 }}  
+              > 
+                <Button
+                  onClick={() => setStep(2)}
+                  className="bg-amber-700 text-amber-50 hover:bg-amber-900 rounded-full"
+                >
+                  Next: Select Book
+                </Button>
+              </motion.div>
             </div>
           </div>
         ) : (
@@ -469,20 +480,30 @@ export function CreateBookClubModal({
               </p>
 
               <div className="flex space-x-3">
-                <Button
-                  variant="outline"
-                  onClick={() => setStep(1)}
-                  className="border-amber-300 text-amber-800"
-                >
-                  Back
-                </Button>
-                <Button
-                  onClick={handleSubmit}
-                  disabled={isSubmitting}
-                  className="bg-amber-800 text-amber-50 hover:bg-amber-700"
-                >
-                  {isSubmitting ? "Creating..." : "Create Book Club"}
-                </Button>
+              <motion.div 
+                    whileHover={{ scale: 1.07 }}
+                    whileTap={{ scale: 0.9 }}  
+                > 
+                  <Button
+                    variant="outline"
+                    onClick={() => setStep(1)}
+                    className="border-amber-300 text-amber-800 rounded-full"
+                  >
+                    Back
+                  </Button>
+                </motion.div>
+                <motion.div 
+                    whileHover={{ scale: 1.07 }}
+                    whileTap={{ scale: 0.9 }}  
+                > 
+                  <Button
+                    onClick={handleSubmit}
+                    disabled={isSubmitting}
+                    className="bg-amber-700 text-amber-50 hover:bg-amber-900 rounded-full"
+                  >
+                    {isSubmitting ? "Creating..." : "Create Book Club"}
+                  </Button>
+                </motion.div>
               </div>
             </div>
           </div>

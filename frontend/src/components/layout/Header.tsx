@@ -9,6 +9,7 @@ import { useEffect, useState } from "react";
 import { useJWToken } from "@/utils/getJWToken";
 import { useRouter } from "next/navigation";
 
+import { motion } from "framer-motion";
 
 // A header prop for including in each function components to either it's an app header or landing page header
 interface HeaderProps {
@@ -182,10 +183,10 @@ export function Header({ variant = "app" }: HeaderProps) {
               Discover
             </Link>
             <Link
-              href="/community"
+              href="/journals"
               className="text-sm font-medium text-amber-900 hover:text-amber-700"
             >
-              Community
+              Journals
             </Link>
             <Link
               href="/club"
@@ -222,15 +223,19 @@ export function Header({ variant = "app" }: HeaderProps) {
                 className="flex items-center gap-1.5 text-sm font-medium text-amber-900 hover:text-amber-700 disabled:opacity-70"
                 disabled={loading}
               >
-                <User className="h-4 w-4" />
-                {loading ? "Loading..." : "My Profile"}
+                My Profile
               </button>
-              <Button
-                onClick={() => signOut()}
-                className="bg-amber-800 text-amber-50 hover:bg-amber-700"
-              >
-                Sign Out
-              </Button>
+              <motion.div 
+                    whileHover={{ scale: 1.07 }}
+                    whileTap={{ scale: 0.9 }}  
+                > 
+                <Button
+                  onClick={() => signOut()}
+                  className="bg-amber-800 text-amber-50 hover:bg-amber-900 rounded-full"
+                >
+                  Sign Out
+                </Button>
+              </motion.div>
             </div>
           ) : (
             <div className="flex items-center gap-4">
