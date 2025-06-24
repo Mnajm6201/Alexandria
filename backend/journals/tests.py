@@ -513,7 +513,7 @@ class JournalListTests(TestCase):
         """Test filtering journals by book"""
         self.client.force_authenticate(user=self.user)
         
-        # Filter URL for book3 (since that's the book with a journal)
+        # Filter URL for book3
         filter_url = f"{self.url}?book_id={self.book3.book_id}"
         response = self.client.get(filter_url)
         

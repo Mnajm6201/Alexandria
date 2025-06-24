@@ -30,7 +30,8 @@ urlpatterns = [
     path('api/bookclubs/', include("bookclubs.urls")),
     path('api/discovery/', include('discovery.urls')),
     path('api/reviews/', include('reviews.urls', namespace='reviews')),
-    path('api/', include('journals.urls'))
+    path('api/', include('journals.urls')),
+    path('api/book/', include('book.urls')),
 ]
 
 if settings.DEBUG:

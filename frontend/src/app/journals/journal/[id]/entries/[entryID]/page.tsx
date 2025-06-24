@@ -16,7 +16,7 @@ export default function EntryPage() {
   const journalId = String(params.id)
   const entryId = String(params.entryId)
 
-  // Mock entry data (still static)
+  // Mock entry data 
   const entry = {
     id: entryId,
     journalId,

@@ -44,7 +44,8 @@ INSTALLED_APPS = [
     "shelves",
     "discovery",
     "reviews",
-    "bookclubs"
+    "bookclubs",
+    "book"
 ]
 
 # Set custom user model
